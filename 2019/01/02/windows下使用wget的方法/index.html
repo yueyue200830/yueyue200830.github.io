@@ -26,7 +26,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows下使用wget的方法">
 <meta property="og:url" content="https://yueyue200830.github.io/2019/01/02/windows%E4%B8%8B%E4%BD%BF%E7%94%A8wget%E7%9A%84%E6%96%B9%E6%B3%95/index.html">
-<meta property="og:site_name" content="Blog">
+<meta property="og:site_name" content="Z Blog">
 <meta property="og:description" content="GNU Wget（常简称为Wget）是一个在网络上进行下载的简单而强大的自由软件，其本身也是GNU计划的一部分。它的名字是“World Wide Web”和“Get”的结合，同时也隐含了软件的主要功能。当前它支持通过HTTP、HTTPS，以及FTP这三个最常见的TCP&#x2F;IP协议协议下载。  wget在linux下很方便就可以安装使用了，但似乎官网并没有给windows下一个安装包之类的东西，搜了">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-01-02T12:40:25.000Z">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>Windows下使用wget的方法 | Blog</title>
+  <title>Windows下使用wget的方法 | Z Blog</title>
   
 
 
@@ -79,7 +79,7 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="Z Blog" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -101,10 +101,11 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Blog</span>
+        <span class="site-title">Z Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
+        <p class="site-subtitle">Simply CS, Simply Coding</p>
   </div>
 
   <div class="site-nav-right"></div>
@@ -205,7 +206,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
+      <meta itemprop="name" content="Z Blog">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -275,8 +276,10 @@
 </blockquote>
 <p>wget在linux下很方便就可以安装使用了，但似乎官网并没有给windows下一个安装包之类的东西，搜了好久后来发现了两个解决方法。</p>
 <a id="more"></a>
+
 <h1 id="用choco安装"><a href="#用choco安装" class="headerlink" title="用choco安装"></a>用choco安装</h1><p>这是我在自己电脑上方法，不过似乎下面一个方法更加方便删除</p>
 <h2 id="安装chocolatey"><a href="#安装chocolatey" class="headerlink" title="安装chocolatey"></a>安装chocolatey</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="string">"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe"</span> -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command <span class="string">"iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"</span> &amp;&amp; SET <span class="string">"PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="安装wget"><a href="#安装wget" class="headerlink" title="安装wget"></a>安装wget</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">choco install wget</span><br></pre></td></tr></table></figure>
 <p>这样就可以直接使用了</p>
 <h1 id="用已编译的包"><a href="#用已编译的包" class="headerlink" title="用已编译的包"></a>用已编译的包</h1><p>有些地方会放出来一些windows下的包，只要在cmd中打开到相应文件夹就可以使用了，或者应该也可以配置环境变量</p>
@@ -397,7 +400,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -410,7 +413,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -458,12 +461,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">44k</span>
+    <span title="Symbols count total">46k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:14</span>
+    <span title="Reading time total">1:17</span>
 </div>
 
         

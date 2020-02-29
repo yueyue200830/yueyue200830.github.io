@@ -26,7 +26,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法学习（一）——欧几里德算法&amp;扩展欧几里得算法">
 <meta property="og:url" content="https://yueyue200830.github.io/2018/12/29/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%B7%E7%AE%97%E6%B3%95-%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/index.html">
-<meta property="og:site_name" content="Blog">
+<meta property="og:site_name" content="Z Blog">
 <meta property="og:description" content="欧几里德算法与扩展欧几里得算法代码和原理">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-12-29T00:38:42.000Z">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>算法学习（一）——欧几里德算法&扩展欧几里得算法 | Blog</title>
+  <title>算法学习（一）——欧几里德算法&扩展欧几里得算法 | Z Blog</title>
   
 
 
@@ -79,7 +79,7 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="Z Blog" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -101,10 +101,11 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Blog</span>
+        <span class="site-title">Z Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
+        <p class="site-subtitle">Simply CS, Simply Coding</p>
   </div>
 
   <div class="site-nav-right"></div>
@@ -205,7 +206,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
+      <meta itemprop="name" content="Z Blog">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -275,7 +276,10 @@
 <p>个人简单脑补就是a和b两个数的模还是a和b的最大公约数</p>
 <p>int类型 </p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;<span class="keyword">return</span> a%b==<span class="number">0</span> ? b : gcd(b, a%b);&#125;</span><br></pre></td></tr></table></figure>
-<p>long long类型的<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">gcd</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> a, <span class="keyword">long</span> <span class="keyword">long</span> b)</span> </span>&#123;<span class="keyword">return</span> a%b==<span class="number">0</span> ? b : gcd(b, a%b);&#125;</span><br></pre></td></tr></table></figure></p>
+
+<p>long long类型的 </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">gcd</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> a, <span class="keyword">long</span> <span class="keyword">long</span> b)</span> </span>&#123;<span class="keyword">return</span> a%b==<span class="number">0</span> ? b : gcd(b, a%b);&#125;</span><br></pre></td></tr></table></figure>
+
 <h1 id="扩展欧几里得算法（exgcd）"><a href="#扩展欧几里得算法（exgcd）" class="headerlink" title="扩展欧几里得算法（exgcd）"></a>扩展欧几里得算法（exgcd）</h1><p>概念： </p>
 <blockquote>
 <p>对于不完全为0的非负整数a,b</p>
@@ -292,6 +296,7 @@
 <p>注意：x可能为负的，需要x=x+p</p>
 <p>代码</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">exgcd</span><span class="params">(ll a, ll b, ll &amp;x, ll &amp;y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b == <span class="number">0</span>)&#123;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    ll t = exgcd(b, a%b, x, y);</span><br><span class="line">    ll tmp = y;</span><br><span class="line">    y = x - a / b * y;</span><br><span class="line">    x = tmp;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/85333585" target="_blank" rel="noopener">https://blog.csdn.net/yueyue200830/article/details/85333585</a></p>
 
     </div>
@@ -409,7 +414,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -422,7 +427,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -470,12 +475,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">44k</span>
+    <span title="Symbols count total">46k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:14</span>
+    <span title="Reading time total">1:17</span>
 </div>
 
         

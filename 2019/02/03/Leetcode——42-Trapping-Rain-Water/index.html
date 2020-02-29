@@ -26,7 +26,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode——42. Trapping Rain Water">
 <meta property="og:url" content="https://yueyue200830.github.io/2019/02/03/Leetcode%E2%80%94%E2%80%9442-Trapping-Rain-Water/index.html">
-<meta property="og:site_name" content="Blog">
+<meta property="og:site_name" content="Z Blog">
 <meta property="og:description" content="题目 Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://yueyue200830.github.io/2019/02/03/Leetcode%E2%80%94%E2%80%9442-Trapping-Rain-Water/rainwatertrap.png">
@@ -51,7 +51,7 @@
   };
 </script>
 
-  <title>Leetcode——42. Trapping Rain Water | Blog</title>
+  <title>Leetcode——42. Trapping Rain Water | Z Blog</title>
   
 
 
@@ -82,7 +82,7 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="Z Blog" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -104,10 +104,11 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Blog</span>
+        <span class="site-title">Z Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
+        <p class="site-subtitle">Simply CS, Simply Coding</p>
   </div>
 
   <div class="site-nav-right"></div>
@@ -208,7 +209,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
+      <meta itemprop="name" content="Z Blog">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -277,19 +278,24 @@
 <p>Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.</p>
 </blockquote>
 <a id="more"></a>
+
 <h2 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h2><p>输入：[0,1,0,2,1,0,1,3,2,1,2,1]<br>答案：6（蓝色部分）</p>
 <img src="/2019/02/03/Leetcode%E2%80%94%E2%80%9442-Trapping-Rain-Water/rainwatertrap.png" class="" title="example">
+
+
 <h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>本题就是需要寻找凹下去比旁边低的部分。</p>
 <p>对于题意的分析部分比较难，如果能正确分析出题意基本就可以解决了。</p>
 <h2 id="题解1"><a href="#题解1" class="headerlink" title="题解1"></a>题解1</h2><p>这个解法是官方的解法，主要写一下思路：</p>
 <p>对于每一条块，把它左边和右边的块一份为二，分别寻找出它左边和右边最高块的高度，显然它最后加了水的高度就是它左右两遍高度的最大值中小的那个。</p>
 <img src="/2019/02/03/Leetcode%E2%80%94%E2%80%9442-Trapping-Rain-Water/solution.png" class="" title="solution">
+
 <p>如图红色为随机的一条，两条黑色的是其左右两边最高的两根，显然最后注满的水量至少之蓝色这么多，也就是左右两根黑色中比较矮的那根的长度。</p>
 <p>因此<strong>sum  = sum(min(left_max[i], right_max[i]))</strong></p>
 <p>比较普通又方便的一种解法是用dp记录left_max和right_max，时间复杂度和空间复杂度都为O(n)。</p>
 <p>而另一种可以更快的方法是用left和right两个来左右一起遍历，同时记录遍历过的left_max和right_max。<br>只要比较现在遍历过的里面左右的最大值，最大值比较小的那侧现在指向的那块最后的注水量就是那侧遍历到的最大的值。（因为另一侧的最大值一定比这一侧的最大值大）<br>即，假设现在left_max比right_max小，那么第left个左边所有的值都知道了，最大值为left_max，而它右边的最大值一定会大于等于right_max。因此min(right_max[i], left_max[i]) = left_max[i]。<br>这样遍历的时间复杂度是O(n)（只需要遍历n次，比dp的2n次少一半），空间复杂度为O(1)（只需要另外4个数记录就好，而dp的额外空间是2n）</p>
 <p>附上官方代码：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; height)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> left = <span class="number">0</span>, right = height.size() - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> left_max = <span class="number">0</span>, right_max = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">    <span class="keyword">if</span> (height[left] &lt; height[right]) &#123;</span><br><span class="line">      height[left] &gt;= left_max ? (left_max = height[left]) : ans += (left_max - height[left]);</span><br><span class="line">      ++left;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      height[right] &gt;= right_max ? (right_max = height[right]) : ans += (right_max - height[right]);</span><br><span class="line">      --right;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="题解2"><a href="#题解2" class="headerlink" title="题解2"></a>题解2</h2><p>这个是我绞尽脑汁后的一个比较复杂的解法，时间复杂度O(n)，空间复杂度最大O(n)（用stack）</p>
 <p>做法是从左往右遍历，遇到可以注水的地方就先把暂时可以注的水给注入。</p>
 <p>如样例中有一部分[2,1,0,1,3]<br>当遇到右侧1的时候，也就是[2,1,0,1]时，在0中注入1的水量，这样就变成了[2,1,1,1]了<br>当遇到3时，对所有的1都注入1的水量，变成[2,2,2,2,3]。</p>
@@ -297,6 +303,7 @@
 <p>因为每次遍历完已经填平了所有遍历过的水坑，因此stack中记录的一定是不可以再注入水的，也就是递增或者递减的一堆数。</p>
 <p>当每次遇到可以注水的时候，注水量为(mini(left_height, right_height) - current_height)*(left_position-right_position-1)（如有不理解可以考虑一下刚才的example）</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">num</span>&#123;</span></span><br><span class="line">     <span class="keyword">int</span> n;</span><br><span class="line">     <span class="keyword">int</span> p;</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (height.size() &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">stack</span>&lt;num&gt; q;</span><br><span class="line">        num tmp, last;</span><br><span class="line">        <span class="keyword">int</span> s = <span class="number">0</span>;</span><br><span class="line">        tmp.n = height[<span class="number">0</span>];</span><br><span class="line">        tmp.p = <span class="number">0</span>;</span><br><span class="line">        q.push(tmp);</span><br><span class="line">        tmp.n = height[<span class="number">1</span>];</span><br><span class="line">        tmp.p = <span class="number">1</span>;</span><br><span class="line">        q.push(tmp);</span><br><span class="line">        <span class="keyword">int</span> n = max(height[<span class="number">0</span>], height[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; height.size(); i++) &#123;</span><br><span class="line">            tmp = q.top();</span><br><span class="line">            <span class="keyword">while</span> (q.size() &gt; <span class="number">1</span> &amp;&amp; n &gt; tmp.n &amp;&amp; tmp.n &lt;= height[i]) &#123;</span><br><span class="line">                last = tmp;</span><br><span class="line">                q.pop();</span><br><span class="line">                tmp = q.top();</span><br><span class="line">                s += (min(tmp.n, height[i]) - last.n) * (i - tmp.p - <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            tmp.n = height[i];</span><br><span class="line">            tmp.p = i;</span><br><span class="line">            q.push(tmp);</span><br><span class="line">            <span class="keyword">if</span> (tmp.n &gt; n) &#123;</span><br><span class="line">                n = tmp.n;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 <p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/86755967" target="_blank" rel="noopener">https://blog.csdn.net/yueyue200830/article/details/86755967</a></p>
 
     </div>
@@ -414,7 +421,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -427,7 +434,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -475,12 +482,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">44k</span>
+    <span title="Symbols count total">46k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:14</span>
+    <span title="Reading time total">1:17</span>
 </div>
 
         

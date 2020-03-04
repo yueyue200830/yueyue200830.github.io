@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Windows系统下对文件进行MD5校验</title>
+    <url>/2020/03/04/Windows%E7%B3%BB%E7%BB%9F%E4%B8%8B%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8CMD5%E6%A0%A1%E9%AA%8C/</url>
+    <content><![CDATA[<blockquote>
+<p>MD5全称MD5信息摘要算法（MD5 Message-Digest Algorithm），是一种被广泛使用的密码散列函数，用于确保信息传输完整一致。</p>
+</blockquote>
+<p>如今，MD5虽然被证明安全性不足，但被广泛运用于文件的校验上。<br>当下载较大文件时，为避免数据缺损，可以进行MD5校验。当然也可以运用于第三方下载官方文件的校验（尤其国内下外网速度不够的情况）</p>
+<a id="more"></a>
+
+<p>本来以为Windows下属性里面会有的，作为一个小白发现想多了，并没有。<br>于是以为要下载软件，没先到其实Windows是有内嵌命令行工具<code>CertUtil</code>的。</p>
+<p><strong>命令</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">certutil -hashfile filePath [HashAlgorithm]</span><br></pre></td></tr></table></figure>
+
+<p>这里<code>filePath</code>就是文件路径，可用绝对路径或相对路径</p>
+<p><code>HashAlgorithm</code>可以是<code>MD2</code>、<code>MD4</code>、<code>MD5</code>、<code>SHA1</code>、<code>SHA256</code>、<code>SHA384</code>、<code>SHA512</code></p>
+<p><strong>样例</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">certutil -hashfile C:\file.exe MD5</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Others</category>
+      </categories>
+      <tags>
+        <tag>Windows</tag>
+        <tag>Safety</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>新版Windows Terminal</title>
     <url>/2020/02/29/%E6%96%B0%E7%89%88Windows-Terminal/</url>
     <content><![CDATA[<p>微软在19年的时候宣布开发新的Windows Terminal，虽然这仅仅是一个终端，并非开发一个新的shell，但是新版整合了各种shell并且超级好看！！<br>这个终端的优点是可以打开各种不同的shell，比如<code>cmd</code>、<code>PowerShell</code>、<code>Azure</code>、<code>GitBash</code>等。</p>
@@ -94,8 +120,8 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
         <tag>Github</tag>
+        <tag>Hexo</tag>
         <tag>多终端</tag>
       </tags>
   </entry>
@@ -160,8 +186,8 @@
         <category>Others</category>
       </categories>
       <tags>
-        <tag>Github</tag>
         <tag>DNS</tag>
+        <tag>Github</tag>
         <tag>Hosts</tag>
       </tags>
   </entry>

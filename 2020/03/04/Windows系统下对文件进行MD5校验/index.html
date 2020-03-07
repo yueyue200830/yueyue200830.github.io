@@ -270,11 +270,9 @@
 </blockquote>
 <p>如今，MD5虽然被证明安全性不足，但被广泛运用于文件的校验上。<br>当下载较大文件时，为避免数据缺损，可以进行MD5校验。当然也可以运用于第三方下载官方文件的校验（尤其国内下外网速度不够的情况）</p>
 <a id="more"></a>
-
 <p>本来以为Windows下属性里面会有的，作为一个小白发现想多了，并没有。<br>于是以为要下载软件，没先到其实Windows是有内嵌命令行工具<code>CertUtil</code>的。</p>
 <p><strong>命令</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">certutil -hashfile filePath [HashAlgorithm]</span><br></pre></td></tr></table></figure>
-
 <p>这里<code>filePath</code>就是文件路径，可用绝对路径或相对路径</p>
 <p><code>HashAlgorithm</code>可以是<code>MD2</code>、<code>MD4</code>、<code>MD5</code>、<code>SHA1</code>、<code>SHA256</code>、<code>SHA384</code>、<code>SHA512</code></p>
 <p><strong>样例</strong></p>
@@ -318,7 +316,10 @@
     <a href="/2020/02/29/%E6%96%B0%E7%89%88Windows-Terminal/" rel="prev" title="新版Windows Terminal">
       <i class="fa fa-chevron-left"></i> 新版Windows Terminal
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/07/Termux-Android-terminal/" rel="next" title="Termux - Android terminal">
+      Termux - Android terminal <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -391,7 +392,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -404,7 +405,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

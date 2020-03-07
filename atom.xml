@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yueyue200830.github.io/"/>
-  <updated>2020-03-07T14:11:04.864Z</updated>
+  <updated>2020-03-07T17:45:18.040Z</updated>
   <id>https://yueyue200830.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Codeforces——1322B.Present</title>
+    <link href="https://yueyue200830.github.io/2020/03/08/Codeforces%E2%80%94%E2%80%941322B-Present/"/>
+    <id>https://yueyue200830.github.io/2020/03/08/Codeforces%E2%80%94%E2%80%941322B-Present/</id>
+    <published>2020-03-07T16:40:12.000Z</published>
+    <updated>2020-03-07T17:45:18.040Z</updated>
+    
+    <content type="html"><![CDATA[<p>下定决心开始打CF的第一个比赛就被虐得好惨，还需要继续努力啊（虽然感觉CF和面试算法题关系不大。。）</p><p>题目网址： <a href="https://codeforces.com/contest/1322/problem/B" target="_blank" rel="noopener">https://codeforces.com/contest/1322/problem/B</a></p><p>好吧，事实上写这篇博文是因为第一次遇到这个解法，对于我这个算法小白来说还是很新颖的。<br>PS.做题的时候天真的以为是O(n)的解法，并且可以用数学做。。。</p><a id="more"></a><h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定$n$个数 $a_1$, $a_2$, … , $a_n$，<br>计算其两两之和的异或值。</p><h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>首先输入大小以看就不可以直接求（废话）<br>复杂度也就是压在O(nlogn)左右</p><p><strong>关键点</strong><br>我们可以把答案回到二进制，然后对二进制的每一位分开求。</p><p><strong>原理</strong></p><p>首先我们定义 $x_i = a_k + a_j$， 即 $x_i$ 是两数之和。<br>令 $s$ 是答案，$s_i$ 是指从右往左答案的第 $i$ 个二进制位（从0开始）</p><p>我们现在假设计算 $s_i$，我们已知所有 $x$ 的第 $i$ 位的01情况，那么求 $s_i$ 就是对它们做异或，也就等于计算 $x$ 中第 $i$ 位是1的个数的奇偶情况。<br>即如果1有偶数个，那么答案对应的位数是0，反之则是1。（简单的异或运算原理）</p><h2 id="Subproblem"><a href="#Subproblem" class="headerlink" title="Subproblem"></a>Subproblem</h2><blockquote><p>对于结果$s$，计算第 $i$ 位的值，即 $s_i$。</p><p>（等价问题）计算两数之和$x$的第 $i$ 位是 $1$ 的数量。</p></blockquote><p>对于这个等价问题，我们先思考一个简单的情况：</p><p>假设现在有一个数 $y &lt; 2^{i+1}$，它的第$i$位的是否位$1$取决于它是否在 $[2^{i}, 2^{i+1})$ 内。<br>现在把 $y$ 扩大为正数，我们可以得到其第$i$位的情况与 $y’ = y \% 2^{i+1} $。</p><p>因此，对于每个 $x$，我们可以只考虑 $x \% 2^{i+1} $。</p><p>但我们希望能通过 $a$ 直接计算出个数，而非计算 $x$ 后求出解。<br>既然我们可以对 $x$ 取模，自然也可以对 $a$ 取模，这对加法并不会有影响。</p><p>因此，我们首先将 $a$ 对 $2^{i+1}$ 取模，令取模后的数为 $b$。<br>我们可以得到 $b \in [0, 2^{i+1} )$，<br>即有 $x \in [0, 2^{i+2}-1 )$。</p><p>我们发现 $x$ 的范围缩小了很多，这次我们不对 $x$ 取模，<br>相反，我们可以直接对 $x$ 划出两个范围：$[2^i, 2^{i+1})$ 和 $[2^i + 2^{i+1}, 2^{i+2}-1 )$</p><p>因此，我们希望寻找 $x$ 在这两个范围内的个数</p><h2 id="Subsubproblem"><a href="#Subsubproblem" class="headerlink" title="Subsubproblem"></a>Subsubproblem</h2><blockquote><p>对于结果 $s$ 的第 $i$ 位，现有 $b$ 是对 $a$ 对于 $2^{i+1}$ 取模，求 $b$ 两两之和在 $[2^i, 2^{i+1})$ 和 $[2^i + 2^{i+1}, 2^{i+2}-1 )$ 的个数。</p><p>（简化版）给定数组 $b$，求其两两和在某一区间的个数。</p></blockquote><p>这里为简化，假设求的区间是 $[k, t)$</p><p><em>暂时只有 $O(nlogn)$ 的解法，未知是否有更迅速的</em></p><p>首先将 $b$ 从小到大排序，<br>然后对 $b<em>i$，它可以相加的数为 $b</em>{i+1}$, …, $b_n$。<br>用二分查找寻找下界值为 $k-b_i$ 的下标 $p$，<br>用二分查找寻找上界值为 $t-b_i$ 的下标 $q$。<br>满足的个数就是 $q-p$。</p><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> a[<span class="number">400005</span>], b[<span class="number">400005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> n, i, j, k, t, m, p, q, s;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    m = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">        m = <span class="built_in">max</span>(a[i], m);</span><br><span class="line">    &#125;</span><br><span class="line">    m = log2(m) + <span class="number">2</span>;</span><br><span class="line">    s = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt;= m; i++) &#123;</span><br><span class="line">        k = <span class="built_in">pow</span>(<span class="number">2</span>, i+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            b[j] = a[j] % k;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(b, b+n);</span><br><span class="line"></span><br><span class="line">        t = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            <span class="comment">// 2^i, 2^(i+1)</span></span><br><span class="line">            p = lower_bound(b+j+<span class="number">1</span>, b+n, k/<span class="number">2</span> - b[j]) - b;</span><br><span class="line">            q = lower_bound(b+j+<span class="number">1</span>, b+n, k - b[j]) - b;</span><br><span class="line">            t += q - p;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 2^i + 2^(i+1), 2^(i+2)-1</span></span><br><span class="line">            p = lower_bound(b+j+<span class="number">1</span>, b+n, k/<span class="number">2</span>*<span class="number">3</span> - b[j]) - b;</span><br><span class="line">            q = lower_bound(b+j+<span class="number">1</span>, b+n, <span class="number">2</span>*k - <span class="number">1</span>) - b;</span><br><span class="line">            t += q - p;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (t % <span class="number">2</span> == <span class="number">1</span>) &#123;</span><br><span class="line">            s += k / <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;下定决心开始打CF的第一个比赛就被虐得好惨，还需要继续努力啊（虽然感觉CF和面试算法题关系不大。。）&lt;/p&gt;
+&lt;p&gt;题目网址： &lt;a href=&quot;https://codeforces.com/contest/1322/problem/B&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://codeforces.com/contest/1322/problem/B&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;好吧，事实上写这篇博文是因为第一次遇到这个解法，对于我这个算法小白来说还是很新颖的。&lt;br&gt;PS.做题的时候天真的以为是O(n)的解法，并且可以用数学做。。。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Algorithm" scheme="https://yueyue200830.github.io/categories/Algorithm/"/>
+    
+    
+      <category term="C++" scheme="https://yueyue200830.github.io/tags/C/"/>
+    
+      <category term="Codeforces" scheme="https://yueyue200830.github.io/tags/Codeforces/"/>
+    
+      <category term="Binary Search" scheme="https://yueyue200830.github.io/tags/Binary-Search/"/>
+    
+  </entry>
   
   <entry>
     <title>Termux - Android terminal</title>
@@ -138,9 +167,9 @@
       <category term="Hexo" scheme="https://yueyue200830.github.io/categories/Hexo/"/>
     
     
-      <category term="Hexo" scheme="https://yueyue200830.github.io/tags/Hexo/"/>
-    
       <category term="Github" scheme="https://yueyue200830.github.io/tags/Github/"/>
+    
+      <category term="Hexo" scheme="https://yueyue200830.github.io/tags/Hexo/"/>
     
       <category term="多终端" scheme="https://yueyue200830.github.io/tags/%E5%A4%9A%E7%BB%88%E7%AB%AF/"/>
     
@@ -166,9 +195,9 @@
       <category term="Others" scheme="https://yueyue200830.github.io/categories/Others/"/>
     
     
-      <category term="Github" scheme="https://yueyue200830.github.io/tags/Github/"/>
-    
       <category term="DNS" scheme="https://yueyue200830.github.io/tags/DNS/"/>
+    
+      <category term="Github" scheme="https://yueyue200830.github.io/tags/Github/"/>
     
       <category term="Hosts" scheme="https://yueyue200830.github.io/tags/Hosts/"/>
     
@@ -514,33 +543,6 @@
       <category term="C++" scheme="https://yueyue200830.github.io/tags/C/"/>
     
       <category term="逆元" scheme="https://yueyue200830.github.io/tags/%E9%80%86%E5%85%83/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>算法学习（二）——快速幂</title>
-    <link href="https://yueyue200830.github.io/2018/12/29/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%B9%82/"/>
-    <id>https://yueyue200830.github.io/2018/12/29/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E5%BF%AB%E9%80%9F%E5%B9%82/</id>
-    <published>2018-12-29T01:26:56.000Z</published>
-    <updated>2020-02-23T13:02:24.752Z</updated>
-    
-    <content type="html"><![CDATA[<p>快速幂是用来解决$n^k \mod N$，将其时间复杂度从 $O(n)$ 减少到 $O(\log n)$ 。</p><a id="more"></a><h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>首先，了解一个模运算的概念</p><blockquote><p>(a+b) mod N = (a mod N + b mod N) mod N</p><p>(a * b) mod N = (a mod N * b mod N) mod N</p></blockquote><p>然后，对于一个数k，把它转换为二进制，</p><p>如11 = 1011</p><p>那么 $ n^{11} = n^8 <em> n^2 </em> n^1 $ 。</p><p>于是 $n^{11} \mod N = (n^8 \mod N) <em> (n^2 \mod N) </em> (n^1 \mod N)$</p><p>那么在循环过程中只需要一直记录$n^{2^m}$，每次判断$2^m$对应$k$的二进制位是$0$（不要）是$1$（要）就可以</p><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">quick_mod</span><span class="params">(ll n, ll k, ll N)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll num = <span class="number">1</span>, t = n;</span><br><span class="line">    <span class="keyword">while</span> (k) &#123;</span><br><span class="line">        <span class="keyword">if</span> (k &amp; <span class="number">1</span>)</span><br><span class="line">            num = num * t % N;</span><br><span class="line">        t = t * t % N;</span><br><span class="line">        k &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>对于快速幂的扩展还有一个矩阵快速幂，它是对于矩阵做一个快速幂的处理，可以用于求斐波那契数列第n项模N </p><p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/85333813" target="_blank" rel="noopener">https://blog.csdn.net/yueyue200830/article/details/85333813</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;快速幂是用来解决$n^k \mod N$，将其时间复杂度从 $O(n)$ 减少到 $O(\log n)$ 。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Algorithm" scheme="https://yueyue200830.github.io/categories/Algorithm/"/>
-    
-    
-      <category term="Algorithm" scheme="https://yueyue200830.github.io/tags/Algorithm/"/>
-    
-      <category term="C++" scheme="https://yueyue200830.github.io/tags/C/"/>
-    
-      <category term="快速幂" scheme="https://yueyue200830.github.io/tags/%E5%BF%AB%E9%80%9F%E5%B9%82/"/>
     
   </entry>
   

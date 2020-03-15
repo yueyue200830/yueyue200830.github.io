@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yueyue200830.github.io/"/>
-  <updated>2020-03-07T17:58:18.204Z</updated>
+  <updated>2020-03-15T08:18:16.383Z</updated>
   <id>https://yueyue200830.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Windows修改右键新建菜单</title>
+    <link href="https://yueyue200830.github.io/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/"/>
+    <id>https://yueyue200830.github.io/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/</id>
+    <published>2020-03-15T07:53:36.000Z</published>
+    <updated>2020-03-15T08:18:16.383Z</updated>
+    
+    <content type="html"><![CDATA[<p>由于课程需求被强制安装了国际知名建模软件EA然而本人真的一点都不喜欢，并且被此软件搞得太不爽了，课程结束删除软件发现竟然没有把右键新建里一起删除，太令人崩溃了吧。。。</p><p>在网上搜索解决方案不知道为何失败后，决定试一下自己修改，没想到成功了！！</p><p>方法依旧是修改`注册表，只是修改不同的部分。</p><a id="more"></a><h1 id="打开注册表"><a href="#打开注册表" class="headerlink" title="打开注册表"></a>打开注册表</h1><p>Windows 10下直接搜索<code>注册表</code>可以跳出来<code>注册表编辑器</code>直接打开即可（搜索多优秀呀，何必学习网上教程注册表编辑器的英文打开方式呢）</p><img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/1.png" class="" width="700" title="搜索注册表"><h1 id="新建文件的存储位置（常规方法）"><a href="#新建文件的存储位置（常规方法）" class="headerlink" title="新建文件的存储位置（常规方法）"></a>新建文件的存储位置（常规方法）</h1><p>右键新建文件的位置是在：<code>计算机\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\ShellNew</code><br>双击打开后有一个<code>Classes</code>，可以看到数据那栏是一堆文件的后缀名</p><img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/2.png" class="" width="700" title="“新建”位置"><p>双击<code>Classes</code>，可以对数据进行编辑，添加或删除不要的后缀名</p><img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/3.png" class="" width="700" title="修改新建数据"><p><strong>然而</strong>，我并没有成功修改。。。每次删除后又被加回来了。。。<br>一开始以为中病毒了呢。。。<br>而事实上是因为只删除了部分导致注册表错误。。。</p><h1 id="删除文件后缀关联"><a href="#删除文件后缀关联" class="headerlink" title="删除文件后缀关联"></a>删除文件后缀关联</h1><p>打开<code>计算机\HKEY_CURRENT_USER</code>，可以看到里面有各式各样的后缀（以<code>.</code>开头的）</p><img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/4.png" class="" title="后缀"><p>那既然上个方法删不掉我们想要的，不如看看这个后缀文件的注册表里有些什么东西。</p><p>找到需要删除的文件后缀对应的文件夹，比如我要删除<code>.eap</code></p><img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/5.png" class="" width="700" title="后缀文件夹"><p>我们可以看到怎么里面有一个<code>ShellNew</code>？？？这不是和前面那个新建文件的名字一样吗？？？<br>再打开其它的后缀文件夹看一下，果然没有<code>ShellNew</code><br>那大概可以猜到是<code>ShellNew</code>的锅，这边定义了有新增但我们上面那个方法只是删除了一个地方，导致出错了。</p><p>因此<strong>解决方法</strong>就是把<code>ShellNew</code>删除掉，由于我本来把软件也卸载了，就直接整个后缀的文件夹全删光了（个人猜测是那个公司写的垃圾）<br>删除后关闭就可以发现新建菜单里没有啦！</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;由于课程需求被强制安装了国际知名建模软件EA然而本人真的一点都不喜欢，并且被此软件搞得太不爽了，课程结束删除软件发现竟然没有把右键新建里一起删除，太令人崩溃了吧。。。&lt;/p&gt;
+&lt;p&gt;在网上搜索解决方案不知道为何失败后，决定试一下自己修改，没想到成功了！！&lt;/p&gt;
+&lt;p&gt;方法依旧是修改`注册表，只是修改不同的部分。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Others" scheme="https://yueyue200830.github.io/categories/Others/"/>
+    
+    
+      <category term="Windows" scheme="https://yueyue200830.github.io/tags/Windows/"/>
+    
+      <category term="注册表" scheme="https://yueyue200830.github.io/tags/%E6%B3%A8%E5%86%8C%E8%A1%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>Codeforces——1322B.Present</title>
@@ -515,34 +542,6 @@
       <category term="Windows" scheme="https://yueyue200830.github.io/tags/Windows/"/>
     
       <category term="wget" scheme="https://yueyue200830.github.io/tags/wget/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>算法学习（三）——逆元</title>
-    <link href="https://yueyue200830.github.io/2018/12/29/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E9%80%86%E5%85%83/"/>
-    <id>https://yueyue200830.github.io/2018/12/29/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E9%80%86%E5%85%83/</id>
-    <published>2018-12-29T02:23:30.000Z</published>
-    <updated>2020-02-29T14:05:00.180Z</updated>
-    
-    <content type="html"><![CDATA[<p>当运算时需要求模的时候，可以直接做的有+-*但是不满足/</p><p>而逆元就是通过某种运算来达到求(a/b)%p的结果</p><a id="more"></a><blockquote><p>当 $b*c ≡ 1$ (mod p)时，</p><p>有 (a / b) % p = (a / b * b * c) % p = (a * c) % p</p><p>这里c就是b关于p的逆元 </p></blockquote><p>那么如何求c呢</p><h1 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h1><blockquote><p>当p为素数时，有 $a^p$ ≡ a(mod p)</p></blockquote><p>故有$a^p$ ≡ 1(mod p)</p><p>因此a关于p的逆元就是$a^{p-2}$</p><p>这个幂可以使用<strong>快速幂</strong>来得出</p><h1 id="扩展欧几里得算法"><a href="#扩展欧几里得算法" class="headerlink" title="扩展欧几里得算法"></a>扩展欧几里得算法</h1><blockquote><p>对于不完全为0的非负整数a,b，必存在整数x,y，满足ax+by=gcd(a,b)</p></blockquote><p>因此，求a*x≡1(mod p)</p><p>即求ax+py=1=gcd(a,b)/gcd(a,b)</p><p>也就是先求出ax+py=gcd(a,b)</p><p>然后x=x/gcd(a,b)即可</p><p>注意：x可能为负的，需要x=x+p</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">exgcd</span><span class="params">(ll a, ll b, ll &amp;x, ll &amp;y)</span>    <span class="comment">//这是扩展欧几里得</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b == <span class="number">0</span>)&#123;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    ll t = exgcd(b, a%b, x, y);</span><br><span class="line">    ll tmp = y;</span><br><span class="line">    y = x - a / b * y;</span><br><span class="line">    x = tmp;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">k = exgcd(k ,p ,x ,i);</span><br><span class="line"><span class="keyword">if</span>(x &lt; <span class="number">0</span>) x += p;                     <span class="comment">//防止x为负</span></span><br><span class="line">x = x / k;</span><br></pre></td></tr></table></figure><p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/85334843" target="_blank" rel="noopener">https://blog.csdn.net/yueyue200830/article/details/85334843</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;当运算时需要求模的时候，可以直接做的有+-*但是不满足/&lt;/p&gt;
-&lt;p&gt;而逆元就是通过某种运算来达到求(a/b)%p的结果&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Algorithm" scheme="https://yueyue200830.github.io/categories/Algorithm/"/>
-    
-    
-      <category term="Algorithm" scheme="https://yueyue200830.github.io/tags/Algorithm/"/>
-    
-      <category term="C++" scheme="https://yueyue200830.github.io/tags/C/"/>
-    
-      <category term="逆元" scheme="https://yueyue200830.github.io/tags/%E9%80%86%E5%85%83/"/>
     
   </entry>
   

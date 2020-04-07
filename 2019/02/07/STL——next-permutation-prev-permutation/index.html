@@ -273,7 +273,6 @@
       
         <p>next_permutation和prev_permutation是对c++求全排列的函数，分别可以求出下一个全排列和前一个全排列。</p>
 <a id="more"></a>
-
 <p>这里以next_permutation为例，来看一下c++官网的定义：</p>
 <blockquote>
 <p>default: bool next_permutation (BidirectionalIterator first, BidirectionalIterator last);<br>custom: bool next_permutation (BidirectionalIterator first, BidirectionalIterator last, Compare comp);</p>
@@ -283,7 +282,6 @@
 <h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>题目：<a href="https://leetcode.com/problems/permutations/" target="_blank" rel="noopener">leetcode 46. Permutations</a></p>
 <p>这是一道全排列的题目，普通解法有dfs和非递归的查找，看解答时发现了这个函数，减少了不少代码量。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">permute</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;</span><br><span class="line">        <span class="keyword">if</span> (nums.size() == <span class="number">0</span>) <span class="keyword">return</span> ans;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        ans.push_back(nums);</span><br><span class="line">        <span class="keyword">while</span> (next_permutation(nums.begin(), nums.end())) &#123;</span><br><span class="line">            ans.push_back(nums);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/86771956" target="_blank" rel="noopener">https://blog.csdn.net/yueyue200830/article/details/86771956</a></p>
 
     </div>
@@ -401,7 +399,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -462,12 +460,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">49k</span>
+    <span title="Symbols count total">50k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:22</span>
+    <span title="Reading time total">1:24</span>
 </div>
 
         

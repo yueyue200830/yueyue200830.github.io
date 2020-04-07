@@ -22,21 +22,22 @@
     var CONFIG = {"hostname":"yueyue200830.github.io","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="GNU Wget（常简称为Wget）是一个在网络上进行下载的简单而强大的自由软件，其本身也是GNU计划的一部分。它的名字是“World Wide Web”和“Get”的结合，同时也隐含了软件的主要功能。当前它支持通过HTTP、HTTPS，以及FTP这三个最常见的TCP&#x2F;IP协议协议下载。  wget在linux下很方便就可以安装使用了，但似乎官网并没有给windows下一个安装包之类的东西，搜了">
+  <meta name="description" content="本文为课程作业复制版，如有相似请助教注意并非抄袭。 这里尝试过png和jpg，为方便保存路径在函数内自动转换，因此需要路径后缀恰为三位。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Windows下使用wget的方法">
-<meta property="og:url" content="https://yueyue200830.github.io/2019/01/02/windows%E4%B8%8B%E4%BD%BF%E7%94%A8wget%E7%9A%84%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:title" content="Python读取图片并保存的几种方式">
+<meta property="og:url" content="https://yueyue200830.github.io/2020/03/11/Python%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E4%BF%9D%E5%AD%98%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Z Blog">
-<meta property="og:description" content="GNU Wget（常简称为Wget）是一个在网络上进行下载的简单而强大的自由软件，其本身也是GNU计划的一部分。它的名字是“World Wide Web”和“Get”的结合，同时也隐含了软件的主要功能。当前它支持通过HTTP、HTTPS，以及FTP这三个最常见的TCP&#x2F;IP协议协议下载。  wget在linux下很方便就可以安装使用了，但似乎官网并没有给windows下一个安装包之类的东西，搜了">
+<meta property="og:description" content="本文为课程作业复制版，如有相似请助教注意并非抄袭。 这里尝试过png和jpg，为方便保存路径在函数内自动转换，因此需要路径后缀恰为三位。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2019-01-02T12:40:25.000Z">
-<meta property="article:modified_time" content="2020-02-23T13:21:24.278Z">
+<meta property="article:published_time" content="2020-03-11T13:24:46.000Z">
+<meta property="article:modified_time" content="2020-04-07T10:11:51.819Z">
 <meta property="article:author" content="yueyue200830">
-<meta property="article:tag" content="Windows">
-<meta property="article:tag" content="wget">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="OpenCV">
+<meta property="article:tag" content="Computer Vision">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://yueyue200830.github.io/2019/01/02/windows%E4%B8%8B%E4%BD%BF%E7%94%A8wget%E7%9A%84%E6%96%B9%E6%B3%95/">
+<link rel="canonical" href="https://yueyue200830.github.io/2020/03/11/Python%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E4%BF%9D%E5%AD%98%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">
 
 
 <script id="page-configurations">
@@ -48,7 +49,7 @@
   };
 </script>
 
-  <title>Windows下使用wget的方法 | Z Blog</title>
+  <title>Python读取图片并保存的几种方式 | Z Blog</title>
   
 
 
@@ -197,7 +198,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yueyue200830.github.io/2019/01/02/windows%E4%B8%8B%E4%BD%BF%E7%94%A8wget%E7%9A%84%E6%96%B9%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="https://yueyue200830.github.io/2020/03/11/Python%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E4%BF%9D%E5%AD%98%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -210,7 +211,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Windows下使用wget的方法
+          Python读取图片并保存的几种方式
         </h1>
 
         <div class="post-meta">
@@ -220,14 +221,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-01-02 20:40:25" itemprop="dateCreated datePublished" datetime="2019-01-02T20:40:25+08:00">2019-01-02</time>
+              <time title="Created: 2020-03-11 21:24:46" itemprop="dateCreated datePublished" datetime="2020-03-11T21:24:46+08:00">2020-03-11</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-23 21:21:24" itemprop="dateModified" datetime="2020-02-23T21:21:24+08:00">2020-02-23</time>
+                <time title="Modified: 2020-04-07 18:11:51" itemprop="dateModified" datetime="2020-04-07T18:11:51+08:00">2020-04-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -235,8 +236,8 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Others/" itemprop="url" rel="index">
-                    <span itemprop="name">Others</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
             </span>
@@ -253,13 +254,13 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
-              <span>688</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
-              <span>1 mins.</span>
+              <span>2 mins.</span>
             </span>
 
         </div>
@@ -271,19 +272,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <blockquote>
-<p>GNU Wget（常简称为Wget）是一个在网络上进行下载的简单而强大的自由软件，其本身也是GNU计划的一部分。<br>它的名字是“World Wide Web”和“Get”的结合，同时也隐含了软件的主要功能。<br>当前它支持通过HTTP、HTTPS，以及FTP这三个最常见的TCP/IP协议协议下载。</p>
-</blockquote>
-<p>wget在linux下很方便就可以安装使用了，但似乎官网并没有给windows下一个安装包之类的东西，搜了好久后来发现了两个解决方法。</p>
+        <p>本文为课程作业复制版，如有相似请助教注意并非抄袭。</p>
+<p>这里尝试过<code>png</code>和<code>jpg</code>，为方便保存路径在函数内自动转换，因此需要路径后缀恰为三位。</p>
 <a id="more"></a>
 
-<h1 id="用choco安装"><a href="#用choco安装" class="headerlink" title="用choco安装"></a>用choco安装</h1><p>这是我在自己电脑上方法，不过似乎下面一个方法更加方便删除</p>
-<h2 id="安装chocolatey"><a href="#安装chocolatey" class="headerlink" title="安装chocolatey"></a>安装chocolatey</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="string">"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe"</span> -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command <span class="string">"iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"</span> &amp;&amp; SET <span class="string">"PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"</span></span><br></pre></td></tr></table></figure>
+<h1 id="方法一：Pillow"><a href="#方法一：Pillow" class="headerlink" title="方法一：Pillow"></a>方法一：Pillow</h1><p>这里采用<code>pillow</code>读取图片，它默认显示图片采用系统的默认图片显示器。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_image_1</span><span class="params">(path)</span>:</span></span><br><span class="line">    <span class="string">""" Pillow</span></span><br><span class="line"><span class="string">    This will show picture with default image showing program.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        path: path of the image.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    image = Image.open(path)</span><br><span class="line">    image.show()</span><br><span class="line">    new_path = path[:<span class="number">-4</span>] + <span class="string">'-fc1.jpg'</span></span><br><span class="line">    image.save(new_path)</span><br></pre></td></tr></table></figure>
 
-<h2 id="安装wget"><a href="#安装wget" class="headerlink" title="安装wget"></a>安装wget</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">choco install wget</span><br></pre></td></tr></table></figure>
-<p>这样就可以直接使用了</p>
-<h1 id="用已编译的包"><a href="#用已编译的包" class="headerlink" title="用已编译的包"></a>用已编译的包</h1><p>有些地方会放出来一些windows下的包，只要在cmd中打开到相应文件夹就可以使用了，或者应该也可以配置环境变量</p>
-<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/85638286" target="_blank" rel="noopener">https://blog.csdn.net/yueyue200830/article/details/85638286</a></p>
+<h1 id="方法二：Matplot"><a href="#方法二：Matplot" class="headerlink" title="方法二：Matplot"></a>方法二：Matplot</h1><p>这里用<code>matplot</code>的<code>pyplot</code>去读取和显示图片，注意保存图片需要在显示之前执行，否则无法保存。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_image_2</span><span class="params">(path)</span>:</span></span><br><span class="line">    <span class="string">""" matplot</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        path: path of the image.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    image = mpimg.imread(path)</span><br><span class="line">    plt.imshow(image)</span><br><span class="line">    plt.axis(<span class="string">'off'</span>)</span><br><span class="line">    new_path = path[:<span class="number">-4</span>] + <span class="string">'-fc2.jpg'</span></span><br><span class="line">    mpimg.imsave(new_path, image)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+
+<h1 id="方法三：OpenCV"><a href="#方法三：OpenCV" class="headerlink" title="方法三：OpenCV"></a>方法三：OpenCV</h1><p>这里显示图片需要条用<code>cv2.waitKey()</code>，否则图片会显示后立刻消失。</p>
+<p><strong>注意</strong>：OpenCV读取的图片的排列方式为bgr而非常见的rgb</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_image_3</span><span class="params">(path)</span>:</span></span><br><span class="line">    <span class="string">""" OpenCV</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        path: path of the image.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    image = cv2.imread(path)</span><br><span class="line">    cv2.imshow(path, image)</span><br><span class="line">    cv2.waitKey()</span><br><span class="line">    new_path = path[:<span class="number">-4</span>] + <span class="string">'-fc3.jpg'</span></span><br><span class="line">    cv2.imwrite(new_path, image)</span><br></pre></td></tr></table></figure>
+
+<h1 id="方法四：Imageio"><a href="#方法四：Imageio" class="headerlink" title="方法四：Imageio"></a>方法四：Imageio</h1><p>这里<code>imageio</code>只是用于读取和保存，用<code>matplot</code>显示。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_image_4</span><span class="params">(path)</span>:</span></span><br><span class="line">    <span class="string">""" imageio</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        path: path of the image.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    image = imageio.imread(path)</span><br><span class="line">    plt.imshow(image)</span><br><span class="line">    plt.show()</span><br><span class="line">    new_path = path[:<span class="number">-4</span>] + <span class="string">'-fc4.jpg'</span></span><br><span class="line">    imageio.imsave(new_path, image)</span><br></pre></td></tr></table></figure>
+
+<h1 id="方法五：skimage"><a href="#方法五：skimage" class="headerlink" title="方法五：skimage"></a>方法五：skimage</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_image_5</span><span class="params">(path)</span>:</span></span><br><span class="line">    <span class="string">""" skimage</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        path: path of the image.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    image = io.imread(path)</span><br><span class="line">    io.imshow(image)</span><br><span class="line">    new_path = path[:<span class="number">-4</span>] + <span class="string">'-fc5.jpg'</span></span><br><span class="line">    io.imsave(new_path, image)</span><br><span class="line">    io.show()</span><br></pre></td></tr></table></figure>
+
+<h1 id="相关加载库"><a href="#相关加载库" class="headerlink" title="相关加载库"></a>相关加载库</h1><p>以防万一不知道import什么，这里列一下需要import的库。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> skimage <span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.image <span class="keyword">as</span> mpimg</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> imageio</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -299,7 +308,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://yueyue200830.github.io/2019/01/02/windows%E4%B8%8B%E4%BD%BF%E7%94%A8wget%E7%9A%84%E6%96%B9%E6%B3%95/" title="Windows下使用wget的方法">https://yueyue200830.github.io/2019/01/02/windows下使用wget的方法/</a>
+    <a href="https://yueyue200830.github.io/2020/03/11/Python%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E4%BF%9D%E5%AD%98%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" title="Python读取图片并保存的几种方式">https://yueyue200830.github.io/2020/03/11/Python读取图片并保存的几种方式/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -310,8 +319,9 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Windows/" rel="tag"># Windows</a>
-              <a href="/tags/wget/" rel="tag"># wget</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/OpenCV/" rel="tag"># OpenCV</a>
+              <a href="/tags/Computer-Vision/" rel="tag"># Computer Vision</a>
           </div>
 
         
@@ -320,12 +330,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2018/12/29/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E9%80%86%E5%85%83/" rel="prev" title="算法学习（三）——逆元">
-      <i class="fa fa-chevron-left"></i> 算法学习（三）——逆元
+    <a href="/2020/03/09/Ubuntu%E5%AE%89%E8%A3%85MySQL8-0/" rel="prev" title="Ubuntu安装MySQL8.0">
+      <i class="fa fa-chevron-left"></i> Ubuntu安装MySQL8.0
     </a></div>
       <div class="post-nav-item">
-    <a href="/2019/02/03/Leetcode%E2%80%94%E2%80%9442-Trapping-Rain-Water/" rel="next" title="Leetcode——42. Trapping Rain Water">
-      Leetcode——42. Trapping Rain Water <i class="fa fa-chevron-right"></i>
+    <a href="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/" rel="next" title="Windows修改右键新建菜单">
+      Windows修改右键新建菜单 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -386,7 +396,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#用choco安装"><span class="nav-number">1.</span> <span class="nav-text">用choco安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装chocolatey"><span class="nav-number">1.1.</span> <span class="nav-text">安装chocolatey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装wget"><span class="nav-number">1.2.</span> <span class="nav-text">安装wget</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用已编译的包"><span class="nav-number">2.</span> <span class="nav-text">用已编译的包</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#方法一：Pillow"><span class="nav-number">1.</span> <span class="nav-text">方法一：Pillow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法二：Matplot"><span class="nav-number">2.</span> <span class="nav-text">方法二：Matplot</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法三：OpenCV"><span class="nav-number">3.</span> <span class="nav-text">方法三：OpenCV</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法四：Imageio"><span class="nav-number">4.</span> <span class="nav-text">方法四：Imageio</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法五：skimage"><span class="nav-number">5.</span> <span class="nav-text">方法五：skimage</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关加载库"><span class="nav-number">6.</span> <span class="nav-text">相关加载库</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

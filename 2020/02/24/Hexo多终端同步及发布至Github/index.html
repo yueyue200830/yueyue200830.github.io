@@ -270,18 +270,24 @@
       
         <p>因为有两台电脑的关系，很多东西都需要同步，一般文件比较小的会用<code>Onedrive</code>，文件比较大的比如Hexo会选择用<code>GitHub</code>（主要贫穷的我只有5G的免费空间）。<br>相比于其它普通文件夹直接push就可以同步，这个就稍微麻烦一点，因为整个文件夹里有多个含有git的文件夹。<br>而在第一次直接把跟目录push上去以后，甚至遇到了这个网站<code>yueyue200830.github.io</code>的github全部被覆盖。<br>当时整个人内心都十分崩溃。。。</p>
 <a id="more"></a>
+
 <h1 id="解决方法之概念"><a href="#解决方法之概念" class="headerlink" title="解决方法之概念"></a>解决方法之概念</h1><p>首先，我们需要了解一下hexo是如何push到github上的</p>
 <p>在根目录寻找一圈后，会发现有一个<code>.deploy_git</code>的文件夹，打开发现和github上面的文件完全一样。<br>没错了，hexo就是直接编译在这个文件夹生成文件，然后push到github上面。</p>
 <p>然而，不要高兴太早，如果单纯的push为什么换电脑是覆盖而不是有任何的conflict信息呢？</p>
 <p>在<code>.deploy_git</code>文件夹在打开<code>git bash</code>，输入<code>git remote -v</code>，发现竟然什么也没有？？？</p>
-<p>介于自己完全不熟练<code>git</code>命令，打开了外部有同步的文件夹同样输入<code>git remote -v</code>，是会得到以下显示的<br><img src="/2020/02/24/Hexo%E5%A4%9A%E7%BB%88%E7%AB%AF%E5%90%8C%E6%AD%A5%E5%8F%8A%E5%8F%91%E5%B8%83%E8%87%B3Github/gitbash1.png" class="" title="Screenshot1"></p>
+<p>介于自己完全不熟练<code>git</code>命令，打开了外部有同步的文件夹同样输入<code>git remote -v</code>，是会得到以下显示的</p>
+<img src="/2020/02/24/Hexo%E5%A4%9A%E7%BB%88%E7%AB%AF%E5%90%8C%E6%AD%A5%E5%8F%8A%E5%8F%91%E5%B8%83%E8%87%B3Github/gitbash1.png" class="" title="Screenshot1">
+
 <p>虽然不清楚发生了什么（对不起，我就是一个git小白）。。但是可以知道我们git仓库没有github上面的信息<br>也就是每次hexo在deploy的时候，是直接把整个仓库替换上去的（好粗暴呀。。）</p>
 <p>而再去看一下整个项目的github，发面默认的gitignore里把<code>.deploy_git</code>添加上了。<br>也就是说同步的时候根本没有任何之前发布的信息，所以当换了一台电脑的时候就会遇到如此崩溃的事情了。</p>
 <h1 id="解决方法之实际操作"><a href="#解决方法之实际操作" class="headerlink" title="解决方法之实际操作"></a>解决方法之实际操作</h1><p>既然<code>.deploy_git</code>和项目各会同步在我的github上，那么与其取消ignore，不如在<code>.deploy_git</code>上添加远程仓库，每次更新前做一个同步。</p>
 <p>在<code>.deploy_git</code>文件夹的终端下输入以下内容，让其连接到github仓库（注意在最后加上<code>.git</code>）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add origin https://github.com/yueyue200830/yueyue200830.github.io.git</span><br></pre></td></tr></table></figure>
+
 <p>这个时候，我们再输入<code>git remote -v</code>，可以看到有信息了</p>
-<p>再把remote和本地的进行一次同步：（应该用pull也可以）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure></p>
+<p>再把remote和本地的进行一次同步：（应该用pull也可以）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin master</span><br></pre></td></tr></table></figure>
+
 <p>这样，我们就在本地同步与github同步成功了，只需要再另一台电脑上也进行以下同步配置，之后每次换电脑的时候只需要两个文件夹各同步一下就可以啦。</p>
 
     </div>
@@ -400,7 +406,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -413,7 +419,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -461,12 +467,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">50k</span>
+    <span title="Symbols count total">52k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:24</span>
+    <span title="Reading time total">1:26</span>
 </div>
 
         

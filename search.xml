@@ -1,6 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>2020实习申请季</title>
+    <url>/2020/04/21/2020%E5%AE%9E%E4%B9%A0%E7%94%B3%E8%AF%B7%E5%AD%A3/</url>
+    <content><![CDATA[<p>实习季总算基本告一段落啦，零零碎碎的还有个别面试可能考虑面掉吧，但是已经决定去哪家了。</p>
+<p>和其它人相比之下，我算是非大众类型的一类面试者，开始准备已经很晚，基础可以算是烂得一塌糊度，但是算法比较好（高于普通水平，低于acmer），靠吃老本。</p>
+<a id="more"></a>
+
+<h1 id="个人情况"><a href="#个人情况" class="headerlink" title="个人情况"></a>个人情况</h1><p>本来去年有在Google实习，基本打算今年继续的，所以其实在三月前是觉得自己很稳的。没有任何复习，还在搞其它的东西。最后也是因为怕万一team match挂可以有个备选吧，结果万万没想到真的备选变成了正选。上周被正式通知取消实习。</p>
+<p>正式开始准备（学习）是在三月之后，曾经在3月初还在和同学讨论我是不是该加入复习大军，现在庆幸的是即使线上学习，身边还有一群同学鞭策着自己学习吧。</p>
+<p>所有公司除微众银行以外全部投的上海的岗位。</p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>说实话算法我基本没刷过题，除了面微软前补了一周的一年前刷的leetcode，基本就剩下看面经里的算法题了。<br>不过算法不太需要刷也多亏了大一的时候学校自己的oj一共刷了400多道吧，leetcode在大二面试前大概刷了60题，剩下就零零碎碎各个网站了。</p>
+<p>因为算是ACM的底子，所以算法题基本是c++，偶尔遇到情况会python，完全不写Java。</p>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>其实算是0基础开始准备的，计网、操作系统特别烂，Java学了几乎等于没学，数据库还在上课。</p>
+<p>其实即使到今天，我的基础依旧特别烂，一旦深入就完蛋的那种。<br>如果有能力看源码的确很重要。</p>
+<h2 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h2><p>所有可见的项目都在Github上了，总体就是：没有能被面试的项目。。。</p>
+<h2 id="最后成果"><a href="#最后成果" class="headerlink" title="最后成果"></a>最后成果</h2><p>Offer: 微软、字节跳动<br>挂过：腾讯腾讯云、阿里CFO、美团、微众银行(没消息)<br>放弃：腾讯正式批、阿里蚂蚁、携程、美团、亚马逊<br>无消息：SAP、Paypal（明确招满了）<br>未知：摩根士丹利</p>
+<h1 id="微软"><a href="#微软" class="headerlink" title="微软"></a>微软</h1><p>微软是我需要面的公司里最合我的一家吧，算是除Google以外最看重算法最少基础的一家公司。</p>
+<p>感觉也算是运气好，我全程算法题，所以还是比较快乐的面试经历。</p>
+<h2 id="笔试"><a href="#笔试" class="headerlink" title="笔试"></a>笔试</h2><p>我没有参加内推（想到的时候过期的），所以做了笔试，最后的话是0+1+(1-2个测试点)。</p>
+<p>第一题花费了很久没看清题意，并且熟悉编译器也花了很久，最后放弃了。<br>第二题虽然听说是去年原题，但我是没有见过啦，不过因为很熟DP，20分钟AC了。<br>第三题忘记是什么题了，最后有两个case没过。</p>
+<h2 id="LC1"><a href="#LC1" class="headerlink" title="LC1"></a>LC1</h2><p>我的一面是个女面试官，其实自己表现不算满意，但也其实是觉得面试官没有深究每题？</p>
+<p><strong>第一题</strong></p>
+<blockquote>
+<p>给定一群人，他们可能有些人相互认识，定义只要其中有认识的人就算是一个朋友圈，找到一共有多少个朋友圈。</p>
+</blockquote>
+<p>我给的解答是DFS，不过面试官问我会不会查并集，实话实说知道但不了解，于是写了DFS的解法。<br>由于写了C++，其实corner case和需要考虑的是比其它语言多的，比如本题我用了引用，但只有部分的引用，被面试官揪出来了。<br>之后写了一些测试用例，并且在面试官的提示下加入了NULL的判断。</p>
+<p><strong>第二题</strong></p>
+<blockquote>
+<p>给定一个数组，两个人玩游戏，只能取左边或者右边，每次都是以最优的方式取的，求第一个取的人是否会赢。</p>
+</blockquote>
+<p>用的DP解法，面试官理解了很久（我不是很懂这个解法不是一个常见解法之一吗？）<br>继续测试用例，并且用测试用例给面试官解答</p>
+<p><strong>一个小题目</strong></p>
+<p>最后时间也不是很足了，面试官问了我HashMap的设计，我答了一个基本设计，再加上了一些Java的实现。</p>
+<p><strong>提问</strong></p>
+<p>问了一下面试官所在的组，写C++和C#多，瞬间觉得应该用python写算法题的。。</p>
+<h2 id="LC2"><a href="#LC2" class="headerlink" title="LC2"></a>LC2</h2><p>这个面试官就问了一道题，个人觉得做得还行，但逻辑不够清晰</p>
+<p><strong>题目</strong></p>
+<blockquote>
+<p>给定一个四则运算的字符串输入，求出结果</p>
+</blockquote>
+<p>记忆中曾经好像见过类似的，用的是栈？但没想出来，最后很复杂的用了很多变量做的，白板代码又是讲解了半天的逻辑。<br>面试官没让我写判断输入是否合法，但直接讲了不合法的情况，然后就被C++坑了呀，没考虑到输入长度超出int类型的情况（我爱python）</p>
+<h2 id="Leader"><a href="#Leader" class="headerlink" title="Leader"></a>Leader</h2><p>唔，这是一场神奇的面试，主要奇怪在后半部分。</p>
+<p>首先面试官让我讲一下之前的算法题，然后再二面的题目上加上了括号，说一下怎么做，我做了一个懒惰的修改版，直接递归。<br>然后分享屏幕，用IDE做了一题，可以编译（人好啊）。至于面试题，我想不起来了，本地代码被我删除了。。。不过很简单就是了，最多十几分钟写完的</p>
+<p><strong>然后</strong>，30分钟面完了，面试官为了撑时间和我闲聊，甚至推荐我转行投行、PE和咨询赚钱。面完觉得要挂了。。。</p>
+<h1 id="字节跳动"><a href="#字节跳动" class="headerlink" title="字节跳动"></a>字节跳动</h1><p>申请的是AI Lab的后端实习，当初纯粹是想挑个冷门的部门试试，但现在感觉正式员工还是可能其它部门比较好？<br>和大部分部门不太一样的是，AI Lab只有两面，超级快乐！</p>
+<h2 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h2><p>基础基本不记得问了什么，但没什么难点是肯定的。</p>
+<p>由于有前端经历，被面试官问了一个js的闭包，没复习不会，不过用var声明题目看起来有点历史悠久呀。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"The Window"</span>;</span><br><span class="line"><span class="keyword">var</span> object = &#123;</span><br><span class="line">　　name : <span class="string">"My Object"</span>,</span><br><span class="line">　　getNameFunc : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　　　<span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">　　　　&#125;;</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>算法题一</strong></p>
+<blockquote>
+<p>给一棵完全二叉树，计算它的节点个数</p>
+</blockquote>
+<p>一开始完全没看倒完全二叉树，所以用了全搜索的解法，后来提醒之下说了一个其实没问题但比较复杂然而面试官并没有懂的解法，时间复杂度和面试官的解法一样。</p>
+<p><strong>算法题二</strong></p>
+<blockquote>
+<p>Leetcode原题：Partition Equal Subset Sum</p>
+</blockquote>
+<p>见过，不记得是否做过，题目看错，最后发现dp，五分钟秒的，但因为写了优化版的面试官没看懂，又两分钟极限写代码证明自己是对的。</p>
+<p><strong>总结</strong>：面试官不是算法好的人，脑子一般般，优化dp这么基础的看不懂，建议多刷点题。</p>
+<h2 id="二面"><a href="#二面" class="headerlink" title="二面"></a>二面</h2><p>周日面试面试官还因为开会迟到，好忙呀。</p>
+<p>此面没问基础，问了项目，但也不深挖。</p>
+<p><strong>算法题一</strong></p>
+<blockquote>
+<p>给n*m的矩阵，正整数，假设为小岛，如果某个点大于它相邻的点，那么就说河水可以流下去，这个矩阵外面是海水，最旁边的点河水可以流到海里，找出不能流到海里的点</p>
+</blockquote>
+<p>基础dfs，挺简单的</p>
+<p><strong>算法题二</strong></p>
+<blockquote>
+<p>给1-n的，输出字典序</p>
+</blockquote>
+<p>据说leetcode原题，没见过，一开始没注意到是1-n，字典树都出来了，后来反应过来很简单，递归。结果写得太快被反问是不是做过？？没见我题目都没看清嘛。</p>
+<h2 id="hr面"><a href="#hr面" class="headerlink" title="hr面"></a>hr面</h2><p>用的zoom，谈了20分钟，主要也就是读不读研，怎么选择offer。个人感觉表现一般，最后联系我给offer的也是这个hr了。</p>
+<h1 id="美团"><a href="#美团" class="headerlink" title="美团"></a>美团</h1><p>美团hr真的是史上最垃圾hr，但是面试官人真的好好！</p>
+<p>当初没了解过部门，投的是基础研发，感觉比较偏？面的部门是搞数据库的</p>
+<h2 id="笔试-1"><a href="#笔试-1" class="headerlink" title="笔试"></a>笔试</h2><p>1+1+0.45+0+0.45<br>算是一个还行但也不太好的成绩吧，不过喜欢美团的题目，最算法的一个。</p>
+<h2 id="一面（电面）"><a href="#一面（电面）" class="headerlink" title="一面（电面）"></a>一面（电面）</h2><p>这个面试官人超级好！不会的就说没关系，还是唯一一个挖我的blog的面试官。</p>
+<ul>
+<li>讲一下项目（挖坑j2ee自己跳下去了）</li>
+<li>你是java比较熟吗（项目java，算法c++，python也还行）</li>
+<li>前端使用js？（不太熟，用过）</li>
+<li>问linux，$0,$1,$?,$$是什么（记忆中回答了$0和$1是第一个和第二个参数）</li>
+<li>然后提到了我的blog，于是问怎么修改ssh端口（我的博文，但是不记得了）</li>
+<li>Linux常用命令</li>
+<li>服务器部署了什么（提到项目and我的乱七八糟的小东西）</li>
+<li>假设项目部署在服务器，并且又访问日志，如果用linux命令获取最常访问的ip（说了map，用linux命令不会）</li>
+<li>硬链接&amp;软链接（不记得）</li>
+<li>数据库存储引擎（innodb，还有一个不记得）</li>
+<li>数据库事务</li>
+<li>隔离级别</li>
+<li>数据库int(11)和int(10)有区别吗？范围一样吗（猜的有，不一样）</li>
+<li>数据库表里的数据被清掉一半，但磁盘没释放，为什么？（不会）</li>
+<li>七层模型and常用协议</li>
+<li>http code</li>
+<li>三次握手四次挥手</li>
+<li>Js的apply和call区别（没听说过，懵逼）</li>
+<li>跨域（没回答好，说一般在java配置）面试官表示jsonp可用解决</li>
+<li>Vue监听属性的变化（不太知道，猜了个onChange，顺便我问投的后端啊）</li>
+<li>Jsp和servlet有什么区别（表示一起用的呀，不知道）面试官说：同一个。。。</li>
+<li>算法题：ip转成int再转回ip</li>
+<li>设计lru（没答好，我说了一个方法，让再想一个，表示感觉没法优化了。。）</li>
+<li>假设有人用脚本访问你的项目，如何限制访问（一开始说java，后来说nginx，然后才知道要数据库。。。主要说法就是map记录次数），升级版是分布式，再说如果访问量更大呢（猜了一个redis）</li>
+<li>介绍团队</li>
+<li>反问怎么了解前端</li>
+<li>又问了我blog打cf，我就趁机表示了一下最近没怎么刷题，后来想拿cf练练手。</li>
+</ul>
+<h2 id="二面（电面）"><a href="#二面（电面）" class="headerlink" title="二面（电面）"></a>二面（电面）</h2><p>优秀的一面面试官，面完10分钟给我约了二面！<br>二面感觉自己面得很糟糕</p>
+<p><em>有空补，可能是个坑</em></p>
+<h2 id="hr面-1"><a href="#hr面-1" class="headerlink" title="hr面"></a>hr面</h2><p>天真以为oc原来这是面试呀，说考虑一下，反手被挂</p>
+<h2 id="加面一"><a href="#加面一" class="headerlink" title="加面一"></a>加面一</h2><p>被同一个事业群不同部门捞起，加面一轮视频面试。结果因为自己的简历的锅来了一个c++面试官，知识交集约为0。。。</p>
+<ul>
+<li>首先讲了一下技术栈，然后表示用java，c++只会写题。</li>
+<li>讲一下hashmap，被我又扯到java</li>
+<li>跳表会吗（不会，讲道理不是学过数据结构会调表，而是学过redis会跳表啊）</li>
+<li>网络和多线程哪块好一些？表示多线程会java，但没写过大的，网络以为是计网，结果是网络编程？不会，然后扯了一些计网和抓包</li>
+</ul>
+<p><strong>算法题</strong></p>
+<blockquote>
+<p>将单链表的每K个节点之间逆序</p>
+</blockquote>
+<p>题目见过没写过，问了面试官同意到自己的本地ide debug，最后不是那么好的做完了。</p>
+<h2 id="加面二"><a href="#加面二" class="headerlink" title="加面二"></a>加面二</h2><p>加面完大概半小时多被打电话约加面，估计是换一个java面试官来吧。<br>由于那几天有点忙，往后约了两天，然后拿到其它offer就放弃面试了。</p>
+<h1 id="摩根士丹利"><a href="#摩根士丹利" class="headerlink" title="摩根士丹利"></a>摩根士丹利</h1><p>摩根的笔试和微软冲突了，于是没在第一批笔试。<br>今年笔试相比往年简单了不少，2道算法题很简单，5道选择卡了一下。</p>
+<h2 id="电面"><a href="#电面" class="headerlink" title="电面"></a>电面</h2><p>这是一个神奇的电面，面试内容都是我没见过的</p>
+<ul>
+<li>讲一下排序算法有哪些，介绍了快排和归并的思想</li>
+<li>api全称叫什么</li>
+<li>uml全称，了解uml吗，项目中有用过uml吗，对uml的感觉是什么（喜欢或不喜欢）</li>
+<li>了解ddos吗</li>
+<li>什么是事务</li>
+<li>一开始说错了，提到ACID，讲一下acid</li>
+<li>如果单线程单服务器，还要事务吗</li>
+<li>你有用过junit，那么知道如果模拟数据库吗（不记得了，说用的mockito）</li>
+</ul>
+<h2 id="算法面"><a href="#算法面" class="headerlink" title="算法面"></a>算法面</h2><p>这一面被气到了，如果不是面试官找不到我的帐户，大概我不用写那个非算法题吧。<br>作为半个acmer，我很能分别算法题和代码题，显然，我运气不好得碰到代码题。</p>
+<p>事情就是面试官找不到我的帐户，第一次面试，于是给我出了一个题目，分享屏幕，用本地ide写代码。</p>
+<p>题目是约瑟夫环，但是条件限制还挺多的。<br>已经不记得算法版怎么做的了，于是做了链表版的，手写无法编译，肉眼debug，写了一堆问题，一般链表默认单链表啊，我写完告诉我可以双链表，行吧。。</p>
+<p>面试体验-10</p>
+<h2 id="技术面"><a href="#技术面" class="headerlink" title="技术面"></a>技术面</h2><p>没问语言相关，问了数据库和网络（三次握手，还有提到对称加密非对称加密）其余不记得，不难。</p>
+<h2 id="半hr面"><a href="#半hr面" class="headerlink" title="半hr面"></a>半hr面</h2><p>我开启了随意聊天模式，感觉没问太多有效信息，反而被我各种反问hhhh</p>
+<h1 id="阿里"><a href="#阿里" class="headerlink" title="阿里"></a>阿里</h1><p>说真的，作为一个内部自信到要死认为别人都不如自己的大厂，为什么还要发那么多广告。好感度-100</p>
+<h2 id="笔试-2"><a href="#笔试-2" class="headerlink" title="笔试"></a>笔试</h2><p>唔，运气好像还行，1+0.65，那个没全过的c++估计被卡精度了，python被卡超时了。。。</p>
+<h2 id="一面-1"><a href="#一面-1" class="headerlink" title="一面"></a>一面</h2><p>投的是一个CFO部门，然而因为阿里一面是我第一个面试的公司，所以各种不会，各种紧张，面得超级烂。<br>基本就是问我什么都说不太清楚，java熟悉哪块我都不熟悉。</p>
+<p>由于面得太糟糕不愿意去听录音。不过没想到还捞我二面。。。</p>
+<h2 id="二面-1"><a href="#二面-1" class="headerlink" title="二面"></a>二面</h2><ul>
+<li>常见网络协议有哪些</li>
+<li>网络协议分几层，各有什么协议</li>
+<li>为什么要分这么多层（最后被我扯到耦合性去了。。。）</li>
+<li>一般防火墙在哪层（一开始猜了，后来说不知道）</li>
+<li>负载均衡在哪一层（网络/应用都可以）</li>
+<li>http和https区别</li>
+<li>https的安全机制大概逻辑（我讲了非对称加密）</li>
+<li>线程vs进程</li>
+<li>Linux命令看进程/线程运行（ps，我说能看进程，线程不知道）</li>
+<li>Top命令中load和cpu使用率的区别（不知道）</li>
+<li>浏览器中网址过程</li>
+<li>（问题有点绕）最后就是关于cookie和session</li>
+<li>不同服务器如何判别同一个cookie/session（感觉这里一开始面试官说cookie，后来说了session，我回答了session）</li>
+<li>二级域名的cookie，三级域名有吗，（猜有）其它网站有吗（没）</li>
+<li>设计模式（讲工厂讲得特别混乱。。）</li>
+<li>对称加密vs非对称加密</li>
+<li>讲一下hashmap，线程安全吗，哪里会线程不安全</li>
+<li>讲一下奖项。。。然后讲题（我说讲一下最近的cf一道题，但是讲得比较混乱。。因为牵涉到数学）</li>
+<li>讲实习，学到了什么</li>
+</ul>
+<p>面完被打电话问是否愿意转测试（不愿意），之后发现没消息，后来牛客上看了一下这个部门应该招满了，而且自己也的确面得不好。</p>
+<h2 id="一面-2"><a href="#一面-2" class="headerlink" title="一面"></a>一面</h2><p>又找了蚂蚁捞的我，大概是一面和简历面混合版吧，主问项目，面得不好。</p>
+<ul>
+<li>设计一个购物系统</li>
+<li>cookie和session</li>
+</ul>
+<h2 id="二面-2"><a href="#二面-2" class="headerlink" title="二面"></a>二面</h2><p>还是被约了二面，截至本文最后更新还未面试，准备放弃。</p>
+<h1 id="腾讯"><a href="#腾讯" class="headerlink" title="腾讯"></a>腾讯</h1><p>说说腾讯的情况，因为主Java，不想去c++，所以先投web开发，再换了客户端。</p>
+<h2 id="一面-3"><a href="#一面-3" class="headerlink" title="一面"></a>一面</h2><p>投完第二天早上被微信捞了，晚上面试，然而表示不愿去广东，就聊了一下。<br>前端基本不会，表示想去web后端。</p>
+<h2 id="一面-4"><a href="#一面-4" class="headerlink" title="一面"></a>一面</h2><p>被腾讯云的IOS捞了，表示没基础。</p>
+<p>其实一面的基础面得超级烂，主要是考os相关的了，没太复习。<br>被问了堆和栈的区别，我回答了java版的，和os的不太一样。。。面试官应该没get<br>算法题似乎是反转链表。</p>
+<h2 id="二面-3"><a href="#二面-3" class="headerlink" title="二面"></a>二面</h2><p>就算是压力面也不用这样怼我吧，全程怼项目，后来想想应该怼回去的。<br>我就随口问了一句你们加班吗，被反问你为什么觉得不加班。难道不是传闻有些部门不怎么加班嘛，我问一句还不行吗。</p>
+<p>代码题：写单例</p>
+<p><strong>结果</strong>：当然挂了</p>
+<h1 id="携程"><a href="#携程" class="headerlink" title="携程"></a>携程</h1><p>这家在我心中二线公司也是挺有趣的，估计因为今年国外很多offer被revoke了，很多人回来找实习也投了携程保底，他们竟然自信到把之前说好的不用笔试的同学们拉去笔试，还把我一个拿到阿里offer的同学笔试给刷了。</p>
+<h2 id="笔试-3"><a href="#笔试-3" class="headerlink" title="笔试"></a>笔试</h2><p>算法部分：83+75+100，选择部分随便选。<br>不算特别高，但感觉够分数线就交卷了，事实证明还是排在很前面的，基本和提前批的一个时间面试的。</p>
+<h2 id="一面-5"><a href="#一面-5" class="headerlink" title="一面"></a>一面</h2><p>记忆中基础没怎么问，而且问的也很浅。</p>
+<p><strong>代码题一</strong></p>
+<blockquote>
+<p>判断两个二叉树是否相等</p>
+</blockquote>
+<p><strong>代码题二</strong></p>
+<blockquote>
+<p>写个堆的push</p>
+</blockquote>
+<p>基本就没碰过堆，忘记了方法，还好被提醒了一下，就会写了</p>
+<h2 id="二面-4"><a href="#二面-4" class="headerlink" title="二面"></a>二面</h2><p>这个面试官特别迷，各个概念块一个个问下来，都挺简单的，最后写了一个工厂模式。</p>
+<h1 id="Amazon"><a href="#Amazon" class="headerlink" title="Amazon"></a>Amazon</h1><p>神奇的亚马逊发邮件投递，一个月后应该是第二批被捞，发我邮件约时间，结果给的时间段过了还没给我面试时间，在过两天又一个面试邮件来，由于拿到offer回复邮件放弃了，然而hr没看到邮件还被面试官打电话了。。不太行。。</p>
+<h1 id="微众银行"><a href="#微众银行" class="headerlink" title="微众银行"></a>微众银行</h1><p>这家算保底的保底了，就做了一个笔试题，30min秒完AK交卷，估计是我选择题太差了没收到面试通知（真的不看一下我编程做了多久吗？？？）<br>不过反正保底的保底不给我面试我也不稀罕</p>
+]]></content>
+      <categories>
+        <category>Others</category>
+      </categories>
+      <tags>
+        <tag>Internship</tag>
+        <tag>Interview</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Leetcode——142. Linked List Cycle II</title>
     <url>/2020/04/08/Leetcode%E2%80%94%E2%80%94142-Linked-List-Cycle-II/</url>
     <content><![CDATA[<p>刷题时看到这道题，看了解答觉得很数学&amp;有趣，就来写个数学证明题吧hhhh</p>
@@ -353,8 +556,8 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Github</tag>
         <tag>Hexo</tag>
+        <tag>Github</tag>
         <tag>多终端</tag>
       </tags>
   </entry>
@@ -419,8 +622,8 @@
         <category>Others</category>
       </categories>
       <tags>
-        <tag>DNS</tag>
         <tag>Github</tag>
+        <tag>DNS</tag>
         <tag>Hosts</tag>
       </tags>
   </entry>

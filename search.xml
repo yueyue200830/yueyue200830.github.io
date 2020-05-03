@@ -4,18 +4,18 @@
     <title>2020实习申请季</title>
     <url>/2020/04/21/2020%E5%AE%9E%E4%B9%A0%E7%94%B3%E8%AF%B7%E5%AD%A3/</url>
     <content><![CDATA[<p>实习季总算基本告一段落啦，零零碎碎的还有个别面试可能考虑面掉吧，但是已经决定去哪家了。</p>
-<p>和其它人相比之下，我算是非大众类型的一类面试者，开始准备已经很晚，基础可以算是烂得一塌糊度，但是算法比较好（高于普通水平，低于acmer），靠吃老本。</p>
+<p>和其它人相比之下，我算是非大众类型的一类面试者，开始准备已经很晚，基础可以算是烂得一塌糊度，但是算法比较好（高于普通水平，低于acmer）</p>
 <a id="more"></a>
 
 <h1 id="个人情况"><a href="#个人情况" class="headerlink" title="个人情况"></a>个人情况</h1><p>本来去年有在Google实习，基本打算今年继续的，所以其实在三月前是觉得自己很稳的。没有任何复习，还在搞其它的东西。最后也是因为怕万一team match挂可以有个备选吧，结果万万没想到真的备选变成了正选。上周被正式通知取消实习。</p>
 <p>正式开始准备（学习）是在三月之后，曾经在3月初还在和同学讨论我是不是该加入复习大军，现在庆幸的是即使线上学习，身边还有一群同学鞭策着自己学习吧。</p>
-<p>所有公司除微众银行以外全部投的上海的岗位。</p>
+<p>所有公司除微众银行以外全部投的上海的岗位，投的岗位为SWE/后台开发/Java开发。</p>
 <h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>说实话算法我基本没刷过题，除了面微软前补了一周的一年前刷的leetcode，基本就剩下看面经里的算法题了。<br>不过算法不太需要刷也多亏了大一的时候学校自己的oj一共刷了400多道吧，leetcode在大二面试前大概刷了60题，剩下就零零碎碎各个网站了。</p>
 <p>因为算是ACM的底子，所以算法题基本是c++，偶尔遇到情况会python，完全不写Java。</p>
 <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>其实算是0基础开始准备的，计网、操作系统特别烂，Java学了几乎等于没学，数据库还在上课。</p>
 <p>其实即使到今天，我的基础依旧特别烂，一旦深入就完蛋的那种。<br>如果有能力看源码的确很重要。</p>
 <h2 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h2><p>所有可见的项目都在Github上了，总体就是：没有能被面试的项目。。。</p>
-<h2 id="最后成果"><a href="#最后成果" class="headerlink" title="最后成果"></a>最后成果</h2><p>Offer: 微软、字节跳动<br>挂过：腾讯腾讯云、阿里CFO、美团、微众银行(没消息)<br>放弃：腾讯正式批、阿里蚂蚁、携程、美团、亚马逊<br>无消息：SAP、Paypal（明确招满了）<br>未知：摩根士丹利</p>
+<h2 id="最后成果"><a href="#最后成果" class="headerlink" title="最后成果"></a>最后成果</h2><p>Offer: 微软、字节跳动、摩根士丹利<br>挂过：腾讯腾讯云、阿里CFO、美团、微众银行(没消息)<br>放弃：腾讯正式批、阿里蚂蚁、携程、美团、亚马逊<br>无消息：SAP、Paypal（明确招满了）</p>
 <h1 id="微软"><a href="#微软" class="headerlink" title="微软"></a>微软</h1><p>微软是我需要面的公司里最合我的一家吧，算是除Google以外最看重算法最少基础的一家公司。</p>
 <p>感觉也算是运气好，我全程算法题，所以还是比较快乐的面试经历。</p>
 <h2 id="笔试"><a href="#笔试" class="headerlink" title="笔试"></a>笔试</h2><p>我没有参加内推（想到的时候过期的），所以做了笔试，最后的话是0+1+(1-2个测试点)。</p>
@@ -138,7 +138,7 @@
 <p>事情就是面试官找不到我的帐户，第一次面试，于是给我出了一个题目，分享屏幕，用本地ide写代码。</p>
 <p>题目是约瑟夫环，但是条件限制还挺多的。<br>已经不记得算法版怎么做的了，于是做了链表版的，手写无法编译，肉眼debug，写了一堆问题，一般链表默认单链表啊，我写完告诉我可以双链表，行吧。。</p>
 <p>面试体验-10</p>
-<h2 id="技术面"><a href="#技术面" class="headerlink" title="技术面"></a>技术面</h2><p>没问语言相关，问了数据库和网络（三次握手，还有提到对称加密非对称加密）其余不记得，不难。</p>
+<h2 id="技术面"><a href="#技术面" class="headerlink" title="技术面"></a>技术面</h2><p>没问语言相关，问了数据库（join，primary key &amp; foreign key）和网络（三次握手，还有提到对称加密非对称加密）其余不记得，不难。</p>
 <h2 id="半hr面"><a href="#半hr面" class="headerlink" title="半hr面"></a>半hr面</h2><p>我开启了随意聊天模式，感觉没问太多有效信息，反而被我各种反问hhhh</p>
 <h1 id="阿里"><a href="#阿里" class="headerlink" title="阿里"></a>阿里</h1><p>说真的，作为一个内部自信到要死认为别人都不如自己的大厂，为什么还要发那么多广告。好感度-100</p>
 <h2 id="笔试-2"><a href="#笔试-2" class="headerlink" title="笔试"></a>笔试</h2><p>唔，运气好像还行，1+0.65，那个没全过的c++估计被卡精度了，python被卡超时了。。。</p>
@@ -171,7 +171,7 @@
 <li>设计一个购物系统</li>
 <li>cookie和session</li>
 </ul>
-<h2 id="二面-2"><a href="#二面-2" class="headerlink" title="二面"></a>二面</h2><p>还是被约了二面，截至本文最后更新还未面试，准备放弃。</p>
+<h2 id="二面-2"><a href="#二面-2" class="headerlink" title="二面"></a>二面</h2><p>还是被约了二面，拿到其它offer放弃了。</p>
 <h1 id="腾讯"><a href="#腾讯" class="headerlink" title="腾讯"></a>腾讯</h1><p>说说腾讯的情况，因为主Java，不想去c++，所以先投web开发，再换了客户端。</p>
 <h2 id="一面-3"><a href="#一面-3" class="headerlink" title="一面"></a>一面</h2><p>投完第二天早上被微信捞了，晚上面试，然而表示不愿去广东，就聊了一下。<br>前端基本不会，表示想去web后端。</p>
 <h2 id="一面-4"><a href="#一面-4" class="headerlink" title="一面"></a>一面</h2><p>被腾讯云的IOS捞了，表示没基础。</p>
@@ -179,7 +179,7 @@
 <h2 id="二面-3"><a href="#二面-3" class="headerlink" title="二面"></a>二面</h2><p>就算是压力面也不用这样怼我吧，全程怼项目，后来想想应该怼回去的。<br>我就随口问了一句你们加班吗，被反问你为什么觉得不加班。难道不是传闻有些部门不怎么加班嘛，我问一句还不行吗。</p>
 <p>代码题：写单例</p>
 <p><strong>结果</strong>：当然挂了</p>
-<h1 id="携程"><a href="#携程" class="headerlink" title="携程"></a>携程</h1><p>这家在我心中二线公司也是挺有趣的，估计因为今年国外很多offer被revoke了，很多人回来找实习也投了携程保底，他们竟然自信到把之前说好的不用笔试的同学们拉去笔试，还把我一个拿到阿里offer的同学笔试给刷了。</p>
+<h1 id="携程"><a href="#携程" class="headerlink" title="携程"></a>携程</h1><p>这家在我心中二线公司也是挺有趣的，估计因为今年国外很多offer被revoke了，很多人回来找实习也投了携程保底，他们竟然自信到把之前说好的不用笔试的同学们拉去笔试，还把一个拿到阿里offer的同学笔试给刷了。</p>
 <h2 id="笔试-3"><a href="#笔试-3" class="headerlink" title="笔试"></a>笔试</h2><p>算法部分：83+75+100，选择部分随便选。<br>不算特别高，但感觉够分数线就交卷了，事实证明还是排在很前面的，基本和提前批的一个时间面试的。</p>
 <h2 id="一面-5"><a href="#一面-5" class="headerlink" title="一面"></a>一面</h2><p>记忆中基础没怎么问，而且问的也很浅。</p>
 <p><strong>代码题一</strong></p>
@@ -191,7 +191,7 @@
 <p>写个堆的push</p>
 </blockquote>
 <p>基本就没碰过堆，忘记了方法，还好被提醒了一下，就会写了</p>
-<h2 id="二面-4"><a href="#二面-4" class="headerlink" title="二面"></a>二面</h2><p>这个面试官特别迷，各个概念块一个个问下来，都挺简单的，最后写了一个工厂模式。</p>
+<h2 id="二面-4"><a href="#二面-4" class="headerlink" title="二面"></a>二面</h2><p>这个面试官特别迷，各个概念块一个个问下来，包括队列和栈、排序算法、数据库等都挺简单而且非常浅的，最后写了一个工厂模式。</p>
 <h1 id="Amazon"><a href="#Amazon" class="headerlink" title="Amazon"></a>Amazon</h1><p>神奇的亚马逊发邮件投递，一个月后应该是第二批被捞，发我邮件约时间，结果给的时间段过了还没给我面试时间，在过两天又一个面试邮件来，由于拿到offer回复邮件放弃了，然而hr没看到邮件还被面试官打电话了。。不太行。。</p>
 <h1 id="微众银行"><a href="#微众银行" class="headerlink" title="微众银行"></a>微众银行</h1><p>这家算保底的保底了，就做了一个笔试题，30min秒完AK交卷，估计是我选择题太差了没收到面试通知（真的不看一下我编程做了多久吗？？？）<br>不过反正保底的保底不给我面试我也不稀罕</p>
 ]]></content>
@@ -201,6 +201,7 @@
       <tags>
         <tag>Internship</tag>
         <tag>Interview</tag>
+        <tag>面经</tag>
       </tags>
   </entry>
   <entry>
@@ -556,8 +557,8 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
         <tag>Github</tag>
+        <tag>Hexo</tag>
         <tag>多终端</tag>
       </tags>
   </entry>
@@ -622,8 +623,8 @@
         <category>Others</category>
       </categories>
       <tags>
-        <tag>Github</tag>
         <tag>DNS</tag>
+        <tag>Github</tag>
         <tag>Hosts</tag>
       </tags>
   </entry>
@@ -728,8 +729,8 @@
         <category>Linux</category>
       </categories>
       <tags>
-        <tag>MPICH</tag>
         <tag>Ubuntu</tag>
+        <tag>MPICH</tag>
         <tag>parallelism</tag>
       </tags>
   </entry>

@@ -307,7 +307,7 @@
 
 <h1 id="2-计算梯度幅值和方向"><a href="#2-计算梯度幅值和方向" class="headerlink" title="2. 计算梯度幅值和方向"></a>2. 计算梯度幅值和方向</h1><h2 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h2><p>常见方法采用Sobel滤波器在计算梯度和方向。</p>
 <p>采用以下卷积阵列计算x和y的差分：</p>
-<p>$$<br>G_x =<br>\left[<br> \begin{matrix}<br>   -1 &amp; 0 &amp; +1  \<br>   -2 &amp; 0 &amp; +2  \\<br>   -1 &amp; 0 &amp; +1  \\<br>  \end{matrix}<br>\right]<br>$$</p>
+<p>$$<br>G_x =<br>\left[<br> \begin{matrix}<br>   -1 &amp; 0 &amp; +1  \\<br>   -2 &amp; 0 &amp; +2  \\<br>   -1 &amp; 0 &amp; +1  \\<br>  \end{matrix}<br>\right]<br>$$</p>
 <p>$$<br>G_y =<br>\left[<br> \begin{matrix}<br>   -1 &amp; -2 &amp; -1  \\<br>    0 &amp;  0 &amp;  0  \\<br>   +1 &amp; +2 &amp; +1  \\<br>  \end{matrix}<br>\right]<br>$$</p>
 <p>采用下列公式计算梯度幅值和方向：</p>
 <p>$$<br>G = \sqrt{(G_x^2 + G_y^2)}<br>$$</p>
@@ -658,8 +658,8 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
         <tag>Github</tag>
+        <tag>Hexo</tag>
         <tag>多终端</tag>
       </tags>
   </entry>
@@ -724,8 +724,8 @@
         <category>Others</category>
       </categories>
       <tags>
-        <tag>Github</tag>
         <tag>DNS</tag>
+        <tag>Github</tag>
         <tag>Hosts</tag>
       </tags>
   </entry>
@@ -779,8 +779,8 @@
         <category>Python</category>
       </categories>
       <tags>
-        <tag>Python</tag>
         <tag>Windows</tag>
+        <tag>Python</tag>
         <tag>Notification</tag>
       </tags>
   </entry>

@@ -1,3 +1,5 @@
+/** _variables\base.styl **/
+/** _variables\Pisces.styl **/
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
@@ -404,7 +406,7 @@ pre {
 }
 pre,
 code {
-  font-family: consolas, Menlo, "Microsoft YaHei", monospace, "PingFang SC", "Microsoft YaHei";
+  font-family: consolas, Menlo, "PingFang SC", "Microsoft YaHei";
 }
 code {
   background: #eee;
@@ -1195,7 +1197,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff67f9;
+  background: #b166ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1550,7 +1552,7 @@ pre .javascript .function {
 }
 @media (min-width: 1200px) {
   .post-body {
-    font-size: 1em;
+    font-size: 1.125em;
   }
 }
 .post-body span.exturl .fa {
@@ -2605,4 +2607,10 @@ mjx-container + br {
 }
 .links-of-blogroll-item {
   padding: 0;
+}
+/** _common\components\post\post.styl **/
+@media (min-width: 1200px) {
+  .post-body {
+    font-size: 1em;
+  }
 }

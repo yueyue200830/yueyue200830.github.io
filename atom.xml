@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yueyue200830.github.io/"/>
-  <updated>2020-05-15T09:43:10.077Z</updated>
+  <updated>2020-05-17T14:19:19.024Z</updated>
   <id>https://yueyue200830.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hexo+Next添加Valine评论系统</title>
+    <link href="https://yueyue200830.github.io/2020/05/17/Hexo-Next%E6%B7%BB%E5%8A%A0Valine%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/"/>
+    <id>https://yueyue200830.github.io/2020/05/17/Hexo-Next%E6%B7%BB%E5%8A%A0Valine%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/</id>
+    <published>2020-05-17T12:47:36.000Z</published>
+    <updated>2020-05-17T14:19:19.024Z</updated>
+    
+    <content type="html"><![CDATA[<p>博客搭建好一段时间了，也终于有空添加上评论，搜了一下常用的评论系统，自己比较喜欢的是<code>Valine</code>和<code>utterances</code>。</p><p>而最终选择先搭建Valine完全是因为Valine比较和主题融合（当然后来发现也有些问题），utterances太Github式了，和next不配。</p><a id="more"></a><p>首先上<code>Valine</code>的<a href="https://valine.js.org" target="_blank" rel="noopener">官方文档页面</a></p><h1 id="注册LeanCloud"><a href="#注册LeanCloud" class="headerlink" title="注册LeanCloud"></a>注册LeanCloud</h1><p>Valine的运行是基于<code>LeanCloud</code>的</p><p>首先在<a href="https://www.leancloud.cn/" target="_blank" rel="noopener">LeanCloud</a>注册帐户（表示一开始以为这是外国的，结果发现这个国人的网站，international还没做好)<br>需要验证手机号和邮箱</p><p>然后创建应用，其中权限设置可以不用管。</p><img src="/2020/05/17/Hexo-Next%E6%B7%BB%E5%8A%A0Valine%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/1.png" class="" width="600" title="Create-Application"><p>在<code>存储 → 结构化数据</code>中选择<code>创建class</code>，将class名字设为<code>Comment</code>，同样不用管权限。<br>这个<code>Comment</code>就是评论的数据库啦，另外还有一个数据库<code>Counter</code>是用于页面访问统计的<br>ps.似乎不手动创建的话，只要有评论会被自动创建这个class的。</p><p>然后在<code>设置 → 应用Keys</code>中找到<code>AppID</code>和<code>AppKey</code></p><img src="/2020/05/17/Hexo-Next%E6%B7%BB%E5%8A%A0Valine%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/2.png" class="" title="App-Info"><h1 id="配置Next"><a href="#配置Next" class="headerlink" title="配置Next"></a>配置Next</h1><blockquote><p><strong>注意：</strong>我这里用的是<code>next 7.x</code>，可以直接用valine，较早期版本可能需要安装</p></blockquote><p>在<code>./themes/next/_config.yml</code>下面搜索<code>valine</code></p><p>首先可以找到<code>comments</code>，设置<code>active: valine</code></p><p>然后找到<code>valine</code>，把<code>appid</code>和<code>appkey</code>填入，设置<code>enable</code>为<code>true</code></p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Valine</span></span><br><span class="line"><span class="comment"># For more information: https://valine.js.org, https://github.com/xCss/Valine</span></span><br><span class="line"><span class="attr">valine:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">appid:</span>  <span class="comment"># 前面获取的AppID</span></span><br><span class="line">  <span class="attr">appkey:</span> <span class="comment"># 前面获取的AppKey</span></span><br><span class="line">  <span class="attr">notify:</span> <span class="literal">false</span> <span class="comment"># 邮件提醒</span></span><br><span class="line">  <span class="attr">verify:</span> <span class="literal">false</span> <span class="comment"># 是否需要验证</span></span><br><span class="line">  <span class="attr">placeholder:</span> <span class="string">Add</span> <span class="string">your</span> <span class="string">comment</span> <span class="comment"># 输入框默认提示</span></span><br><span class="line">  <span class="attr">avatar:</span> <span class="string">mm</span> <span class="comment"># Gravatar style</span></span><br><span class="line">  <span class="attr">guest_info:</span> <span class="string">nick,</span> <span class="string">mail,</span> <span class="string">link</span> <span class="comment"># 用户输入的个人信息</span></span><br><span class="line">  <span class="attr">pageSize:</span> <span class="number">10</span> <span class="comment"># Pagination size</span></span><br><span class="line">  <span class="attr">language:</span> <span class="comment"># Language, available values: en, zh-cn</span></span><br><span class="line">  <span class="attr">visitor:</span> <span class="literal">false</span> <span class="comment"># 文章访问量统计</span></span><br><span class="line">  <span class="attr">comment_count:</span> <span class="literal">false</span> <span class="comment"># 是否在首页显示统计页面</span></span><br><span class="line">  <span class="attr">recordIP:</span> <span class="literal">false</span> <span class="comment"># 是否记录留言IP，只会出现在数据库中</span></span><br><span class="line">  <span class="attr">serverURLs:</span> <span class="comment"># When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)</span></span><br></pre></td></tr></table></figure><p>这样就可以正常使用valine了。</p><h1 id="部分页面关闭评论功能"><a href="#部分页面关闭评论功能" class="headerlink" title="部分页面关闭评论功能"></a>部分页面关闭评论功能</h1><p>打开评论以后是全局都会显示评论的，因此包括<code>tags</code>这种页面也会显示，当然需要关闭评论啦，只需要在头部加上以下内容即可</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">comments:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure><h1 id="评价"><a href="#评价" class="headerlink" title="评价"></a>评价</h1><p>虽然说整体用起来是很方便的，但是估计之后会换成其它评论，主要一个原因是这个<code>LeanCould</code>其实说不定哪天就收费了，而自己的博客一时半会儿估计也没多少人看，付费是个很不划算的选择。<br>相比之下utterances在Github上集成的，应该会好不少。</p><p>第二个原因，也是各种评论系统的一个通病：似乎无法diy界面，这个评论系统的图标和微博一模一样看着不爽啊！</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;博客搭建好一段时间了，也终于有空添加上评论，搜了一下常用的评论系统，自己比较喜欢的是&lt;code&gt;Valine&lt;/code&gt;和&lt;code&gt;utterances&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;而最终选择先搭建Valine完全是因为Valine比较和主题融合（当然后来发现也有些问题），utterances太Github式了，和next不配。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Hexo" scheme="https://yueyue200830.github.io/categories/Hexo/"/>
+    
+    
+      <category term="Hexo" scheme="https://yueyue200830.github.io/tags/Hexo/"/>
+    
+      <category term="Valine" scheme="https://yueyue200830.github.io/tags/Valine/"/>
+    
+  </entry>
   
   <entry>
     <title>Liunx系统journal日志清理</title>
@@ -360,9 +386,9 @@
       <category term="Hexo" scheme="https://yueyue200830.github.io/categories/Hexo/"/>
     
     
-      <category term="Hexo" scheme="https://yueyue200830.github.io/tags/Hexo/"/>
-    
       <category term="Github" scheme="https://yueyue200830.github.io/tags/Github/"/>
+    
+      <category term="Hexo" scheme="https://yueyue200830.github.io/tags/Hexo/"/>
     
       <category term="多终端" scheme="https://yueyue200830.github.io/tags/%E5%A4%9A%E7%BB%88%E7%AB%AF/"/>
     
@@ -388,9 +414,9 @@
       <category term="Others" scheme="https://yueyue200830.github.io/categories/Others/"/>
     
     
-      <category term="Github" scheme="https://yueyue200830.github.io/tags/Github/"/>
-    
       <category term="DNS" scheme="https://yueyue200830.github.io/tags/DNS/"/>
+    
+      <category term="Github" scheme="https://yueyue200830.github.io/tags/Github/"/>
     
       <category term="Hosts" scheme="https://yueyue200830.github.io/tags/Hosts/"/>
     
@@ -522,33 +548,6 @@
     
     
       <category term="JAVA" scheme="https://yueyue200830.github.io/tags/JAVA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CentOS 7安装MariaDB数据库及基础配置</title>
-    <link href="https://yueyue200830.github.io/2019/07/18/CentOS-7%E5%AE%89%E8%A3%85MariaDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%8A%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/"/>
-    <id>https://yueyue200830.github.io/2019/07/18/CentOS-7%E5%AE%89%E8%A3%85MariaDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%8A%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</id>
-    <published>2019-07-17T16:04:27.000Z</published>
-    <updated>2020-02-23T13:51:23.508Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因为开发需求，在自己的CentOS 7服务器上远程链接数据库，搜索得知CentOS 7默认是MariaDB数据库而非MySQL。虽然安装MySQL也不是不可以，但是既然MariaDB和MySQL很像，那就直接上MariaDB吧。<br>安装教程是搜到的英文教程，主要是用来记录和帮助一些人翻译一下的。</p><a id="more"></a><h1 id="安装MariaDB"><a href="#安装MariaDB" class="headerlink" title="安装MariaDB"></a>安装MariaDB</h1><h2 id="一、增加MariaDB-Yum"><a href="#一、增加MariaDB-Yum" class="headerlink" title="一、增加MariaDB Yum"></a>一、增加MariaDB Yum</h2><p>首先需要新增一个文件，这边用vim写。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/yum.repos.d/MariaDB.repo</span><br></pre></td></tr></table></figure><p>在这个文件中加入这些内容，如果不会用vim的首先按<strong>i</strong>，然后粘贴上去，在按<strong>ESC</strong>，最后输入 <strong>:wq</strong>。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[mariadb]</span><br><span class="line">name &#x3D; MariaDB</span><br><span class="line">baseurl &#x3D; http:&#x2F;&#x2F;yum.mariadb.org&#x2F;10.1&#x2F;centos7-amd64</span><br><span class="line">gpgkey &#x3D; https:&#x2F;&#x2F;yum.mariadb.org&#x2F;RPM-GPG-KEY-MariaDB</span><br><span class="line">gpgcheck &#x3D; 1</span><br></pre></td></tr></table></figure><h2 id="二、安装MariaDB"><a href="#二、安装MariaDB" class="headerlink" title="二、安装MariaDB"></a>二、安装MariaDB</h2><p>最好在root用户下安装（非root用户我后面几个命令报错了）</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mariadb mariadb-server</span><br></pre></td></tr></table></figure><h2 id="三、配置MariaDB"><a href="#三、配置MariaDB" class="headerlink" title="三、配置MariaDB"></a>三、配置MariaDB</h2><p>启动mariadb</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mariadb</span><br></pre></td></tr></table></figure><p>设置开机自启动</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> mariadb</span><br></pre></td></tr></table></figure><p>设置root密码等相关，这其中包括密码等一些基本设置，一开始是没有密码的，所以按回车就可以了。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure><h2 id="四、登录"><a href="#四、登录" class="headerlink" title="四、登录"></a>四、登录</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure><h2 id="五、查看版本"><a href="#五、查看版本" class="headerlink" title="五、查看版本"></a>五、查看版本</h2><p>MariaDB还真是MySQL的亲家，查看版本命令竟然使用mysql的。。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -V</span><br></pre></td></tr></table></figure><h2 id="六、新增用户"><a href="#六、新增用户" class="headerlink" title="六、新增用户"></a>六、新增用户</h2><p>登录到root用户到数据库下</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> mysql.user(Host,<span class="keyword">User</span>,<span class="keyword">Password</span>) <span class="keyword">values</span>(<span class="string">"localhost"</span>,<span class="string">"admin"</span>,<span class="keyword">password</span>(<span class="string">"admin"</span>));</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure><h2 id="七、开启远程访问"><a href="#七、开启远程访问" class="headerlink" title="七、开启远程访问"></a>七、开启远程访问</h2><p>首先登录到root用户下数据库，然后输入以下句子：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> *.* <span class="keyword">TO</span> <span class="string">'root'</span>@<span class="string">'%'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'123456'</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> <span class="keyword">OPTION</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure><p>其中‘root’可以替换成任何已创建的用户，‘123456’处是密码。<br>这样就可以远程访问了。</p><p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/96387164" target="_blank" rel="noopener">https://blog.csdn.net/yueyue200830/article/details/96387164</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;因为开发需求，在自己的CentOS 7服务器上远程链接数据库，搜索得知CentOS 7默认是MariaDB数据库而非MySQL。虽然安装MySQL也不是不可以，但是既然MariaDB和MySQL很像，那就直接上MariaDB吧。&lt;br&gt;安装教程是搜到的英文教程，主要是用来记录和帮助一些人翻译一下的。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Database" scheme="https://yueyue200830.github.io/categories/Database/"/>
-    
-    
-      <category term="Linux" scheme="https://yueyue200830.github.io/tags/Linux/"/>
-    
-      <category term="MariaDB" scheme="https://yueyue200830.github.io/tags/MariaDB/"/>
-    
-      <category term="Centos" scheme="https://yueyue200830.github.io/tags/Centos/"/>
     
   </entry>
   

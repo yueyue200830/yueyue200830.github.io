@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"yueyue200830.github.io","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="刷题时看到这道题，看了解答觉得很数学&amp;有趣，就来写个数学证明题吧hhhh 题目 Given a linked list, return the node where the cycle begins. If there is no cycle, return null.  Leetcode链接">
+  <meta name="description" content="刷题时看到这道题，看了解答觉得很数学\&amp;有趣，就来写个数学证明题吧hhhh 题目 Given a linked list, return the node where the cycle begins. If there is no cycle, return null.  Leetcode链接">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode——142. Linked List Cycle II">
 <meta property="og:url" content="https://yueyue200830.github.io/2020/04/08/Leetcode%E2%80%94%E2%80%94142-Linked-List-Cycle-II/index.html">
 <meta property="og:site_name" content="Z Blog">
-<meta property="og:description" content="刷题时看到这道题，看了解答觉得很数学&amp;有趣，就来写个数学证明题吧hhhh 题目 Given a linked list, return the node where the cycle begins. If there is no cycle, return null.  Leetcode链接">
+<meta property="og:description" content="刷题时看到这道题，看了解答觉得很数学\&amp;有趣，就来写个数学证明题吧hhhh 题目 Given a linked list, return the node where the cycle begins. If there is no cycle, return null.  Leetcode链接">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-08T13:53:50.000Z">
 <meta property="article:modified_time" content="2020-04-08T14:32:09.221Z">
@@ -279,29 +279,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>刷题时看到这道题，看了解答觉得很数学&amp;有趣，就来写个数学证明题吧hhhh</p>
+        <p>刷题时看到这道题，看了解答觉得很数学\&amp;有趣，就来写个数学证明题吧hhhh</p>
 <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><blockquote>
 <p>Given a linked list, return the node where the cycle begins. If there is no cycle, return <code>null</code>.</p>
 </blockquote>
 <p><a href="https://leetcode.com/problems/linked-list-cycle-ii/" target="_blank" rel="noopener">Leetcode链接</a></p>
 <a id="more"></a>
-
 <h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>其实这是<code>Linked List Cycle</code>的升级版，和1一样，首先判断是否成环，采用快慢指针的方法，这里就不多加解释。</p>
 <p>当我们确定是成环时，我们需要去寻找环的头部。</p>
 <h2 id="解法一：map记录"><a href="#解法一：map记录" class="headerlink" title="解法一：map记录"></a>解法一：map记录</h2><p>这是一个最简单的方法就是用map记录环中的点，然后从头开始找第一个在map中的点，这里我也就不放代码了。</p>
 <p>时间复杂度$O(n)$，但空间复杂度有点高。。</p>
 <h2 id="解法二：双指针寻找-数学原理）"><a href="#解法二：双指针寻找-数学原理）" class="headerlink" title="解法二：双指针寻找(数学原理）"></a>解法二：双指针寻找(数学原理）</h2><p>这是我想记录的一个方法，个人认为没见过解答一般没法想出来，倒是可能猜到？</p>
 <p><strong>做法</strong>：假设前面快慢指针分别为a和b，现在a和b应指向同一个节点，只需选择其中一个（如a）与一个新的指向头部head的节点的指针c一起往前走，它们第一次指向的同一个节点就是环的第一个节点。</p>
-<p>简单来说写个伪代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a is a previous pointer</span></span><br><span class="line">c = head;</span><br><span class="line"><span class="keyword">while</span> (a != c) &#123;</span><br><span class="line">  a = a-&gt;next;</span><br><span class="line">  c = c-&gt;next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>简单来说写个伪代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a is a previous pointer</span></span><br><span class="line">c = head;</span><br><span class="line"><span class="keyword">while</span> (a != c) &#123;</span><br><span class="line">  a = a-&gt;next;</span><br><span class="line">  c = c-&gt;next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>是不是很神奇？完全想不到啊</p>
 <p>时间复杂度$O(n)$，空间复杂度$O(1)$。</p>
 <h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><p>首先，定义这里的长度为需要走的步数。</p>
-<p>假设从head到环的头部的长度为$S_{head}$，环的长度为$S_{circle}$。<br>在前面的算法，慢指针a走了$S_a$，快指针b走了$S_b$。<br>则我们有<br>$$S_b = 2 * S_a$$</p>
-<p>又因为现在a和b在同一个点，因此b比a多走$k$圈，即<br>$$S_b - S_a = k * S_{circle}$$<br>$$S_a = k * S_{circle}$$</p>
-<p>那么若a又走了$S_1$的长度的话（即从头走到环头部的长度）<br>$$S_a’ = S_{head} + S_a$$<br>$$S_a’ = S_{head} + k * S_{circle}$$</p>
-<p>这就正好是走了一个头部到环的距离+$k$圈环，也就是a正好在环的头部。</p>
+<p>假设从head到环的头部的长度为$S<em>{head}$，环的长度为$S</em>{circle}$。<br>在前面的算法，慢指针a走了$S_a$，快指针b走了$S_b$。<br>则我们有</p>
+<script type="math/tex; mode=display">S_b = 2 * S_a</script><p>又因为现在a和b在同一个点，因此b比a多走$k$圈，即</p>
+<script type="math/tex; mode=display">S_b - S_a = k * S_{circle}</script><script type="math/tex; mode=display">S_a = k * S_{circle}</script><p>那么若a又走了$S_1$的长度的话（即从头走到环头部的长度）</p>
+<script type="math/tex; mode=display">S_a' = S_{head} + S_a</script><script type="math/tex; mode=display">S_a' = S_{head} + k * S_{circle}</script><p>这就正好是走了一个头部到环的距离+$k$圈环，也就是a正好在环的头部。</p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    ListNode *a = head;</span><br><span class="line">    ListNode *b = head;</span><br><span class="line">    <span class="keyword">while</span> (a != <span class="literal">NULL</span> &amp;&amp; b != <span class="literal">NULL</span> &amp;&amp; b-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        a = a-&gt;next;</span><br><span class="line">        b = b-&gt;next-&gt;next;</span><br><span class="line">        <span class="keyword">if</span> (a == b) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="literal">NULL</span> || b-&gt;next == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    b = head;</span><br><span class="line">    <span class="keyword">while</span> (a != b) &#123;</span><br><span class="line">        a = a-&gt;next;</span><br><span class="line">        b = b-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
@@ -486,7 +483,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:55</span>
+    <span title="Reading time total">1:54</span>
 </div>
 
         

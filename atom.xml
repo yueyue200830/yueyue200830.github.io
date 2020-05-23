@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yueyue200830.github.io/"/>
-  <updated>2020-05-19T03:26:29.282Z</updated>
+  <updated>2020-05-23T17:39:26.043Z</updated>
   <id>https://yueyue200830.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>通过密钥对服务器进行SSH连接</title>
+    <link href="https://yueyue200830.github.io/2020/05/24/%E9%80%9A%E8%BF%87%E5%AF%86%E9%92%A5%E5%AF%B9%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9B%E8%A1%8CSSH%E8%BF%9E%E6%8E%A5/"/>
+    <id>https://yueyue200830.github.io/2020/05/24/%E9%80%9A%E8%BF%87%E5%AF%86%E9%92%A5%E5%AF%B9%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9B%E8%A1%8CSSH%E8%BF%9E%E6%8E%A5/</id>
+    <published>2020-05-23T17:19:09.000Z</published>
+    <updated>2020-05-23T17:39:26.043Z</updated>
+    
+    <content type="html"><![CDATA[<p>常见的ssh连接服务器有两种，一是通过用户名和密码登录，这也是我们最常用的，而另一种是通过密钥来登录，这种不仅可以省去密码，而且更加安全可靠。</p><a id="more"></a><h1 id="服务器端生成密钥"><a href="#服务器端生成密钥" class="headerlink" title="服务器端生成密钥"></a>服务器端生成密钥</h1><p>首先连接服务器，输入<code>ssh-keygen</code>建立密钥， 会跳出以下内容：（中文备注的地方需要输入处理）</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ ssh-keygen</span><br><span class="line">Generating public&#x2F;private rsa key pair.</span><br><span class="line">Enter file in which to save the key (&#x2F;root&#x2F;.ssh&#x2F;id_rsa): &#x2F;&#x2F; 直接按Enter，用默认文件位置</span><br><span class="line">Enter passphrase (empty for no passphrase): &#x2F;&#x2F; 直接Enter，不用密码</span><br><span class="line">Enter same passphrase again: &#x2F;&#x2F; 重复密码</span><br><span class="line">Your identification has been saved in &#x2F;root&#x2F;.ssh&#x2F;id_rsa.</span><br><span class="line">Your public key has been saved in &#x2F;root&#x2F;.ssh&#x2F;id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span><br><span class="line">The key&#39;s randomart image is:</span><br><span class="line">+---[RSA 2048]----+</span><br><span class="line">|                 |</span><br><span class="line">|                 |</span><br><span class="line">|                 |</span><br><span class="line">|     o +         |</span><br><span class="line">|    o O S .      |</span><br><span class="line">|     X O &#x3D; o     |</span><br><span class="line">|    @ O.* X      |</span><br><span class="line">|   ..XoX.* +     |</span><br><span class="line">|   xxxxxxxx      |</span><br><span class="line">+----[SHA256]-----+</span><br></pre></td></tr></table></figure><p>这样密钥就生成好了，其中<code>id_rsa</code>是密钥，也是我们本地需要的钥匙，<code>id_rsa.pub</code>是公钥，服务器自己持有</p><h1 id="服务器配置密钥"><a href="#服务器配置密钥" class="headerlink" title="服务器配置密钥"></a>服务器配置密钥</h1><p>在<code>~/.ssh</code>文件夹下面可以找到刚才生成的钥匙（我这里是root用户，所以上面显示的是<code>/root</code>）</p><p>首先需要把<code>id_rsa.pub</code>这个公钥内容复制到<code>authorized_keys</code></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat id_rsa.pub &gt;&gt; authorized_keys</span><br></pre></td></tr></table></figure><p>然后需要修改文件的读写权限，保证只有此用户有写权限，一般就设置为以下的权限：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod 600 authorized_keys</span><br><span class="line">chmod 700 ~/.ssh</span><br></pre></td></tr></table></figure><p>到这里如果之前没有对服务器ssh进行修改的话，服务器端配置就完成了</p><h1 id="客户端配置密钥"><a href="#客户端配置密钥" class="headerlink" title="客户端配置密钥"></a>客户端配置密钥</h1><p>其实客户端这里没什么配置的，只要把私钥复制到本地就可以</p><p>通过<code>scp</code>命令复制id_rsa文件到本地用户的<code>.ssh</code>文件夹下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp root@xxxx:~/.ssh/id_rsa ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure><p>之后就可以通过密钥登录了，命令如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@xxx -i ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;常见的ssh连接服务器有两种，一是通过用户名和密码登录，这也是我们最常用的，而另一种是通过密钥来登录，这种不仅可以省去密码，而且更加安全可靠。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://yueyue200830.github.io/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="https://yueyue200830.github.io/tags/Linux/"/>
+    
+      <category term="SSH" scheme="https://yueyue200830.github.io/tags/SSH/"/>
+    
+  </entry>
   
   <entry>
     <title>Windows下用Python模拟鼠标点击</title>
@@ -460,9 +485,9 @@
       <category term="Hexo" scheme="https://yueyue200830.github.io/categories/Hexo/"/>
     
     
-      <category term="Hexo" scheme="https://yueyue200830.github.io/tags/Hexo/"/>
-    
       <category term="Github" scheme="https://yueyue200830.github.io/tags/Github/"/>
+    
+      <category term="Hexo" scheme="https://yueyue200830.github.io/tags/Hexo/"/>
     
       <category term="多终端" scheme="https://yueyue200830.github.io/tags/%E5%A4%9A%E7%BB%88%E7%AB%AF/"/>
     
@@ -517,34 +542,6 @@
     
     
       <category term="Hexo" scheme="https://yueyue200830.github.io/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python触发win10通知栏通知提醒</title>
-    <link href="https://yueyue200830.github.io/2020/02/11/Python%E8%A7%A6%E5%8F%91win10%E9%80%9A%E7%9F%A5%E6%A0%8F%E9%80%9A%E7%9F%A5%E6%8F%90%E9%86%92/"/>
-    <id>https://yueyue200830.github.io/2020/02/11/Python%E8%A7%A6%E5%8F%91win10%E9%80%9A%E7%9F%A5%E6%A0%8F%E9%80%9A%E7%9F%A5%E6%8F%90%E9%86%92/</id>
-    <published>2020-02-11T14:18:22.000Z</published>
-    <updated>2020-02-23T14:11:59.221Z</updated>
-    
-    <content type="html"><![CDATA[<p>在写代码的时候想在某些特定情况触发提示（后台自动运行的情况下），可以搜到的大部分是右下角提示之类比较丑的自定义提示，而其实现在win10已经有自己的通知栏，如果能用自带的通知栏绝对是一个很优秀的选择。搜了很久后发现了一个库叫做<strong>win10toast</strong>。</p><p>这个库最后是18年更新的，感觉是不会有更新了，但只要不会出问题就好，开发者github：<a href="https://github.com/jithurjacob/Windows-10-Toast-Notifications" target="_blank" rel="noopener">jithurjacob/Windows-10-Toast-Notifications</a></p><a id="more"></a><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>用pip安装：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install win10toast</span><br></pre></td></tr></table></figure><p>这个需要同时安装<strong>pywin32</strong>，没有安装的话pip会自动一起安装的。</p><h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> win10toast <span class="keyword">import</span> ToastNotifier</span><br><span class="line"></span><br><span class="line">toaster = ToastNotifier()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 有icon的版本</span></span><br><span class="line">toaster.show_toast(<span class="string">"Hello World!!!"</span>,</span><br><span class="line">                   <span class="string">"Python is 10 seconds awsm!"</span>,</span><br><span class="line">                   icon_path=<span class="string">"custom.ico"</span>,</span><br><span class="line">                   duration=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 无icon，采用python的icon，且采用自己的线程</span></span><br><span class="line">toaster.show_toast(<span class="string">"Example two"</span>,</span><br><span class="line">                   <span class="string">"This notification is in it's own thread!"</span>,</span><br><span class="line">                   icon_path=<span class="literal">None</span>,</span><br><span class="line">                   duration=<span class="number">5</span>,</span><br><span class="line">                   threaded=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 等待提示框关闭</span></span><br><span class="line"><span class="keyword">while</span> toaster.notification_active(): time.sleep(<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure><p>提示框截图：</p><img src="/2020/02/11/Python%E8%A7%A6%E5%8F%91win10%E9%80%9A%E7%9F%A5%E6%A0%8F%E9%80%9A%E7%9F%A5%E6%8F%90%E9%86%92/screenshot.png" class="" title="Screenshot"><p>本来想要一个可以永久长时间需要手动关闭的提示框，可惜似乎开发者并没有支持，经过尝试采用-1是有效的，但是会报错。</p><p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/104270913" target="_blank" rel="noopener">https://blog.csdn.net/yueyue200830/article/details/104270913</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在写代码的时候想在某些特定情况触发提示（后台自动运行的情况下），可以搜到的大部分是右下角提示之类比较丑的自定义提示，而其实现在win10已经有自己的通知栏，如果能用自带的通知栏绝对是一个很优秀的选择。搜了很久后发现了一个库叫做&lt;strong&gt;win10toast&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;这个库最后是18年更新的，感觉是不会有更新了，但只要不会出问题就好，开发者github：&lt;a href=&quot;https://github.com/jithurjacob/Windows-10-Toast-Notifications&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;jithurjacob/Windows-10-Toast-Notifications&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Python" scheme="https://yueyue200830.github.io/categories/Python/"/>
-    
-    
-      <category term="Windows" scheme="https://yueyue200830.github.io/tags/Windows/"/>
-    
-      <category term="Python" scheme="https://yueyue200830.github.io/tags/Python/"/>
-    
-      <category term="Notification" scheme="https://yueyue200830.github.io/tags/Notification/"/>
     
   </entry>
   

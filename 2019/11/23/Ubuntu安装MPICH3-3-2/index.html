@@ -289,40 +289,30 @@
         <p>Linux上安装MPICH还算是方便的，虽然是indows系统，但搜索了一下windows安装的方法，最后选择放弃windows选择linux，不过虚拟机上的性能可能稍微差一点，但是作为并行的入门使用还是没有问题的。</p>
 <p>主要步骤一开始是跟着网上搜索的，后来发现其实自带的readme写得很详细，推荐如果英文ok看readme就好。</p>
 <a id="more"></a>
-
 <p>此安装步骤成功安装于Ubuntu 16和Ubuntu 18。</p>
 <h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>官网：<a href="https://www.mpich.org/" target="_blank" rel="noopener">https://www.mpich.org/</a><br>点击download以后选择<strong>mpich-3.3.2 (stable release)</strong>，下面自带的ubuntu平台的没太看懂于是就放弃了。</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>下载好以后解压并打开目录：（其实更喜欢右键解压哈哈哈）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar xzf mpich-3.3.2.tar.gz</span><br><span class="line"><span class="built_in">cd</span> mpich-3.3.2</span><br></pre></td></tr></table></figure>
-
 <p>如果看一下Readme的话可以发现必须要的是gcc，可选g++和Fortran。没有安装c的编译器的自行搜索</p>
 <p>然后配置文件（这里没有用readme的重定向因为感觉看起来方便）：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure -prefix=/usr/<span class="built_in">local</span>/mpich</span><br></pre></td></tr></table></figure>
-
 <p>这里prefix是安装路径<br>如果有Fortran报错，又不需要支持Fortran的话：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure -prefix=/usr/<span class="built_in">local</span>/mpich --<span class="built_in">disable</span>-fortran</span><br></pre></td></tr></table></figure>
-
 <p>然后make file（此处等待5分钟）：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
-
 <p>然后安装（此处继续等待五分钟）：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-
 <p>如果出错的话可以尝试make clean然后再来一遍</p>
 <h1 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h1><p>为了能全局使用，我们需要配置一下环境变量。这里被坑了很久，因为网上都是bash的配置，但我的默认shell是zsh，然后就一直配不出。。。</p>
-<p>如果配置的是bash，打开bash的环境变量配置文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim ~/.bashrc</span><br></pre></td></tr></table></figure>
-<p>如果是zsh，则：</p>
+<p>如果配置的是bash，打开bash的环境变量配置文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim ~/.bashrc</span><br></pre></td></tr></table></figure><br>如果是zsh，则：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim ~/.zshrc</span><br></pre></td></tr></table></figure>
 <h1 id="编辑环境变量"><a href="#编辑环境变量" class="headerlink" title="编辑环境变量"></a>编辑环境变量</h1><p>输入<strong>G</strong>移到最后一行，<br>按下<strong>i</strong>进行编辑<br>加入：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/mpich/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
 <p>然后按下<strong>ESC</strong>，以及 <strong>:wq</strong>保存退出。</p>
 <p>然后刷新一下环境变量：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
-
 <p>然后输入以下命令测试，应该会有反应</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> mpicc</span><br><span class="line"><span class="built_in">which</span> mpiexec</span><br></pre></td></tr></table></figure>
-
 <p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/103212344" target="_blank" rel="noopener">https://blog.csdn.net/yueyue200830/article/details/103212344</a></p>
 
     </div>
@@ -442,7 +432,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -455,7 +445,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-count">51</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -503,7 +493,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">72k</span>
+    <span title="Symbols count total">73k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>

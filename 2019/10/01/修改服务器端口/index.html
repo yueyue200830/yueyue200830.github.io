@@ -287,22 +287,14 @@
       
         <p>自己建一个服务器，最基础会遇到的问题就是被人随机攻击服务器，把默认端口修改掉就会减少很多啦</p>
 <a id="more"></a>
-
-<p>登录服务器以后，输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
-
+<p>登录服务器以后，输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure></p>
 <p>然后会看到一行被注释的 #port 22</p>
 <p>把”#”删掉然后把22换成其它端口号就好。</p>
 <p>关于vim使用，要修改之前按一下i，修改结束按esc，然后输入”:wq”。</p>
-<p>最后重新刷新一下配置（Debian 9）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service ssh restart</span><br></pre></td></tr></table></figure>
-<p>如不成功，可尝试以下命令：（Centos 7）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service sshd restart</span><br></pre></td></tr></table></figure>
-
+<p>最后重新刷新一下配置（Debian 9）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service ssh restart</span><br></pre></td></tr></table></figure><br>如不成功，可尝试以下命令：（Centos 7）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service sshd restart</span><br></pre></td></tr></table></figure></p>
 <p>然后可以先试一下用默认端口登录，发现不可以登录</p>
 <p>之后输入</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@xxx.xxx.xx.xx -p abcd(端口号)</span><br></pre></td></tr></table></figure>
-
 <p>会发现让输入密码，那就成功修改端口啦</p>
 <p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/101845927" target="_blank" rel="noopener">https://blog.csdn.net/yueyue200830/article/details/101845927</a></p>
 
@@ -421,7 +413,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -434,7 +426,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-count">51</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -482,7 +474,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">72k</span>
+    <span title="Symbols count total">73k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>

@@ -289,7 +289,6 @@
         <p>当运算时需要求模的时候，可以直接做的有+-*但是不满足/</p>
 <p>而逆元就是通过某种运算来达到求(a/b)%p的结果</p>
 <a id="more"></a>
-
 <blockquote>
 <p>当 $b*c ≡ 1$ (mod p)时，</p>
 <p>有 (a / b) % p = (a / b * b * c) % p = (a * c) % p</p>
@@ -311,7 +310,6 @@
 <p>然后x=x/gcd(a,b)即可</p>
 <p>注意：x可能为负的，需要x=x+p</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">exgcd</span><span class="params">(ll a, ll b, ll &amp;x, ll &amp;y)</span>    <span class="comment">//这是扩展欧几里得</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b == <span class="number">0</span>)&#123;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    ll t = exgcd(b, a%b, x, y);</span><br><span class="line">    ll tmp = y;</span><br><span class="line">    y = x - a / b * y;</span><br><span class="line">    x = tmp;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">k = exgcd(k ,p ,x ,i);</span><br><span class="line"><span class="keyword">if</span>(x &lt; <span class="number">0</span>) x += p;                     <span class="comment">//防止x为负</span></span><br><span class="line">x = x / k;</span><br></pre></td></tr></table></figure>
-
 <p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/85334843" target="_blank" rel="noopener">https://blog.csdn.net/yueyue200830/article/details/85334843</a></p>
 
     </div>
@@ -431,7 +429,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -444,7 +442,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-count">51</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -492,7 +490,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">72k</span>
+    <span title="Symbols count total">73k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>

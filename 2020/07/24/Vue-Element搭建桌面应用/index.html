@@ -282,10 +282,13 @@
         <p>写这篇文章是因为在开发时发现好多文章都过时了（目测我的很快也要过时了）</p>
 <p>现在网上大部分以前的文章都是推荐用<code>electron-vue</code>搭建的，但经过我的实验，<code>vue-cli 4.0</code>完全不能用啊，这里推荐一个新的插件<code>Vue CLI Plugin Electron Builder</code>，<a href="https://github.com/nklayman/vue-cli-plugin-electron-builder" target="_blank" rel="noopener">Github</a>，<a href="https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/" target="_blank" rel="noopener">官方文档</a>。</p>
 <a id="more"></a>
+
 <p>这个插件使用也十分方便，首先用<code>vue-cli</code>搭建一个<code>Vue</code>的项目：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 全局安装vue-cli</span></span><br><span class="line">npm install -g @vue/cli</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用vue-cli搭建一个新的项目，其中会需要一些选项，这里不多介绍，可自行查询</span></span><br><span class="line">vue create &lt;project-name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入项目</span></span><br><span class="line"><span class="built_in">cd</span> &lt;project-name&gt;</span><br></pre></td></tr></table></figure>
+
 <p>之后用添加<code>electron-builder</code>依赖，这里会自动引入<code>Electron</code>，并搭建整个开发环境</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 添加electron-builder依赖</span><br><span class="line">vue add electron-builder</span><br><span class="line"></span><br><span class="line"># 安装相关依赖</span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line"># 运行项目</span><br><span class="line">npm run electron:serve</span><br></pre></td></tr></table></figure>
+
 <p>这里主要是推销一下这个插件，并且帮助大家避雷，就不多介绍其它用法了（本人也是新手）</p>
 
     </div>
@@ -326,7 +329,10 @@
     <a href="/2020/07/19/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2Nginx%E7%9A%84%E5%9D%91/" rel="prev" title="服务器部署Nginx的坑">
       <i class="fa fa-chevron-left"></i> 服务器部署Nginx的坑
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/18/2020%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/" rel="next" title="2020秋招总结">
+      2020秋招总结 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -400,7 +406,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -413,7 +419,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-count">56</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -461,12 +467,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">74k</span>
+    <span title="Symbols count total">76k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:03</span>
+    <span title="Reading time total">2:07</span>
 </div>
 
         

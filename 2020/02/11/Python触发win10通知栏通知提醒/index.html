@@ -291,11 +291,16 @@
         <p>在写代码的时候想在某些特定情况触发提示（后台自动运行的情况下），可以搜到的大部分是右下角提示之类比较丑的自定义提示，而其实现在win10已经有自己的通知栏，如果能用自带的通知栏绝对是一个很优秀的选择。搜了很久后发现了一个库叫做<strong>win10toast</strong>。</p>
 <p>这个库最后是18年更新的，感觉是不会有更新了，但只要不会出问题就好，开发者github：<a href="https://github.com/jithurjacob/Windows-10-Toast-Notifications" target="_blank" rel="noopener">jithurjacob/Windows-10-Toast-Notifications</a></p>
 <a id="more"></a>
+
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>用pip安装：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install win10toast</span><br></pre></td></tr></table></figure>
+
 <p>这个需要同时安装<strong>pywin32</strong>，没有安装的话pip会自动一起安装的。</p>
 <h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> win10toast <span class="keyword">import</span> ToastNotifier</span><br><span class="line"></span><br><span class="line">toaster = ToastNotifier()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 有icon的版本</span></span><br><span class="line">toaster.show_toast(<span class="string">"Hello World!!!"</span>,</span><br><span class="line">                   <span class="string">"Python is 10 seconds awsm!"</span>,</span><br><span class="line">                   icon_path=<span class="string">"custom.ico"</span>,</span><br><span class="line">                   duration=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 无icon，采用python的icon，且采用自己的线程</span></span><br><span class="line">toaster.show_toast(<span class="string">"Example two"</span>,</span><br><span class="line">                   <span class="string">"This notification is in it's own thread!"</span>,</span><br><span class="line">                   icon_path=<span class="literal">None</span>,</span><br><span class="line">                   duration=<span class="number">5</span>,</span><br><span class="line">                   threaded=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 等待提示框关闭</span></span><br><span class="line"><span class="keyword">while</span> toaster.notification_active(): time.sleep(<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure>
-<p>提示框截图：<br><img src="/2020/02/11/Python%E8%A7%A6%E5%8F%91win10%E9%80%9A%E7%9F%A5%E6%A0%8F%E9%80%9A%E7%9F%A5%E6%8F%90%E9%86%92/screenshot.png" class="" title="Screenshot"><br>本来想要一个可以永久长时间需要手动关闭的提示框，可惜似乎开发者并没有支持，经过尝试采用-1是有效的，但是会报错。</p>
+
+<p>提示框截图：</p>
+<img src="/2020/02/11/Python%E8%A7%A6%E5%8F%91win10%E9%80%9A%E7%9F%A5%E6%A0%8F%E9%80%9A%E7%9F%A5%E6%8F%90%E9%86%92/screenshot.png" class="" title="Screenshot">
+<p>本来想要一个可以永久长时间需要手动关闭的提示框，可惜似乎开发者并没有支持，经过尝试采用-1是有效的，但是会报错。</p>
 <p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/104270913" target="_blank" rel="noopener">https://blog.csdn.net/yueyue200830/article/details/104270913</a></p>
 
     </div>
@@ -415,7 +420,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -428,7 +433,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-count">56</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -476,12 +481,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">74k</span>
+    <span title="Symbols count total">76k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:03</span>
+    <span title="Reading time total">2:07</span>
 </div>
 
         

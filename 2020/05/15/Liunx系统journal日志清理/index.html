@@ -282,13 +282,16 @@
       
         <p>Linux系统下<code>var/log/journal</code>常常霸占着大量空间，但又一般情况毫无用处，因此需要进行一些设定来控制日志大小。</p>
 <a id="more"></a>
+
 <p><strong>题外话</strong></p>
 <p>作为一个linux小白，也就电脑上装了个虚拟机，20G内存，如果不是写作业把电脑内存用爆了，大概也不会注意到它吧。</p>
 <p>我的系统是<code>Ubuntu 18</code>，应该所有linux都适用。</p>
 <h1 id="查看占用内存"><a href="#查看占用内存" class="headerlink" title="查看占用内存"></a>查看占用内存</h1><p>处理到<code>var/log/journal</code>下查看内存占用，还可以直接输入以下命令查看：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">journalctl --disk-usage</span><br></pre></td></tr></table></figure>
+
 <h1 id="删除日志"><a href="#删除日志" class="headerlink" title="删除日志"></a>删除日志</h1><h2 id="方法一：通过日志可存在的时间"><a href="#方法一：通过日志可存在的时间" class="headerlink" title="方法一：通过日志可存在的时间"></a>方法一：通过日志可存在的时间</h2><p>通过设置日志可存在的时间长度来删除日志：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo journalctl --rotate</span><br><span class="line">sudo journalctl --vacuum-time=1s</span><br></pre></td></tr></table></figure>
+
 <p><strong>第二行：</strong></p>
 <p>这里可选的参数：s是秒，m是分，h是小时，d是日，w是星期，months是月。</p>
 <p>因此一般不太可能出现前一秒生成的日志，因此设置时长为1秒可以删除所有日志。<br>但如果之后想保存一段时间的日志，需要重新设置一下，比如我设置为1个月。</p>
@@ -296,13 +299,16 @@
 <p>这里rotate的作用是将一个active的日志变为archived，也就是可能现在在录入日志，把在此之前的日志封装为一个，并换下一个文件进行日志记录。<br>这样可以把在此之前的日志全部清理，当然，不用这个命令也是可以的。</p>
 <h2 id="方法二：通过日志可存在的最大内存"><a href="#方法二：通过日志可存在的最大内存" class="headerlink" title="方法二：通过日志可存在的最大内存"></a>方法二：通过日志可存在的最大内存</h2><p>除了用时间，当然也可以用空间来删除</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo journalctl --rotate --vacuum-size=50M</span><br></pre></td></tr></table></figure>
+
 <p>这里是指删除到小于50M，rotate在一些新版本种可以写在一行种。</p>
 <p>空间常见的就是KMGT四个单位</p>
 <h2 id="方法三：直接删除文件"><a href="#方法三：直接删除文件" class="headerlink" title="方法三：直接删除文件"></a>方法三：直接删除文件</h2><p>把整个文件夹全部删除也是没有问题的，不过我个人觉得有上面的方法为什么还要硬核删除呢。</p>
 <h1 id="设置日志参数"><a href="#设置日志参数" class="headerlink" title="设置日志参数"></a>设置日志参数</h1><p>日志文件过大无非是因为没有针对日期和内存大小的自动清理机制，可以通过一些设置来实现。</p>
 <p>修改的文件是<code>/etc/systemd/journald.conf</code></p>
 <h2 id="设置最大占用空间"><a href="#设置最大占用空间" class="headerlink" title="设置最大占用空间"></a>设置最大占用空间</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SystemMaxUse=100M</span><br></pre></td></tr></table></figure>
+
 <h2 id="设置最长保存时间"><a href="#设置最长保存时间" class="headerlink" title="设置最长保存时间"></a>设置最长保存时间</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MaxFileSec=5day</span><br></pre></td></tr></table></figure>
+
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://www.linuxuprising.com/2019/10/how-to-clean-up-systemd-journal-logs.html" target="_blank" rel="noopener">How To Clear The systemd journal Logs</a></p>
 
     </div>
@@ -422,7 +428,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -435,7 +441,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-count">56</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -483,12 +489,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">74k</span>
+    <span title="Symbols count total">76k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:03</span>
+    <span title="Reading time total">2:07</span>
 </div>
 
         

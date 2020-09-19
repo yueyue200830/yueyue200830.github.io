@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="9ay-z3ep7Zek63qOsEb7JqINfKIQRxqvQ4efBve7eVc">
+  <meta name="msvalidate.01" content="77BD50564510E4BCABCFADB76378DC4F">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yueyue200830.github.io","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="漫长的秋招从往年的金八银九变成了金七银八，从七月的焦虑到八月初的痛苦到最后的收获，总体我算是幸运的，能拿到几个大厂的意向书。然而反观总体面试情况，其实有点可笑，大厂面的都offer，剩下都不要我。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2020秋招总结">
+<meta property="og:url" content="https://yueyue200830.github.io/2020/09/18/2020%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Z Blog">
+<meta property="og:description" content="漫长的秋招从往年的金八银九变成了金七银八，从七月的焦虑到八月初的痛苦到最后的收获，总体我算是幸运的，能拿到几个大厂的意向书。然而反观总体面试情况，其实有点可笑，大厂面的都offer，剩下都不要我。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-18T14:04:46.000Z">
+<meta property="article:modified_time" content="2020-09-19T03:17:24.707Z">
+<meta property="article:author" content="yueyue200830">
+<meta property="article:tag" content="Interview">
+<meta property="article:tag" content="校招">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://yueyue200830.github.io/2020/09/18/2020%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>2020秋招总结 | Z Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Z Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Z Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Simply CS, Simply Coding</p>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>Sitemap</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yueyue200830.github.io/2020/09/18/2020%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yueyue200830">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Z Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2020秋招总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-09-18 22:04:46" itemprop="dateCreated datePublished" datetime="2020-09-18T22:04:46+08:00">2020-09-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-19 11:17:24" itemprop="dateModified" datetime="2020-09-19T11:17:24+08:00">2020-09-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Others/" itemprop="url" rel="index">
+                    <span itemprop="name">Others</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2020/09/18/2020%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/18/2020%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>漫长的秋招从往年的金八银九变成了金七银八，从七月的焦虑到八月初的痛苦到最后的收获，总体我算是幸运的，能拿到几个大厂的意向书。<br>然而反观总体面试情况，其实有点可笑，大厂面的都offer，剩下都不要我。</p>
+<a id="more"></a>
+
+<h1 id="个人情况"><a href="#个人情况" class="headerlink" title="个人情况"></a>个人情况</h1><p>投的后端岗位，略懂前端，各种不精通但Java、Go、C++都有接触，相关项目经验完全不足。<br>有两段外企实习经历，算法在普通人中算不错的。<br>投递基本全为上海的岗位</p>
+<h1 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h1><p>意向书：字节、美团、蚂蚁<br>感谢信：大疆（深圳，笔试挂），京东（二面挂），Akuna（电面挂），商汤（一面挂），Shopee（新加坡，一面挂）<br>无消息：腾讯（只要上海，似乎没hc），亚马逊（学校邮箱没收到笔试邮件）</p>
+<p>其实秋招这样的结果也挺无语的，最难进的几个公司给了意向书，剩下一堆都不要我。可能是经验不足吧，大厂不是很在意培养人才，但其它厂比较在意经验（京东二面面试官明确表示我经验不足。。）</p>
+<h1 id="字节"><a href="#字节" class="headerlink" title="字节"></a>字节</h1><p>字节应该是我最幸运的一个公司，也是第一个意向书的公司，收到意向书以后总体就轻松了不少。</p>
+<p>因为拿到了字节的实习offer，所以可以直通车，但其实中间过程有点曲折，被打电话后莫名被投到网络工程师然后挂了，去argue后深圳的部门又打电话，之后又变成了上海的视频部门，我选择了放弃面试，再秋招正式批重新申请了。<br>十分意外得是那个部门竟然也给了我直通车的机会，就加了一轮面试，最后给了意向书。</p>
+<h2 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h2><ul>
+<li>问项目，讲了Go的项目，然后被深入问Go的特点，表示概念只会Java</li>
+<li>Java的JVM</li>
+<li>段页式存储一次数据查询几次</li>
+<li>看我写过vue问js特性</li>
+<li>js的promise</li>
+<li>计网：如果浏览器页面无法加载怎么排查</li>
+<li>算法题：最短包含某个字符串的子串</li>
+</ul>
+<h1 id="美团"><a href="#美团" class="headerlink" title="美团"></a>美团</h1><p>第一场笔试，编程题AK，本场题目水准不如实习。</p>
+<h2 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h2><p>某天晚上的视频面，内容忘得差不多了，没面好</p>
+<ul>
+<li>hashtable和hashmap区别</li>
+<li>第一题算法题应该是dp</li>
+<li>后面面试官看我算法不错加了一题：最大回文子串，继续只会dp，O(n)的做法没想出来</li>
+</ul>
+<h2 id="二面"><a href="#二面" class="headerlink" title="二面"></a>二面</h2><p>一二面联系间隔了一整周，差点以为挂了。</p>
+<p>本轮面试官思路特别跳跃，一段技术问题，一段闲聊。。。</p>
+<ul>
+<li>最近看什么书（被我说不看书看博客）</li>
+<li>一般看什么博客（遇到问题再看，作死的解答，然后扯到一些和理论不相关但好玩的博客和概念）</li>
+<li>java8特性</li>
+</ul>
+<h2 id="HR面"><a href="#HR面" class="headerlink" title="HR面"></a>HR面</h2><p>二面后2小时被hr面了，其实整体感觉有点push。</p>
+<p>hr面时说要一个月出结果，然而最终大概一周多就突然收到了意向书</p>
+<h1 id="蚂蚁金服"><a href="#蚂蚁金服" class="headerlink" title="蚂蚁金服"></a>蚂蚁金服</h1><p>能拿到蚂蚁的意向书感觉是真的很幸运的，可能所有的坏运气都用在了阿里的笔试上吧，偏偏遇到一场错排+AC自动机的笔试，最后只有0.3，是所有公司笔试中唯一没有AK编程题的笔试。</p>
+<p>整体面试效率是很高的，基本间隔两天会有消息。因为当时在实习，每次打电话都约了其它时间，面试官都很nice的同意了。</p>
+<h2 id="简历面（一面）"><a href="#简历面（一面）" class="headerlink" title="简历面（一面）"></a>简历面（一面）</h2><p>简历面问的十分基础，因此回答得还不错</p>
+<ul>
+<li>二叉树，平衡二叉树，红黑树，B+树简单说一下</li>
+<li>mysql分页查询</li>
+<li>left join， right join</li>
+<li>mysql 投影（被坑到了，我只知道英文projection）</li>
+<li>数据库锁（乐观锁，悲观锁）</li>
+<li>java反射机制，可以干什么</li>
+<li>设计模式</li>
+<li>IOC</li>
+<li>Jvm</li>
+<li>文件读取，如果一个比如100G的文件，要做一些处理，怎么设计</li>
+<li>排序算法：快排、归并（用法）、桶排</li>
+<li>进程和线程</li>
+<li>缓存不命中的替换策略</li>
+<li>http协议</li>
+</ul>
+<h2 id="二面-1"><a href="#二面-1" class="headerlink" title="二面"></a>二面</h2><p>二面就比较深入了，我比较菜，但面试官人也超级好，挑我会的问</p>
+<p>主要就问了项目，中间件，还有分布式，然而我并不会分布式，面试官很耐心得引导我怎么设计某个分布式的东西，于是我瞎猜了一通，没想到过了。</p>
+<h2 id="三面"><a href="#三面" class="headerlink" title="三面"></a>三面</h2><p>说实话三面面得很不好，疯狂问我实习项目相关的，但我不太能讲清楚（自己觉得讲得还听清楚的呀）</p>
+<h2 id="四面（交叉面）"><a href="#四面（交叉面）" class="headerlink" title="四面（交叉面）"></a>四面（交叉面）</h2><p>没想到会有交叉面，但又面得十分糟糕，没有把我项目遇到的问题讲清楚，最后还为了挽回一下我的评级多问了点问题。</p>
+<h2 id="HR面-1"><a href="#HR面-1" class="headerlink" title="HR面"></a>HR面</h2><p>阿里的这个hr是我面过最厉害的hr，可以一阵见血得指出我的问题，太太太厉害了。</p>
+<h1 id="腾讯"><a href="#腾讯" class="headerlink" title="腾讯"></a>腾讯</h1><p>被广东地区部门捞过，表示只要上海的就没后续了</p>
+<p>第一轮笔试70分钟AK都没人捞也是很心塞的。</p>
+<h1 id="大疆"><a href="#大疆" class="headerlink" title="大疆"></a>大疆</h1><p>随手投了一个没想到C++的岗位，笔试算法AK，概念乱猜，直接感谢信，不过大疆据说今年招的人很少</p>
+<h1 id="京东"><a href="#京东" class="headerlink" title="京东"></a>京东</h1><p>笔试算法AK，一面体验很好，二面不行</p>
+<h2 id="一面-1"><a href="#一面-1" class="headerlink" title="一面"></a>一面</h2><p>算是基础面吧，京东的面试还挺固定的，面试前看了面经，Java spring必考，不会就挂，然后疯狂补了一下。</p>
+<p>一些小插曲：面试期间腾讯来电话，和面试官说了面试官很nice的说过会儿打回来。</p>
+<h2 id="二面-2"><a href="#二面-2" class="headerlink" title="二面"></a>二面</h2><p>上来看到我的项目就怼我项目经验不足，就表明不想要我呗，就差没被我怼回去了。。</p>
+<p>金融相关部门</p>
+<h1 id="Akuna"><a href="#Akuna" class="headerlink" title="Akuna"></a>Akuna</h1><p>唯一一家明知C++还投递的公司，不了解公司业务看着是个外企就投了</p>
+<p>笔试是网上做题，有概念和算法，算法题感觉不错，测试点全过了。</p>
+<h2 id="电面"><a href="#电面" class="headerlink" title="电面"></a>电面</h2><p>这轮面试说实话是我准备不充分，甚至不太记得C++怎么写。。</p>
+<ol>
+<li>十六进制的与/或操作</li>
+<li>改正一棵树找最大值的函数</li>
+<li>实现一个account类，使得可以实想两个帐户之间的转账功能（涉及到锁）</li>
+<li>实现STL中的vector（脑子不清晰这题没写出来）</li>
+</ol>
+<h1 id="商汤"><a href="#商汤" class="headerlink" title="商汤"></a>商汤</h1><p>也是一家随手投，没看清岗位的公司，要求没写清楚要会容器分布式等知识啊。。。</p>
+<p>面试时我Java面试官Go，没有什么知识交集。</p>
+<h1 id="Shopee"><a href="#Shopee" class="headerlink" title="Shopee"></a>Shopee</h1><p>投的是新加坡的岗，对于中国人开的外国公司体验就一个国内企业的感觉，没有任何外企的感觉。</p>
+<p>笔试概念占据超高的比例，算法题超级简单。。</p>
+<h2 id="一面-2"><a href="#一面-2" class="headerlink" title="一面"></a>一面</h2><p>hr晚上11点给我发面试邀请我就被吓到了。。。</p>
+<p>概念部分中规中矩没什么太难的点，算法写hashmap又没认真思考过然后写崩了，还有一题两个栈实现一个队列。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>yueyue200830
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://yueyue200830.github.io/2020/09/18/2020%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/" title="2020秋招总结">https://yueyue200830.github.io/2020/09/18/2020秋招总结/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Interview/" rel="tag"># Interview</a>
+              <a href="/tags/%E6%A0%A1%E6%8B%9B/" rel="tag"># 校招</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/24/Vue-Element%E6%90%AD%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8/" rel="prev" title="Vue+Element搭建桌面应用">
+      <i class="fa fa-chevron-left"></i> Vue+Element搭建桌面应用
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#个人情况"><span class="nav-number">1.</span> <span class="nav-text">个人情况</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结果"><span class="nav-number">2.</span> <span class="nav-text">结果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字节"><span class="nav-number">3.</span> <span class="nav-text">字节</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#面试"><span class="nav-number">3.1.</span> <span class="nav-text">面试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#美团"><span class="nav-number">4.</span> <span class="nav-text">美团</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一面"><span class="nav-number">4.1.</span> <span class="nav-text">一面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二面"><span class="nav-number">4.2.</span> <span class="nav-text">二面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HR面"><span class="nav-number">4.3.</span> <span class="nav-text">HR面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#蚂蚁金服"><span class="nav-number">5.</span> <span class="nav-text">蚂蚁金服</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简历面（一面）"><span class="nav-number">5.1.</span> <span class="nav-text">简历面（一面）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二面-1"><span class="nav-number">5.2.</span> <span class="nav-text">二面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三面"><span class="nav-number">5.3.</span> <span class="nav-text">三面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四面（交叉面）"><span class="nav-number">5.4.</span> <span class="nav-text">四面（交叉面）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HR面-1"><span class="nav-number">5.5.</span> <span class="nav-text">HR面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#腾讯"><span class="nav-number">6.</span> <span class="nav-text">腾讯</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大疆"><span class="nav-number">7.</span> <span class="nav-text">大疆</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#京东"><span class="nav-number">8.</span> <span class="nav-text">京东</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一面-1"><span class="nav-number">8.1.</span> <span class="nav-text">一面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二面-2"><span class="nav-number">8.2.</span> <span class="nav-text">二面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Akuna"><span class="nav-number">9.</span> <span class="nav-text">Akuna</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#电面"><span class="nav-number">9.1.</span> <span class="nav-text">电面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#商汤"><span class="nav-number">10.</span> <span class="nav-text">商汤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shopee"><span class="nav-number">11.</span> <span class="nav-text">Shopee</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一面-2"><span class="nav-number">11.1.</span> <span class="nav-text">一面</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yueyue200830</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yueyue200830" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yueyue200830" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yueyue200830@163.com" title="E-Mail → mailto:yueyue200830@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/yueyue200830" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;yueyue200830" rel="noopener" target="_blank"><i class="fa fa-fw fa-codiepie"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yueyue200830</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="Symbols count total">76k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">2:07</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'sh5S0z8pii4z5WK0vFJvezHt-MdYXbMMI',
+      appKey     : '1xzkJ66M0YUNtQ9qodkCVSVT',
+      placeholder: "Add your comment",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

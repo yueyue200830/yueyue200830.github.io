@@ -288,35 +288,15 @@
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因为开发需求，在自己的CentOS 7服务器上远程链接数据库，搜索得知CentOS 7默认是MariaDB数据库而非MySQL。虽然安装MySQL也不是不可以，但是既然MariaDB和MySQL很像，那就直接上MariaDB吧。<br>安装教程是搜到的英文教程，主要是用来记录和帮助一些人翻译一下的。</p>
 <a id="more"></a>
-
-<h1 id="安装MariaDB"><a href="#安装MariaDB" class="headerlink" title="安装MariaDB"></a>安装MariaDB</h1><h2 id="一、增加MariaDB-Yum"><a href="#一、增加MariaDB-Yum" class="headerlink" title="一、增加MariaDB Yum"></a>一、增加MariaDB Yum</h2><p>首先需要新增一个文件，这边用vim写。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/yum.repos.d/MariaDB.repo</span><br></pre></td></tr></table></figure>
-<p>在这个文件中加入这些内容，如果不会用vim的首先按<strong>i</strong>，然后粘贴上去，在按<strong>ESC</strong>，最后输入 <strong>:wq</strong>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[mariadb]</span><br><span class="line">name &#x3D; MariaDB</span><br><span class="line">baseurl &#x3D; http:&#x2F;&#x2F;yum.mariadb.org&#x2F;10.1&#x2F;centos7-amd64</span><br><span class="line">gpgkey &#x3D; https:&#x2F;&#x2F;yum.mariadb.org&#x2F;RPM-GPG-KEY-MariaDB</span><br><span class="line">gpgcheck &#x3D; 1</span><br></pre></td></tr></table></figure>
-
-<h2 id="二、安装MariaDB"><a href="#二、安装MariaDB" class="headerlink" title="二、安装MariaDB"></a>二、安装MariaDB</h2><p>最好在root用户下安装（非root用户我后面几个命令报错了）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mariadb mariadb-server</span><br></pre></td></tr></table></figure>
-
-<h2 id="三、配置MariaDB"><a href="#三、配置MariaDB" class="headerlink" title="三、配置MariaDB"></a>三、配置MariaDB</h2><p>启动mariadb</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mariadb</span><br></pre></td></tr></table></figure>
-
-<p>设置开机自启动</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> mariadb</span><br></pre></td></tr></table></figure>
-
-<p>设置root密码等相关，这其中包括密码等一些基本设置，一开始是没有密码的，所以按回车就可以了。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure>
-
+<h1 id="安装MariaDB"><a href="#安装MariaDB" class="headerlink" title="安装MariaDB"></a>安装MariaDB</h1><h2 id="一、增加MariaDB-Yum"><a href="#一、增加MariaDB-Yum" class="headerlink" title="一、增加MariaDB Yum"></a>一、增加MariaDB Yum</h2><p>首先需要新增一个文件，这边用vim写。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/yum.repos.d/MariaDB.repo</span><br></pre></td></tr></table></figure><br>在这个文件中加入这些内容，如果不会用vim的首先按<strong>i</strong>，然后粘贴上去，在按<strong>ESC</strong>，最后输入 <strong>:wq</strong>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[mariadb]</span><br><span class="line">name &#x3D; MariaDB</span><br><span class="line">baseurl &#x3D; http:&#x2F;&#x2F;yum.mariadb.org&#x2F;10.1&#x2F;centos7-amd64</span><br><span class="line">gpgkey &#x3D; https:&#x2F;&#x2F;yum.mariadb.org&#x2F;RPM-GPG-KEY-MariaDB</span><br><span class="line">gpgcheck &#x3D; 1</span><br></pre></td></tr></table></figure></p>
+<h2 id="二、安装MariaDB"><a href="#二、安装MariaDB" class="headerlink" title="二、安装MariaDB"></a>二、安装MariaDB</h2><p>最好在root用户下安装（非root用户我后面几个命令报错了）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mariadb mariadb-server</span><br></pre></td></tr></table></figure></p>
+<h2 id="三、配置MariaDB"><a href="#三、配置MariaDB" class="headerlink" title="三、配置MariaDB"></a>三、配置MariaDB</h2><p>启动mariadb<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mariadb</span><br></pre></td></tr></table></figure></p>
+<p>设置开机自启动<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> mariadb</span><br></pre></td></tr></table></figure></p>
+<p>设置root密码等相关，这其中包括密码等一些基本设置，一开始是没有密码的，所以按回车就可以了。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure></p>
 <h2 id="四、登录"><a href="#四、登录" class="headerlink" title="四、登录"></a>四、登录</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
-
-<h2 id="五、查看版本"><a href="#五、查看版本" class="headerlink" title="五、查看版本"></a>五、查看版本</h2><p>MariaDB还真是MySQL的亲家，查看版本命令竟然使用mysql的。。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -V</span><br></pre></td></tr></table></figure>
-
-<h2 id="六、新增用户"><a href="#六、新增用户" class="headerlink" title="六、新增用户"></a>六、新增用户</h2><p>登录到root用户到数据库下</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> mysql.user(Host,<span class="keyword">User</span>,<span class="keyword">Password</span>) <span class="keyword">values</span>(<span class="string">"localhost"</span>,<span class="string">"admin"</span>,<span class="keyword">password</span>(<span class="string">"admin"</span>));</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="七、开启远程访问"><a href="#七、开启远程访问" class="headerlink" title="七、开启远程访问"></a>七、开启远程访问</h2><p>首先登录到root用户下数据库，然后输入以下句子：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> *.* <span class="keyword">TO</span> <span class="string">'root'</span>@<span class="string">'%'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'123456'</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> <span class="keyword">OPTION</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
-<p>其中‘root’可以替换成任何已创建的用户，‘123456’处是密码。<br>这样就可以远程访问了。</p>
+<h2 id="五、查看版本"><a href="#五、查看版本" class="headerlink" title="五、查看版本"></a>五、查看版本</h2><p>MariaDB还真是MySQL的亲家，查看版本命令竟然使用mysql的。。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -V</span><br></pre></td></tr></table></figure></p>
+<h2 id="六、新增用户"><a href="#六、新增用户" class="headerlink" title="六、新增用户"></a>六、新增用户</h2><p>登录到root用户到数据库下<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> mysql.user(Host,<span class="keyword">User</span>,<span class="keyword">Password</span>) <span class="keyword">values</span>(<span class="string">"localhost"</span>,<span class="string">"admin"</span>,<span class="keyword">password</span>(<span class="string">"admin"</span>));</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="七、开启远程访问"><a href="#七、开启远程访问" class="headerlink" title="七、开启远程访问"></a>七、开启远程访问</h2><p>首先登录到root用户下数据库，然后输入以下句子：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> *.* <span class="keyword">TO</span> <span class="string">'root'</span>@<span class="string">'%'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'123456'</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> <span class="keyword">OPTION</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure><br>其中‘root’可以替换成任何已创建的用户，‘123456’处是密码。<br>这样就可以远程访问了。</p>
 <p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/96387164" target="_blank" rel="noopener">https://blog.csdn.net/yueyue200830/article/details/96387164</a></p>
 
     </div>
@@ -436,7 +416,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -497,12 +477,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">76k</span>
+    <span title="Symbols count total">77k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:07</span>
+    <span title="Reading time total">2:09</span>
 </div>
 
         

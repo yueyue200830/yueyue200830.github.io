@@ -290,19 +290,31 @@
       
         <p>微软在19年的时候宣布开发新的Windows Terminal，虽然这仅仅是一个终端，并非开发一个新的shell，但是新版整合了各种shell并且超级好看！！<br>这个终端的优点是可以打开各种不同的shell，比如<code>cmd</code>、<code>PowerShell</code>、<code>Azure</code>、<code>GitBash</code>等。</p>
 <a id="more"></a>
-<p>截图：<br><img src="/2020/02/29/%E6%96%B0%E7%89%88Windows-Terminal/terminal.png" class="" width="700" title="Terminal"></p>
+
+<p>截图：</p>
+<img src="/2020/02/29/%E6%96%B0%E7%89%88Windows-Terminal/terminal.png" class="" width="700" title="Terminal">
+
 <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>微软在<a href="https://github.com/microsoft/terminal" target="_blank" rel="noopener">Github</a>上公开了代码，可以有两种方法安装，一个是用VS，还有就是直接应用商店下载</p>
 <p>只是想玩一下的我当然应用商店下载啦，又方便又不容易又bug，就是更新慢点而已</p>
 <h1 id="下载与安装"><a href="#下载与安装" class="headerlink" title="下载与安装"></a>下载与安装</h1><p>在微软应用商店搜索<code>Windows Terminal</code>，可以找到以下内容，安装即可</p>
 <img src="/2020/02/29/%E6%96%B0%E7%89%88Windows-Terminal/store.png" class="" width="700" title="Store">
+
 <h1 id="使用与配置"><a href="#使用与配置" class="headerlink" title="使用与配置"></a>使用与配置</h1><p>安装好后可以直接打开，会发现emmm没有什么好看的，当然主要的大招是自己配置哈哈哈</p>
 <p>找到下拉菜单，可以发现应该有cmd、PowserShell和Azure，选择<code>setting</code>，用文本编辑器打开，这是一个<code>json</code>的配置文件</p>
-<h2 id="增加亚力克（Acrylic）效果"><a href="#增加亚力克（Acrylic）效果" class="headerlink" title="增加亚力克（Acrylic）效果"></a>增加亚力克（Acrylic）效果</h2><p>在每个shell的配置文件中添加：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"useAcrylic": true</span><br></pre></td></tr></table></figure></p>
+<h2 id="增加亚力克（Acrylic）效果"><a href="#增加亚力克（Acrylic）效果" class="headerlink" title="增加亚力克（Acrylic）效果"></a>增加亚力克（Acrylic）效果</h2><p>在每个shell的配置文件中添加：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"useAcrylic": true</span><br></pre></td></tr></table></figure>
+
 <p>保存重新打开就可以看到之前本文的截图效果了（也就是毛玻璃），瞬间爱了呀！<br>然而鸡肋的cmd并没有因此有改进。。。只是界面影响心情所以喜欢了哈哈哈</p>
 <h2 id="切换默认shell"><a href="#切换默认shell" class="headerlink" title="切换默认shell"></a>切换默认shell</h2><p>安装打开后默认应该是PowerShell，由于不用PowerShell，所以把它改成了cmd</p>
 <p>找到<code>defaultProfile</code>，把它的内容改成你想到修改的shell对应的<code>guid</code></p>
-<p>比如我的cmd配置如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Make changes here to the cmd.exe profile</span></span><br><span class="line">    <span class="attr">"guid"</span>: <span class="string">"&#123;0caa0dad-35be-5f56-a8ff-afceeeaa6101&#125;"</span>,</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"cmd"</span>,</span><br><span class="line">    <span class="attr">"commandline"</span>: <span class="string">"cmd.exe"</span>,</span><br><span class="line">    <span class="attr">"hidden"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">"useAcrylic"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>那么defaultProfile就改为：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"defaultProfile": "&#123;0caa0dad-35be-5f56-a8ff-afceeeaa6101&#125;"</span><br></pre></td></tr></table></figure></p>
-<h2 id="添加gitbash"><a href="#添加gitbash" class="headerlink" title="添加gitbash"></a>添加gitbash</h2><p>配置如下，复制进去基本就可以<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Git Bash</span></span><br><span class="line">    <span class="attr">"guid"</span>: <span class="string">"&#123;00000000-0000-0000-ba54-000000000002&#125;"</span>,</span><br><span class="line">    <span class="attr">"closeOnExit"</span> : <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"colorScheme"</span> : <span class="string">"Campbell"</span>,</span><br><span class="line">    <span class="attr">"commandline"</span> : <span class="string">"\"%PROGRAMFILES%\\git\\usr\\bin\\bash.exe\" -i -l"</span>,</span><br><span class="line">    <span class="attr">"cursorColor"</span> : <span class="string">"#FFFFFF"</span>,</span><br><span class="line">    <span class="attr">"cursorShape"</span> : <span class="string">"bar"</span>,</span><br><span class="line">    <span class="attr">"historySize"</span> : <span class="number">9001</span>,</span><br><span class="line">    <span class="attr">"icon"</span> : <span class="string">"%PROGRAMFILES%\\Git\\mingw64\\share\\git\\git-for-windows.ico"</span>,</span><br><span class="line">    <span class="attr">"name"</span> : <span class="string">"Git Bash"</span>,</span><br><span class="line">    <span class="attr">"snapOnInput"</span> : <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"startingDirectory"</span> : <span class="string">"%USERPROFILE%"</span>,</span><br><span class="line">    <span class="attr">"useAcrylic"</span> : <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"hidden"</span>: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>比如我的cmd配置如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Make changes here to the cmd.exe profile</span></span><br><span class="line">    <span class="attr">"guid"</span>: <span class="string">"&#123;0caa0dad-35be-5f56-a8ff-afceeeaa6101&#125;"</span>,</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"cmd"</span>,</span><br><span class="line">    <span class="attr">"commandline"</span>: <span class="string">"cmd.exe"</span>,</span><br><span class="line">    <span class="attr">"hidden"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">"useAcrylic"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么defaultProfile就改为：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"defaultProfile": "&#123;0caa0dad-35be-5f56-a8ff-afceeeaa6101&#125;"</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加gitbash"><a href="#添加gitbash" class="headerlink" title="添加gitbash"></a>添加gitbash</h2><p>配置如下，复制进去基本就可以</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Git Bash</span></span><br><span class="line">    <span class="attr">"guid"</span>: <span class="string">"&#123;00000000-0000-0000-ba54-000000000002&#125;"</span>,</span><br><span class="line">    <span class="attr">"closeOnExit"</span> : <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"colorScheme"</span> : <span class="string">"Campbell"</span>,</span><br><span class="line">    <span class="attr">"commandline"</span> : <span class="string">"\"%PROGRAMFILES%\\git\\usr\\bin\\bash.exe\" -i -l"</span>,</span><br><span class="line">    <span class="attr">"cursorColor"</span> : <span class="string">"#FFFFFF"</span>,</span><br><span class="line">    <span class="attr">"cursorShape"</span> : <span class="string">"bar"</span>,</span><br><span class="line">    <span class="attr">"historySize"</span> : <span class="number">9001</span>,</span><br><span class="line">    <span class="attr">"icon"</span> : <span class="string">"%PROGRAMFILES%\\Git\\mingw64\\share\\git\\git-for-windows.ico"</span>,</span><br><span class="line">    <span class="attr">"name"</span> : <span class="string">"Git Bash"</span>,</span><br><span class="line">    <span class="attr">"snapOnInput"</span> : <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"startingDirectory"</span> : <span class="string">"%USERPROFILE%"</span>,</span><br><span class="line">    <span class="attr">"useAcrylic"</span> : <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"hidden"</span>: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>关于icon，我自己的是mitty的gitbash，所以有以上位置，但如果用的cmd的，icon应该位置不太一样，这里没有去搜过，如果跳不出来可以去搜索或者直接自己硬找一下</p>
 <h1 id="评价"><a href="#评价" class="headerlink" title="评价"></a>评价</h1><p>其实写这篇博文主要还是脑子一抽觉得new Windows Terminal真的好好看呀，但是其实并不怎么使用它。。。<br>毕竟习惯性打开cmd或者右键gitbash了</p>
 <p>但是组合在一起其实使用起来还是比较方便的，并且比较好看的界面+好看的字体+支持windows表情还是很不错的。</p>
@@ -423,7 +435,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -484,12 +496,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">77k</span>
+    <span title="Symbols count total">78k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:09</span>
+    <span title="Reading time total">2:10</span>
 </div>
 
         

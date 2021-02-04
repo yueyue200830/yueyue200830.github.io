@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://yueyue200830.github.io/2020/02/24/Github%E5%8A%A0%E9%80%9F%E8%AE%BF%E9%97%AE-%E9%98%B2DNS%E6%B1%A1%E6%9F%93/ip1.png">
 <meta property="og:image" content="https://yueyue200830.github.io/2020/02/24/Github%E5%8A%A0%E9%80%9F%E8%AE%BF%E9%97%AE-%E9%98%B2DNS%E6%B1%A1%E6%9F%93/ip2.png">
 <meta property="article:published_time" content="2020-02-24T07:58:56.000Z">
-<meta property="article:modified_time" content="2020-02-24T12:26:55.031Z">
+<meta property="article:modified_time" content="2020-02-24T07:58:56.000Z">
 <meta property="article:author" content="yueyue200830">
 <meta property="article:tag" content="DNS">
 <meta property="article:tag" content="Github">
@@ -224,9 +224,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-02-24 15:58:56 / Modified: 20:26:55" itemprop="dateCreated datePublished" datetime="2020-02-24T15:58:56+08:00">2020-02-24</time>
+              <time title="Created: 2020-02-24 15:58:56" itemprop="dateCreated datePublished" datetime="2020-02-24T15:58:56+08:00">2020-02-24</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -302,7 +301,7 @@
 <li>github.global.ssl.fastly.net</li>
 </ul>
 <h2 id="可选"><a href="#可选" class="headerlink" title="可选"></a>可选</h2><ul>
-<li><a href="http://www.github.com" target="_blank" rel="noopener">www.github.com</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.github.com">www.github.com</a></li>
 <li>api.github.com</li>
 <li>github.githubassets.com</li>
 <li>github.map.fastly.net</li>
@@ -316,7 +315,7 @@
 <img src="/2020/02/24/Github%E5%8A%A0%E9%80%9F%E8%AE%BF%E9%97%AE-%E9%98%B2DNS%E6%B1%A1%E6%9F%93/p1.png" class="" width="300" title="Network-Screenshot">
 
 <p>如图，可以看到头像是加载失败的，找到网址是：avatars0.githubusercontent.com，把它加入需要解析的地址</p>
-<h1 id="二、获取Github的DNS解析地址"><a href="#二、获取Github的DNS解析地址" class="headerlink" title="二、获取Github的DNS解析地址"></a>二、获取Github的DNS解析地址</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>采用<a href="https://www.ipaddress.com/ip-lookup" target="_blank" rel="noopener">IPAddress.com</a>查询ip地址。</p>
+<h1 id="二、获取Github的DNS解析地址"><a href="#二、获取Github的DNS解析地址" class="headerlink" title="二、获取Github的DNS解析地址"></a>二、获取Github的DNS解析地址</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>采用<a target="_blank" rel="noopener" href="https://www.ipaddress.com/ip-lookup">IPAddress.com</a>查询ip地址。</p>
 <p>输入需要查找的网址，如：assets-cdn.github.com，就可以看到结果。</p>
 <img src="/2020/02/24/Github%E5%8A%A0%E9%80%9F%E8%AE%BF%E9%97%AE-%E9%98%B2DNS%E6%B1%A1%E6%9F%93/ip1.png" class="" width="400" title="Find-ip">
 
@@ -329,11 +328,9 @@
 <h1 id="三、修改Hosts文件"><a href="#三、修改Hosts文件" class="headerlink" title="三、修改Hosts文件"></a>三、修改Hosts文件</h1><p>打开系统的hosts文件，Windows是在<code>C:\Windows\System32\drivers\etc</code>，Mac和Linux是在<code>/etc</code><br>均需要采用管理员（root）打开</p>
 <p>在文件最后加上需要的ip和域名对应的地址，如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.30.255.112 gist.github.com</span><br><span class="line">192.30.253.113 github.com</span><br><span class="line">185.199.111.153 assets-cdn.github.com</span><br></pre></td></tr></table></figure>
-
 <h1 id="四、刷新DNS缓存"><a href="#四、刷新DNS缓存" class="headerlink" title="四、刷新DNS缓存"></a>四、刷新DNS缓存</h1><p>对于Windwos用户，需要刷新一下DNS缓存</p>
 <p>打开<code>cmd</code>或<code>powershell</code><br>输入</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipconfig /flushdns</span><br></pre></td></tr></table></figure>
-
 <p>这样就可以使用我们自定义的hosts了</p>
 <h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><p>这其实是一个硬方法，由于ip可能会变且存在很多不同的ip，采用自定义ip其实并没有那么方便，一是不一定能找到最快的ip，二是一旦ip修改还得自行修改hosts文件，并没有那么方便。<br>但网上搜索了那么多，也没有找到一些好的方法，就先选择采用这个方法吧。</p>
 <p>ps.几年前的采用修改hosts的方法是可以当半个梯子用的，不过现在好像并不太好用了。。</p>
@@ -441,7 +438,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#原理"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一、获取需要解析的地址"><span class="nav-number">2.</span> <span class="nav-text">一、获取需要解析的地址</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#必须"><span class="nav-number">2.1.</span> <span class="nav-text">必须</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可选"><span class="nav-number">2.2.</span> <span class="nav-text">可选</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何有针对性的选择添加解析的域名"><span class="nav-number">2.3.</span> <span class="nav-text">如何有针对性的选择添加解析的域名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、获取Github的DNS解析地址"><span class="nav-number">3.</span> <span class="nav-text">二、获取Github的DNS解析地址</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一"><span class="nav-number">3.1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二"><span class="nav-number">3.2.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、修改Hosts文件"><span class="nav-number">4.</span> <span class="nav-text">三、修改Hosts文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、刷新DNS缓存"><span class="nav-number">5.</span> <span class="nav-text">四、刷新DNS缓存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缺点"><span class="nav-number">6.</span> <span class="nav-text">缺点</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%8E%B7%E5%8F%96%E9%9C%80%E8%A6%81%E8%A7%A3%E6%9E%90%E7%9A%84%E5%9C%B0%E5%9D%80"><span class="nav-number">2.</span> <span class="nav-text">一、获取需要解析的地址</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%85%E9%A1%BB"><span class="nav-number">2.1.</span> <span class="nav-text">必须</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E9%80%89"><span class="nav-number">2.2.</span> <span class="nav-text">可选</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%9C%89%E9%92%88%E5%AF%B9%E6%80%A7%E7%9A%84%E9%80%89%E6%8B%A9%E6%B7%BB%E5%8A%A0%E8%A7%A3%E6%9E%90%E7%9A%84%E5%9F%9F%E5%90%8D"><span class="nav-number">2.3.</span> <span class="nav-text">如何有针对性的选择添加解析的域名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%8E%B7%E5%8F%96Github%E7%9A%84DNS%E8%A7%A3%E6%9E%90%E5%9C%B0%E5%9D%80"><span class="nav-number">3.</span> <span class="nav-text">二、获取Github的DNS解析地址</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80"><span class="nav-number">3.1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="nav-number">3.2.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%BF%AE%E6%94%B9Hosts%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">三、修改Hosts文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%88%B7%E6%96%B0DNS%E7%BC%93%E5%AD%98"><span class="nav-number">5.</span> <span class="nav-text">四、刷新DNS缓存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-number">6.</span> <span class="nav-text">缺点</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -516,12 +513,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">83k</span>
+    <span title="Symbols count total">86k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:19</span>
+    <span title="Reading time total">2:23</span>
 </div>
 
         

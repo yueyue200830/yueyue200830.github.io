@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -30,7 +30,7 @@
 <meta property="og:description" content="自己建一个服务器，最基础会遇到的问题就是被人随机攻击服务器，把默认端口修改掉就会减少很多啦">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-10-01T07:06:25.000Z">
-<meta property="article:modified_time" content="2020-02-23T13:56:58.649Z">
+<meta property="article:modified_time" content="2019-10-01T07:06:25.000Z">
 <meta property="article:author" content="yueyue200830">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="port">
@@ -222,13 +222,6 @@
 
               <time title="Created: 2019-10-01 15:06:25" itemprop="dateCreated datePublished" datetime="2019-10-01T15:06:25+08:00">2019-10-01</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-23 21:56:58" itemprop="dateModified" datetime="2020-02-23T21:56:58+08:00">2020-02-23</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -290,7 +283,6 @@
 
 <p>登录服务器以后，输入</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
-
 <p>然后会看到一行被注释的 #port 22</p>
 <p>把”#”删掉然后把22换成其它端口号就好。</p>
 <p>关于vim使用，要修改之前按一下i，修改结束按esc，然后输入”:wq”。</p>
@@ -298,13 +290,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service ssh restart</span><br></pre></td></tr></table></figure>
 <p>如不成功，可尝试以下命令：（Centos 7）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service sshd restart</span><br></pre></td></tr></table></figure>
-
 <p>然后可以先试一下用默认端口登录，发现不可以登录</p>
 <p>之后输入</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@xxx.xxx.xx.xx -p abcd(端口号)</span><br></pre></td></tr></table></figure>
-
 <p>会发现让输入密码，那就成功修改端口啦</p>
-<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/101845927" target="_blank" rel="noopener">https://blog.csdn.net/yueyue200830/article/details/101845927</a></p>
+<p>搬运自CSDN：<a target="_blank" rel="noopener" href="https://blog.csdn.net/yueyue200830/article/details/101845927">https://blog.csdn.net/yueyue200830/article/details/101845927</a></p>
 
     </div>
 
@@ -482,12 +472,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">83k</span>
+    <span title="Symbols count total">86k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:19</span>
+    <span title="Reading time total">2:23</span>
 </div>
 
         

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -30,7 +30,7 @@
 <meta property="og:description" content="刷题时看到这道题，看了解答觉得很数学&amp;有趣，就来写个数学证明题吧hhhh 题目 Given a linked list, return the node where the cycle begins. If there is no cycle, return null.  Leetcode链接">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-08T13:53:50.000Z">
-<meta property="article:modified_time" content="2020-04-08T14:32:09.221Z">
+<meta property="article:modified_time" content="2020-04-08T13:53:50.000Z">
 <meta property="article:author" content="yueyue200830">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="Leetcode">
@@ -219,9 +219,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-04-08 21:53:50 / Modified: 22:32:09" itemprop="dateCreated datePublished" datetime="2020-04-08T21:53:50+08:00">2020-04-08</time>
+              <time title="Created: 2020-04-08 21:53:50" itemprop="dateCreated datePublished" datetime="2020-04-08T21:53:50+08:00">2020-04-08</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -283,7 +282,7 @@
 <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><blockquote>
 <p>Given a linked list, return the node where the cycle begins. If there is no cycle, return <code>null</code>.</p>
 </blockquote>
-<p><a href="https://leetcode.com/problems/linked-list-cycle-ii/" target="_blank" rel="noopener">Leetcode链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/linked-list-cycle-ii/">Leetcode链接</a></p>
 <a id="more"></a>
 
 <h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>其实这是<code>Linked List Cycle</code>的升级版，和1一样，首先判断是否成环，采用快慢指针的方法，这里就不多加解释。</p>
@@ -294,7 +293,6 @@
 <p><strong>做法</strong>：假设前面快慢指针分别为a和b，现在a和b应指向同一个节点，只需选择其中一个（如a）与一个新的指向头部head的节点的指针c一起往前走，它们第一次指向的同一个节点就是环的第一个节点。</p>
 <p>简单来说写个伪代码：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a is a previous pointer</span></span><br><span class="line">c = head;</span><br><span class="line"><span class="keyword">while</span> (a != c) &#123;</span><br><span class="line">  a = a-&gt;next;</span><br><span class="line">  c = c-&gt;next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>是不是很神奇？完全想不到啊</p>
 <p>时间复杂度$O(n)$，空间复杂度$O(1)$。</p>
 <h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><p>首先，定义这里的长度为需要走的步数。</p>
@@ -303,7 +301,6 @@
 <p>那么若a又走了$S_1$的长度的话（即从头走到环头部的长度）<br>$$S_a’ = S_{head} + S_a$$<br>$$S_a’ = S_{head} + k * S_{circle}$$</p>
 <p>这就正好是走了一个头部到环的距离+$k$圈环，也就是a正好在环的头部。</p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    ListNode *a = head;</span><br><span class="line">    ListNode *b = head;</span><br><span class="line">    <span class="keyword">while</span> (a != <span class="literal">NULL</span> &amp;&amp; b != <span class="literal">NULL</span> &amp;&amp; b-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        a = a-&gt;next;</span><br><span class="line">        b = b-&gt;next-&gt;next;</span><br><span class="line">        <span class="keyword">if</span> (a == b) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="literal">NULL</span> || b-&gt;next == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    b = head;</span><br><span class="line">    <span class="keyword">while</span> (a != b) &#123;</span><br><span class="line">        a = a-&gt;next;</span><br><span class="line">        b = b-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
     </div>
 
     
@@ -406,7 +403,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解法一：map记录"><span class="nav-number">2.1.</span> <span class="nav-text">解法一：map记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解法二：双指针寻找-数学原理）"><span class="nav-number">2.2.</span> <span class="nav-text">解法二：双指针寻找(数学原理）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#证明"><span class="nav-number">2.2.1.</span> <span class="nav-text">证明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">2.2.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95%E4%B8%80%EF%BC%9Amap%E8%AE%B0%E5%BD%95"><span class="nav-number">2.1.</span> <span class="nav-text">解法一：map记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95%E4%BA%8C%EF%BC%9A%E5%8F%8C%E6%8C%87%E9%92%88%E5%AF%BB%E6%89%BE-%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">解法二：双指针寻找(数学原理）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E"><span class="nav-number">2.2.1.</span> <span class="nav-text">证明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">2.2.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -481,12 +478,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">83k</span>
+    <span title="Symbols count total">86k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:19</span>
+    <span title="Reading time total">2:23</span>
 </div>
 
         

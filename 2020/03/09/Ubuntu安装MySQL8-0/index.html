@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://yueyue200830.github.io/2020/03/09/Ubuntu%E5%AE%89%E8%A3%85MySQL8-0/17.png">
 <meta property="og:image" content="https://yueyue200830.github.io/2020/03/09/Ubuntu%E5%AE%89%E8%A3%85MySQL8-0/16.png">
 <meta property="article:published_time" content="2020-03-09T12:57:15.000Z">
-<meta property="article:modified_time" content="2020-12-28T03:45:13.200Z">
+<meta property="article:modified_time" content="2020-03-09T12:57:15.000Z">
 <meta property="article:author" content="yueyue200830">
 <meta property="article:tag" content="MySQL">
 <meta property="article:tag" content="Ubuntu">
@@ -232,13 +232,6 @@
 
               <time title="Created: 2020-03-09 20:57:15" itemprop="dateCreated datePublished" datetime="2020-03-09T20:57:15+08:00">2020-03-09</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-28 11:45:13" itemprop="dateModified" datetime="2020-12-28T11:45:13+08:00">2020-12-28</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -298,12 +291,11 @@
         <p>安装环境为<code>Ubuntu 18.04.4 LTS</code>。<br>由于在<code>apt</code>下默认的版本是<code>mysql5.7</code>，需要先配置仓库，再进行安装。</p>
 <a id="more"></a>
 
-<h1 id="添加MySQL8-0仓库"><a href="#添加MySQL8-0仓库" class="headerlink" title="添加MySQL8.0仓库"></a>添加MySQL8.0仓库</h1><p>首先在<a href="https://dev.mysql.com/downloads/file/?id=494003" target="_blank" rel="noopener">https://dev.mysql.com/downloads/file/?id=494003</a>下载<code>apt repository</code></p>
+<h1 id="添加MySQL8-0仓库"><a href="#添加MySQL8-0仓库" class="headerlink" title="添加MySQL8.0仓库"></a>添加MySQL8.0仓库</h1><p>首先在<a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/file/?id=494003">https://dev.mysql.com/downloads/file/?id=494003</a>下载<code>apt repository</code></p>
 <img src="/2020/03/09/Ubuntu%E5%AE%89%E8%A3%85MySQL8-0/3.png" class="" width="800">
 
 <p>然后配置仓库，输入：（其中PATH和deb的名称应根据自己的需求更改，可参照下面截图的头部）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -i /PATH/version-specific-package-name.deb</span><br></pre></td></tr></table></figure>
-
 <p>然后会跳出来仓库配置界面，直接选择ok</p>
 <img src="/2020/03/09/Ubuntu%E5%AE%89%E8%A3%85MySQL8-0/5.png" class="" width="700">
 
@@ -316,7 +308,6 @@
 
 <h1 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h1><p>在命令行输入：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-server</span><br></pre></td></tr></table></figure>
-
 <h2 id="配置过程"><a href="#配置过程" class="headerlink" title="配置过程"></a>配置过程</h2><p>在输入安装命令并下载完成后，即进入配置模式。<br>在弹出的框内输入root用户的密码或先设为空，然后再次确认密码</p>
 <img src="/2020/03/09/Ubuntu%E5%AE%89%E8%A3%85MySQL8-0/9.png" class="" width="700">
 
@@ -326,29 +317,25 @@
 
 <h1 id="登录MySQL"><a href="#登录MySQL" class="headerlink" title="登录MySQL"></a>登录MySQL</h1><p>采用之前配置的密码进入mysql：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
-
 <p>可以看到版本号和其它一些信息，证明安装正确</p>
 <img src="/2020/03/09/Ubuntu%E5%AE%89%E8%A3%85MySQL8-0/12.png" class="" width="700">
 
 
 <h1 id="查看MySQL启动信息"><a href="#查看MySQL启动信息" class="headerlink" title="查看MySQL启动信息"></a>查看MySQL启动信息</h1><p>输入命令查看MySQL的状态：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service mysql status</span><br></pre></td></tr></table></figure>
-
 <p>可以看到之前安装完成并且首次启动MySQL时已开启MySQL</p>
 <img src="/2020/03/09/Ubuntu%E5%AE%89%E8%A3%85MySQL8-0/13.png" class="" width="800">
 
 <p>尝试停止MySQL服务：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service mysql stop</span><br></pre></td></tr></table></figure>
-
 <h1 id="设置默认mysql命令参数"><a href="#设置默认mysql命令参数" class="headerlink" title="设置默认mysql命令参数"></a>设置默认mysql命令参数</h1><p>在当前用户的用户目录下新建<code>.my.cnf</code>，可配置如用户名/密码等，来简便mysql的操作</p>
 <img src="/2020/03/09/Ubuntu%E5%AE%89%E8%A3%85MySQL8-0/17.png" class="">
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">host&#x3D;localhost</span><br><span class="line">user&#x3D;root</span><br><span class="line">password&#x3D;&lt;password&gt;</span><br></pre></td></tr></table></figure>
-
 <p>这样只需输入<code>mysql</code>即可以root用户进入数据库</p>
 <img src="/2020/03/09/Ubuntu%E5%AE%89%E8%A3%85MySQL8-0/16.png" class="" width="700">
 
-<h1 id="Centos7-安装MySQL8的方法"><a href="#Centos7-安装MySQL8的方法" class="headerlink" title="Centos7 安装MySQL8的方法"></a>Centos7 安装MySQL8的方法</h1><p>上个测试过可以的链接（不过英文，但复制即可）：<a href="https://www.mysqltutorial.org/install-mysql-centos/" target="_blank" rel="noopener">Install MySQL CentOS</a></p>
+<h1 id="Centos7-安装MySQL8的方法"><a href="#Centos7-安装MySQL8的方法" class="headerlink" title="Centos7 安装MySQL8的方法"></a>Centos7 安装MySQL8的方法</h1><p>上个测试过可以的链接（不过英文，但复制即可）：<a target="_blank" rel="noopener" href="https://www.mysqltutorial.org/install-mysql-centos/">Install MySQL CentOS</a></p>
 
     </div>
 
@@ -452,7 +439,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#添加MySQL8-0仓库"><span class="nav-number">1.</span> <span class="nav-text">添加MySQL8.0仓库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装MySQL"><span class="nav-number">2.</span> <span class="nav-text">安装MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置过程"><span class="nav-number">2.1.</span> <span class="nav-text">配置过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#登录MySQL"><span class="nav-number">3.</span> <span class="nav-text">登录MySQL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看MySQL启动信息"><span class="nav-number">4.</span> <span class="nav-text">查看MySQL启动信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置默认mysql命令参数"><span class="nav-number">5.</span> <span class="nav-text">设置默认mysql命令参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Centos7-安装MySQL8的方法"><span class="nav-number">6.</span> <span class="nav-text">Centos7 安装MySQL8的方法</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0MySQL8-0%E4%BB%93%E5%BA%93"><span class="nav-number">1.</span> <span class="nav-text">添加MySQL8.0仓库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85MySQL"><span class="nav-number">2.</span> <span class="nav-text">安装MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">配置过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%99%BB%E5%BD%95MySQL"><span class="nav-number">3.</span> <span class="nav-text">登录MySQL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BMySQL%E5%90%AF%E5%8A%A8%E4%BF%A1%E6%81%AF"><span class="nav-number">4.</span> <span class="nav-text">查看MySQL启动信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4mysql%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">设置默认mysql命令参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Centos7-%E5%AE%89%E8%A3%85MySQL8%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">Centos7 安装MySQL8的方法</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -527,12 +514,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">83k</span>
+    <span title="Symbols count total">86k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:19</span>
+    <span title="Reading time total">2:23</span>
 </div>
 
         

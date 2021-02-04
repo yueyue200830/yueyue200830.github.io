@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://yueyue200830.github.io/2019/02/03/Leetcode%E2%80%94%E2%80%9442-Trapping-Rain-Water/rainwatertrap.png">
 <meta property="og:image" content="https://yueyue200830.github.io/2019/02/03/Leetcode%E2%80%94%E2%80%9442-Trapping-Rain-Water/solution.png">
 <meta property="article:published_time" content="2019-02-03T00:10:50.000Z">
-<meta property="article:modified_time" content="2020-02-23T14:12:04.150Z">
+<meta property="article:modified_time" content="2019-02-03T00:10:50.000Z">
 <meta property="article:author" content="yueyue200830">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="Leetcode">
@@ -225,13 +225,6 @@
 
               <time title="Created: 2019-02-03 08:10:50" itemprop="dateCreated datePublished" datetime="2019-02-03T08:10:50+08:00">2019-02-03</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-23 22:12:04" itemprop="dateModified" datetime="2020-02-23T22:12:04+08:00">2020-02-23</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -309,7 +302,6 @@
 <p>而另一种可以更快的方法是用left和right两个来左右一起遍历，同时记录遍历过的left_max和right_max。<br>只要比较现在遍历过的里面左右的最大值，最大值比较小的那侧现在指向的那块最后的注水量就是那侧遍历到的最大的值。（因为另一侧的最大值一定比这一侧的最大值大）<br>即，假设现在left_max比right_max小，那么第left个左边所有的值都知道了，最大值为left_max，而它右边的最大值一定会大于等于right_max。因此min(right_max[i], left_max[i]) = left_max[i]。<br>这样遍历的时间复杂度是O(n)（只需要遍历n次，比dp的2n次少一半），空间复杂度为O(1)（只需要另外4个数记录就好，而dp的额外空间是2n）</p>
 <p>附上官方代码：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; height)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> left = <span class="number">0</span>, right = height.size() - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> left_max = <span class="number">0</span>, right_max = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">    <span class="keyword">if</span> (height[left] &lt; height[right]) &#123;</span><br><span class="line">      height[left] &gt;= left_max ? (left_max = height[left]) : ans += (left_max - height[left]);</span><br><span class="line">      ++left;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      height[right] &gt;= right_max ? (right_max = height[right]) : ans += (right_max - height[right]);</span><br><span class="line">      --right;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="题解2"><a href="#题解2" class="headerlink" title="题解2"></a>题解2</h2><p>这个是我绞尽脑汁后的一个比较复杂的解法，时间复杂度O(n)，空间复杂度最大O(n)（用stack）</p>
 <p>做法是从左往右遍历，遇到可以注水的地方就先把暂时可以注的水给注入。</p>
 <p>如样例中有一部分[2,1,0,1,3]<br>当遇到右侧1的时候，也就是[2,1,0,1]时，在0中注入1的水量，这样就变成了[2,1,1,1]了<br>当遇到3时，对所有的1都注入1的水量，变成[2,2,2,2,3]。</p>
@@ -317,8 +309,7 @@
 <p>因为每次遍历完已经填平了所有遍历过的水坑，因此stack中记录的一定是不可以再注入水的，也就是递增或者递减的一堆数。</p>
 <p>当每次遇到可以注水的时候，注水量为(mini(left_height, right_height) - current_height)*(left_position-right_position-1)（如有不理解可以考虑一下刚才的example）</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">num</span>&#123;</span></span><br><span class="line">     <span class="keyword">int</span> n;</span><br><span class="line">     <span class="keyword">int</span> p;</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (height.size() &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">stack</span>&lt;num&gt; q;</span><br><span class="line">        num tmp, last;</span><br><span class="line">        <span class="keyword">int</span> s = <span class="number">0</span>;</span><br><span class="line">        tmp.n = height[<span class="number">0</span>];</span><br><span class="line">        tmp.p = <span class="number">0</span>;</span><br><span class="line">        q.push(tmp);</span><br><span class="line">        tmp.n = height[<span class="number">1</span>];</span><br><span class="line">        tmp.p = <span class="number">1</span>;</span><br><span class="line">        q.push(tmp);</span><br><span class="line">        <span class="keyword">int</span> n = max(height[<span class="number">0</span>], height[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; height.size(); i++) &#123;</span><br><span class="line">            tmp = q.top();</span><br><span class="line">            <span class="keyword">while</span> (q.size() &gt; <span class="number">1</span> &amp;&amp; n &gt; tmp.n &amp;&amp; tmp.n &lt;= height[i]) &#123;</span><br><span class="line">                last = tmp;</span><br><span class="line">                q.pop();</span><br><span class="line">                tmp = q.top();</span><br><span class="line">                s += (min(tmp.n, height[i]) - last.n) * (i - tmp.p - <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            tmp.n = height[i];</span><br><span class="line">            tmp.p = i;</span><br><span class="line">            q.push(tmp);</span><br><span class="line">            <span class="keyword">if</span> (tmp.n &gt; n) &#123;</span><br><span class="line">                n = tmp.n;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/86755967" target="_blank" rel="noopener">https://blog.csdn.net/yueyue200830/article/details/86755967</a></p>
+<p>搬运自CSDN：<a target="_blank" rel="noopener" href="https://blog.csdn.net/yueyue200830/article/details/86755967">https://blog.csdn.net/yueyue200830/article/details/86755967</a></p>
 
     </div>
 
@@ -422,7 +413,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#样例"><span class="nav-number">1.1.</span> <span class="nav-text">样例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题意"><span class="nav-number">2.</span> <span class="nav-text">题意</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题解1"><span class="nav-number">2.1.</span> <span class="nav-text">题解1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解2"><span class="nav-number">2.2.</span> <span class="nav-text">题解2</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B7%E4%BE%8B"><span class="nav-number">1.1.</span> <span class="nav-text">样例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E6%84%8F"><span class="nav-number">2.</span> <span class="nav-text">题意</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A31"><span class="nav-number">2.1.</span> <span class="nav-text">题解1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A32"><span class="nav-number">2.2.</span> <span class="nav-text">题解2</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -497,12 +488,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">83k</span>
+    <span title="Symbols count total">86k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:19</span>
+    <span title="Reading time total">2:23</span>
 </div>
 
         

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -30,7 +30,7 @@
 <meta property="og:description" content="在几个编辑器里面，VS Code已经算是比较优秀，有插件可以很方便编译和运行c++的，但是因为特殊需要要输出中文，结果发现乱码。。搜索了一通选择了我个人觉得比较方便的方法 这里我编译运行是采用code runner的，但应该对task配置的方法也适用，不过这里强烈推荐code runner！">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-05-25T16:36:53.000Z">
-<meta property="article:modified_time" content="2020-05-25T16:53:44.675Z">
+<meta property="article:modified_time" content="2020-05-25T16:36:53.000Z">
 <meta property="article:author" content="yueyue200830">
 <meta property="article:tag" content="Windows">
 <meta property="article:tag" content="VS Code">
@@ -219,9 +219,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-05-26 00:36:53 / Modified: 00:53:44" itemprop="dateCreated datePublished" datetime="2020-05-26T00:36:53+08:00">2020-05-26</time>
+              <time title="Created: 2020-05-26 00:36:53" itemprop="dateCreated datePublished" datetime="2020-05-26T00:36:53+08:00">2020-05-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -261,7 +260,7 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
-              <span>690</span>
+              <span>720</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -288,8 +287,7 @@
 <p>既然是编码问题，那么可以直接把terminal的编码改成<code>UTF-8</code>，这样就可以了。<br>但是搜索了以下， 直接修改会导致一些程序的错误。<br>实际上，我们只是需要运行的环境是<code>UTF-8</code>编码而已，因此只需要命令修改编译运行时的terminal的编码即可。</p>
 <p>修改编码的命令是：<code>chcp 65001</code></p>
 <p>我们需要将这个命令集成到编译运行的命令里<br>打开用户的<code>setting.json</code>，也可以通过<code>code runner</code>的<code>extention setting</code>中<code>executorMap</code>进入<br>添加以下内容，这里后面的命令是插件自己的命令，没有修改</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"code-runner.executorMap": &#123;</span><br><span class="line">    "cpp": "chcp 65001 &amp;&amp; cd $dir &amp;&amp; g++ $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt"</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;code-runner.executorMap&quot;: &#123;</span><br><span class="line">    &quot;cpp&quot;: &quot;chcp 65001 &amp;&amp; cd $dir &amp;&amp; g++ $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 <p>保存后就会运行这条命令了，可以解决中文乱码的问题</p>
 
     </div>
@@ -468,12 +466,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">83k</span>
+    <span title="Symbols count total">86k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:19</span>
+    <span title="Reading time total">2:23</span>
 </div>
 
         

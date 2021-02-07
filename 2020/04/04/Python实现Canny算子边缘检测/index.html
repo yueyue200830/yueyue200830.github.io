@@ -15,11 +15,11 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yueyue200830.github.io","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"yueyue200830.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Canny边缘检测算子是John F.Canny于1986年开发出来的一个多级边缘检测算法。Canny的目标是找到一个最优的边缘检测算法。 这里附上我手写的代码，不保证有bug。这里图像偷懒直接裁剪而没有做padding。以及代码大多没用numpy写，所以运行速度较慢（实际就是不会）">
@@ -47,8 +47,9 @@
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: false,
-    isPost: true
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
   };
 </script>
 
@@ -102,51 +103,54 @@
 
   <div class="site-meta">
 
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Z Blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">Simply CS, Simply Coding</p>
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Z Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Simply CS, Simply Coding</p>
   </div>
 
-  <div class="site-nav-right"></div>
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
 </div>
 
 
+
+
 <nav class="site-nav">
-  
-  <ul id="menu" class="menu">
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
 
-    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>Sitemap</a>
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -154,16 +158,18 @@
         </a>
       </li>
   </ul>
-
 </nav>
-  <div class="site-search">
+
+
+
+  <div class="search-pop-overlay">
     <div class="popup search-popup">
-    <div class="search-header">
+        <div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off"
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -171,12 +177,15 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result"></div>
-
-</div>
-<div class="search-pop-overlay"></div>
-
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
   </div>
+</div>
+
+    </div>
+  </div>
+
 </div>
     </header>
 
@@ -193,14 +202,13 @@
         <div class="content-wrap">
           
 
-          <div class="content">
+          <div class="content post posts-expand">
             
 
-  <div class="posts-expand">
-      
+    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yueyue200830.github.io/2020/04/04/Python%E5%AE%9E%E7%8E%B0Canny%E7%AE%97%E5%AD%90%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -220,7 +228,7 @@
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
@@ -228,13 +236,11 @@
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
                 </span>
             </span>
 
@@ -250,7 +256,7 @@
   <span class="post-meta-item">
     
       <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
+        <i class="far fa-comment"></i>
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
@@ -262,15 +268,15 @@
   <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
+                <i class="far fa-file-word"></i>
               </span>
-              <span>7.7k</span>
+              <span>7.5k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
+                <i class="far fa-clock"></i>
               </span>
-              <span>13 mins.</span>
+              <span>7 mins.</span>
             </span>
 
         </div>
@@ -285,7 +291,6 @@
         <p>Canny边缘检测算子是John F.Canny于1986年开发出来的一个多级边缘检测算法。Canny的目标是找到一个最优的边缘检测算法。</p>
 <p>这里附上我手写的代码，不保证有bug。这里图像偷懒直接裁剪而没有做padding。以及代码大多没用numpy写，所以运行速度较慢（实际就是不会）</p>
 <a id="more"></a>
-
 <p>其三个主要评价标准：</p>
 <ol>
 <li>低错误率: 标识出尽可能多的实际边缘，同时尽可能的减少噪声产生的误报。</li>
@@ -295,24 +300,45 @@
 <p>Canny算子求边缘点具体算法步骤如下：</p>
 <h1 id="1-用高斯滤波器平滑图像"><a href="#1-用高斯滤波器平滑图像" class="headerlink" title="1. 用高斯滤波器平滑图像"></a>1. 用高斯滤波器平滑图像</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>高斯滤波器（kernel）是将高斯函数离散化，将滤波器中对应的横纵坐标索引代入高斯函数，即可得到对应的值。</p>
 <p>(2k+1)x(2k+1) 滤波器的计算公式如下：</p>
-<p>$$ H[i, j] = \frac{1}{2 \pi \sigma ^ 2} e ^ {- \frac{(i-k-1)^2 + (j-k-1)^2}{2 \sigma ^ 2}} $$</p>
-<p>常见的高斯滤波器为size=5，其近似值为：</p>
-<p>$$<br>K = \frac{1}{159}<br>\left[<br> \begin{matrix}<br>   2 &amp; 4 &amp; 5 &amp; 4 &amp; 2 \\<br>   4 &amp; 9 &amp; 12 &amp; 9 &amp; 4 \\<br>   5 &amp; 12 &amp; 15 &amp; 12 &amp; 5 \\<br>   4 &amp; 9 &amp; 12 &amp; 9 &amp; 4 \\<br>   2 &amp; 4 &amp; 5 &amp; 4 &amp; 2<br>  \end{matrix}<br>\right]<br>$$</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>代码首先根据length和σ计算出高斯滤波器，然后对图片进行平滑</p>
+<script type="math/tex; mode=display">H[i, j] = \frac{1}{2 \pi \sigma ^ 2} e ^ {- \frac{(i-k-1)^2 + (j-k-1)^2}{2 \sigma ^ 2}}</script><p>常见的高斯滤波器为size=5，其近似值为：</p>
+<script type="math/tex; mode=display">
+K = \frac{1}{159}
+\left[
+ \begin{matrix}
+   2 & 4 & 5 & 4 & 2 \\\\
+   4 & 9 & 12 & 9 & 4 \\\\
+   5 & 12 & 15 & 12 & 5 \\\\
+   4 & 9 & 12 & 9 & 4 \\\\
+   2 & 4 & 5 & 4 & 2
+  \end{matrix}
+\right]</script><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>代码首先根据length和σ计算出高斯滤波器，然后对图片进行平滑</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">smooth</span>(<span class="params">image, sigma = <span class="number">1.4</span>, length = <span class="number">5</span></span>):</span></span><br><span class="line">    <span class="comment"># Compute gaussian filter</span></span><br><span class="line">    k = length // <span class="number">2</span></span><br><span class="line">    gaussian = np.zeros([length, length])</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(length):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(length):</span><br><span class="line">            gaussian[i, j] = np.exp(-((i-k) ** <span class="number">2</span> + (j-k) ** <span class="number">2</span>) / (<span class="number">2</span> * sigma ** <span class="number">2</span>))</span><br><span class="line">    gaussian /= <span class="number">2</span> * np.pi * sigma ** <span class="number">2</span></span><br><span class="line">    <span class="comment"># Batch Normalization</span></span><br><span class="line">    gaussian = gaussian / np.<span class="built_in">sum</span>(gaussian)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Use Gaussian Filter</span></span><br><span class="line">    W, H = image.shape</span><br><span class="line">    new_image = np.zeros([W - k * <span class="number">2</span>, H - k * <span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(W - <span class="number">2</span> * k):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(H - <span class="number">2</span> * k):</span><br><span class="line">            new_image[i, j] = np.<span class="built_in">sum</span>(image[i:i+length, j:j+length] * gaussian)</span><br><span class="line"></span><br><span class="line">    new_image = np.uint8(new_image)</span><br></pre></td></tr></table></figure>
 <h1 id="2-计算梯度幅值和方向"><a href="#2-计算梯度幅值和方向" class="headerlink" title="2. 计算梯度幅值和方向"></a>2. 计算梯度幅值和方向</h1><h2 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h2><p>常见方法采用Sobel滤波器在计算梯度和方向。</p>
 <p>采用以下卷积阵列计算x和y的差分：</p>
-<p>$$<br>G_x =<br>\left[<br> \begin{matrix}<br>   -1 &amp; 0 &amp; +1  \\<br>   -2 &amp; 0 &amp; +2  \\<br>   -1 &amp; 0 &amp; +1  \\<br>  \end{matrix}<br>\right]<br>$$</p>
-<p>$$<br>G_y =<br>\left[<br> \begin{matrix}<br>   -1 &amp; -2 &amp; -1  \\<br>    0 &amp;  0 &amp;  0  \\<br>   +1 &amp; +2 &amp; +1  \\<br>  \end{matrix}<br>\right]<br>$$</p>
-<p>采用下列公式计算梯度幅值和方向：</p>
-<p>$$<br>G = \sqrt{(G_x^2 + G_y^2)}<br>$$</p>
-<p>$$<br>\theta = \arctan{\frac{G_y}{G_x}}<br>$$</p>
-<p>梯度角度θ范围从弧度-π到π，然后把它近似到四个方向，分别代表水平，垂直和两个对角线方向（0°,45°,90°,135°）。可以以 $±\frac{iπ}{8}$（i=1,3,5,7）分割，落在每个区域的梯度角给一个特定值，代表四个方向之一。</p>
+<script type="math/tex; mode=display">
+G_x =
+\left[
+ \begin{matrix}
+   -1 & 0 & +1  \\\\
+   -2 & 0 & +2  \\\\
+   -1 & 0 & +1  \\\\
+  \end{matrix}
+\right]</script><script type="math/tex; mode=display">
+G_y =
+\left[
+ \begin{matrix}
+   -1 & -2 & -1  \\\\
+    0 &  0 &  0  \\\\
+   +1 & +2 & +1  \\\\
+  \end{matrix}
+\right]</script><p>采用下列公式计算梯度幅值和方向：</p>
+<script type="math/tex; mode=display">
+G = \sqrt{(G_x^2 + G_y^2)}</script><script type="math/tex; mode=display">
+\theta = \arctan{\frac{G_y}{G_x}}</script><p>梯度角度θ范围从弧度-π到π，然后把它近似到四个方向，分别代表水平，垂直和两个对角线方向（0°,45°,90°,135°）。可以以 $±\frac{iπ}{8}$（i=1,3,5,7）分割，落在每个区域的梯度角给一个特定值，代表四个方向之一。</p>
 <h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_gradient_and_direction</span>(<span class="params">image</span>):</span></span><br><span class="line">    Gx = np.array([[-<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>], [-<span class="number">2</span>, <span class="number">0</span>, <span class="number">2</span>], [-<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line">    Gy = np.array([[-<span class="number">1</span>, -<span class="number">2</span>, -<span class="number">1</span>], [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>]])</span><br><span class="line"></span><br><span class="line">    W, H = image.shape</span><br><span class="line">    gradients = np.zeros([W - <span class="number">2</span>, H - <span class="number">2</span>])</span><br><span class="line">    direction = np.zeros([W - <span class="number">2</span>, H - <span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(W - <span class="number">2</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(H - <span class="number">2</span>):</span><br><span class="line">            dx = np.<span class="built_in">sum</span>(image[i:i+<span class="number">3</span>, j:j+<span class="number">3</span>] * Gx)</span><br><span class="line">            dy = np.<span class="built_in">sum</span>(image[i:i+<span class="number">3</span>, j:j+<span class="number">3</span>] * Gy)</span><br><span class="line">            gradients[i, j] = np.sqrt(dx ** <span class="number">2</span> + dy ** <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">if</span> dx == <span class="number">0</span>:</span><br><span class="line">                direction[i, j] = np.pi / <span class="number">2</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                direction[i, j] = np.arctan(dy / dx)</span><br><span class="line"></span><br><span class="line">    gradients = np.uint8(gradients)</span><br></pre></td></tr></table></figure>
 <h1 id="3-对梯度幅值进行非极大值抑制"><a href="#3-对梯度幅值进行非极大值抑制" class="headerlink" title="3. 对梯度幅值进行非极大值抑制"></a>3. 对梯度幅值进行非极大值抑制</h1><h2 id="概念-2"><a href="#概念-2" class="headerlink" title="概念"></a>概念</h2><p>非极大值抑制是进行边缘检测的一个重要步骤，通俗意义上是指寻找像素点局部最大值。沿着梯度方向，比较它前面和后面的梯度值，如果它不是局部最大值，则去除。</p>
 <p>这里借用知乎@戴馨乐的图片，由于图片是之前记录下的，原文地址没有保存</p>
 <img src="/2020/04/04/Python%E5%AE%9E%E7%8E%B0Canny%E7%AE%97%E5%AD%90%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B/1.jpg" class="" title="非极大值抑制">
-
 <h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">NMS</span>(<span class="params">gradients, direction</span>):</span></span><br><span class="line">    W, H = gradients.shape</span><br><span class="line">    nms = np.copy(gradients[<span class="number">1</span>:-<span class="number">1</span>, <span class="number">1</span>:-<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, W - <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, H - <span class="number">1</span>):</span><br><span class="line">            theta = direction[i, j]</span><br><span class="line">            weight = np.tan(theta)</span><br><span class="line">            <span class="keyword">if</span> theta &gt; np.pi / <span class="number">4</span>:</span><br><span class="line">                d1 = [<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">                d2 = [<span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">                weight = <span class="number">1</span> / weight</span><br><span class="line">            <span class="keyword">elif</span> theta &gt;= <span class="number">0</span>:</span><br><span class="line">                d1 = [<span class="number">1</span>, <span class="number">0</span>]</span><br><span class="line">                d2 = [<span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">            <span class="keyword">elif</span> theta &gt;= - np.pi / <span class="number">4</span>:</span><br><span class="line">                d1 = [<span class="number">1</span>, <span class="number">0</span>]</span><br><span class="line">                d2 = [<span class="number">1</span>, -<span class="number">1</span>]</span><br><span class="line">                weight *= -<span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                d1 = [<span class="number">0</span>, -<span class="number">1</span>]</span><br><span class="line">                d2 = [<span class="number">1</span>, -<span class="number">1</span>]</span><br><span class="line">                weight = -<span class="number">1</span> / weight</span><br><span class="line"></span><br><span class="line">            g1 = gradients[i + d1[<span class="number">0</span>], j + d1[<span class="number">1</span>]]</span><br><span class="line">            g2 = gradients[i + d2[<span class="number">0</span>], j + d2[<span class="number">1</span>]]</span><br><span class="line">            g3 = gradients[i - d1[<span class="number">0</span>], j - d1[<span class="number">1</span>]]</span><br><span class="line">            g4 = gradients[i - d2[<span class="number">0</span>], j - d2[<span class="number">1</span>]]</span><br><span class="line"></span><br><span class="line">            grade_count1 = g1 * weight + g2 * (<span class="number">1</span> - weight)</span><br><span class="line">            grade_count2 = g3 * weight + g4 * (<span class="number">1</span> - weight)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> grade_count1 &gt; gradients[i, j] <span class="keyword">or</span> grade_count2 &gt; gradients[i, j]:</span><br><span class="line">                nms[i - <span class="number">1</span>, j - <span class="number">1</span>] = <span class="number">0</span></span><br></pre></td></tr></table></figure>
 <h1 id="4-用双阈值算法检测"><a href="#4-用双阈值算法检测" class="headerlink" title="4. 用双阈值算法检测"></a>4. 用双阈值算法检测</h1><h2 id="概念-3"><a href="#概念-3" class="headerlink" title="概念"></a>概念</h2><p>设置两个阈值，minVal和maxVal。梯度大于maxVal的任何边缘是真边缘，而minVal以下的边缘是非边缘。位于这两个阈值之间的边缘会基于其连通性而分类为边缘或非边缘，如果它们连接到“可靠边缘”像素，则它们被视为边缘的一部分；否则，不是边缘。</p>
 <p>这里采用dfs搜索的方法，对于所有真边缘开始dfs搜索，直至搜索完成。</p>
@@ -339,7 +365,7 @@
     <a href="https://yueyue200830.github.io/2020/04/04/Python%E5%AE%9E%E7%8E%B0Canny%E7%AE%97%E5%AD%90%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B/" title="Python实现Canny算子边缘检测">https://yueyue200830.github.io/2020/04/04/Python实现Canny算子边缘检测/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
   </li>
 </ul>
 </div>
@@ -373,7 +399,6 @@
   
   
 
-  </div>
 
 
           </div>
@@ -382,7 +407,7 @@
 
 <script>
   window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
+    let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
@@ -459,16 +484,16 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/yueyue200830" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yueyue200830" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+        <a href="https://github.com/yueyue200830" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yueyue200830" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:yueyue200830@163.com" title="E-Mail → mailto:yueyue200830@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+        <a href="mailto:yueyue200830@163.com" title="E-Mail → mailto:yueyue200830@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://blog.csdn.net/yueyue200830" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;yueyue200830" rel="noopener" target="_blank"><i class="fa fa-fw fa-codiepie"></i></a>
+        <a href="https://blog.csdn.net/yueyue200830" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;yueyue200830" rel="noopener" target="_blank"><i class="fab fa-codiepie fa-fw"></i></a>
       </span>
       <span class="links-of-author-item">
-        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
       </span>
   </div>
 
@@ -488,6 +513,8 @@
       <div class="footer-inner">
         
 
+        
+
 <div class="copyright">
   
   &copy; 2020 – 
@@ -498,14 +525,14 @@
   <span class="author" itemprop="copyrightHolder">yueyue200830</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
+      <i class="fa fa-chart-area"></i>
     </span>
     <span title="Symbols count total">86k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:23</span>
+    <span title="Reading time total">1:18</span>
 </div>
 
         
@@ -563,12 +590,28 @@
   
   <script>
     (function(){
-      var bp = document.createElement('script');
-      var curProtocol = window.location.protocol.split(':')[0];
-      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(bp, s);
-    })();
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
   </script>
 
 
@@ -597,9 +640,13 @@
 <script>
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
-        loader: {
-          load: ['[tex]/mhchem']
-        },
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
       tex: {
         inlineMath: {'[+]': [['$', '$']]},
           packages: {'[+]': ['mhchem']},

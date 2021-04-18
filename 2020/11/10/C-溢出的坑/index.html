@@ -277,11 +277,13 @@
       
         <p>C++的int只有32位，计算溢出也是十分普遍的事情，但我作死得尝试采用溢出的计算方法，结果发现千万不要代码中做溢出计算，编译器分分钟把你搞死。。</p>
 <a id="more"></a>
+
 <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">0x7fffffff</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; !(x + x + <span class="number">2</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
 <p>根据常理，输出答案应该是1，<code>2 * (0x7fffffff + 1) = 2 * 0x80000000 = 0</code>，想想挺完美的吧，结果得出是0，百思不得其解，甚至尝试用了多个编译器，结果在我windows下的codeblocks中得到了1！</p>
 <h1 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h1><p>查看了codeblocks的编译器，发现是32位的，其它编译器都是64位的，还以为是32位和64位的锅呢，然而并不是，实际是2014年编译器和2019年编译器的锅。。。</p>
 <p>不死心的我把代码进行了汇编，终于发现了问题所在：</p>
 <img src="/2020/11/10/C-%E6%BA%A2%E5%87%BA%E7%9A%84%E5%9D%91/1.png" class="" title="screenshot">
+
 <p>这是main函数的汇编截图，主要看赋值的那行开始的三行，首先第一句是赋值<code>0x7fffffff</code>给<code>-4(%rbp)</code>，然后把它和<code>-1</code>比较一下，就完事了？？？<br>Excuse me？？<br>仔细思考一下的确也没错，<code>!</code>遇到0是1，也就是比较是否为0，也就是<code>x + x + 2 == 0</code>，优化一下就是<code>x + 1 == 0</code>。。</p>
 <p>完全没想到是编译器太优秀了，帮我自行简化了，然而因为溢出的原因，<code>x + x + 2 == 0</code>其实有两个解。。</p>
 <p>至于为什么我的codeblocks得到了1，是因为14年的编译器还比较傻，算的是<code>2x == -2</code>。</p>
@@ -398,7 +400,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -411,7 +413,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -461,12 +463,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">86k</span>
+    <span title="Symbols count total">89k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:18</span>
+    <span title="Reading time total">1:21</span>
 </div>
 
         

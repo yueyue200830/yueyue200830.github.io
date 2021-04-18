@@ -288,36 +288,33 @@
         <p>教程链接：<a target="_blank" rel="noopener" href="https://learnopengl-cn.github.io/01%20Getting%20started/04%20Hello%20Triangle/">你好，三角形</a></p>
 <p>这一章学的东西超级多，学完也算基本入门啦</p>
 <a id="more"></a>
+
 <p>那就从最基础的开始吧</p>
 <h1 id="顶点输入"><a href="#顶点输入" class="headerlink" title="顶点输入"></a>顶点输入</h1><p>首先是坐标轴，它是高中数学学的直角坐标系的坐标轴，理解特别简单。</p>
 <p>对应的数值需要在-1和1之间，大概类似百分比吧，最后的f代表浮点数。</p>
 <p>和顶点对应的是顶点缓冲对象VBO，先是创建一个unsigned int来储存id，然后创建顶点缓冲对象，再是绑定缓冲对象</p>
 <p>最后把顶点数据缓冲进去</p>
 <p>这里glBufferData最后一个参数是显卡管理给定数据的模式</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
-<th style="text-align:left">变量</th>
-<th style="text-align:left">意义</th>
+<th align="left">变量</th>
+<th align="left">意义</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">GL_STATIC_DRAW</td>
-<td style="text-align:left">数据几乎不会改变</td>
+<tbody><tr>
+<td align="left">GL_STATIC_DRAW</td>
+<td align="left">数据几乎不会改变</td>
 </tr>
 <tr>
-<td style="text-align:left">GL_DYNAMIC_DRAW</td>
-<td style="text-align:left">数据会改变很多</td>
+<td align="left">GL_DYNAMIC_DRAW</td>
+<td align="left">数据会改变很多</td>
 </tr>
 <tr>
-<td style="text-align:left">GL_STREAM_DRAW</td>
-<td style="text-align:left">数据每次绘制都会改变</td>
+<td align="left">GL_STREAM_DRAW</td>
+<td align="left">数据每次绘制都会改变</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//顶点坐标x,y,z，需要在-1到1之间，标准数学坐标轴</span></span><br><span class="line"><span class="comment">//如果是2d的话z变为0</span></span><br><span class="line"><span class="keyword">float</span> vertices[] = &#123;</span><br><span class="line">	<span class="number">-0.5f</span>, <span class="number">-0.5f</span>, <span class="number">0.0f</span>,</span><br><span class="line">	 <span class="number">0.5f</span>, <span class="number">-0.5f</span>, <span class="number">0.0f</span>,</span><br><span class="line">	 <span class="number">0.0f</span>,  <span class="number">0.5f</span>, <span class="number">0.0f</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> VBO;                      <span class="comment">//VBO顶点缓冲对象的id</span></span><br><span class="line">glGenBuffers(<span class="number">1</span>, &amp;VBO);                 <span class="comment">//生成顶点缓冲对象，给VBO这个id。类型为GL_ARRAY_BUFFER</span></span><br><span class="line">glBindBuffer(GL_ARRAY_BUFFER, VBO);    <span class="comment">//把新建的缓冲绑定到GL_ARRAY_BUFFER</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//把顶点数据复制到缓冲的内存中</span></span><br><span class="line"><span class="comment">//显卡管理给定数据的模式：GL_STATIC_DRAW数据几乎不会改变，GL_DYNAMIC_DRAW数据会改变很多，GL_STREAM_DRAW数据每次绘制都会改变</span></span><br><span class="line">glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);    <span class="comment">//顶点缓冲对象，传送数据大小，发送的实际数据，显卡管理给定数据的模式</span></span><br></pre></td></tr></table></figure>
 <h1 id="顶点着色器"><a href="#顶点着色器" class="headerlink" title="顶点着色器"></a>顶点着色器</h1><p>着色器相关的在后面有详细介绍，这里主要是为了能够编译使用</p>
 <h2 id="顶点着色器-1"><a href="#顶点着色器-1" class="headerlink" title="顶点着色器"></a>顶点着色器</h2><h3 id="着色器代码"><a href="#着色器代码" class="headerlink" title="着色器代码"></a>着色器代码</h3><p>这是一个非常基础的GLSL顶点着色器</p>
@@ -334,6 +331,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 片段着色器同上</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *fragmentShaderSource = <span class="string">&quot;#version 330 core\n&quot;</span></span><br><span class="line">	<span class="string">&quot;out vec4 FragColor;\n&quot;</span></span><br><span class="line">	<span class="string">&quot;void main()\n&quot;</span></span><br><span class="line">	<span class="string">&quot;&#123;\n&quot;</span></span><br><span class="line">	<span class="string">&quot;   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n&quot;</span>        <span class="comment">//RGB色，最后一个alpha透明度</span></span><br><span class="line">	<span class="string">&quot;&#125;\n\0&quot;</span>;</span><br></pre></td></tr></table></figure>
 <h3 id="编译片段着色器"><a href="#编译片段着色器" class="headerlink" title="编译片段着色器"></a>编译片段着色器</h3><p>这里比上面少了两行报错内容的声明</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 编译片段着色器，原理基本同上</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> fragmentShader;                                     <span class="comment">//创建片段着色器对象</span></span><br><span class="line">fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);             <span class="comment">//创建顶点着色器</span></span><br><span class="line">glShaderSource(fragmentShader, <span class="number">1</span>, &amp;fragmentShaderSource, <span class="literal">NULL</span>);  <span class="comment">//要编译的着色器，传递的源码字符串数量，顶点着色器真正的源码，（未知）</span></span><br><span class="line">glCompileShader(fragmentShader);</span><br><span class="line"><span class="comment">//判断编译是否成功</span></span><br><span class="line">glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &amp;success);</span><br><span class="line"><span class="keyword">if</span> (!success)                                                    <span class="comment">//判断编译是否成功</span></span><br><span class="line">&#123;</span><br><span class="line">	glGetShaderInfoLog(fragmentShader, <span class="number">512</span>, <span class="literal">NULL</span>, infoLog);</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n&quot;</span> &lt;&lt; infoLog &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="着色器程序"><a href="#着色器程序" class="headerlink" title="着色器程序"></a>着色器程序</h3><p>着色器程序是类似加载顶点着色器和片段着色器,代码一如既往的相似</p>
 <p>顺便最后因为着色器程序全部get啦，那么顶点着色器和片段着色器就不需要留着数据了</p>
 <p>其实从某种意义上感觉片段着色器和顶点着色器对于着色器程序做的是一个封装处理，这样易于管理</p>
@@ -475,7 +473,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -488,7 +486,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -538,12 +536,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">86k</span>
+    <span title="Symbols count total">89k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:18</span>
+    <span title="Reading time total">1:21</span>
 </div>
 
         

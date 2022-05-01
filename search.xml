@@ -37,6 +37,39 @@
       </tags>
   </entry>
   <entry>
+    <title>Atom安装命令行插件</title>
+    <url>/2020/05/18/Atom%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<p>Atom默认是不带终端的，需要安装插件，常见可以在搜索引擎搜索到的有两个：<code>Terminal-Plus</code>和<code>platformio-ide-terminal</code>。<br>而事实上前者是已经放弃更新的插件，后者是基于前者开发的，因此需要安装的是<code>platformio-ide-terminal</code></p>
+<a id="more"></a>
+
+<p><strong>注：</strong>Windows系统的我前者安装是直接出错的，完全跳不出，因此必须安装后者！</p>
+<h1 id="platformio-ide-terminal安装"><a href="#platformio-ide-terminal安装" class="headerlink" title="platformio-ide-terminal安装"></a>platformio-ide-terminal安装</h1><p>只需要在package中搜索<code>platformio-ide-terminal</code>，点击install就好</p>
+<h1 id="使用插件"><a href="#使用插件" class="headerlink" title="使用插件"></a>使用插件</h1><p>安装好后有三种方法可以打开</p>
+<img src="/2020/05/18/Atom%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%8F%92%E4%BB%B6/3.png" class="" title="terminal-powershell">
+
+<h2 id="通过菜单打开terminal"><a href="#通过菜单打开terminal" class="headerlink" title="通过菜单打开terminal"></a>通过菜单打开terminal</h2><p>菜单<code>package</code> → <code>platformio-ide-terminal</code> → <code>Toggle</code></p>
+<img src="/2020/05/18/Atom%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%8F%92%E4%BB%B6/1.png" class="" title="menu">
+
+<h2 id="通过小图标打开terminal"><a href="#通过小图标打开terminal" class="headerlink" title="通过小图标打开terminal"></a>通过小图标打开terminal</h2><p>找到左下角中➕的小图标，点击即可</p>
+<img src="/2020/05/18/Atom%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%8F%92%E4%BB%B6/2.png" class="" title="icon">
+
+<h2 id="通过快捷键打开terminal"><a href="#通过快捷键打开terminal" class="headerlink" title="通过快捷键打开terminal"></a>通过快捷键打开terminal</h2><p>通过<code>ctrl + `</code>可以toggle terminal</p>
+<p>具体其它快捷键可以参考使用文档，不过我这里似乎new terminal的快捷键被覆盖了</p>
+<h1 id="修改默认终端"><a href="#修改默认终端" class="headerlink" title="修改默认终端"></a>修改默认终端</h1><p>Windows下安装好后默认是<code>Powershell</code>，为方便使用，我改成了<code>Git bash</code></p>
+<p>在setting中找到platformio-ide-terminal，将其中<code>shell override</code>改为gitbash的路径，我这里是<code>C:\Program Files\Git\bin\bash.exe</code></p>
+<img src="/2020/05/18/Atom%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%8F%92%E4%BB%B6/4.png" class="" title="terminal-gitbash">
+
+<p>重新新开一个terminal就可以看到效果了</p>
+]]></content>
+      <categories>
+        <category>Others</category>
+      </categories>
+      <tags>
+        <tag>Atom</tag>
+        <tag>Terminal</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2020秋招总结</title>
     <url>/2020/09/18/2020%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<p>漫长的秋招从往年的金八银九变成了金七银八，从七月的焦虑到八月初的痛苦到最后的收获，总体我算是幸运的，能拿到几个大厂的意向书。<br>然而反观总体面试情况，其实有点可笑，大厂面的都offer，剩下都不要我。</p>
@@ -129,37 +162,22 @@
       </tags>
   </entry>
   <entry>
-    <title>Atom安装命令行插件</title>
-    <url>/2020/05/18/Atom%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%8F%92%E4%BB%B6/</url>
-    <content><![CDATA[<p>Atom默认是不带终端的，需要安装插件，常见可以在搜索引擎搜索到的有两个：<code>Terminal-Plus</code>和<code>platformio-ide-terminal</code>。<br>而事实上前者是已经放弃更新的插件，后者是基于前者开发的，因此需要安装的是<code>platformio-ide-terminal</code></p>
+    <title>C++溢出的坑</title>
+    <url>/2020/11/10/C-%E6%BA%A2%E5%87%BA%E7%9A%84%E5%9D%91/</url>
+    <content><![CDATA[<p>C++的int只有32位，计算溢出也是十分普遍的事情，但我作死得尝试采用溢出的计算方法，结果发现千万不要代码中做溢出计算，编译器分分钟把你搞死。。</p>
 <a id="more"></a>
 
-<p><strong>注：</strong>Windows系统的我前者安装是直接出错的，完全跳不出，因此必须安装后者！</p>
-<h1 id="platformio-ide-terminal安装"><a href="#platformio-ide-terminal安装" class="headerlink" title="platformio-ide-terminal安装"></a>platformio-ide-terminal安装</h1><p>只需要在package中搜索<code>platformio-ide-terminal</code>，点击install就好</p>
-<h1 id="使用插件"><a href="#使用插件" class="headerlink" title="使用插件"></a>使用插件</h1><p>安装好后有三种方法可以打开</p>
-<img src="/2020/05/18/Atom%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%8F%92%E4%BB%B6/3.png" class="" title="terminal-powershell">
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">0x7fffffff</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; !(x + x + <span class="number">2</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<p>根据常理，输出答案应该是1，<code>2 * (0x7fffffff + 1) = 2 * 0x80000000 = 0</code>，想想挺完美的吧，结果得出是0，百思不得其解，甚至尝试用了多个编译器，结果在我windows下的codeblocks中得到了1！</p>
+<h1 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h1><p>查看了codeblocks的编译器，发现是32位的，其它编译器都是64位的，还以为是32位和64位的锅呢，然而并不是，实际是2014年编译器和2019年编译器的锅。。。</p>
+<p>不死心的我把代码进行了汇编，终于发现了问题所在：</p>
+<img src="/2020/11/10/C-%E6%BA%A2%E5%87%BA%E7%9A%84%E5%9D%91/1.png" class="" title="screenshot">
 
-<h2 id="通过菜单打开terminal"><a href="#通过菜单打开terminal" class="headerlink" title="通过菜单打开terminal"></a>通过菜单打开terminal</h2><p>菜单<code>package</code> → <code>platformio-ide-terminal</code> → <code>Toggle</code></p>
-<img src="/2020/05/18/Atom%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%8F%92%E4%BB%B6/1.png" class="" title="menu">
-
-<h2 id="通过小图标打开terminal"><a href="#通过小图标打开terminal" class="headerlink" title="通过小图标打开terminal"></a>通过小图标打开terminal</h2><p>找到左下角中➕的小图标，点击即可</p>
-<img src="/2020/05/18/Atom%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%8F%92%E4%BB%B6/2.png" class="" title="icon">
-
-<h2 id="通过快捷键打开terminal"><a href="#通过快捷键打开terminal" class="headerlink" title="通过快捷键打开terminal"></a>通过快捷键打开terminal</h2><p>通过<code>ctrl + `</code>可以toggle terminal</p>
-<p>具体其它快捷键可以参考使用文档，不过我这里似乎new terminal的快捷键被覆盖了</p>
-<h1 id="修改默认终端"><a href="#修改默认终端" class="headerlink" title="修改默认终端"></a>修改默认终端</h1><p>Windows下安装好后默认是<code>Powershell</code>，为方便使用，我改成了<code>Git bash</code></p>
-<p>在setting中找到platformio-ide-terminal，将其中<code>shell override</code>改为gitbash的路径，我这里是<code>C:\Program Files\Git\bin\bash.exe</code></p>
-<img src="/2020/05/18/Atom%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%8F%92%E4%BB%B6/4.png" class="" title="terminal-gitbash">
-
-<p>重新新开一个terminal就可以看到效果了</p>
+<p>这是main函数的汇编截图，主要看赋值的那行开始的三行，首先第一句是赋值<code>0x7fffffff</code>给<code>-4(%rbp)</code>，然后把它和<code>-1</code>比较一下，就完事了？？？<br>Excuse me？？<br>仔细思考一下的确也没错，<code>!</code>遇到0是1，也就是比较是否为0，也就是<code>x + x + 2 == 0</code>，优化一下就是<code>x + 1 == 0</code>。。</p>
+<p>完全没想到是编译器太优秀了，帮我自行简化了，然而因为溢出的原因，<code>x + x + 2 == 0</code>其实有两个解。。</p>
+<p>至于为什么我的codeblocks得到了1，是因为14年的编译器还比较傻，算的是<code>2x == -2</code>。</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>溢出的坑真的不能踩啊，还是得乖乖得写正确的代码，谁知道谁知道编译器哪天又太优秀了把代码优化了呢。</p>
 ]]></content>
-      <categories>
-        <category>Others</category>
-      </categories>
-      <tags>
-        <tag>Atom</tag>
-        <tag>Terminal</tag>
-      </tags>
   </entry>
   <entry>
     <title>CentOS 7安装MariaDB数据库及基础配置</title>
@@ -197,24 +215,6 @@
         <tag>MariaDB</tag>
         <tag>Centos</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>C++溢出的坑</title>
-    <url>/2020/11/10/C-%E6%BA%A2%E5%87%BA%E7%9A%84%E5%9D%91/</url>
-    <content><![CDATA[<p>C++的int只有32位，计算溢出也是十分普遍的事情，但我作死得尝试采用溢出的计算方法，结果发现千万不要代码中做溢出计算，编译器分分钟把你搞死。。</p>
-<a id="more"></a>
-
-<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">0x7fffffff</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; !(x + x + <span class="number">2</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
-<p>根据常理，输出答案应该是1，<code>2 * (0x7fffffff + 1) = 2 * 0x80000000 = 0</code>，想想挺完美的吧，结果得出是0，百思不得其解，甚至尝试用了多个编译器，结果在我windows下的codeblocks中得到了1！</p>
-<h1 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h1><p>查看了codeblocks的编译器，发现是32位的，其它编译器都是64位的，还以为是32位和64位的锅呢，然而并不是，实际是2014年编译器和2019年编译器的锅。。。</p>
-<p>不死心的我把代码进行了汇编，终于发现了问题所在：</p>
-<img src="/2020/11/10/C-%E6%BA%A2%E5%87%BA%E7%9A%84%E5%9D%91/1.png" class="" title="screenshot">
-
-<p>这是main函数的汇编截图，主要看赋值的那行开始的三行，首先第一句是赋值<code>0x7fffffff</code>给<code>-4(%rbp)</code>，然后把它和<code>-1</code>比较一下，就完事了？？？<br>Excuse me？？<br>仔细思考一下的确也没错，<code>!</code>遇到0是1，也就是比较是否为0，也就是<code>x + x + 2 == 0</code>，优化一下就是<code>x + 1 == 0</code>。。</p>
-<p>完全没想到是编译器太优秀了，帮我自行简化了，然而因为溢出的原因，<code>x + x + 2 == 0</code>其实有两个解。。</p>
-<p>至于为什么我的codeblocks得到了1，是因为14年的编译器还比较傻，算的是<code>2x == -2</code>。</p>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>溢出的坑真的不能踩啊，还是得乖乖得写正确的代码，谁知道谁知道编译器哪天又太优秀了把代码优化了呢。</p>
-]]></content>
   </entry>
   <entry>
     <title>Chrome浏览器阻止特定URL发送请求</title>
@@ -479,40 +479,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Leetcode——142. Linked List Cycle II</title>
-    <url>/2020/04/08/Leetcode%E2%80%94%E2%80%94142-Linked-List-Cycle-II/</url>
-    <content><![CDATA[<p>刷题时看到这道题，看了解答觉得很数学&amp;有趣，就来写个数学证明题吧hhhh</p>
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><blockquote>
-<p>Given a linked list, return the node where the cycle begins. If there is no cycle, return <code>null</code>.</p>
-</blockquote>
-<p><a href="https://leetcode.com/problems/linked-list-cycle-ii/">Leetcode链接</a></p>
-<a id="more"></a>
-
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>其实这是<code>Linked List Cycle</code>的升级版，和1一样，首先判断是否成环，采用快慢指针的方法，这里就不多加解释。</p>
-<p>当我们确定是成环时，我们需要去寻找环的头部。</p>
-<h2 id="解法一：map记录"><a href="#解法一：map记录" class="headerlink" title="解法一：map记录"></a>解法一：map记录</h2><p>这是一个最简单的方法就是用map记录环中的点，然后从头开始找第一个在map中的点，这里我也就不放代码了。</p>
-<p>时间复杂度$O(n)$，但空间复杂度有点高。。</p>
-<h2 id="解法二：双指针寻找-数学原理）"><a href="#解法二：双指针寻找-数学原理）" class="headerlink" title="解法二：双指针寻找(数学原理）"></a>解法二：双指针寻找(数学原理）</h2><p>这是我想记录的一个方法，个人认为没见过解答一般没法想出来，倒是可能猜到？</p>
-<p><strong>做法</strong>：假设前面快慢指针分别为a和b，现在a和b应指向同一个节点，只需选择其中一个（如a）与一个新的指向头部head的节点的指针c一起往前走，它们第一次指向的同一个节点就是环的第一个节点。</p>
-<p>简单来说写个伪代码：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// a is a previous pointer</span></span><br><span class="line">c = head;</span><br><span class="line"><span class="keyword">while</span> (a != c) &#123;</span><br><span class="line">  a = a-&gt;next;</span><br><span class="line">  c = c-&gt;next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>是不是很神奇？完全想不到啊</p>
-<p>时间复杂度$O(n)$，空间复杂度$O(1)$。</p>
-<h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><p>首先，定义这里的长度为需要走的步数。</p>
-<p>假设从head到环的头部的长度为$S_{head}$，环的长度为$S_{circle}$。<br>在前面的算法，慢指针a走了$S_a$，快指针b走了$S_b$。<br>则我们有<br>$$S_b = 2 * S_a$$</p>
-<p>又因为现在a和b在同一个点，因此b比a多走$k$圈，即<br>$$S_b - S_a = k * S_{circle}$$<br>$$S_a = k * S_{circle}$$</p>
-<p>那么若a又走了$S_1$的长度的话（即从头走到环头部的长度）<br>$$S_a’ = S_{head} + S_a$$<br>$$S_a’ = S_{head} + k * S_{circle}$$</p>
-<p>这就正好是走了一个头部到环的距离+$k$圈环，也就是a正好在环的头部。</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    ListNode *a = head;</span><br><span class="line">    ListNode *b = head;</span><br><span class="line">    <span class="keyword">while</span> (a != <span class="literal">NULL</span> &amp;&amp; b != <span class="literal">NULL</span> &amp;&amp; b-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        a = a-&gt;next;</span><br><span class="line">        b = b-&gt;next-&gt;next;</span><br><span class="line">        <span class="keyword">if</span> (a == b) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="literal">NULL</span> || b-&gt;next == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    b = head;</span><br><span class="line">    <span class="keyword">while</span> (a != b) &#123;</span><br><span class="line">        a = a-&gt;next;</span><br><span class="line">        b = b-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Algorithm</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-        <tag>Leetcode</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaWeb学习——Servlet+表单提交</title>
     <url>/2018/12/21/JavaWeb%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94Servlet-%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4/</url>
     <content><![CDATA[<p>网上写servlet的大神不少，记录一下遇到的问题。</p>
@@ -547,6 +513,40 @@
       </tags>
   </entry>
   <entry>
+    <title>Leetcode——142. Linked List Cycle II</title>
+    <url>/2020/04/08/Leetcode%E2%80%94%E2%80%94142-Linked-List-Cycle-II/</url>
+    <content><![CDATA[<p>刷题时看到这道题，看了解答觉得很数学&amp;有趣，就来写个数学证明题吧hhhh</p>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><blockquote>
+<p>Given a linked list, return the node where the cycle begins. If there is no cycle, return <code>null</code>.</p>
+</blockquote>
+<p><a href="https://leetcode.com/problems/linked-list-cycle-ii/">Leetcode链接</a></p>
+<a id="more"></a>
+
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>其实这是<code>Linked List Cycle</code>的升级版，和1一样，首先判断是否成环，采用快慢指针的方法，这里就不多加解释。</p>
+<p>当我们确定是成环时，我们需要去寻找环的头部。</p>
+<h2 id="解法一：map记录"><a href="#解法一：map记录" class="headerlink" title="解法一：map记录"></a>解法一：map记录</h2><p>这是一个最简单的方法就是用map记录环中的点，然后从头开始找第一个在map中的点，这里我也就不放代码了。</p>
+<p>时间复杂度$O(n)$，但空间复杂度有点高。。</p>
+<h2 id="解法二：双指针寻找-数学原理）"><a href="#解法二：双指针寻找-数学原理）" class="headerlink" title="解法二：双指针寻找(数学原理）"></a>解法二：双指针寻找(数学原理）</h2><p>这是我想记录的一个方法，个人认为没见过解答一般没法想出来，倒是可能猜到？</p>
+<p><strong>做法</strong>：假设前面快慢指针分别为a和b，现在a和b应指向同一个节点，只需选择其中一个（如a）与一个新的指向头部head的节点的指针c一起往前走，它们第一次指向的同一个节点就是环的第一个节点。</p>
+<p>简单来说写个伪代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// a is a previous pointer</span></span><br><span class="line">c = head;</span><br><span class="line"><span class="keyword">while</span> (a != c) &#123;</span><br><span class="line">  a = a-&gt;next;</span><br><span class="line">  c = c-&gt;next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>是不是很神奇？完全想不到啊</p>
+<p>时间复杂度$O(n)$，空间复杂度$O(1)$。</p>
+<h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><p>首先，定义这里的长度为需要走的步数。</p>
+<p>假设从head到环的头部的长度为$S_{head}$，环的长度为$S_{circle}$。<br>在前面的算法，慢指针a走了$S_a$，快指针b走了$S_b$。<br>则我们有<br>$$S_b = 2 * S_a$$</p>
+<p>又因为现在a和b在同一个点，因此b比a多走$k$圈，即<br>$$S_b - S_a = k * S_{circle}$$<br>$$S_a = k * S_{circle}$$</p>
+<p>那么若a又走了$S_1$的长度的话（即从头走到环头部的长度）<br>$$S_a’ = S_{head} + S_a$$<br>$$S_a’ = S_{head} + k * S_{circle}$$</p>
+<p>这就正好是走了一个头部到环的距离+$k$圈环，也就是a正好在环的头部。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    ListNode *a = head;</span><br><span class="line">    ListNode *b = head;</span><br><span class="line">    <span class="keyword">while</span> (a != <span class="literal">NULL</span> &amp;&amp; b != <span class="literal">NULL</span> &amp;&amp; b-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        a = a-&gt;next;</span><br><span class="line">        b = b-&gt;next-&gt;next;</span><br><span class="line">        <span class="keyword">if</span> (a == b) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="literal">NULL</span> || b-&gt;next == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    b = head;</span><br><span class="line">    <span class="keyword">while</span> (a != b) &#123;</span><br><span class="line">        a = a-&gt;next;</span><br><span class="line">        b = b-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Leetcode——415. Add Strings(大数加法)</title>
     <url>/2019/03/02/Leetcode%E2%80%94%E2%80%94415-Add-Strings-%E5%A4%A7%E6%95%B0%E5%8A%A0%E6%B3%95/</url>
     <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><blockquote>
@@ -558,6 +558,47 @@
 <p>首先相同位数的相加，然后考虑一下进位符。<br>如果一个数没有第k位，那么和的第k位就是另一个数的第k位和进位符相加。<br>最后需要注意以下最后会不会有多出一个进位。</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">addStrings</span><span class="params">(<span class="built_in">string</span> num1, <span class="built_in">string</span> num2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = num1.size() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> j = num2.size() - <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">string</span> s;</span><br><span class="line">        <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &gt;= <span class="number">0</span> || j &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> t = k;</span><br><span class="line">            <span class="keyword">if</span> (i &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                t += num2[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (j &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                t += num1[i] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                t += num2[j] + num1[i] - <span class="string">&#x27;0&#x27;</span> - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            k = t / <span class="number">10</span>;</span><br><span class="line">            <span class="keyword">char</span> c = <span class="string">&#x27;0&#x27;</span> + t % <span class="number">10</span>;</span><br><span class="line">            s = c + s;</span><br><span class="line">            i--;</span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (k &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            s = <span class="string">&quot;1&quot;</span> + s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/88075414">https://blog.csdn.net/yueyue200830/article/details/88075414</a></p>
+]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode——42. Trapping Rain Water</title>
+    <url>/2019/02/03/Leetcode%E2%80%94%E2%80%9442-Trapping-Rain-Water/</url>
+    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><blockquote>
+<p>Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h2><p>输入：[0,1,0,2,1,0,1,3,2,1,2,1]<br>答案：6（蓝色部分）</p>
+<img src="/2019/02/03/Leetcode%E2%80%94%E2%80%9442-Trapping-Rain-Water/rainwatertrap.png" class="" title="example">
+
+
+<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>本题就是需要寻找凹下去比旁边低的部分。</p>
+<p>对于题意的分析部分比较难，如果能正确分析出题意基本就可以解决了。</p>
+<h2 id="题解1"><a href="#题解1" class="headerlink" title="题解1"></a>题解1</h2><p>这个解法是官方的解法，主要写一下思路：</p>
+<p>对于每一条块，把它左边和右边的块一份为二，分别寻找出它左边和右边最高块的高度，显然它最后加了水的高度就是它左右两遍高度的最大值中小的那个。</p>
+<img src="/2019/02/03/Leetcode%E2%80%94%E2%80%9442-Trapping-Rain-Water/solution.png" class="" title="solution">
+
+<p>如图红色为随机的一条，两条黑色的是其左右两边最高的两根，显然最后注满的水量至少之蓝色这么多，也就是左右两根黑色中比较矮的那根的长度。</p>
+<p>因此<strong>sum  = sum(min(left_max[i], right_max[i]))</strong></p>
+<p>比较普通又方便的一种解法是用dp记录left_max和right_max，时间复杂度和空间复杂度都为O(n)。</p>
+<p>而另一种可以更快的方法是用left和right两个来左右一起遍历，同时记录遍历过的left_max和right_max。<br>只要比较现在遍历过的里面左右的最大值，最大值比较小的那侧现在指向的那块最后的注水量就是那侧遍历到的最大的值。（因为另一侧的最大值一定比这一侧的最大值大）<br>即，假设现在left_max比right_max小，那么第left个左边所有的值都知道了，最大值为left_max，而它右边的最大值一定会大于等于right_max。因此min(right_max[i], left_max[i]) = left_max[i]。<br>这样遍历的时间复杂度是O(n)（只需要遍历n次，比dp的2n次少一半），空间复杂度为O(1)（只需要另外4个数记录就好，而dp的额外空间是2n）</p>
+<p>附上官方代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; height)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> left = <span class="number">0</span>, right = height.size() - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> left_max = <span class="number">0</span>, right_max = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">    <span class="keyword">if</span> (height[left] &lt; height[right]) &#123;</span><br><span class="line">      height[left] &gt;= left_max ? (left_max = height[left]) : ans += (left_max - height[left]);</span><br><span class="line">      ++left;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      height[right] &gt;= right_max ? (right_max = height[right]) : ans += (right_max - height[right]);</span><br><span class="line">      --right;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="题解2"><a href="#题解2" class="headerlink" title="题解2"></a>题解2</h2><p>这个是我绞尽脑汁后的一个比较复杂的解法，时间复杂度O(n)，空间复杂度最大O(n)（用stack）</p>
+<p>做法是从左往右遍历，遇到可以注水的地方就先把暂时可以注的水给注入。</p>
+<p>如样例中有一部分[2,1,0,1,3]<br>当遇到右侧1的时候，也就是[2,1,0,1]时，在0中注入1的水量，这样就变成了[2,1,1,1]了<br>当遇到3时，对所有的1都注入1的水量，变成[2,2,2,2,3]。</p>
+<p>整个的难点在于用stack的记录，对于同一个高度块只记录一次，每次需要同时记录高度和位置，因此需要用结构体来记录。<br>又由于是从左往右遍历的，每次记录同高度下最右边的那条。</p>
+<p>因为每次遍历完已经填平了所有遍历过的水坑，因此stack中记录的一定是不可以再注入水的，也就是递增或者递减的一堆数。</p>
+<p>当每次遇到可以注水的时候，注水量为(mini(left_height, right_height) - current_height)*(left_position-right_position-1)（如有不理解可以考虑一下刚才的example）</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">num</span>&#123;</span></span><br><span class="line">     <span class="keyword">int</span> n;</span><br><span class="line">     <span class="keyword">int</span> p;</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (height.size() &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">stack</span>&lt;num&gt; q;</span><br><span class="line">        num tmp, last;</span><br><span class="line">        <span class="keyword">int</span> s = <span class="number">0</span>;</span><br><span class="line">        tmp.n = height[<span class="number">0</span>];</span><br><span class="line">        tmp.p = <span class="number">0</span>;</span><br><span class="line">        q.push(tmp);</span><br><span class="line">        tmp.n = height[<span class="number">1</span>];</span><br><span class="line">        tmp.p = <span class="number">1</span>;</span><br><span class="line">        q.push(tmp);</span><br><span class="line">        <span class="keyword">int</span> n = max(height[<span class="number">0</span>], height[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; height.size(); i++) &#123;</span><br><span class="line">            tmp = q.top();</span><br><span class="line">            <span class="keyword">while</span> (q.size() &gt; <span class="number">1</span> &amp;&amp; n &gt; tmp.n &amp;&amp; tmp.n &lt;= height[i]) &#123;</span><br><span class="line">                last = tmp;</span><br><span class="line">                q.pop();</span><br><span class="line">                tmp = q.top();</span><br><span class="line">                s += (min(tmp.n, height[i]) - last.n) * (i - tmp.p - <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            tmp.n = height[i];</span><br><span class="line">            tmp.p = i;</span><br><span class="line">            q.push(tmp);</span><br><span class="line">            <span class="keyword">if</span> (tmp.n &gt; n) &#123;</span><br><span class="line">                n = tmp.n;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/86755967">https://blog.csdn.net/yueyue200830/article/details/86755967</a></p>
 ]]></content>
       <categories>
         <category>Algorithm</category>
@@ -624,72 +665,6 @@
       </categories>
       <tags>
         <tag>Markdown</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Leetcode——42. Trapping Rain Water</title>
-    <url>/2019/02/03/Leetcode%E2%80%94%E2%80%9442-Trapping-Rain-Water/</url>
-    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><blockquote>
-<p>Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.</p>
-</blockquote>
-<a id="more"></a>
-
-<h2 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h2><p>输入：[0,1,0,2,1,0,1,3,2,1,2,1]<br>答案：6（蓝色部分）</p>
-<img src="/2019/02/03/Leetcode%E2%80%94%E2%80%9442-Trapping-Rain-Water/rainwatertrap.png" class="" title="example">
-
-
-<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>本题就是需要寻找凹下去比旁边低的部分。</p>
-<p>对于题意的分析部分比较难，如果能正确分析出题意基本就可以解决了。</p>
-<h2 id="题解1"><a href="#题解1" class="headerlink" title="题解1"></a>题解1</h2><p>这个解法是官方的解法，主要写一下思路：</p>
-<p>对于每一条块，把它左边和右边的块一份为二，分别寻找出它左边和右边最高块的高度，显然它最后加了水的高度就是它左右两遍高度的最大值中小的那个。</p>
-<img src="/2019/02/03/Leetcode%E2%80%94%E2%80%9442-Trapping-Rain-Water/solution.png" class="" title="solution">
-
-<p>如图红色为随机的一条，两条黑色的是其左右两边最高的两根，显然最后注满的水量至少之蓝色这么多，也就是左右两根黑色中比较矮的那根的长度。</p>
-<p>因此<strong>sum  = sum(min(left_max[i], right_max[i]))</strong></p>
-<p>比较普通又方便的一种解法是用dp记录left_max和right_max，时间复杂度和空间复杂度都为O(n)。</p>
-<p>而另一种可以更快的方法是用left和right两个来左右一起遍历，同时记录遍历过的left_max和right_max。<br>只要比较现在遍历过的里面左右的最大值，最大值比较小的那侧现在指向的那块最后的注水量就是那侧遍历到的最大的值。（因为另一侧的最大值一定比这一侧的最大值大）<br>即，假设现在left_max比right_max小，那么第left个左边所有的值都知道了，最大值为left_max，而它右边的最大值一定会大于等于right_max。因此min(right_max[i], left_max[i]) = left_max[i]。<br>这样遍历的时间复杂度是O(n)（只需要遍历n次，比dp的2n次少一半），空间复杂度为O(1)（只需要另外4个数记录就好，而dp的额外空间是2n）</p>
-<p>附上官方代码：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; height)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> left = <span class="number">0</span>, right = height.size() - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> left_max = <span class="number">0</span>, right_max = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">    <span class="keyword">if</span> (height[left] &lt; height[right]) &#123;</span><br><span class="line">      height[left] &gt;= left_max ? (left_max = height[left]) : ans += (left_max - height[left]);</span><br><span class="line">      ++left;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      height[right] &gt;= right_max ? (right_max = height[right]) : ans += (right_max - height[right]);</span><br><span class="line">      --right;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="题解2"><a href="#题解2" class="headerlink" title="题解2"></a>题解2</h2><p>这个是我绞尽脑汁后的一个比较复杂的解法，时间复杂度O(n)，空间复杂度最大O(n)（用stack）</p>
-<p>做法是从左往右遍历，遇到可以注水的地方就先把暂时可以注的水给注入。</p>
-<p>如样例中有一部分[2,1,0,1,3]<br>当遇到右侧1的时候，也就是[2,1,0,1]时，在0中注入1的水量，这样就变成了[2,1,1,1]了<br>当遇到3时，对所有的1都注入1的水量，变成[2,2,2,2,3]。</p>
-<p>整个的难点在于用stack的记录，对于同一个高度块只记录一次，每次需要同时记录高度和位置，因此需要用结构体来记录。<br>又由于是从左往右遍历的，每次记录同高度下最右边的那条。</p>
-<p>因为每次遍历完已经填平了所有遍历过的水坑，因此stack中记录的一定是不可以再注入水的，也就是递增或者递减的一堆数。</p>
-<p>当每次遇到可以注水的时候，注水量为(mini(left_height, right_height) - current_height)*(left_position-right_position-1)（如有不理解可以考虑一下刚才的example）</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">num</span>&#123;</span></span><br><span class="line">     <span class="keyword">int</span> n;</span><br><span class="line">     <span class="keyword">int</span> p;</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (height.size() &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">stack</span>&lt;num&gt; q;</span><br><span class="line">        num tmp, last;</span><br><span class="line">        <span class="keyword">int</span> s = <span class="number">0</span>;</span><br><span class="line">        tmp.n = height[<span class="number">0</span>];</span><br><span class="line">        tmp.p = <span class="number">0</span>;</span><br><span class="line">        q.push(tmp);</span><br><span class="line">        tmp.n = height[<span class="number">1</span>];</span><br><span class="line">        tmp.p = <span class="number">1</span>;</span><br><span class="line">        q.push(tmp);</span><br><span class="line">        <span class="keyword">int</span> n = max(height[<span class="number">0</span>], height[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; height.size(); i++) &#123;</span><br><span class="line">            tmp = q.top();</span><br><span class="line">            <span class="keyword">while</span> (q.size() &gt; <span class="number">1</span> &amp;&amp; n &gt; tmp.n &amp;&amp; tmp.n &lt;= height[i]) &#123;</span><br><span class="line">                last = tmp;</span><br><span class="line">                q.pop();</span><br><span class="line">                tmp = q.top();</span><br><span class="line">                s += (min(tmp.n, height[i]) - last.n) * (i - tmp.p - <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            tmp.n = height[i];</span><br><span class="line">            tmp.p = i;</span><br><span class="line">            q.push(tmp);</span><br><span class="line">            <span class="keyword">if</span> (tmp.n &gt; n) &#123;</span><br><span class="line">                n = tmp.n;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/86755967">https://blog.csdn.net/yueyue200830/article/details/86755967</a></p>
-]]></content>
-      <categories>
-        <category>Algorithm</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-        <tag>Leetcode</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Python触发win10通知栏通知提醒</title>
-    <url>/2020/02/11/Python%E8%A7%A6%E5%8F%91win10%E9%80%9A%E7%9F%A5%E6%A0%8F%E9%80%9A%E7%9F%A5%E6%8F%90%E9%86%92/</url>
-    <content><![CDATA[<p>在写代码的时候想在某些特定情况触发提示（后台自动运行的情况下），可以搜到的大部分是右下角提示之类比较丑的自定义提示，而其实现在win10已经有自己的通知栏，如果能用自带的通知栏绝对是一个很优秀的选择。搜了很久后发现了一个库叫做<strong>win10toast</strong>。</p>
-<p>这个库最后是18年更新的，感觉是不会有更新了，但只要不会出问题就好，开发者github：<a href="https://github.com/jithurjacob/Windows-10-Toast-Notifications">jithurjacob/Windows-10-Toast-Notifications</a></p>
-<a id="more"></a>
-
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>用pip安装：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install win10toast</span><br></pre></td></tr></table></figure>
-<p>这个需要同时安装<strong>pywin32</strong>，没有安装的话pip会自动一起安装的。</p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> win10toast <span class="keyword">import</span> ToastNotifier</span><br><span class="line"></span><br><span class="line">toaster = ToastNotifier()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 有icon的版本</span></span><br><span class="line">toaster.show_toast(<span class="string">&quot;Hello World!!!&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;Python is 10 seconds awsm!&quot;</span>,</span><br><span class="line">                   icon_path=<span class="string">&quot;custom.ico&quot;</span>,</span><br><span class="line">                   duration=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 无icon，采用python的icon，且采用自己的线程</span></span><br><span class="line">toaster.show_toast(<span class="string">&quot;Example two&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;This notification is in it&#x27;s own thread!&quot;</span>,</span><br><span class="line">                   icon_path=<span class="literal">None</span>,</span><br><span class="line">                   duration=<span class="number">5</span>,</span><br><span class="line">                   threaded=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 等待提示框关闭</span></span><br><span class="line"><span class="keyword">while</span> toaster.notification_active(): time.sleep(<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure>
-<p>提示框截图：</p>
-<img src="/2020/02/11/Python%E8%A7%A6%E5%8F%91win10%E9%80%9A%E7%9F%A5%E6%A0%8F%E9%80%9A%E7%9F%A5%E6%8F%90%E9%86%92/screenshot.png" class="" title="Screenshot">
-<p>本来想要一个可以永久长时间需要手动关闭的提示框，可惜似乎开发者并没有支持，经过尝试采用-1是有效的，但是会报错。</p>
-<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/104270913">https://blog.csdn.net/yueyue200830/article/details/104270913</a></p>
-]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Windows</tag>
-        <tag>Python</tag>
-        <tag>Notification</tag>
       </tags>
   </entry>
   <entry>
@@ -772,6 +747,56 @@
       </tags>
   </entry>
   <entry>
+    <title>Python触发win10通知栏通知提醒</title>
+    <url>/2020/02/11/Python%E8%A7%A6%E5%8F%91win10%E9%80%9A%E7%9F%A5%E6%A0%8F%E9%80%9A%E7%9F%A5%E6%8F%90%E9%86%92/</url>
+    <content><![CDATA[<p>在写代码的时候想在某些特定情况触发提示（后台自动运行的情况下），可以搜到的大部分是右下角提示之类比较丑的自定义提示，而其实现在win10已经有自己的通知栏，如果能用自带的通知栏绝对是一个很优秀的选择。搜了很久后发现了一个库叫做<strong>win10toast</strong>。</p>
+<p>这个库最后是18年更新的，感觉是不会有更新了，但只要不会出问题就好，开发者github：<a href="https://github.com/jithurjacob/Windows-10-Toast-Notifications">jithurjacob/Windows-10-Toast-Notifications</a></p>
+<a id="more"></a>
+
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>用pip安装：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install win10toast</span><br></pre></td></tr></table></figure>
+<p>这个需要同时安装<strong>pywin32</strong>，没有安装的话pip会自动一起安装的。</p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> win10toast <span class="keyword">import</span> ToastNotifier</span><br><span class="line"></span><br><span class="line">toaster = ToastNotifier()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 有icon的版本</span></span><br><span class="line">toaster.show_toast(<span class="string">&quot;Hello World!!!&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;Python is 10 seconds awsm!&quot;</span>,</span><br><span class="line">                   icon_path=<span class="string">&quot;custom.ico&quot;</span>,</span><br><span class="line">                   duration=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 无icon，采用python的icon，且采用自己的线程</span></span><br><span class="line">toaster.show_toast(<span class="string">&quot;Example two&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;This notification is in it&#x27;s own thread!&quot;</span>,</span><br><span class="line">                   icon_path=<span class="literal">None</span>,</span><br><span class="line">                   duration=<span class="number">5</span>,</span><br><span class="line">                   threaded=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 等待提示框关闭</span></span><br><span class="line"><span class="keyword">while</span> toaster.notification_active(): time.sleep(<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure>
+<p>提示框截图：</p>
+<img src="/2020/02/11/Python%E8%A7%A6%E5%8F%91win10%E9%80%9A%E7%9F%A5%E6%A0%8F%E9%80%9A%E7%9F%A5%E6%8F%90%E9%86%92/screenshot.png" class="" title="Screenshot">
+<p>本来想要一个可以永久长时间需要手动关闭的提示框，可惜似乎开发者并没有支持，经过尝试采用-1是有效的，但是会报错。</p>
+<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/104270913">https://blog.csdn.net/yueyue200830/article/details/104270913</a></p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Windows</tag>
+        <tag>Notification</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>STL——next_permutation&amp;prev_permutation</title>
+    <url>/2019/02/07/STL%E2%80%94%E2%80%94next-permutation-prev-permutation/</url>
+    <content><![CDATA[<p>next_permutation和prev_permutation是对c++求全排列的函数，分别可以求出下一个全排列和前一个全排列。</p>
+<a id="more"></a>
+
+<p>这里以next_permutation为例，来看一下c++官网的定义：</p>
+<blockquote>
+<p>default: bool next_permutation (BidirectionalIterator first, BidirectionalIterator last);<br>custom: bool next_permutation (BidirectionalIterator first, BidirectionalIterator last, Compare comp);</p>
+</blockquote>
+<p>可以看到和sort的用法很像，只需要输入first和last就可以返回是否有下一个，如果有的话会直接在内部排序出现下一个。</p>
+<p>同时可以选项是comp函数，可以自定义排序方式，默认为字典序。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>题目：<a href="https://leetcode.com/problems/permutations/">leetcode 46. Permutations</a></p>
+<p>这是一道全排列的题目，普通解法有dfs和非递归的查找，看解答时发现了这个函数，减少了不少代码量。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; permute(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;</span><br><span class="line">        <span class="keyword">if</span> (nums.size() == <span class="number">0</span>) <span class="keyword">return</span> ans;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        ans.push_back(nums);</span><br><span class="line">        <span class="keyword">while</span> (next_permutation(nums.begin(), nums.end())) &#123;</span><br><span class="line">            ans.push_back(nums);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/86771956">https://blog.csdn.net/yueyue200830/article/details/86771956</a></p>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>全排列</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SQL 基础语句</title>
     <url>/2019/05/11/SQL-%E5%9F%BA%E7%A1%80%E8%AF%AD%E5%8F%A5/</url>
     <content><![CDATA[<ul>
@@ -825,31 +850,6 @@
         <tag>Terminal</tag>
         <tag>Termux</tag>
         <tag>Android</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>STL——next_permutation&amp;prev_permutation</title>
-    <url>/2019/02/07/STL%E2%80%94%E2%80%94next-permutation-prev-permutation/</url>
-    <content><![CDATA[<p>next_permutation和prev_permutation是对c++求全排列的函数，分别可以求出下一个全排列和前一个全排列。</p>
-<a id="more"></a>
-
-<p>这里以next_permutation为例，来看一下c++官网的定义：</p>
-<blockquote>
-<p>default: bool next_permutation (BidirectionalIterator first, BidirectionalIterator last);<br>custom: bool next_permutation (BidirectionalIterator first, BidirectionalIterator last, Compare comp);</p>
-</blockquote>
-<p>可以看到和sort的用法很像，只需要输入first和last就可以返回是否有下一个，如果有的话会直接在内部排序出现下一个。</p>
-<p>同时可以选项是comp函数，可以自定义排序方式，默认为字典序。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>题目：<a href="https://leetcode.com/problems/permutations/">leetcode 46. Permutations</a></p>
-<p>这是一道全排列的题目，普通解法有dfs和非递归的查找，看解答时发现了这个函数，减少了不少代码量。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; permute(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;</span><br><span class="line">        <span class="keyword">if</span> (nums.size() == <span class="number">0</span>) <span class="keyword">return</span> ans;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        ans.push_back(nums);</span><br><span class="line">        <span class="keyword">while</span> (next_permutation(nums.begin(), nums.end())) &#123;</span><br><span class="line">            ans.push_back(nums);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/86771956">https://blog.csdn.net/yueyue200830/article/details/86771956</a></p>
-]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-        <tag>全排列</tag>
       </tags>
   </entry>
   <entry>
@@ -978,67 +978,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Windows下用Python模拟鼠标点击</title>
-    <url>/2020/05/19/Windows%E4%B8%8B%E7%94%A8Python%E6%A8%A1%E6%8B%9F%E9%BC%A0%E6%A0%87%E7%82%B9%E5%87%BB/</url>
-    <content><![CDATA[<p>由于某些需求，本人被安排了一个实现模拟按键的功能，虽然听说似乎按键精灵也有类似实现，但我的需求可能它无法满足，值得自己写。</p>
-<p>对于Windows下的模拟，python一般是采用<code>win32api</code>，此外C++等也可以实现类似的功能，但是python简洁很多，适合不太熟悉Windows变成的人。</p>
-<a id="more"></a>
-
-<p>其实一开始是找到一个别人写的项目想直接用的，可惜运行失败，而且有部分需求不满足，有兴趣的可以直接试试<a href="https://github.com/PyUserInput/PyUserInput">PyUserInput</a></p>
-<h1 id="鼠标模拟"><a href="#鼠标模拟" class="headerlink" title="鼠标模拟"></a>鼠标模拟</h1><p>这一块基本和<code>PyUserInput</code>一样，因为我的需求没有那么复杂，所以只用了部分，有兴趣的可以看源码<a href="https://github.com/PyUserInput/PyUserInput/blob/master/pymouse/windows.py">PyUserInput/pymouse</a></p>
-<p>鼠标的基本操作可以分为：press（按下），release（释放），scroll（滚动，这里没写），move（移动）<br>在基本操作的基础上又有：click（按下+释放），drag（按下+移动+释放）</p>
-<h2 id="Press-按下"><a href="#Press-按下" class="headerlink" title="Press 按下"></a>Press 按下</h2><p>模拟在屏幕(x, y)的位置下按下鼠标，button=1是左键，button=2是右键</p>
-<p>注意这里只模拟了点击操作，并没有修改鼠标的位置</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> win32api</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">press</span>(<span class="params">x, y, button=<span class="number">1</span></span>):</span></span><br><span class="line">    buttonAction = <span class="number">2</span> ** ((<span class="number">2</span> * button) - <span class="number">1</span>)</span><br><span class="line">    win32api.mouse_event(buttonAction, x, y)</span><br></pre></td></tr></table></figure>
-<h2 id="Release-释放"><a href="#Release-释放" class="headerlink" title="Release 释放"></a>Release 释放</h2><p>操作同上</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> win32api</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">release</span>(<span class="params">x, y, button=<span class="number">1</span></span>):</span></span><br><span class="line">    buttonAction = <span class="number">2</span> ** ((<span class="number">2</span> * button))</span><br><span class="line">    win32api.mouse_event(buttonAction, x, y)</span><br></pre></td></tr></table></figure>
-<h2 id="Move-移动"><a href="#Move-移动" class="headerlink" title="Move 移动"></a>Move 移动</h2><p>这里其实只是将鼠标设定到(x, y)的位置，并没有动画过程（写这个代码想想也没需要吧）</p>
-<p>采用了<code>ctypes</code>这个库</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">move</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    ctypes.windll.user32.SetCursorPos(x, y)</span><br></pre></td></tr></table></figure>
-<h2 id="Click-点击"><a href="#Click-点击" class="headerlink" title="Click 点击"></a>Click 点击</h2><p>点击 = 按下 + 释放</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">click</span>(<span class="params">x, y, button=<span class="number">1</span></span>):</span></span><br><span class="line">    press(x, y, button)</span><br><span class="line">    release(x, y, button)</span><br></pre></td></tr></table></figure>
-<h2 id="Drag-拖动"><a href="#Drag-拖动" class="headerlink" title="Drag 拖动"></a>Drag 拖动</h2><p>拖动 = 位置1按下 + 位置2释放</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">drag</span>(<span class="params">x1, y1, x2, y2</span>):</span></span><br><span class="line">    self.press(x1, y1)</span><br><span class="line">    self.release(x2, y2)</span><br></pre></td></tr></table></figure>
-<h2 id="获取当前鼠标位置"><a href="#获取当前鼠标位置" class="headerlink" title="获取当前鼠标位置"></a>获取当前鼠标位置</h2><p>这里其实困扰了我一下，虽然<code>ctypes</code>中有函数可以实现这个功能，但传入的参数有点奇怪，应该是传入的一个指定类型的实例，并且直接将坐标点返回给这个实例。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>(<span class="params">ctypes.Structure</span>):</span></span><br><span class="line">    _fields_ = [(<span class="string">&quot;x&quot;</span>, ctypes.c_ulong),</span><br><span class="line">                (<span class="string">&quot;y&quot;</span>, ctypes.c_ulong)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_pos</span>():</span></span><br><span class="line">    point = Point()</span><br><span class="line">    ctypes.windll.user32.GetCursorPos(ctypes.byref(point))</span><br><span class="line">    <span class="keyword">return</span> point.x, point.y</span><br></pre></td></tr></table></figure>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><a href="https://github.com/PyUserInput/PyUserInput">PyUserInput</a></li>
-<li><a href="https://github.com/qiueer/autoops_for_win">autoops_for_win</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Windows</tag>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Windows系统下对文件进行MD5校验</title>
-    <url>/2020/03/04/Windows%E7%B3%BB%E7%BB%9F%E4%B8%8B%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8CMD5%E6%A0%A1%E9%AA%8C/</url>
-    <content><![CDATA[<blockquote>
-<p>MD5全称MD5信息摘要算法（MD5 Message-Digest Algorithm），是一种被广泛使用的密码散列函数，用于确保信息传输完整一致。</p>
-</blockquote>
-<p>如今，MD5虽然被证明安全性不足，但被广泛运用于文件的校验上。<br>当下载较大文件时，为避免数据缺损，可以进行MD5校验。当然也可以运用于第三方下载官方文件的校验（尤其国内下外网速度不够的情况）</p>
-<a id="more"></a>
-
-<p>本来以为Windows下属性里面会有的，作为一个小白发现想多了，并没有。<br>于是以为要下载软件，没先到其实Windows是有内嵌命令行工具<code>CertUtil</code>的。</p>
-<p><strong>命令</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">certutil -hashfile filePath [HashAlgorithm]</span><br></pre></td></tr></table></figure>
-<p>这里<code>filePath</code>就是文件路径，可用绝对路径或相对路径</p>
-<p><code>HashAlgorithm</code>可以是<code>MD2</code>、<code>MD4</code>、<code>MD5</code>、<code>SHA1</code>、<code>SHA256</code>、<code>SHA384</code>、<code>SHA512</code></p>
-<p><strong>样例</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">certutil -hashfile C:\file.exe MD5</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Windows</category>
-      </categories>
-      <tags>
-        <tag>Windows</tag>
-        <tag>MD5</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Windows修改右键新建菜单</title>
     <url>/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/</url>
     <content><![CDATA[<p>由于课程需求被强制安装了国际知名建模软件EA然而本人真的一点都不喜欢，并且被此软件搞得太不爽了，课程结束删除软件发现竟然没有把右键新建里一起删除，太令人崩溃了吧。。。</p>
@@ -1076,27 +1015,93 @@
       </tags>
   </entry>
   <entry>
-    <title>Windows下使用wget的方法</title>
-    <url>/2019/01/02/windows%E4%B8%8B%E4%BD%BF%E7%94%A8wget%E7%9A%84%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<blockquote>
-<p>GNU Wget（常简称为Wget）是一个在网络上进行下载的简单而强大的自由软件，其本身也是GNU计划的一部分。<br>它的名字是“World Wide Web”和“Get”的结合，同时也隐含了软件的主要功能。<br>当前它支持通过HTTP、HTTPS，以及FTP这三个最常见的TCP/IP协议协议下载。</p>
-</blockquote>
-<p>wget在linux下很方便就可以安装使用了，但似乎官网并没有给windows下一个安装包之类的东西，搜了好久后来发现了两个解决方法。</p>
+    <title>Windows下用Python模拟鼠标点击</title>
+    <url>/2020/05/19/Windows%E4%B8%8B%E7%94%A8Python%E6%A8%A1%E6%8B%9F%E9%BC%A0%E6%A0%87%E7%82%B9%E5%87%BB/</url>
+    <content><![CDATA[<p>由于某些需求，本人被安排了一个实现模拟按键的功能，虽然听说似乎按键精灵也有类似实现，但我的需求可能它无法满足，值得自己写。</p>
+<p>对于Windows下的模拟，python一般是采用<code>win32api</code>，此外C++等也可以实现类似的功能，但是python简洁很多，适合不太熟悉Windows变成的人。</p>
 <a id="more"></a>
 
-<h1 id="用choco安装"><a href="#用choco安装" class="headerlink" title="用choco安装"></a>用choco安装</h1><p>这是我在自己电脑上方法，不过似乎下面一个方法更加方便删除</p>
-<h2 id="安装chocolatey"><a href="#安装chocolatey" class="headerlink" title="安装chocolatey"></a>安装chocolatey</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@<span class="string">&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot;</span> -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command <span class="string">&quot;iex ((New-Object System.Net.WebClient).DownloadString(&#x27;https://chocolatey.org/install.ps1&#x27;))&quot;</span> &amp;&amp; SET <span class="string">&quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;</span></span><br></pre></td></tr></table></figure>
-<h2 id="安装wget"><a href="#安装wget" class="headerlink" title="安装wget"></a>安装wget</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">choco install wget</span><br></pre></td></tr></table></figure>
-<p>这样就可以直接使用了</p>
-<h1 id="用已编译的包"><a href="#用已编译的包" class="headerlink" title="用已编译的包"></a>用已编译的包</h1><p>有些地方会放出来一些windows下的包，只要在cmd中打开到相应文件夹就可以使用了，或者应该也可以配置环境变量</p>
-<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/85638286">https://blog.csdn.net/yueyue200830/article/details/85638286</a></p>
+<p>其实一开始是找到一个别人写的项目想直接用的，可惜运行失败，而且有部分需求不满足，有兴趣的可以直接试试<a href="https://github.com/PyUserInput/PyUserInput">PyUserInput</a></p>
+<h1 id="鼠标模拟"><a href="#鼠标模拟" class="headerlink" title="鼠标模拟"></a>鼠标模拟</h1><p>这一块基本和<code>PyUserInput</code>一样，因为我的需求没有那么复杂，所以只用了部分，有兴趣的可以看源码<a href="https://github.com/PyUserInput/PyUserInput/blob/master/pymouse/windows.py">PyUserInput/pymouse</a></p>
+<p>鼠标的基本操作可以分为：press（按下），release（释放），scroll（滚动，这里没写），move（移动）<br>在基本操作的基础上又有：click（按下+释放），drag（按下+移动+释放）</p>
+<h2 id="Press-按下"><a href="#Press-按下" class="headerlink" title="Press 按下"></a>Press 按下</h2><p>模拟在屏幕(x, y)的位置下按下鼠标，button=1是左键，button=2是右键</p>
+<p>注意这里只模拟了点击操作，并没有修改鼠标的位置</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> win32api</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">press</span>(<span class="params">x, y, button=<span class="number">1</span></span>):</span></span><br><span class="line">    buttonAction = <span class="number">2</span> ** ((<span class="number">2</span> * button) - <span class="number">1</span>)</span><br><span class="line">    win32api.mouse_event(buttonAction, x, y)</span><br></pre></td></tr></table></figure>
+<h2 id="Release-释放"><a href="#Release-释放" class="headerlink" title="Release 释放"></a>Release 释放</h2><p>操作同上</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> win32api</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">release</span>(<span class="params">x, y, button=<span class="number">1</span></span>):</span></span><br><span class="line">    buttonAction = <span class="number">2</span> ** ((<span class="number">2</span> * button))</span><br><span class="line">    win32api.mouse_event(buttonAction, x, y)</span><br></pre></td></tr></table></figure>
+<h2 id="Move-移动"><a href="#Move-移动" class="headerlink" title="Move 移动"></a>Move 移动</h2><p>这里其实只是将鼠标设定到(x, y)的位置，并没有动画过程（写这个代码想想也没需要吧）</p>
+<p>采用了<code>ctypes</code>这个库</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">move</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    ctypes.windll.user32.SetCursorPos(x, y)</span><br></pre></td></tr></table></figure>
+<h2 id="Click-点击"><a href="#Click-点击" class="headerlink" title="Click 点击"></a>Click 点击</h2><p>点击 = 按下 + 释放</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">click</span>(<span class="params">x, y, button=<span class="number">1</span></span>):</span></span><br><span class="line">    press(x, y, button)</span><br><span class="line">    release(x, y, button)</span><br></pre></td></tr></table></figure>
+<h2 id="Drag-拖动"><a href="#Drag-拖动" class="headerlink" title="Drag 拖动"></a>Drag 拖动</h2><p>拖动 = 位置1按下 + 位置2释放</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">drag</span>(<span class="params">x1, y1, x2, y2</span>):</span></span><br><span class="line">    self.press(x1, y1)</span><br><span class="line">    self.release(x2, y2)</span><br></pre></td></tr></table></figure>
+<h2 id="获取当前鼠标位置"><a href="#获取当前鼠标位置" class="headerlink" title="获取当前鼠标位置"></a>获取当前鼠标位置</h2><p>这里其实困扰了我一下，虽然<code>ctypes</code>中有函数可以实现这个功能，但传入的参数有点奇怪，应该是传入的一个指定类型的实例，并且直接将坐标点返回给这个实例。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>(<span class="params">ctypes.Structure</span>):</span></span><br><span class="line">    _fields_ = [(<span class="string">&quot;x&quot;</span>, ctypes.c_ulong),</span><br><span class="line">                (<span class="string">&quot;y&quot;</span>, ctypes.c_ulong)]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_pos</span>():</span></span><br><span class="line">    point = Point()</span><br><span class="line">    ctypes.windll.user32.GetCursorPos(ctypes.byref(point))</span><br><span class="line">    <span class="keyword">return</span> point.x, point.y</span><br></pre></td></tr></table></figure>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://github.com/PyUserInput/PyUserInput">PyUserInput</a></li>
+<li><a href="https://github.com/qiueer/autoops_for_win">autoops_for_win</a></li>
+</ul>
 ]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows系统下对文件进行MD5校验</title>
+    <url>/2020/03/04/Windows%E7%B3%BB%E7%BB%9F%E4%B8%8B%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8CMD5%E6%A0%A1%E9%AA%8C/</url>
+    <content><![CDATA[<blockquote>
+<p>MD5全称MD5信息摘要算法（MD5 Message-Digest Algorithm），是一种被广泛使用的密码散列函数，用于确保信息传输完整一致。</p>
+</blockquote>
+<p>如今，MD5虽然被证明安全性不足，但被广泛运用于文件的校验上。<br>当下载较大文件时，为避免数据缺损，可以进行MD5校验。当然也可以运用于第三方下载官方文件的校验（尤其国内下外网速度不够的情况）</p>
+<a id="more"></a>
+
+<p>本来以为Windows下属性里面会有的，作为一个小白发现想多了，并没有。<br>于是以为要下载软件，没先到其实Windows是有内嵌命令行工具<code>CertUtil</code>的。</p>
+<p><strong>命令</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">certutil -hashfile filePath [HashAlgorithm]</span><br></pre></td></tr></table></figure>
+<p>这里<code>filePath</code>就是文件路径，可用绝对路径或相对路径</p>
+<p><code>HashAlgorithm</code>可以是<code>MD2</code>、<code>MD4</code>、<code>MD5</code>、<code>SHA1</code>、<code>SHA256</code>、<code>SHA384</code>、<code>SHA512</code></p>
+<p><strong>样例</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">certutil -hashfile C:\file.exe MD5</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Windows</category>
       </categories>
       <tags>
         <tag>Windows</tag>
-        <tag>wget</tag>
+        <tag>MD5</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>修改服务器端口</title>
+    <url>/2019/10/01/%E4%BF%AE%E6%94%B9%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%8F%A3/</url>
+    <content><![CDATA[<p>自己建一个服务器，最基础会遇到的问题就是被人随机攻击服务器，把默认端口修改掉就会减少很多啦</p>
+<a id="more"></a>
+
+<p>登录服务器以后，输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+<p>然后会看到一行被注释的 #port 22</p>
+<p>把”#”删掉然后把22换成其它端口号就好。</p>
+<p>关于vim使用，要修改之前按一下i，修改结束按esc，然后输入”:wq”。</p>
+<p>最后重新刷新一下配置（Debian 9）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service ssh restart</span><br></pre></td></tr></table></figure>
+<p>如不成功，可尝试以下命令：（Centos 7）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service sshd restart</span><br></pre></td></tr></table></figure>
+<p>然后可以先试一下用默认端口登录，发现不可以登录</p>
+<p>之后输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh root@xxx.xxx.xx.xx -p abcd(端口号)</span><br></pre></td></tr></table></figure>
+<p>会发现让输入密码，那就成功修改端口啦</p>
+<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/101845927">https://blog.csdn.net/yueyue200830/article/details/101845927</a></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>port</tag>
       </tags>
   </entry>
   <entry>
@@ -1187,55 +1192,27 @@
       </tags>
   </entry>
   <entry>
-    <title>修改服务器端口</title>
-    <url>/2019/10/01/%E4%BF%AE%E6%94%B9%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%8F%A3/</url>
-    <content><![CDATA[<p>自己建一个服务器，最基础会遇到的问题就是被人随机攻击服务器，把默认端口修改掉就会减少很多啦</p>
+    <title>Windows下使用wget的方法</title>
+    <url>/2019/01/02/windows%E4%B8%8B%E4%BD%BF%E7%94%A8wget%E7%9A%84%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<blockquote>
+<p>GNU Wget（常简称为Wget）是一个在网络上进行下载的简单而强大的自由软件，其本身也是GNU计划的一部分。<br>它的名字是“World Wide Web”和“Get”的结合，同时也隐含了软件的主要功能。<br>当前它支持通过HTTP、HTTPS，以及FTP这三个最常见的TCP/IP协议协议下载。</p>
+</blockquote>
+<p>wget在linux下很方便就可以安装使用了，但似乎官网并没有给windows下一个安装包之类的东西，搜了好久后来发现了两个解决方法。</p>
 <a id="more"></a>
 
-<p>登录服务器以后，输入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
-<p>然后会看到一行被注释的 #port 22</p>
-<p>把”#”删掉然后把22换成其它端口号就好。</p>
-<p>关于vim使用，要修改之前按一下i，修改结束按esc，然后输入”:wq”。</p>
-<p>最后重新刷新一下配置（Debian 9）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service ssh restart</span><br></pre></td></tr></table></figure>
-<p>如不成功，可尝试以下命令：（Centos 7）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service sshd restart</span><br></pre></td></tr></table></figure>
-<p>然后可以先试一下用默认端口登录，发现不可以登录</p>
-<p>之后输入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh root@xxx.xxx.xx.xx -p abcd(端口号)</span><br></pre></td></tr></table></figure>
-<p>会发现让输入密码，那就成功修改端口啦</p>
-<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/101845927">https://blog.csdn.net/yueyue200830/article/details/101845927</a></p>
+<h1 id="用choco安装"><a href="#用choco安装" class="headerlink" title="用choco安装"></a>用choco安装</h1><p>这是我在自己电脑上方法，不过似乎下面一个方法更加方便删除</p>
+<h2 id="安装chocolatey"><a href="#安装chocolatey" class="headerlink" title="安装chocolatey"></a>安装chocolatey</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@<span class="string">&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot;</span> -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command <span class="string">&quot;iex ((New-Object System.Net.WebClient).DownloadString(&#x27;https://chocolatey.org/install.ps1&#x27;))&quot;</span> &amp;&amp; SET <span class="string">&quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="安装wget"><a href="#安装wget" class="headerlink" title="安装wget"></a>安装wget</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">choco install wget</span><br></pre></td></tr></table></figure>
+<p>这样就可以直接使用了</p>
+<h1 id="用已编译的包"><a href="#用已编译的包" class="headerlink" title="用已编译的包"></a>用已编译的包</h1><p>有些地方会放出来一些windows下的包，只要在cmd中打开到相应文件夹就可以使用了，或者应该也可以配置环境变量</p>
+<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/85638286">https://blog.csdn.net/yueyue200830/article/details/85638286</a></p>
 ]]></content>
       <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>port</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于VS Code运行C++中文乱码问题</title>
-    <url>/2020/05/26/%E5%85%B3%E4%BA%8EVS-Code%E8%BF%90%E8%A1%8CC-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>在几个编辑器里面，VS Code已经算是比较优秀，有插件可以很方便编译和运行<code>c++</code>的，但是因为特殊需要要输出中文，结果发现乱码。。搜索了一通选择了我个人觉得比较方便的方法</p>
-<p>这里我编译运行是采用<code>code runner</code>的，但应该对task配置的方法也适用，不过这里强烈推荐<code>code runner</code>！</p>
-<a id="more"></a>
-
-<p>首先说说乱码的原因，其实就是<code>cmd</code>和<code>powershell</code>在中文的Windows下默认编码是<code>GBK</code>，而编译输出的文件是<code>UTF-8</code>，于是导致了乱码</p>
-<p>其实在<code>git bash</code>里直接运行把编译好的exe是没有编码问题的，不过在VS Code中也似乎变成了<code>GBK</code>的编码</p>
-<p>既然是编码问题，那么可以直接把terminal的编码改成<code>UTF-8</code>，这样就可以了。<br>但是搜索了以下， 直接修改会导致一些程序的错误。<br>实际上，我们只是需要运行的环境是<code>UTF-8</code>编码而已，因此只需要命令修改编译运行时的terminal的编码即可。</p>
-<p>修改编码的命令是：<code>chcp 65001</code></p>
-<p>我们需要将这个命令集成到编译运行的命令里<br>打开用户的<code>setting.json</code>，也可以通过<code>code runner</code>的<code>extention setting</code>中<code>executorMap</code>进入<br>添加以下内容，这里后面的命令是插件自己的命令，没有修改</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;code-runner.executorMap&quot;: &#123;</span><br><span class="line">    &quot;cpp&quot;: &quot;chcp 65001 &amp;&amp; cd $dir &amp;&amp; g++ $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<p>保存后就会运行这条命令了，可以解决中文乱码的问题</p>
-]]></content>
-      <categories>
-        <category>Others</category>
+        <category>Windows</category>
       </categories>
       <tags>
         <tag>Windows</tag>
-        <tag>VS Code</tag>
+        <tag>wget</tag>
       </tags>
   </entry>
   <entry>
@@ -1287,6 +1264,29 @@
       </categories>
       <tags>
         <tag>HTML</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于VS Code运行C++中文乱码问题</title>
+    <url>/2020/05/26/%E5%85%B3%E4%BA%8EVS-Code%E8%BF%90%E8%A1%8CC-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>在几个编辑器里面，VS Code已经算是比较优秀，有插件可以很方便编译和运行<code>c++</code>的，但是因为特殊需要要输出中文，结果发现乱码。。搜索了一通选择了我个人觉得比较方便的方法</p>
+<p>这里我编译运行是采用<code>code runner</code>的，但应该对task配置的方法也适用，不过这里强烈推荐<code>code runner</code>！</p>
+<a id="more"></a>
+
+<p>首先说说乱码的原因，其实就是<code>cmd</code>和<code>powershell</code>在中文的Windows下默认编码是<code>GBK</code>，而编译输出的文件是<code>UTF-8</code>，于是导致了乱码</p>
+<p>其实在<code>git bash</code>里直接运行把编译好的exe是没有编码问题的，不过在VS Code中也似乎变成了<code>GBK</code>的编码</p>
+<p>既然是编码问题，那么可以直接把terminal的编码改成<code>UTF-8</code>，这样就可以了。<br>但是搜索了以下， 直接修改会导致一些程序的错误。<br>实际上，我们只是需要运行的环境是<code>UTF-8</code>编码而已，因此只需要命令修改编译运行时的terminal的编码即可。</p>
+<p>修改编码的命令是：<code>chcp 65001</code></p>
+<p>我们需要将这个命令集成到编译运行的命令里<br>打开用户的<code>setting.json</code>，也可以通过<code>code runner</code>的<code>extention setting</code>中<code>executorMap</code>进入<br>添加以下内容，这里后面的命令是插件自己的命令，没有修改</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;code-runner.executorMap&quot;: &#123;</span><br><span class="line">    &quot;cpp&quot;: &quot;chcp 65001 &amp;&amp; cd $dir &amp;&amp; g++ $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>保存后就会运行这条命令了，可以解决中文乱码的问题</p>
+]]></content>
+      <categories>
+        <category>Others</category>
+      </categories>
+      <tags>
+        <tag>Windows</tag>
+        <tag>VS Code</tag>
       </tags>
   </entry>
   <entry>
@@ -1401,41 +1401,6 @@
       </tags>
   </entry>
   <entry>
-    <title>算法学习（一）——欧几里德算法&amp;扩展欧几里得算法</title>
-    <url>/2018/12/29/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%B7%E7%AE%97%E6%B3%95-%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="最大公约数-欧几里德算法（gcd）"><a href="#最大公约数-欧几里德算法（gcd）" class="headerlink" title="最大公约数/欧几里德算法（gcd）"></a>最大公约数/欧几里德算法（gcd）</h1><p>欧几里德算法又称辗转相除法，是用于求最大公约数的方法，证明可以度娘。</p>
-<p>个人简单脑补就是a和b两个数的模还是a和b的最大公约数</p>
-<p>int类型 </p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;<span class="keyword">return</span> a%b==<span class="number">0</span> ? b : gcd(b, a%b);&#125;</span><br></pre></td></tr></table></figure>
-<p>long long类型的 </p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">gcd</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> a, <span class="keyword">long</span> <span class="keyword">long</span> b)</span> </span>&#123;<span class="keyword">return</span> a%b==<span class="number">0</span> ? b : gcd(b, a%b);&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="扩展欧几里得算法（exgcd）"><a href="#扩展欧几里得算法（exgcd）" class="headerlink" title="扩展欧几里得算法（exgcd）"></a>扩展欧几里得算法（exgcd）</h1><p>概念： </p>
-<blockquote>
-<p>对于不完全为0的非负整数a,b</p>
-<p>必存在整数x,y，满足ax+by = gcd(a, b)</p>
-</blockquote>
-<p>运用：</p>
-<blockquote>
-<p>求解ax+by=c，用扩展欧几里得求得后*c/gcd(a,b)</p>
-</blockquote>
-<p>求a*x≡1(mod p)</p>
-<p>即求ax+py=1=gcd(a,b)/gcd(a,b)</p>
-<p>也就是先求出ax+py=gcd(a,b)</p>
-<p>然后x=x/gcd(a,b)即可</p>
-<p>注意：x可能为负的，需要x=x+p</p>
-<p>代码</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">exgcd</span><span class="params">(ll a, ll b, ll &amp;x, ll &amp;y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b == <span class="number">0</span>)&#123;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    ll t = exgcd(b, a%b, x, y);</span><br><span class="line">    ll tmp = y;</span><br><span class="line">    y = x - a / b * y;</span><br><span class="line">    x = tmp;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/85333585">https://blog.csdn.net/yueyue200830/article/details/85333585</a></p>
-]]></content>
-      <categories>
-        <category>Algorithm</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-        <tag>gcd</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>服务器部署Nginx的坑</title>
     <url>/2020/07/19/%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2Nginx%E7%9A%84%E5%9D%91/</url>
     <content><![CDATA[<p>好久不发博文了，debug了一天的Nginx部署，必须得记录一下踩过的坑。</p>
@@ -1469,6 +1434,41 @@
         <tag>Linux</tag>
         <tag>Deployment</tag>
         <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>算法学习（一）——欧几里德算法&amp;扩展欧几里得算法</title>
+    <url>/2018/12/29/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%B7%E7%AE%97%E6%B3%95-%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="最大公约数-欧几里德算法（gcd）"><a href="#最大公约数-欧几里德算法（gcd）" class="headerlink" title="最大公约数/欧几里德算法（gcd）"></a>最大公约数/欧几里德算法（gcd）</h1><p>欧几里德算法又称辗转相除法，是用于求最大公约数的方法，证明可以度娘。</p>
+<p>个人简单脑补就是a和b两个数的模还是a和b的最大公约数</p>
+<p>int类型 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;<span class="keyword">return</span> a%b==<span class="number">0</span> ? b : gcd(b, a%b);&#125;</span><br></pre></td></tr></table></figure>
+<p>long long类型的 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">gcd</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> a, <span class="keyword">long</span> <span class="keyword">long</span> b)</span> </span>&#123;<span class="keyword">return</span> a%b==<span class="number">0</span> ? b : gcd(b, a%b);&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="扩展欧几里得算法（exgcd）"><a href="#扩展欧几里得算法（exgcd）" class="headerlink" title="扩展欧几里得算法（exgcd）"></a>扩展欧几里得算法（exgcd）</h1><p>概念： </p>
+<blockquote>
+<p>对于不完全为0的非负整数a,b</p>
+<p>必存在整数x,y，满足ax+by = gcd(a, b)</p>
+</blockquote>
+<p>运用：</p>
+<blockquote>
+<p>求解ax+by=c，用扩展欧几里得求得后*c/gcd(a,b)</p>
+</blockquote>
+<p>求a*x≡1(mod p)</p>
+<p>即求ax+py=1=gcd(a,b)/gcd(a,b)</p>
+<p>也就是先求出ax+py=gcd(a,b)</p>
+<p>然后x=x/gcd(a,b)即可</p>
+<p>注意：x可能为负的，需要x=x+p</p>
+<p>代码</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">exgcd</span><span class="params">(ll a, ll b, ll &amp;x, ll &amp;y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b == <span class="number">0</span>)&#123;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    ll t = exgcd(b, a%b, x, y);</span><br><span class="line">    ll tmp = y;</span><br><span class="line">    y = x - a / b * y;</span><br><span class="line">    x = tmp;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/85333585">https://blog.csdn.net/yueyue200830/article/details/85333585</a></p>
+]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>gcd</tag>
       </tags>
   </entry>
   <entry>
@@ -1508,29 +1508,6 @@
         <tag>Algorithm</tag>
         <tag>C++</tag>
         <tag>逆元</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>解决Google Play Store一直「正在等待下载」的问题</title>
-    <url>/2020/02/29/%E8%A7%A3%E5%86%B3Google-Play-Store%E4%B8%80%E7%9B%B4%E3%80%8C%E6%AD%A3%E5%9C%A8%E7%AD%89%E5%BE%85%E4%B8%8B%E8%BD%BD%E3%80%8D%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>大概月初开始，我的小米的Play Store就开始卡在<code>正在等待下载</code>，play store其它内容加载一切正常，其它网页加载也都正常，但是就是无法更新。。<br>卡了近一个月后终于想到网络搜索解决问题了。</p>
-<a id="more"></a>
-
-<ol>
-<li>确保是软件问题，play store可加载其它内容，且没有程序卡在<code>正在下载</code></li>
-<li>打开play store的应用信息，选择<code>清楚全部数据</code>，可能会出现提示，按确定清除数据<img src="/2020/02/29/%E8%A7%A3%E5%86%B3Google-Play-Store%E4%B8%80%E7%9B%B4%E3%80%8C%E6%AD%A3%E5%9C%A8%E7%AD%89%E5%BE%85%E4%B8%8B%E8%BD%BD%E3%80%8D%E7%9A%84%E9%97%AE%E9%A2%98/play-store.jpg" class="" width="300" title="Play-store"></li>
-<li>【小米手机/部分国内手机】打开<code>下载管理</code>（或类似名称），禁用迅雷加速下载<img src="/2020/02/29/%E8%A7%A3%E5%86%B3Google-Play-Store%E4%B8%80%E7%9B%B4%E3%80%8C%E6%AD%A3%E5%9C%A8%E7%AD%89%E5%BE%85%E4%B8%8B%E8%BD%BD%E3%80%8D%E7%9A%84%E9%97%AE%E9%A2%98/xunlei.jpg" class="" width="300" title="Xunlei"></li>
-<li>打开下载管理的应用信息，选择<code>清楚全部数据</code></li>
-<li>重新打开play store，查看是否恢复正常</li>
-</ol>
-<p>完全不懂什么原理，个人猜测线程卡死死锁了？<br>据说play store的下载机制是通过手机自己的下载来下载的，所以可能出奇奇怪怪的问题。。</p>
-<p>ps. play store绝对是一个神奇的软件，在我的三星出现了一个更迷的bug，无法自动更新play store，永远显示已经最新版，且确定过版本应该不是盗版。。。</p>
-]]></content>
-      <categories>
-        <category>Others</category>
-      </categories>
-      <tags>
-        <tag>Android</tag>
       </tags>
   </entry>
   <entry>
@@ -1585,6 +1562,29 @@
       </categories>
       <tags>
         <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决Google Play Store一直「正在等待下载」的问题</title>
+    <url>/2020/02/29/%E8%A7%A3%E5%86%B3Google-Play-Store%E4%B8%80%E7%9B%B4%E3%80%8C%E6%AD%A3%E5%9C%A8%E7%AD%89%E5%BE%85%E4%B8%8B%E8%BD%BD%E3%80%8D%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>大概月初开始，我的小米的Play Store就开始卡在<code>正在等待下载</code>，play store其它内容加载一切正常，其它网页加载也都正常，但是就是无法更新。。<br>卡了近一个月后终于想到网络搜索解决问题了。</p>
+<a id="more"></a>
+
+<ol>
+<li>确保是软件问题，play store可加载其它内容，且没有程序卡在<code>正在下载</code></li>
+<li>打开play store的应用信息，选择<code>清楚全部数据</code>，可能会出现提示，按确定清除数据<img src="/2020/02/29/%E8%A7%A3%E5%86%B3Google-Play-Store%E4%B8%80%E7%9B%B4%E3%80%8C%E6%AD%A3%E5%9C%A8%E7%AD%89%E5%BE%85%E4%B8%8B%E8%BD%BD%E3%80%8D%E7%9A%84%E9%97%AE%E9%A2%98/play-store.jpg" class="" width="300" title="Play-store"></li>
+<li>【小米手机/部分国内手机】打开<code>下载管理</code>（或类似名称），禁用迅雷加速下载<img src="/2020/02/29/%E8%A7%A3%E5%86%B3Google-Play-Store%E4%B8%80%E7%9B%B4%E3%80%8C%E6%AD%A3%E5%9C%A8%E7%AD%89%E5%BE%85%E4%B8%8B%E8%BD%BD%E3%80%8D%E7%9A%84%E9%97%AE%E9%A2%98/xunlei.jpg" class="" width="300" title="Xunlei"></li>
+<li>打开下载管理的应用信息，选择<code>清楚全部数据</code></li>
+<li>重新打开play store，查看是否恢复正常</li>
+</ol>
+<p>完全不懂什么原理，个人猜测线程卡死死锁了？<br>据说play store的下载机制是通过手机自己的下载来下载的，所以可能出奇奇怪怪的问题。。</p>
+<p>ps. play store绝对是一个神奇的软件，在我的三星出现了一个更迷的bug，无法自动更新play store，永远显示已经最新版，且确定过版本应该不是盗版。。。</p>
+]]></content>
+      <categories>
+        <category>Others</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
       </tags>
   </entry>
   <entry>
@@ -1864,6 +1864,150 @@
         <tag>Interview</tag>
         <tag>Internship</tag>
         <tag>面经</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Google Foo Bar挑战</title>
+    <url>/2022/04/30/Google-Foo-Bar%E6%8C%91%E6%88%98/</url>
+    <content><![CDATA[<p>非常意外得在一次技术搜索中跳出了foo bar参赛的页面，曾听闻过这是Google的一个特殊招聘渠道，不过感觉近几年这个挑战被宣传后更多得只是一个有趣的挑战，近几年也没见到有人通过这个参与面试了。</p>
+<a id="more"></a>
+
+<p>Foo Bar一共有5个level的题目，每个level有一个或多个题目，随着level提高，题目的难度也会提高，每个题目都有限制的答题时间，但最短的也有7天，所以可以给答题者足够的思考时间。<br>题目一共可以用两种语言类回答，Java和Python，因为近期用Python更多些以及Python写起来也更简洁些，所以题解都是用的Python。</p>
+<p>Foo Bar类似Google的其他比赛，题目都会有很多的包装，需要阅读理解，个人还是比较欣赏这种没法完全背解答的题目。<br>另一个比较与众不同的是，这个挑战虽然是一个网页，但全程需要使用命令行进行测试提交挑战，只有在编写代码时是一个web端的编辑器。</p>
+<img src="/2022/04/30/Google-Foo-Bar%E6%8C%91%E6%88%98/screenshot.png" class="" title="foo-bar页面截图">
+
+<h1 id="Level-1"><a href="#Level-1" class="headerlink" title="Level 1"></a>Level 1</h1><p>level 1只有一题，一开始题目没有复制出来，只有个截图看下吧</p>
+<h2 id="Level-1-1"><a href="#Level-1-1" class="headerlink" title="Level 1-1"></a>Level 1-1</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><img src="/2022/04/30/Google-Foo-Bar%E6%8C%91%E6%88%98/level-1.png" class="" title="level-1题目">
+
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>第一题还是非常简单的，做一个字符串的转换就可以了</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">x</span>):</span></span><br><span class="line">    s = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(x)):</span><br><span class="line">        a = x[i]</span><br><span class="line">        <span class="keyword">if</span> a &gt;= <span class="string">&#x27;a&#x27;</span> <span class="keyword">and</span> a &lt;= <span class="string">&#x27;z&#x27;</span>:</span><br><span class="line">            a = <span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>) + <span class="built_in">ord</span>(<span class="string">&#x27;z&#x27;</span>) - <span class="built_in">ord</span>(a))</span><br><span class="line">        s += a</span><br><span class="line">    <span class="keyword">return</span> s</span><br></pre></td></tr></table></figure>
+<p>代码通过后会有这么一个可爱的图案</p>
+<img src="/2022/04/30/Google-Foo-Bar%E6%8C%91%E6%88%98/submission.png" class="" title="过关截图">
+
+<h1 id="Level-2"><a href="#Level-2" class="headerlink" title="Level 2"></a>Level 2</h1><p>level 2有两题，题目总体还是比较简单的</p>
+<h2 id="Level-2-1"><a href="#Level-2-1" class="headerlink" title="Level 2-1"></a>Level 2-1</h2><h3 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h3><blockquote>
+<p>Please Pass the Coded Messages</p>
+<p>You need to pass a message to the bunny workers, but to avoid detection, the code you agreed to use is… obscure, to say the least. The bunnies are given food on standard-issue plates that are stamped with the numbers 0-9 for easier sorting, and you need to combine sets of plates to create the numbers in the code. The signal that a number is part of the code is that it is divisible by 3. You can do smaller numbers like 15 and 45 easily, but bigger numbers like 144 and 414 are a little trickier. Write a program to help yourself quickly create large numbers for use in the code, given a limited number of plates to work with.</p>
+<p>You have L, a list containing some digits (0 to 9). Write a function solution(L) which finds the largest number that can be made from some or all of these digits and is divisible by 3. If it is not possible to make such a number, return 0 as the solution. L will contain anywhere from 1 to 9 digits.  The same digit may appear multiple times in the list, but each element in the list may only be used once.</p>
+</blockquote>
+<h3 id="测试样例"><a href="#测试样例" class="headerlink" title="测试样例"></a>测试样例</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">Input:</span><br><span class="line">Solution.solution(&#123;3, 1, 4, 1&#125;)</span><br><span class="line">Output:</span><br><span class="line"><span class="code">    4311</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">Input:</span></span><br><span class="line"><span class="code">Solution.solution(&#123;3, 1, 4, 1, 5, 9&#125;)</span></span><br><span class="line"><span class="code">Output:</span></span><br><span class="line"><span class="code">    94311</span></span><br></pre></td></tr></table></figure>
+<h3 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h3><p>题目整体可以分为两步，1：把数字从大到小排序；2：去掉几个数（0-2个数）是的数字之和模3余0。<br>关于第二步，很明显去掉一个字符会大于去掉两个字符，且去掉的数字越小越好，所以依次尝试这两种情况是否能满足3的倍数即可。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">l</span>):</span></span><br><span class="line">    x = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]</span><br><span class="line">    </span><br><span class="line">    s = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> l:</span><br><span class="line">        x[i] += <span class="number">1</span></span><br><span class="line">        s += i</span><br><span class="line">    diff = s % <span class="number">3</span></span><br><span class="line">    <span class="keyword">if</span> diff != <span class="number">0</span>:</span><br><span class="line">        <span class="comment"># cut 1 char</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">            <span class="keyword">if</span> x[i] &gt; <span class="number">0</span> <span class="keyword">and</span> i % <span class="number">3</span> == diff:</span><br><span class="line">                x[i] -= <span class="number">1</span></span><br><span class="line">                diff = <span class="number">0</span>  <span class="comment"># set to zero</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> diff != <span class="number">0</span>:</span><br><span class="line">            <span class="comment"># cut 2 char</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">                <span class="keyword">if</span> x[i] &gt; <span class="number">0</span>:</span><br><span class="line">                    x[i] -= <span class="number">1</span></span><br><span class="line">                    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">                        <span class="keyword">if</span> x[j] &gt; <span class="number">0</span> <span class="keyword">and</span> (i + j) % <span class="number">3</span> == diff:</span><br><span class="line">                            x[j] -= <span class="number">1</span></span><br><span class="line">                            diff = <span class="number">0</span></span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                    <span class="keyword">if</span> diff == <span class="number">0</span>:</span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                    x[i] += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> diff != <span class="number">0</span>:</span><br><span class="line">         <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    result = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">while</span> x[i] &gt; <span class="number">0</span>:</span><br><span class="line">            result = result * <span class="number">10</span> + i</span><br><span class="line">            x[i] -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Level-2-2"><a href="#Level-2-2" class="headerlink" title="Level 2-2"></a>Level 2-2</h2><h3 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a>题目</h3><blockquote>
+<p>Power Hungry</p>
+<p>Commander Lambda’s space station is HUGE. And huge space stations take a LOT of power. Huge space stations with doomsday devices take even more power. To help meet the station’s power needs, Commander Lambda has installed solar panels on the station’s outer surface. But the station sits in the middle of a quasar quantum flux field, which wreaks havoc on the solar panels. You and your team of henchmen have been assigned to repair the solar panels, but you’d rather not take down all of the panels at once if you can help it, since they do help power the space station and all!</p>
+<p>You need to figure out which sets of panels in any given array you can take offline to repair while still maintaining the maximum amount of power output per array, and to do THAT, you’ll first need to figure out what the maximum output of each array actually is. Write a function solution(xs) that takes a list of integers representing the power output levels of each panel in an array, and returns the maximum product of some non-empty subset of those numbers. So for example, if an array contained panels with power output levels of [2, -3, 1, 0, -5], then the maximum product would be found by taking the subset: xs[0] = 2, xs[1] = -3, xs[4] = -5, giving the product 2*(-3)*(-5) = 30.  So solution([2,-3,1,0,-5]) will be “30”.</p>
+<p>Each array of solar panels contains at least 1 and no more than 50 panels, and each panel will have a power output level whose absolute value is no greater than 1000 (some panels are malfunctioning so badly that they’re draining energy, but you know a trick with the panels’ wave stabilizer that lets you combine two negative-output panels to produce the positive output of the multiple of their power values). The final products may be very large, so give the solution as a string representation of the number.</p>
+</blockquote>
+<h3 id="测试样例-1"><a href="#测试样例-1" class="headerlink" title="测试样例"></a>测试样例</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">Input:</span><br><span class="line">solution.solution([2, 0, 2, 2, 0])</span><br><span class="line">Output:</span><br><span class="line"><span class="code">    8</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">Input:</span></span><br><span class="line"><span class="code">solution.solution([-2, -3, 4, -5])</span></span><br><span class="line"><span class="code">Output:</span></span><br><span class="line"><span class="code">    60</span></span><br></pre></td></tr></table></figure>
+<h3 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h3><p>求这些数的乘积之和的最大值，对于正数直接相乘即可；对于负数需要选取偶数个相乘；对于0在只有一个负数的时候会选择。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">xs</span>):</span></span><br><span class="line">    result = <span class="number">1</span></span><br><span class="line">    negative = []</span><br><span class="line">    p = <span class="number">0</span> <span class="comment"># positive count</span></span><br><span class="line">    n = <span class="number">0</span> <span class="comment"># negative count</span></span><br><span class="line">    zero = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xs:</span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">0</span>:</span><br><span class="line">            result *= i</span><br><span class="line">            p += <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> i &lt; <span class="number">0</span>:</span><br><span class="line">            negative.append(i)</span><br><span class="line">            n += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            zero += <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> p == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">            result = <span class="number">0</span></span><br><span class="line">        <span class="keyword">elif</span> n == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">if</span> zero != <span class="number">0</span>:</span><br><span class="line">                result = <span class="number">0</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                result = negative[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    negative.sort()</span><br><span class="line">    l = <span class="built_in">len</span>(negative)</span><br><span class="line">    <span class="keyword">if</span> l % <span class="number">2</span> != <span class="number">0</span>:</span><br><span class="line">        l -= <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(l):</span><br><span class="line">        result *= negative[i]</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">str</span>(result)</span><br></pre></td></tr></table></figure>
+<h1 id="Level-3"><a href="#Level-3" class="headerlink" title="Level 3"></a>Level 3</h1><p>level 3中后两题感觉比较简单，但3-1卡了我很久，感觉逻辑非常绕</p>
+<h2 id="Level-3-1"><a href="#Level-3-1" class="headerlink" title="Level 3-1"></a>Level 3-1</h2><h3 id="题目-3"><a href="#题目-3" class="headerlink" title="题目"></a>题目</h3><blockquote>
+<p>Doomsday Fuel</p>
+<p>Making fuel for the LAMBCHOP’s reactor core is a tricky process because of the exotic matter involved. It starts as raw ore, then during processing, begins randomly changing between forms, eventually reaching a stable form. There may be multiple stable forms that a sample could ultimately reach, not all of which are useful as fuel. </p>
+<p>Commander Lambda has tasked you to help the scientists increase fuel creation efficiency by predicting the end state of a given ore sample. You have carefully studied the different structures that the ore can take and which transitions it undergoes. It appears that, while random, the probability of each structure transforming is fixed. That is, each time the ore is in 1 state, it has the same probabilities of entering the next state (which might be the same state).  You have recorded the observed transitions in a matrix. The others in the lab have hypothesized more exotic forms that the ore can become, but you haven’t seen all of them.</p>
+<p>Write a function solution(m) that takes an array of array of nonnegative ints representing how many times that state has gone to the next state and return an array of ints for each terminal state giving the exact probabilities of each terminal state, represented as the numerator for each state, then the denominator for all of them at the end and in simplest form. The matrix is at most 10 by 10. It is guaranteed that no matter which state the ore is in, there is a path from that state to a terminal state. That is, the processing will always eventually end in a stable state. The ore starts in state 0. The denominator will fit within a signed 32-bit integer during the calculation, as long as the fraction is simplified regularly. </p>
+<p>For example, consider the matrix m:<br>[<br>[0,1,0,0,0,1],  # s0, the initial state, goes to s1 and s5 with equal probability<br>[4,0,0,3,2,0],  # s1 can become s0, s3, or s4, but with different probabilities<br>[0,0,0,0,0,0],  # s2 is terminal, and unreachable (never observed in practice)<br>[0,0,0,0,0,0],  # s3 is terminal<br>[0,0,0,0,0,0],  # s4 is terminal<br>[0,0,0,0,0,0],  # s5 is terminal<br>]<br>So, we can consider different paths to terminal states, such as:<br>s0 -&gt; s1 -&gt; s3<br>s0 -&gt; s1 -&gt; s0 -&gt; s1 -&gt; s0 -&gt; s1 -&gt; s4<br>s0 -&gt; s1 -&gt; s0 -&gt; s5<br>Tracing the probabilities of each, we find that<br>s2 has probability 0<br>s3 has probability 3/14<br>s4 has probability 1/7<br>s5 has probability 9/14<br>So, putting that together, and making a common denominator, gives an answer in the form of<br>[s2.numerator, s3.numerator, s4.numerator, s5.numerator, denominator] which is<br>[0, 3, 2, 9, 14].</p>
+</blockquote>
+<h3 id="测试样例-2"><a href="#测试样例-2" class="headerlink" title="测试样例"></a>测试样例</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">Input:</span><br><span class="line">solution.solution([[0, 2, 1, 0, 0], [0, 0, 0, 3, 4], [0, 0, 0, 0, 0], [0, 0, 0, 0,0], [0, 0, 0, 0, 0]])</span><br><span class="line">Output:</span><br><span class="line"><span class="code">    [7, 6, 8, 21]</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">Input:</span></span><br><span class="line"><span class="code">solution.solution([[0, 1, 0, 0, 0, 1], [4, 0, 0, 3, 2, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]])</span></span><br><span class="line"><span class="code">Output:</span></span><br><span class="line"><span class="code">    [0, 3, 2, 9, 14]</span></span><br></pre></td></tr></table></figure>
+<h3 id="题解-3"><a href="#题解-3" class="headerlink" title="题解"></a>题解</h3><p>这道计算概率的题目把我绕得非常混乱，应该是自己没想清楚做法，感觉目前的解法也不是最优的，所以看看就好。</p>
+<p>尝试过的思路：</p>
+<ol>
+<li>[成功] 正向计算，从s0开始dfs，寻找到terminal的概率</li>
+<li>[失败] 反向计算，从terminal开始反着找到可以到达它的node</li>
+</ol>
+<p>最后用的第一个方法来计算，通过dfs计算si到各个node的概率，这里比较困难的点是如何定义dfs，我的定义是si到terminal或已经访问过的node的概率<br>即如果现在是s1之前访问的是s0，terminal是s4和s5，那么dfs(s1)会计算s1到s0、s4、s5的概率，到s1、s2、s3的概率都是0。</p>
+<p>这样定义是为了解决dfs遇到循环如何计算概率，我们观察一个case，现在有三个路径（其中s3、s4是terminal）：</p>
+<ol>
+<li>s1 -&gt; s2 -&gt; s1</li>
+<li>s1 -&gt; s3</li>
+<li>s1 -&gt; s4</li>
+</ol>
+<p>我们可以看到无论循环多少次s1，最终都会到s3或者s4，实际上的概率与不计算循环是一致的，所以在计算si到其他node的概率时，可以把它到自己的概率平分给其他node</p>
+<p>在这样的计算逻辑下，对于si而言，对于未访问过的node，我们可以通过上述定义解决循环访问的问题，而对于已经访问过的node，我们会交回这些node自己处理。<br>在dfs的逻辑下，也就是当dfs到一个访问过的节点时，会计算这个访问过的节点的概率，并返回给上一级；当得到它所有下游节点到其他节点的概率时，把循环到自己的概率部分去掉再平分</p>
+<p>此外，因为是概率，所以这里存储的结构会比较复杂，我采用在list最后加上一个数表示分母</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">m</span>):</span></span><br><span class="line">    n = <span class="built_in">len</span>(m)</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> [<span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">    is_terminal = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(m[i]) == <span class="number">0</span>:</span><br><span class="line">            is_terminal[i] = <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    visited = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">x</span>):</span></span><br><span class="line">        <span class="comment"># x line</span></span><br><span class="line">        <span class="comment"># return prob list + denominator</span></span><br><span class="line">        <span class="comment"># prob list: including recursion probability</span></span><br><span class="line">        <span class="keyword">if</span> visited[x]:</span><br><span class="line">            <span class="keyword">return</span> [<span class="number">0</span>] * (n + <span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        visited[x] = <span class="number">1</span></span><br><span class="line">        l = m[x]</span><br><span class="line">        s = <span class="built_in">sum</span>(l)</span><br><span class="line">        res = [<span class="number">0</span>] * (n + <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">if</span> l[i] == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> is_terminal[i]:</span><br><span class="line">                r = [<span class="number">0</span>] * (n + <span class="number">1</span>)</span><br><span class="line">                r[i] = l[i]</span><br><span class="line">                r[n] = s</span><br><span class="line">                res = add(res, r, n)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> visited[i]:</span><br><span class="line">                    r = [<span class="number">0</span>] * (n + <span class="number">1</span>)</span><br><span class="line">                    r[i] = l[i]</span><br><span class="line">                    r[n] = s</span><br><span class="line">                    res = add(res, r, n)</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    r = dfs(i)</span><br><span class="line">                    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                        r[j] *= l[i]</span><br><span class="line">                    r[n] *= s</span><br><span class="line">                    res = add(res, r, n)</span><br><span class="line">        <span class="comment"># deal with recursion</span></span><br><span class="line">        res[n] -= res[x]</span><br><span class="line">        res[x] = <span class="number">0</span></span><br><span class="line">        res = gcd_list(res)</span><br><span class="line">        visited[x] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">    </span><br><span class="line">    res = dfs(<span class="number">0</span>)</span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="keyword">if</span> is_terminal[i]:</span><br><span class="line">            result.append(res[i])</span><br><span class="line">    result.append(res[n])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">a, b, n</span>):</span></span><br><span class="line">    <span class="comment"># add two prob list, n is the length</span></span><br><span class="line">    <span class="keyword">if</span> a[n] == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> b</span><br><span class="line">    <span class="keyword">if</span> b[n] == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> a</span><br><span class="line">    l = lcm(a[n], b[n])</span><br><span class="line">    r = [<span class="number">0</span>] * (n + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        r[i] = a[i] * l / a[n] + b[i] * l / b[n]</span><br><span class="line">    r[n] = l</span><br><span class="line">    <span class="keyword">return</span> r</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gcd_list</span>(<span class="params">l</span>):</span></span><br><span class="line">    g = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> l:</span><br><span class="line">        <span class="keyword">if</span> i != <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">if</span> g == <span class="number">0</span>:</span><br><span class="line">                g = i</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                g = gcd(g, i)</span><br><span class="line">    r = [i / g <span class="keyword">for</span> i <span class="keyword">in</span> l]</span><br><span class="line">    <span class="keyword">return</span> r</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gcd</span>(<span class="params">x, y</span>):</span></span><br><span class="line">   <span class="keyword">while</span>(y):</span><br><span class="line">       x, y = y, x % y</span><br><span class="line">   <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lcm</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="keyword">return</span> x * y / gcd(x, y)</span><br></pre></td></tr></table></figure>
+<h2 id="Level-3-2"><a href="#Level-3-2" class="headerlink" title="Level 3-2"></a>Level 3-2</h2><h3 id="题目-4"><a href="#题目-4" class="headerlink" title="题目"></a>题目</h3><blockquote>
+<p>Fuel Injection Perfection</p>
+<p>Commander Lambda has asked for your help to refine the automatic quantum antimatter fuel injection system for the LAMBCHOP doomsday device. It’s a great chance for you to get a closer look at the LAMBCHOP – and maybe sneak in a bit of sabotage while you’re at it – so you took the job gladly. </p>
+<p>Quantum antimatter fuel comes in small pellets, which is convenient since the many moving parts of the LAMBCHOP each need to be fed fuel one pellet at a time. However, minions dump pellets in bulk into the fuel intake. You need to figure out the most efficient way to sort and shift the pellets down to a single pellet at a time. </p>
+<p>The fuel control mechanisms have three operations: </p>
+<p>1) Add one fuel pellet<br>2) Remove one fuel pellet<br>3) Divide the entire group of fuel pellets by 2 (due to the destructive energy released when a quantum antimatter pellet is cut in half, the safety controls will only allow this to happen if there is an even number of pellets)</p>
+<p>Write a function called solution(n) which takes a positive integer as a string and returns the minimum number of operations needed to transform the number of pellets to 1. The fuel intake control panel can only display a number up to 309 digits long, so there won’t ever be more pellets than you can express in that many digits.</p>
+<p>For example:<br>solution(4) returns 2: 4 -&gt; 2 -&gt; 1<br>solution(15) returns 5: 15 -&gt; 16 -&gt; 8 -&gt; 4 -&gt; 2 -&gt; 1</p>
+</blockquote>
+<h3 id="测试样例-3"><a href="#测试样例-3" class="headerlink" title="测试样例"></a>测试样例</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">Input:</span><br><span class="line">solution.solution(&#x27;15&#x27;)</span><br><span class="line">Output:</span><br><span class="line"><span class="code">    5</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">Input:</span></span><br><span class="line"><span class="code">solution.solution(&#x27;4&#x27;)</span></span><br><span class="line"><span class="code">Output:</span></span><br><span class="line"><span class="code">    2</span></span><br></pre></td></tr></table></figure>
+<h3 id="题解-4"><a href="#题解-4" class="headerlink" title="题解"></a>题解</h3><p>把数字转换成二进制看，末尾有三种情况：</p>
+<ol>
+<li>末尾是0，直接除2，一次操作，长度少一位</li>
+<li>末尾仅有一个连续的1，减1除2，两次操作，长度减少一位</li>
+<li>末尾有n（n&gt;1）个连续的1，加1除2，两次操作，长度减少n位</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">n</span>):</span></span><br><span class="line">    num = <span class="built_in">int</span>(n)</span><br><span class="line">    s = <span class="number">0</span></span><br><span class="line">    count = <span class="number">0</span> <span class="comment"># 1 count</span></span><br><span class="line">    <span class="keyword">while</span> num != <span class="number">1</span>:</span><br><span class="line">        m = num % <span class="number">2</span></span><br><span class="line">        num /= <span class="number">2</span></span><br><span class="line">        s += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> m == <span class="number">1</span>:</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> count &gt; <span class="number">1</span>:</span><br><span class="line">                s += <span class="number">1</span></span><br><span class="line">                count = <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> count == <span class="number">1</span>:</span><br><span class="line">                s += <span class="number">1</span></span><br><span class="line">                count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> count &gt;= <span class="number">2</span>:</span><br><span class="line">        s += <span class="number">2</span></span><br><span class="line">    <span class="keyword">elif</span> count == <span class="number">1</span>:</span><br><span class="line">        s += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> s</span><br></pre></td></tr></table></figure>
+<h2 id="Level-3-3"><a href="#Level-3-3" class="headerlink" title="Level 3-3"></a>Level 3-3</h2><h3 id="题目-5"><a href="#题目-5" class="headerlink" title="题目"></a>题目</h3><blockquote>
+<p>Find the Access Codes</p>
+<p>In order to destroy Commander Lambda’s LAMBCHOP doomsday device, you’ll need access to it. But the only door leading to the LAMBCHOP chamber is secured with a unique lock system whose number of passcodes changes daily. Commander Lambda gets a report every day that includes the locks’ access codes, but only the Commander knows how to figure out which of several lists contains the access codes. You need to find a way to determine which list contains the access codes once you’re ready to go in. </p>
+<p>Fortunately, now that you’re Commander Lambda’s personal assistant, Lambda has confided to you that all the access codes are “lucky triples” in order to make it easier to find them in the lists. A “lucky triple” is a tuple (x, y, z) where x divides y and y divides z, such as (1, 2, 4). With that information, you can figure out which list contains the number of access codes that matches the number of locks on the door when you’re ready to go in (for example, if there’s 5 passcodes, you’d need to find a list with 5 “lucky triple” access codes).</p>
+<p>Write a function solution(l) that takes a list of positive integers l and counts the number of “lucky triples” of (li, lj, lk) where the list indices meet the requirement i &lt; j &lt; k.  The length of l is between 2 and 2000 inclusive.  The elements of l are between 1 and 999999 inclusive.  The solution fits within a signed 32-bit integer. Some of the lists are purposely generated without any access codes to throw off spies, so if no triples are found, return 0. </p>
+<p>For example, [1, 2, 3, 4, 5, 6] has the triples: [1, 2, 4], [1, 2, 6], [1, 3, 6], making the solution 3 total.</p>
+</blockquote>
+<h3 id="测试样例-4"><a href="#测试样例-4" class="headerlink" title="测试样例"></a>测试样例</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">Input:</span><br><span class="line">solution.solution([1, 2, 3, 4, 5, 6])</span><br><span class="line">Output:</span><br><span class="line"><span class="code">    3</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">Input:</span></span><br><span class="line"><span class="code">solution.solution([1, 1, 1])</span></span><br><span class="line"><span class="code">Output:</span></span><br><span class="line"><span class="code">    1</span></span><br></pre></td></tr></table></figure>
+<h3 id="题解-5"><a href="#题解-5" class="headerlink" title="题解"></a>题解</h3><p>遍历每个数，将它定为三个数的中间的数lj，找到li和lk的数量，相乘即是满足条件的数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">l</span>):</span></span><br><span class="line">    n = <span class="built_in">len</span>(l)</span><br><span class="line">    s = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n-<span class="number">1</span>):</span><br><span class="line">        c_i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, j):</span><br><span class="line">            <span class="keyword">if</span> l[j] % l[i] == <span class="number">0</span>:</span><br><span class="line">                c_i += <span class="number">1</span></span><br><span class="line">        c_k = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(j+<span class="number">1</span>, n):</span><br><span class="line">            <span class="keyword">if</span> l[k] % l[j] == <span class="number">0</span>:</span><br><span class="line">                c_k += <span class="number">1</span></span><br><span class="line">        s += c_i * c_k</span><br><span class="line">    <span class="keyword">return</span> s</span><br></pre></td></tr></table></figure>
+<h1 id="Level-4"><a href="#Level-4" class="headerlink" title="Level 4"></a>Level 4</h1><p>level 4整体感觉比较难的，第一题是常规算法中不常见的网络流，第二题不确定dfs</p>
+<h2 id="Level-4-1"><a href="#Level-4-1" class="headerlink" title="Level 4-1"></a>Level 4-1</h2><h3 id="题目-6"><a href="#题目-6" class="headerlink" title="题目"></a>题目</h3><blockquote>
+<p>Escape Pods</p>
+<p>You’ve blown up the LAMBCHOP doomsday device and relieved the bunnies of their work duries – and now you need to escape from the space station as quickly and as orderly as possible! The bunnies have all gathered in various locations throughout the station, and need to make their way towards the seemingly endless amount of escape pods positioned in other parts of the station. You need to get the numerous bunnies through the various rooms to the escape pods. Unfortunately, the corridors between the rooms can only fit so many bunnies at a time. What’s more, many of the corridors were resized to accommodate the LAMBCHOP, so they vary in how many bunnies can move through them at a time. </p>
+<p>Given the starting room numbers of the groups of bunnies, the room numbers of the escape pods, and how many bunnies can fit through at a time in each direction of every corridor in between, figure out how many bunnies can safely make it to the escape pods at a time at peak.</p>
+<p>Write a function solution(entrances, exits, path) that takes an array of integers denoting where the groups of gathered bunnies are, an array of integers denoting where the escape pods are located, and an array of an array of integers of the corridors, returning the total number of bunnies that can get through at each time step as an int. The entrances and exits are disjoint and thus will never overlap. The path element path[A][B] = C describes that the corridor going from A to B can fit C bunnies at each time step.  There are at most 50 rooms connected by the corridors and at most 2000000 bunnies that will fit at a time.</p>
+<p>For example, if you have:<br>entrances = [0, 1]<br>exits = [4, 5]<br>path = [<br>  [0, 0, 4, 6, 0, 0],  # Room 0: Bunnies<br>  [0, 0, 5, 2, 0, 0],  # Room 1: Bunnies<br>  [0, 0, 0, 0, 4, 4],  # Room 2: Intermediate room<br>  [0, 0, 0, 0, 6, 6],  # Room 3: Intermediate room<br>  [0, 0, 0, 0, 0, 0],  # Room 4: Escape pods<br>  [0, 0, 0, 0, 0, 0],  # Room 5: Escape pods<br>]</p>
+<p>Then in each time step, the following might happen:<br>0 sends 4/4 bunnies to 2 and 6/6 bunnies to 3<br>1 sends 4/5 bunnies to 2 and 2/2 bunnies to 3<br>2 sends 4/4 bunnies to 4 and 4/4 bunnies to 5<br>3 sends 4/6 bunnies to 4 and 4/6 bunnies to 5</p>
+<p>So, in total, 16 bunnies could make it to the escape pods at 4 and 5 at each time step.  (Note that in this example, room 3 could have sent any variation of 8 bunnies to 4 and 5, such as 2/6 and 6/6, but the final solution remains the same.)</p>
+</blockquote>
+<h3 id="测试样例-5"><a href="#测试样例-5" class="headerlink" title="测试样例"></a>测试样例</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">Input:</span><br><span class="line">solution.solution([0], [3], [[0, 7, 0, 0], [0, 0, 6, 0], [0, 0, 0, 8], [9, 0, 0, 0]])</span><br><span class="line">Output:</span><br><span class="line"><span class="code">    6</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">Input:</span></span><br><span class="line"><span class="code">solution.solution([0, 1], [4, 5], [[0, 0, 4, 6, 0, 0], [0, 0, 5, 2, 0, 0], [0, 0, 0, 0, 4, 4], [0, 0, 0, 0, 6, 6], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]])</span></span><br><span class="line"><span class="code">Output:</span></span><br><span class="line"><span class="code">    16</span></span><br></pre></td></tr></table></figure>
+<h3 id="题解-6"><a href="#题解-6" class="headerlink" title="题解"></a>题解</h3><p>经典网络流，《挑战》上有原题，只是没有包装，在入流和出流分别加上一个总入流和总出流。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">entrances, exits, path</span>):</span></span><br><span class="line">    MAX_NUM = <span class="number">4000000</span></span><br><span class="line">    n = <span class="built_in">len</span>(path)</span><br><span class="line">    </span><br><span class="line">    visited = [<span class="number">0</span>] * n</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">x, num</span>):</span></span><br><span class="line">        <span class="comment"># start from room x</span></span><br><span class="line">        <span class="comment"># return number of bunnies get through</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> visited[x]:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> x <span class="keyword">in</span> exits:</span><br><span class="line">            <span class="keyword">return</span> num</span><br><span class="line"></span><br><span class="line">        visited[x] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">if</span> path[x][i] &lt;= <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            f = dfs(i, <span class="built_in">min</span>(num, path[x][i]))</span><br><span class="line">            <span class="keyword">if</span> f &lt;= <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            path[x][i] -= f</span><br><span class="line">            path[i][x] += f</span><br><span class="line">            visited[x] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">return</span> f</span><br><span class="line">        visited[x] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    res = <span class="number">0</span></span><br><span class="line">    f = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> f &gt; <span class="number">0</span>:</span><br><span class="line">        f = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> e <span class="keyword">in</span> entrances:</span><br><span class="line">            f += dfs(e, MAX_NUM)</span><br><span class="line">        res += f</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h2 id="Level-4-2"><a href="#Level-4-2" class="headerlink" title="Level 4-2"></a>Level 4-2</h2><h3 id="题目-7"><a href="#题目-7" class="headerlink" title="题目"></a>题目</h3><blockquote>
+<p>Running with Bunnies</p>
+<p>You and the bunny workers need to get out of this collapsing death trap of a space station – and fast! Unfortunately, some of the bunnies have been weakened by their long work shifts and can’t run very fast. Their friends are trying to help them, but this escape would go a lot faster if you also pitched in. The defensive bulkhead doors have begun to close, and if you don’t make it through in time, you’ll be trapped! You need to grab as many bunnies as you can and get through the bulkheads before they close. </p>
+<p>The time it takes to move from your starting point to all of the bunnies and to the bulkhead will be given to you in a square matrix of integers. Each row will tell you the time it takes to get to the start, first bunny, second bunny, …, last bunny, and the bulkhead in that order. The order of the rows follows the same pattern (start, each bunny, bulkhead). The bunnies can jump into your arms, so picking them up is instantaneous, and arriving at the bulkhead at the same time as it seals still allows for a successful, if dramatic, escape. (Don’t worry, any bunnies you don’t pick up will be able to escape with you since they no longer have to carry the ones you did pick up.) You can revisit different spots if you wish, and moving to the bulkhead doesn’t mean you have to immediately leave – you can move to and from the bulkhead to pick up additional bunnies if time permits.</p>
+<p>In addition to spending time traveling between bunnies, some paths interact with the space station’s security checkpoints and add time back to the clock. Adding time to the clock will delay the closing of the bulkhead doors, and if the time goes back up to 0 or a positive number after the doors have already closed, it triggers the bulkhead to reopen. Therefore, it might be possible to walk in a circle and keep gaining time: that is, each time a path is traversed, the same amount of time is used or added.</p>
+<p>Write a function of the form solution(times, time_limit) to calculate the most bunnies you can pick up and which bunnies they are, while still escaping through the bulkhead before the doors close for good. If there are multiple sets of bunnies of the same size, return the set of bunnies with the lowest worker IDs (as indexes) in sorted order. The bunnies are represented as a sorted list by worker ID, with the first bunny being 0. There are at most 5 bunnies, and time_limit is a non-negative integer that is at most 999.</p>
+<p>For instance, in the case of<br>[<br>  [0, 2, 2, 2, -1],  # 0 = Start<br>  [9, 0, 2, 2, -1],  # 1 = Bunny 0<br>  [9, 3, 0, 2, -1],  # 2 = Bunny 1<br>  [9, 3, 2, 0, -1],  # 3 = Bunny 2<br>  [9, 3, 2, 2,  0],  # 4 = Bulkhead<br>]<br>and a time limit of 1, the five inner array rows designate the starting point, bunny 0, bunny 1, bunny 2, and the bulkhead door exit respectively. You could take the path:</p>
+<p>Start End Delta Time Status<br>    -   0     -    1 Bulkhead initially open<br>    0   4    -1    2<br>    4   2     2    0<br>    2   4    -1    1<br>    4   3     2   -1 Bulkhead closes<br>    3   4    -1    0 Bulkhead reopens; you and the bunnies exit</p>
+<p>With this solution, you would pick up bunnies 1 and 2. This is the best combination for this space station hallway, so the solution is [1, 2].</p>
+</blockquote>
+<h3 id="测试样例-6"><a href="#测试样例-6" class="headerlink" title="测试样例"></a>测试样例</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">Input:</span><br><span class="line">solution.solution([[0, 2, 2, 2, -1], [9, 0, 2, 2, -1], [9, 3, 0, 2, -1], [9, 3, 2, 0, -1], [9, 3, 2, 2, 0]], 1)</span><br><span class="line">Output:</span><br><span class="line"><span class="code">    [1, 2]</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">Input:</span></span><br><span class="line"><span class="code">solution.solution([[0, 1, 1, 1, 1], [1, 0, 1, 1, 1], [1, 1, 0, 1, 1], [1, 1, 1, 0, 1], [1, 1, 1, 1, 0]], 3)</span></span><br><span class="line"><span class="code">Output:</span></span><br><span class="line"><span class="code">    [0, 1]</span></span><br></pre></td></tr></table></figure>
+<h3 id="题解-7"><a href="#题解-7" class="headerlink" title="题解"></a>题解</h3><p>这道题也是硬解的一道题，因为数据量不大，dfs后做了些剪枝过的，应该也不是正确解法。</p>
+<ol>
+<li>首先用dp找到从i到j消费最少的路径</li>
+<li>然后从start处开始dfs遍历所有可能的走法，以下为两个停止dfs的情况：<ol>
+<li>注意到这里会重复到bulkhead，最短路径原则至多到bulkhead n次</li>
+<li>由于最终必须到达bulkhead，因此当前节点必须能走到bulkhead</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">times, times_limit</span>):</span></span><br><span class="line">    n = <span class="built_in">len</span>(times)</span><br><span class="line">    m = n-<span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    dp = [[x <span class="keyword">for</span> x <span class="keyword">in</span> t] <span class="keyword">for</span> t <span class="keyword">in</span> times] <span class="comment"># copy</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                dp[j][k] = <span class="built_in">min</span>(dp[j][k], dp[j][i] + dp[i][k])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="keyword">if</span> dp[i][i] &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="comment"># pick up all bunnies</span></span><br><span class="line">            <span class="keyword">return</span> [x-<span class="number">1</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, m)]</span><br><span class="line">    </span><br><span class="line">    visited = [<span class="number">0</span>] * n</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">x, limit</span>):</span></span><br><span class="line">        <span class="comment"># x: current buddy, limit: left limit</span></span><br><span class="line">        <span class="keyword">if</span> limit &lt; dp[x][m] <span class="keyword">or</span> visited[x] &gt; n:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> x == m:</span><br><span class="line">            <span class="keyword">if</span> <span class="number">0</span> <span class="keyword">not</span> <span class="keyword">in</span> visited:</span><br><span class="line">                <span class="keyword">return</span> [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line">            do_dfs = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, m):</span><br><span class="line">                <span class="keyword">if</span> visited[i] == <span class="number">0</span> <span class="keyword">and</span> dp[x][i]+dp[i][x] &lt;= limit:</span><br><span class="line">                    do_dfs = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> do_dfs:</span><br><span class="line">                <span class="keyword">return</span> [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n) <span class="keyword">if</span> visited[i] &gt; <span class="number">0</span> <span class="keyword">or</span> i == m]</span><br><span class="line">        </span><br><span class="line">        res = []</span><br><span class="line">        visited[x] += <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">if</span> i == x:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            r = dfs(i, limit - times[x][i])</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(r) == n:</span><br><span class="line">                res = r</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(r) &gt; <span class="built_in">len</span>(res):</span><br><span class="line">                res = r</span><br><span class="line">            <span class="keyword">elif</span> <span class="built_in">len</span>(r) == <span class="built_in">len</span>(res):</span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(r)):</span><br><span class="line">                    <span class="keyword">if</span> r[i] &lt; res[i]:</span><br><span class="line">                        res = r</span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">        visited[x] -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">    </span><br><span class="line">    result = dfs(<span class="number">0</span>, times_limit)</span><br><span class="line">    result = [r-<span class="number">1</span> <span class="keyword">for</span> r <span class="keyword">in</span> result <span class="keyword">if</span> r <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, m)]</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+<h1 id="Level-5"><a href="#Level-5" class="headerlink" title="Level 5"></a>Level 5</h1><h2 id="Level-5-1"><a href="#Level-5-1" class="headerlink" title="Level 5-1"></a>Level 5-1</h2><p>这道题没做出来，感觉是dp，但没完全想出来</p>
+<h3 id="题目-8"><a href="#题目-8" class="headerlink" title="题目"></a>题目</h3><blockquote>
+<p>Expanding Nebula</p>
+<p>You’ve escaped Commander Lambda’s exploding space station along with numerous escape pods full of bunnies. But – oh no! – one of the escape pods has flown into a nearby nebula, causing you to lose track of it. You start monitoring the nebula, but unfortunately, just a moment too late to find where the pod went. However, you do find that the gas of the steadily expanding nebula follows a simple pattern, meaning that you should be able to determine the previous state of the gas and narrow down where you might find the pod.</p>
+<p>From the scans of the nebula, you have found that it is very flat and distributed in distinct patches, so you can model it as a 2D grid. You find that the current existence of gas in a cell of the grid is determined exactly by its 4 nearby cells, specifically, (1) that cell, (2) the cell below it, (3) the cell to the right of it, and (4) the cell below and to the right of it. If, in the current state, exactly 1 of those 4 cells in the 2x2 block has gas, then it will also have gas in the next state. Otherwise, the cell will be empty in the next state.</p>
+<p>For example, let’s say the previous state of the grid (p) was:<br>.O..<br>..O.<br>…O<br>O…</p>
+<p>To see how this grid will change to become the current grid (c) over the next time step, consider the 2x2 blocks of cells around each cell.  Of the 2x2 block of [p[0][0], p[0][1], p[1][0], p[1][1]], only p[0][1] has gas in it, which means this 2x2 block would become cell c[0][0] with gas in the next time step:<br>.O -&gt; O<br>..</p>
+<p>Likewise, in the next 2x2 block to the right consisting of [p[0][1], p[0][2], p[1][1], p[1][2]], two of the containing cells have gas, so in the next state of the grid, c[0][1] will NOT have gas:<br>O. -&gt; .<br>.O</p>
+<p>Following this pattern to its conclusion, from the previous state p, the current state of the grid c will be:<br>O.O<br>.O.<br>O.O</p>
+<p>Note that the resulting output will have 1 fewer row and column, since the bottom and rightmost cells do not have a cell below and to the right of them, respectively.</p>
+<p>Write a function solution(g) where g is an array of array of bools saying whether there is gas in each cell (the current scan of the nebula), and return an int with the number of possible previous states that could have resulted in that grid after 1 time step.  For instance, if the function were given the current state c above, it would deduce that the possible previous states were p (given above) as well as its horizontal and vertical reflections, and would return 4. The width of the grid will be between 3 and 50 inclusive, and the height of the grid will be between 3 and 9 inclusive.  The solution will always be less than one billion (10^9).</p>
+</blockquote>
+<h3 id="测试样例-7"><a href="#测试样例-7" class="headerlink" title="测试样例"></a>测试样例</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">Input:</span><br><span class="line">solution.solution([[True, True, False, True, False, True, False, True, True, False], [True, True, False, False, False, False, True, True, True, False], [True, True, False, False, False, False, False, False, False, True], [False, True, False, False, False, False, True, True, False, False]])</span><br><span class="line">Output:</span><br><span class="line"><span class="code">    11567</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">Input:</span></span><br><span class="line"><span class="code">solution.solution([[True, False, True], [False, True, False], [True, False, True]])</span></span><br><span class="line"><span class="code">Output:</span></span><br><span class="line"><span class="code">    4</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">Input:</span></span><br><span class="line"><span class="code">solution.solution([[True, False, True, False, False, True, True, True], [True, False, True, False, False, False, True, False], [True, True, True, False, False, False, True, False], [True, False, True, False, False, False, True, False], [True, False, True, False, False, True, True, True]])</span></span><br><span class="line"><span class="code">Output:</span></span><br><span class="line"><span class="code">    254</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>

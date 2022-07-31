@@ -70,6 +70,61 @@
       </tags>
   </entry>
   <entry>
+    <title>C++溢出的坑</title>
+    <url>/2020/11/10/C-%E6%BA%A2%E5%87%BA%E7%9A%84%E5%9D%91/</url>
+    <content><![CDATA[<p>C++的int只有32位，计算溢出也是十分普遍的事情，但我作死得尝试采用溢出的计算方法，结果发现千万不要代码中做溢出计算，编译器分分钟把你搞死。。</p>
+<a id="more"></a>
+
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">0x7fffffff</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; !(x + x + <span class="number">2</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<p>根据常理，输出答案应该是1，<code>2 * (0x7fffffff + 1) = 2 * 0x80000000 = 0</code>，想想挺完美的吧，结果得出是0，百思不得其解，甚至尝试用了多个编译器，结果在我windows下的codeblocks中得到了1！</p>
+<h1 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h1><p>查看了codeblocks的编译器，发现是32位的，其它编译器都是64位的，还以为是32位和64位的锅呢，然而并不是，实际是2014年编译器和2019年编译器的锅。。。</p>
+<p>不死心的我把代码进行了汇编，终于发现了问题所在：</p>
+<img src="/2020/11/10/C-%E6%BA%A2%E5%87%BA%E7%9A%84%E5%9D%91/1.png" class="" title="screenshot">
+
+<p>这是main函数的汇编截图，主要看赋值的那行开始的三行，首先第一句是赋值<code>0x7fffffff</code>给<code>-4(%rbp)</code>，然后把它和<code>-1</code>比较一下，就完事了？？？<br>Excuse me？？<br>仔细思考一下的确也没错，<code>!</code>遇到0是1，也就是比较是否为0，也就是<code>x + x + 2 == 0</code>，优化一下就是<code>x + 1 == 0</code>。。</p>
+<p>完全没想到是编译器太优秀了，帮我自行简化了，然而因为溢出的原因，<code>x + x + 2 == 0</code>其实有两个解。。</p>
+<p>至于为什么我的codeblocks得到了1，是因为14年的编译器还比较傻，算的是<code>2x == -2</code>。</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>溢出的坑真的不能踩啊，还是得乖乖得写正确的代码，谁知道谁知道编译器哪天又太优秀了把代码优化了呢。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>CentOS 7安装MariaDB数据库及基础配置</title>
+    <url>/2019/07/18/CentOS-7%E5%AE%89%E8%A3%85MariaDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%8A%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因为开发需求，在自己的CentOS 7服务器上远程链接数据库，搜索得知CentOS 7默认是MariaDB数据库而非MySQL。虽然安装MySQL也不是不可以，但是既然MariaDB和MySQL很像，那就直接上MariaDB吧。<br>安装教程是搜到的英文教程，主要是用来记录和帮助一些人翻译一下的。</p>
+<a id="more"></a>
+
+<h1 id="安装MariaDB"><a href="#安装MariaDB" class="headerlink" title="安装MariaDB"></a>安装MariaDB</h1><h2 id="一、增加MariaDB-Yum"><a href="#一、增加MariaDB-Yum" class="headerlink" title="一、增加MariaDB Yum"></a>一、增加MariaDB Yum</h2><p>首先需要新增一个文件，这边用vim写。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/yum.repos.d/MariaDB.repo</span><br></pre></td></tr></table></figure>
+<p>在这个文件中加入这些内容，如果不会用vim的首先按<strong>i</strong>，然后粘贴上去，在按<strong>ESC</strong>，最后输入 <strong>:wq</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[mariadb]</span><br><span class="line">name &#x3D; MariaDB</span><br><span class="line">baseurl &#x3D; http:&#x2F;&#x2F;yum.mariadb.org&#x2F;10.1&#x2F;centos7-amd64</span><br><span class="line">gpgkey &#x3D; https:&#x2F;&#x2F;yum.mariadb.org&#x2F;RPM-GPG-KEY-MariaDB</span><br><span class="line">gpgcheck &#x3D; 1</span><br></pre></td></tr></table></figure>
+<h2 id="二、安装MariaDB"><a href="#二、安装MariaDB" class="headerlink" title="二、安装MariaDB"></a>二、安装MariaDB</h2><p>最好在root用户下安装（非root用户我后面几个命令报错了）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install mariadb mariadb-server</span><br></pre></td></tr></table></figure>
+<h2 id="三、配置MariaDB"><a href="#三、配置MariaDB" class="headerlink" title="三、配置MariaDB"></a>三、配置MariaDB</h2><p>启动mariadb</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start mariadb</span><br></pre></td></tr></table></figure>
+<p>设置开机自启动</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> mariadb</span><br></pre></td></tr></table></figure>
+<p>设置root密码等相关，这其中包括密码等一些基本设置，一开始是没有密码的，所以按回车就可以了。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure>
+<h2 id="四、登录"><a href="#四、登录" class="headerlink" title="四、登录"></a>四、登录</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+<h2 id="五、查看版本"><a href="#五、查看版本" class="headerlink" title="五、查看版本"></a>五、查看版本</h2><p>MariaDB还真是MySQL的亲家，查看版本命令竟然使用mysql的。。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysql -V</span><br></pre></td></tr></table></figure>
+<h2 id="六、新增用户"><a href="#六、新增用户" class="headerlink" title="六、新增用户"></a>六、新增用户</h2><p>登录到root用户到数据库下</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> mysql.user(Host,<span class="keyword">User</span>,Password) <span class="keyword">values</span>(&quot;localhost&quot;,&quot;admin&quot;,password(&quot;admin&quot;));</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+<h2 id="七、开启远程访问"><a href="#七、开启远程访问" class="headerlink" title="七、开启远程访问"></a>七、开启远程访问</h2><p>首先登录到root用户下数据库，然后输入以下句子：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;123456&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+<p>其中‘root’可以替换成任何已创建的用户，‘123456’处是密码。<br>这样就可以远程访问了。</p>
+<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/96387164">https://blog.csdn.net/yueyue200830/article/details/96387164</a></p>
+]]></content>
+      <categories>
+        <category>Database</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>MariaDB</tag>
+        <tag>Centos</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2020秋招总结</title>
     <url>/2020/09/18/2020%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<p>漫长的秋招从往年的金八银九变成了金七银八，从七月的焦虑到八月初的痛苦到最后的收获，总体我算是幸运的，能拿到几个大厂的意向书。<br>然而反观总体面试情况，其实有点可笑，大厂面的都offer，剩下都不要我。</p>
@@ -159,61 +214,6 @@
       <tags>
         <tag>Interview</tag>
         <tag>校招</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++溢出的坑</title>
-    <url>/2020/11/10/C-%E6%BA%A2%E5%87%BA%E7%9A%84%E5%9D%91/</url>
-    <content><![CDATA[<p>C++的int只有32位，计算溢出也是十分普遍的事情，但我作死得尝试采用溢出的计算方法，结果发现千万不要代码中做溢出计算，编译器分分钟把你搞死。。</p>
-<a id="more"></a>
-
-<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">0x7fffffff</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; !(x + x + <span class="number">2</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
-<p>根据常理，输出答案应该是1，<code>2 * (0x7fffffff + 1) = 2 * 0x80000000 = 0</code>，想想挺完美的吧，结果得出是0，百思不得其解，甚至尝试用了多个编译器，结果在我windows下的codeblocks中得到了1！</p>
-<h1 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h1><p>查看了codeblocks的编译器，发现是32位的，其它编译器都是64位的，还以为是32位和64位的锅呢，然而并不是，实际是2014年编译器和2019年编译器的锅。。。</p>
-<p>不死心的我把代码进行了汇编，终于发现了问题所在：</p>
-<img src="/2020/11/10/C-%E6%BA%A2%E5%87%BA%E7%9A%84%E5%9D%91/1.png" class="" title="screenshot">
-
-<p>这是main函数的汇编截图，主要看赋值的那行开始的三行，首先第一句是赋值<code>0x7fffffff</code>给<code>-4(%rbp)</code>，然后把它和<code>-1</code>比较一下，就完事了？？？<br>Excuse me？？<br>仔细思考一下的确也没错，<code>!</code>遇到0是1，也就是比较是否为0，也就是<code>x + x + 2 == 0</code>，优化一下就是<code>x + 1 == 0</code>。。</p>
-<p>完全没想到是编译器太优秀了，帮我自行简化了，然而因为溢出的原因，<code>x + x + 2 == 0</code>其实有两个解。。</p>
-<p>至于为什么我的codeblocks得到了1，是因为14年的编译器还比较傻，算的是<code>2x == -2</code>。</p>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>溢出的坑真的不能踩啊，还是得乖乖得写正确的代码，谁知道谁知道编译器哪天又太优秀了把代码优化了呢。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>CentOS 7安装MariaDB数据库及基础配置</title>
-    <url>/2019/07/18/CentOS-7%E5%AE%89%E8%A3%85MariaDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%8A%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因为开发需求，在自己的CentOS 7服务器上远程链接数据库，搜索得知CentOS 7默认是MariaDB数据库而非MySQL。虽然安装MySQL也不是不可以，但是既然MariaDB和MySQL很像，那就直接上MariaDB吧。<br>安装教程是搜到的英文教程，主要是用来记录和帮助一些人翻译一下的。</p>
-<a id="more"></a>
-
-<h1 id="安装MariaDB"><a href="#安装MariaDB" class="headerlink" title="安装MariaDB"></a>安装MariaDB</h1><h2 id="一、增加MariaDB-Yum"><a href="#一、增加MariaDB-Yum" class="headerlink" title="一、增加MariaDB Yum"></a>一、增加MariaDB Yum</h2><p>首先需要新增一个文件，这边用vim写。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/yum.repos.d/MariaDB.repo</span><br></pre></td></tr></table></figure>
-<p>在这个文件中加入这些内容，如果不会用vim的首先按<strong>i</strong>，然后粘贴上去，在按<strong>ESC</strong>，最后输入 <strong>:wq</strong>。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[mariadb]</span><br><span class="line">name &#x3D; MariaDB</span><br><span class="line">baseurl &#x3D; http:&#x2F;&#x2F;yum.mariadb.org&#x2F;10.1&#x2F;centos7-amd64</span><br><span class="line">gpgkey &#x3D; https:&#x2F;&#x2F;yum.mariadb.org&#x2F;RPM-GPG-KEY-MariaDB</span><br><span class="line">gpgcheck &#x3D; 1</span><br></pre></td></tr></table></figure>
-<h2 id="二、安装MariaDB"><a href="#二、安装MariaDB" class="headerlink" title="二、安装MariaDB"></a>二、安装MariaDB</h2><p>最好在root用户下安装（非root用户我后面几个命令报错了）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install mariadb mariadb-server</span><br></pre></td></tr></table></figure>
-<h2 id="三、配置MariaDB"><a href="#三、配置MariaDB" class="headerlink" title="三、配置MariaDB"></a>三、配置MariaDB</h2><p>启动mariadb</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start mariadb</span><br></pre></td></tr></table></figure>
-<p>设置开机自启动</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> mariadb</span><br></pre></td></tr></table></figure>
-<p>设置root密码等相关，这其中包括密码等一些基本设置，一开始是没有密码的，所以按回车就可以了。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure>
-<h2 id="四、登录"><a href="#四、登录" class="headerlink" title="四、登录"></a>四、登录</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
-<h2 id="五、查看版本"><a href="#五、查看版本" class="headerlink" title="五、查看版本"></a>五、查看版本</h2><p>MariaDB还真是MySQL的亲家，查看版本命令竟然使用mysql的。。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysql -V</span><br></pre></td></tr></table></figure>
-<h2 id="六、新增用户"><a href="#六、新增用户" class="headerlink" title="六、新增用户"></a>六、新增用户</h2><p>登录到root用户到数据库下</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> mysql.user(Host,<span class="keyword">User</span>,Password) <span class="keyword">values</span>(&quot;localhost&quot;,&quot;admin&quot;,password(&quot;admin&quot;));</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
-<h2 id="七、开启远程访问"><a href="#七、开启远程访问" class="headerlink" title="七、开启远程访问"></a>七、开启远程访问</h2><p>首先登录到root用户下数据库，然后输入以下句子：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;123456&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
-<p>其中‘root’可以替换成任何已创建的用户，‘123456’处是密码。<br>这样就可以远程访问了。</p>
-<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/96387164">https://blog.csdn.net/yueyue200830/article/details/96387164</a></p>
-]]></content>
-      <categories>
-        <category>Database</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>MariaDB</tag>
-        <tag>Centos</tag>
       </tags>
   </entry>
   <entry>
@@ -720,33 +720,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Python读取图片并保存的几种方式</title>
-    <url>/2020/03/11/Python%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E4%BF%9D%E5%AD%98%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<p>这里尝试过<code>png</code>和<code>jpg</code>，为方便保存路径在函数内自动转换，因此需要路径后缀恰为三位。</p>
-<a id="more"></a>
-
-<h1 id="方法一：Pillow"><a href="#方法一：Pillow" class="headerlink" title="方法一：Pillow"></a>方法一：Pillow</h1><p>这里采用<code>pillow</code>读取图片，它默认显示图片采用系统的默认图片显示器。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_image_1</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; Pillow</span></span><br><span class="line"><span class="string">    This will show picture with default image showing program.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        path: path of the image.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    image = Image.<span class="built_in">open</span>(path)</span><br><span class="line">    image.show()</span><br><span class="line">    new_path = path[:-<span class="number">4</span>] + <span class="string">&#x27;-fc1.jpg&#x27;</span></span><br><span class="line">    image.save(new_path)</span><br></pre></td></tr></table></figure>
-<h1 id="方法二：Matplot"><a href="#方法二：Matplot" class="headerlink" title="方法二：Matplot"></a>方法二：Matplot</h1><p>这里用<code>matplot</code>的<code>pyplot</code>去读取和显示图片，注意保存图片需要在显示之前执行，否则无法保存。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_image_2</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; matplot</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        path: path of the image.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    image = mpimg.imread(path)</span><br><span class="line">    plt.imshow(image)</span><br><span class="line">    plt.axis(<span class="string">&#x27;off&#x27;</span>)</span><br><span class="line">    new_path = path[:-<span class="number">4</span>] + <span class="string">&#x27;-fc2.jpg&#x27;</span></span><br><span class="line">    mpimg.imsave(new_path, image)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
-<h1 id="方法三：OpenCV"><a href="#方法三：OpenCV" class="headerlink" title="方法三：OpenCV"></a>方法三：OpenCV</h1><p>这里显示图片需要条用<code>cv2.waitKey()</code>，否则图片会显示后立刻消失。</p>
-<p><strong>注意</strong>：OpenCV读取的图片的排列方式为bgr而非常见的rgb</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_image_3</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; OpenCV</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        path: path of the image.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    image = cv2.imread(path)</span><br><span class="line">    cv2.imshow(path, image)</span><br><span class="line">    cv2.waitKey()</span><br><span class="line">    new_path = path[:-<span class="number">4</span>] + <span class="string">&#x27;-fc3.jpg&#x27;</span></span><br><span class="line">    cv2.imwrite(new_path, image)</span><br></pre></td></tr></table></figure>
-<h1 id="方法四：Imageio"><a href="#方法四：Imageio" class="headerlink" title="方法四：Imageio"></a>方法四：Imageio</h1><p>这里<code>imageio</code>只是用于读取和保存，用<code>matplot</code>显示。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_image_4</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; imageio</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        path: path of the image.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    image = imageio.imread(path)</span><br><span class="line">    plt.imshow(image)</span><br><span class="line">    plt.show()</span><br><span class="line">    new_path = path[:-<span class="number">4</span>] + <span class="string">&#x27;-fc4.jpg&#x27;</span></span><br><span class="line">    imageio.imsave(new_path, image)</span><br></pre></td></tr></table></figure>
-<h1 id="方法五：skimage"><a href="#方法五：skimage" class="headerlink" title="方法五：skimage"></a>方法五：skimage</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_image_5</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; skimage</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        path: path of the image.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    image = io.imread(path)</span><br><span class="line">    io.imshow(image)</span><br><span class="line">    new_path = path[:-<span class="number">4</span>] + <span class="string">&#x27;-fc5.jpg&#x27;</span></span><br><span class="line">    io.imsave(new_path, image)</span><br><span class="line">    io.show()</span><br></pre></td></tr></table></figure>
-<h1 id="相关加载库"><a href="#相关加载库" class="headerlink" title="相关加载库"></a>相关加载库</h1><p>以防万一不知道import什么，这里列一下需要import的库。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> skimage <span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.image <span class="keyword">as</span> mpimg</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> imageio</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>OpenCV</tag>
-        <tag>Computer Vision</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Python触发win10通知栏通知提醒</title>
     <url>/2020/02/11/Python%E8%A7%A6%E5%8F%91win10%E9%80%9A%E7%9F%A5%E6%A0%8F%E9%80%9A%E7%9F%A5%E6%8F%90%E9%86%92/</url>
     <content><![CDATA[<p>在写代码的时候想在某些特定情况触发提示（后台自动运行的情况下），可以搜到的大部分是右下角提示之类比较丑的自定义提示，而其实现在win10已经有自己的通知栏，如果能用自带的通知栏绝对是一个很优秀的选择。搜了很久后发现了一个库叫做<strong>win10toast</strong>。</p>
@@ -772,28 +745,30 @@
       </tags>
   </entry>
   <entry>
-    <title>STL——next_permutation&amp;prev_permutation</title>
-    <url>/2019/02/07/STL%E2%80%94%E2%80%94next-permutation-prev-permutation/</url>
-    <content><![CDATA[<p>next_permutation和prev_permutation是对c++求全排列的函数，分别可以求出下一个全排列和前一个全排列。</p>
+    <title>Python读取图片并保存的几种方式</title>
+    <url>/2020/03/11/Python%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87%E5%B9%B6%E4%BF%9D%E5%AD%98%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<p>这里尝试过<code>png</code>和<code>jpg</code>，为方便保存路径在函数内自动转换，因此需要路径后缀恰为三位。</p>
 <a id="more"></a>
 
-<p>这里以next_permutation为例，来看一下c++官网的定义：</p>
-<blockquote>
-<p>default: bool next_permutation (BidirectionalIterator first, BidirectionalIterator last);<br>custom: bool next_permutation (BidirectionalIterator first, BidirectionalIterator last, Compare comp);</p>
-</blockquote>
-<p>可以看到和sort的用法很像，只需要输入first和last就可以返回是否有下一个，如果有的话会直接在内部排序出现下一个。</p>
-<p>同时可以选项是comp函数，可以自定义排序方式，默认为字典序。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>题目：<a href="https://leetcode.com/problems/permutations/">leetcode 46. Permutations</a></p>
-<p>这是一道全排列的题目，普通解法有dfs和非递归的查找，看解答时发现了这个函数，减少了不少代码量。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; permute(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;</span><br><span class="line">        <span class="keyword">if</span> (nums.size() == <span class="number">0</span>) <span class="keyword">return</span> ans;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        ans.push_back(nums);</span><br><span class="line">        <span class="keyword">while</span> (next_permutation(nums.begin(), nums.end())) &#123;</span><br><span class="line">            ans.push_back(nums);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/86771956">https://blog.csdn.net/yueyue200830/article/details/86771956</a></p>
-]]></content>
+<h1 id="方法一：Pillow"><a href="#方法一：Pillow" class="headerlink" title="方法一：Pillow"></a>方法一：Pillow</h1><p>这里采用<code>pillow</code>读取图片，它默认显示图片采用系统的默认图片显示器。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_image_1</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; Pillow</span></span><br><span class="line"><span class="string">    This will show picture with default image showing program.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        path: path of the image.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    image = Image.<span class="built_in">open</span>(path)</span><br><span class="line">    image.show()</span><br><span class="line">    new_path = path[:-<span class="number">4</span>] + <span class="string">&#x27;-fc1.jpg&#x27;</span></span><br><span class="line">    image.save(new_path)</span><br></pre></td></tr></table></figure>
+<h1 id="方法二：Matplot"><a href="#方法二：Matplot" class="headerlink" title="方法二：Matplot"></a>方法二：Matplot</h1><p>这里用<code>matplot</code>的<code>pyplot</code>去读取和显示图片，注意保存图片需要在显示之前执行，否则无法保存。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_image_2</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; matplot</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        path: path of the image.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    image = mpimg.imread(path)</span><br><span class="line">    plt.imshow(image)</span><br><span class="line">    plt.axis(<span class="string">&#x27;off&#x27;</span>)</span><br><span class="line">    new_path = path[:-<span class="number">4</span>] + <span class="string">&#x27;-fc2.jpg&#x27;</span></span><br><span class="line">    mpimg.imsave(new_path, image)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+<h1 id="方法三：OpenCV"><a href="#方法三：OpenCV" class="headerlink" title="方法三：OpenCV"></a>方法三：OpenCV</h1><p>这里显示图片需要条用<code>cv2.waitKey()</code>，否则图片会显示后立刻消失。</p>
+<p><strong>注意</strong>：OpenCV读取的图片的排列方式为bgr而非常见的rgb</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_image_3</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; OpenCV</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        path: path of the image.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    image = cv2.imread(path)</span><br><span class="line">    cv2.imshow(path, image)</span><br><span class="line">    cv2.waitKey()</span><br><span class="line">    new_path = path[:-<span class="number">4</span>] + <span class="string">&#x27;-fc3.jpg&#x27;</span></span><br><span class="line">    cv2.imwrite(new_path, image)</span><br></pre></td></tr></table></figure>
+<h1 id="方法四：Imageio"><a href="#方法四：Imageio" class="headerlink" title="方法四：Imageio"></a>方法四：Imageio</h1><p>这里<code>imageio</code>只是用于读取和保存，用<code>matplot</code>显示。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_image_4</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; imageio</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        path: path of the image.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    image = imageio.imread(path)</span><br><span class="line">    plt.imshow(image)</span><br><span class="line">    plt.show()</span><br><span class="line">    new_path = path[:-<span class="number">4</span>] + <span class="string">&#x27;-fc4.jpg&#x27;</span></span><br><span class="line">    imageio.imsave(new_path, image)</span><br></pre></td></tr></table></figure>
+<h1 id="方法五：skimage"><a href="#方法五：skimage" class="headerlink" title="方法五：skimage"></a>方法五：skimage</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_image_5</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; skimage</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        path: path of the image.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    image = io.imread(path)</span><br><span class="line">    io.imshow(image)</span><br><span class="line">    new_path = path[:-<span class="number">4</span>] + <span class="string">&#x27;-fc5.jpg&#x27;</span></span><br><span class="line">    io.imsave(new_path, image)</span><br><span class="line">    io.show()</span><br></pre></td></tr></table></figure>
+<h1 id="相关加载库"><a href="#相关加载库" class="headerlink" title="相关加载库"></a>相关加载库</h1><p>以防万一不知道import什么，这里列一下需要import的库。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> skimage <span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.image <span class="keyword">as</span> mpimg</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> imageio</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>C++</category>
+        <category>Python</category>
       </categories>
       <tags>
-        <tag>C++</tag>
-        <tag>全排列</tag>
+        <tag>Python</tag>
+        <tag>OpenCV</tag>
+        <tag>Computer Vision</tag>
       </tags>
   </entry>
   <entry>
@@ -835,6 +810,31 @@
       </tags>
   </entry>
   <entry>
+    <title>STL——next_permutation&amp;prev_permutation</title>
+    <url>/2019/02/07/STL%E2%80%94%E2%80%94next-permutation-prev-permutation/</url>
+    <content><![CDATA[<p>next_permutation和prev_permutation是对c++求全排列的函数，分别可以求出下一个全排列和前一个全排列。</p>
+<a id="more"></a>
+
+<p>这里以next_permutation为例，来看一下c++官网的定义：</p>
+<blockquote>
+<p>default: bool next_permutation (BidirectionalIterator first, BidirectionalIterator last);<br>custom: bool next_permutation (BidirectionalIterator first, BidirectionalIterator last, Compare comp);</p>
+</blockquote>
+<p>可以看到和sort的用法很像，只需要输入first和last就可以返回是否有下一个，如果有的话会直接在内部排序出现下一个。</p>
+<p>同时可以选项是comp函数，可以自定义排序方式，默认为字典序。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>题目：<a href="https://leetcode.com/problems/permutations/">leetcode 46. Permutations</a></p>
+<p>这是一道全排列的题目，普通解法有dfs和非递归的查找，看解答时发现了这个函数，减少了不少代码量。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; permute(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;</span><br><span class="line">        <span class="keyword">if</span> (nums.size() == <span class="number">0</span>) <span class="keyword">return</span> ans;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        ans.push_back(nums);</span><br><span class="line">        <span class="keyword">while</span> (next_permutation(nums.begin(), nums.end())) &#123;</span><br><span class="line">            ans.push_back(nums);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/86771956">https://blog.csdn.net/yueyue200830/article/details/86771956</a></p>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>全排列</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Termux - Android terminal</title>
     <url>/2020/03/07/Termux-Android-terminal/</url>
     <content><![CDATA[<p>此处留个坑，纪念一下终于安装了<code>Termux</code>，并且可以使用啦。<br>不过怕自己<code>rm -rf</code>一键把手机给挂了，没怎么配权限 &amp; 在备用机上安装的。<br>希望有空更新并且学习一下。</p>
@@ -850,50 +850,6 @@
         <tag>Terminal</tag>
         <tag>Termux</tag>
         <tag>Android</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Ubuntu安装MPICH3.3.2</title>
-    <url>/2019/11/23/Ubuntu%E5%AE%89%E8%A3%85MPICH3-3-2/</url>
-    <content><![CDATA[<p>Linux上安装MPICH还算是方便的，虽然是indows系统，但搜索了一下windows安装的方法，最后选择放弃windows选择linux，不过虚拟机上的性能可能稍微差一点，但是作为并行的入门使用还是没有问题的。</p>
-<p>主要步骤一开始是跟着网上搜索的，后来发现其实自带的readme写得很详细，推荐如果英文ok看readme就好。</p>
-<a id="more"></a>
-
-<p>此安装步骤成功安装于Ubuntu 16和Ubuntu 18。</p>
-<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>官网：<a href="https://www.mpich.org/">https://www.mpich.org/</a><br>点击download以后选择<strong>mpich-3.3.2 (stable release)</strong>，下面自带的ubuntu平台的没太看懂于是就放弃了。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>下载好以后解压并打开目录：（其实更喜欢右键解压哈哈哈）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar xzf mpich-3.3.2.tar.gz</span><br><span class="line"><span class="built_in">cd</span> mpich-3.3.2</span><br></pre></td></tr></table></figure>
-<p>如果看一下Readme的话可以发现必须要的是gcc，可选g++和Fortran。没有安装c的编译器的自行搜索</p>
-<p>然后配置文件（这里没有用readme的重定向因为感觉看起来方便）：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure -prefix=/usr/<span class="built_in">local</span>/mpich</span><br></pre></td></tr></table></figure>
-<p>这里prefix是安装路径<br>如果有Fortran报错，又不需要支持Fortran的话：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure -prefix=/usr/<span class="built_in">local</span>/mpich --disable-fortran</span><br></pre></td></tr></table></figure>
-<p>然后make file（此处等待5分钟）：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
-<p>然后安装（此处继续等待五分钟）：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-<p>如果出错的话可以尝试make clean然后再来一遍</p>
-<h1 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h1><p>为了能全局使用，我们需要配置一下环境变量。这里被坑了很久，因为网上都是bash的配置，但我的默认shell是zsh，然后就一直配不出。。。</p>
-<p>如果配置的是bash，打开bash的环境变量配置文件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim ~/.bashrc</span><br></pre></td></tr></table></figure>
-<p>如果是zsh，则：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim ~/.zshrc</span><br></pre></td></tr></table></figure>
-<h1 id="编辑环境变量"><a href="#编辑环境变量" class="headerlink" title="编辑环境变量"></a>编辑环境变量</h1><p>输入<strong>G</strong>移到最后一行，<br>按下<strong>i</strong>进行编辑<br>加入：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/mpich/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
-<p>然后按下<strong>ESC</strong>，以及 <strong>:wq</strong>保存退出。</p>
-<p>然后刷新一下环境变量：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
-<p>然后输入以下命令测试，应该会有反应</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">which</span> mpicc</span><br><span class="line"><span class="built_in">which</span> mpiexec</span><br></pre></td></tr></table></figure>
-<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/103212344">https://blog.csdn.net/yueyue200830/article/details/103212344</a></p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Ubuntu</tag>
-        <tag>MPICH</tag>
-        <tag>parallelism</tag>
       </tags>
   </entry>
   <entry>
@@ -957,6 +913,50 @@
       </tags>
   </entry>
   <entry>
+    <title>Ubuntu安装MPICH3.3.2</title>
+    <url>/2019/11/23/Ubuntu%E5%AE%89%E8%A3%85MPICH3-3-2/</url>
+    <content><![CDATA[<p>Linux上安装MPICH还算是方便的，虽然是indows系统，但搜索了一下windows安装的方法，最后选择放弃windows选择linux，不过虚拟机上的性能可能稍微差一点，但是作为并行的入门使用还是没有问题的。</p>
+<p>主要步骤一开始是跟着网上搜索的，后来发现其实自带的readme写得很详细，推荐如果英文ok看readme就好。</p>
+<a id="more"></a>
+
+<p>此安装步骤成功安装于Ubuntu 16和Ubuntu 18。</p>
+<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>官网：<a href="https://www.mpich.org/">https://www.mpich.org/</a><br>点击download以后选择<strong>mpich-3.3.2 (stable release)</strong>，下面自带的ubuntu平台的没太看懂于是就放弃了。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>下载好以后解压并打开目录：（其实更喜欢右键解压哈哈哈）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar xzf mpich-3.3.2.tar.gz</span><br><span class="line"><span class="built_in">cd</span> mpich-3.3.2</span><br></pre></td></tr></table></figure>
+<p>如果看一下Readme的话可以发现必须要的是gcc，可选g++和Fortran。没有安装c的编译器的自行搜索</p>
+<p>然后配置文件（这里没有用readme的重定向因为感觉看起来方便）：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure -prefix=/usr/<span class="built_in">local</span>/mpich</span><br></pre></td></tr></table></figure>
+<p>这里prefix是安装路径<br>如果有Fortran报错，又不需要支持Fortran的话：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./configure -prefix=/usr/<span class="built_in">local</span>/mpich --disable-fortran</span><br></pre></td></tr></table></figure>
+<p>然后make file（此处等待5分钟）：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+<p>然后安装（此处继续等待五分钟）：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>如果出错的话可以尝试make clean然后再来一遍</p>
+<h1 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h1><p>为了能全局使用，我们需要配置一下环境变量。这里被坑了很久，因为网上都是bash的配置，但我的默认shell是zsh，然后就一直配不出。。。</p>
+<p>如果配置的是bash，打开bash的环境变量配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim ~/.bashrc</span><br></pre></td></tr></table></figure>
+<p>如果是zsh，则：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim ~/.zshrc</span><br></pre></td></tr></table></figure>
+<h1 id="编辑环境变量"><a href="#编辑环境变量" class="headerlink" title="编辑环境变量"></a>编辑环境变量</h1><p>输入<strong>G</strong>移到最后一行，<br>按下<strong>i</strong>进行编辑<br>加入：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/mpich/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<p>然后按下<strong>ESC</strong>，以及 <strong>:wq</strong>保存退出。</p>
+<p>然后刷新一下环境变量：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+<p>然后输入以下命令测试，应该会有反应</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">which</span> mpicc</span><br><span class="line"><span class="built_in">which</span> mpiexec</span><br></pre></td></tr></table></figure>
+<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/103212344">https://blog.csdn.net/yueyue200830/article/details/103212344</a></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+        <tag>MPICH</tag>
+        <tag>parallelism</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue+Element搭建桌面应用</title>
     <url>/2020/07/24/Vue-Element%E6%90%AD%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8/</url>
     <content><![CDATA[<p>写这篇文章是因为在开发时发现好多文章都过时了（目测我的很快也要过时了）</p>
@@ -975,43 +975,6 @@
       <tags>
         <tag>Vue</tag>
         <tag>Element</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Windows修改右键新建菜单</title>
-    <url>/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/</url>
-    <content><![CDATA[<p>由于课程需求被强制安装了国际知名建模软件EA然而本人真的一点都不喜欢，并且被此软件搞得太不爽了，课程结束删除软件发现竟然没有把右键新建里一起删除，太令人崩溃了吧。。。</p>
-<p>在网上搜索解决方案不知道为何失败后，决定试一下自己修改，没想到成功了！！</p>
-<p>方法依旧是修改<code>注册表</code>，只是修改不同的部分。</p>
-<a id="more"></a>
-
-<h1 id="打开注册表"><a href="#打开注册表" class="headerlink" title="打开注册表"></a>打开注册表</h1><p>Windows 10下直接搜索<code>注册表</code>可以跳出来<code>注册表编辑器</code>直接打开即可（搜索多优秀呀，何必学习网上教程注册表编辑器的英文打开方式呢）</p>
-<img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/1.png" class="" width="700" title="搜索注册表">
-
-<h1 id="新建文件的存储位置（常规方法）"><a href="#新建文件的存储位置（常规方法）" class="headerlink" title="新建文件的存储位置（常规方法）"></a>新建文件的存储位置（常规方法）</h1><p>右键新建文件的位置是在：<code>计算机\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\ShellNew</code><br>双击打开后有一个<code>Classes</code>，可以看到数据那栏是一堆文件的后缀名</p>
-<img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/2.png" class="" width="700" title="“新建”位置">
-
-<p>双击<code>Classes</code>，可以对数据进行编辑，添加或删除不要的后缀名</p>
-<img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/3.png" class="" width="700" title="修改新建数据">
-
-
-<p><strong>然而</strong>，我并没有成功修改。。。每次删除后又被加回来了。。。<br>一开始以为中病毒了呢。。。<br>而事实上是因为只删除了部分导致注册表错误。。。</p>
-<h1 id="删除文件后缀关联"><a href="#删除文件后缀关联" class="headerlink" title="删除文件后缀关联"></a>删除文件后缀关联</h1><p>打开<code>计算机\HKEY_CURRENT_USER</code>，可以看到里面有各式各样的后缀（以<code>.</code>开头的）</p>
-<img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/4.png" class="" title="后缀">
-
-<p>那既然上个方法删不掉我们想要的，不如看看这个后缀文件的注册表里有些什么东西。</p>
-<p>找到需要删除的文件后缀对应的文件夹，比如我要删除<code>.eap</code></p>
-<img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/5.png" class="" width="700" title="后缀文件夹">
-
-<p>我们可以看到怎么里面有一个<code>ShellNew</code>？？？这不是和前面那个新建文件的名字一样吗？？？<br>再打开其它的后缀文件夹看一下，果然没有<code>ShellNew</code><br>那大概可以猜到是<code>ShellNew</code>的锅，这边定义了有新增但我们上面那个方法只是删除了一个地方，导致出错了。</p>
-<p>因此<strong>解决方法</strong>就是把<code>ShellNew</code>删除掉，由于我本来把软件也卸载了，就直接整个后缀的文件夹全删光了（个人猜测是那个公司写的垃圾）<br>删除后关闭就可以发现新建菜单里没有啦！</p>
-]]></content>
-      <categories>
-        <category>Windows</category>
-      </categories>
-      <tags>
-        <tag>Windows</tag>
-        <tag>注册表</tag>
       </tags>
   </entry>
   <entry>
@@ -1052,6 +1015,43 @@
       </tags>
   </entry>
   <entry>
+    <title>Windows修改右键新建菜单</title>
+    <url>/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/</url>
+    <content><![CDATA[<p>由于课程需求被强制安装了国际知名建模软件EA然而本人真的一点都不喜欢，并且被此软件搞得太不爽了，课程结束删除软件发现竟然没有把右键新建里一起删除，太令人崩溃了吧。。。</p>
+<p>在网上搜索解决方案不知道为何失败后，决定试一下自己修改，没想到成功了！！</p>
+<p>方法依旧是修改<code>注册表</code>，只是修改不同的部分。</p>
+<a id="more"></a>
+
+<h1 id="打开注册表"><a href="#打开注册表" class="headerlink" title="打开注册表"></a>打开注册表</h1><p>Windows 10下直接搜索<code>注册表</code>可以跳出来<code>注册表编辑器</code>直接打开即可（搜索多优秀呀，何必学习网上教程注册表编辑器的英文打开方式呢）</p>
+<img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/1.png" class="" width="700" title="搜索注册表">
+
+<h1 id="新建文件的存储位置（常规方法）"><a href="#新建文件的存储位置（常规方法）" class="headerlink" title="新建文件的存储位置（常规方法）"></a>新建文件的存储位置（常规方法）</h1><p>右键新建文件的位置是在：<code>计算机\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\ShellNew</code><br>双击打开后有一个<code>Classes</code>，可以看到数据那栏是一堆文件的后缀名</p>
+<img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/2.png" class="" width="700" title="“新建”位置">
+
+<p>双击<code>Classes</code>，可以对数据进行编辑，添加或删除不要的后缀名</p>
+<img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/3.png" class="" width="700" title="修改新建数据">
+
+
+<p><strong>然而</strong>，我并没有成功修改。。。每次删除后又被加回来了。。。<br>一开始以为中病毒了呢。。。<br>而事实上是因为只删除了部分导致注册表错误。。。</p>
+<h1 id="删除文件后缀关联"><a href="#删除文件后缀关联" class="headerlink" title="删除文件后缀关联"></a>删除文件后缀关联</h1><p>打开<code>计算机\HKEY_CURRENT_USER</code>，可以看到里面有各式各样的后缀（以<code>.</code>开头的）</p>
+<img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/4.png" class="" title="后缀">
+
+<p>那既然上个方法删不掉我们想要的，不如看看这个后缀文件的注册表里有些什么东西。</p>
+<p>找到需要删除的文件后缀对应的文件夹，比如我要删除<code>.eap</code></p>
+<img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/5.png" class="" width="700" title="后缀文件夹">
+
+<p>我们可以看到怎么里面有一个<code>ShellNew</code>？？？这不是和前面那个新建文件的名字一样吗？？？<br>再打开其它的后缀文件夹看一下，果然没有<code>ShellNew</code><br>那大概可以猜到是<code>ShellNew</code>的锅，这边定义了有新增但我们上面那个方法只是删除了一个地方，导致出错了。</p>
+<p>因此<strong>解决方法</strong>就是把<code>ShellNew</code>删除掉，由于我本来把软件也卸载了，就直接整个后缀的文件夹全删光了（个人猜测是那个公司写的垃圾）<br>删除后关闭就可以发现新建菜单里没有啦！</p>
+]]></content>
+      <categories>
+        <category>Windows</category>
+      </categories>
+      <tags>
+        <tag>Windows</tag>
+        <tag>注册表</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Windows系统下对文件进行MD5校验</title>
     <url>/2020/03/04/Windows%E7%B3%BB%E7%BB%9F%E4%B8%8B%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8CMD5%E6%A0%A1%E9%AA%8C/</url>
     <content><![CDATA[<blockquote>
@@ -1073,35 +1073,6 @@
       <tags>
         <tag>Windows</tag>
         <tag>MD5</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>修改服务器端口</title>
-    <url>/2019/10/01/%E4%BF%AE%E6%94%B9%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%8F%A3/</url>
-    <content><![CDATA[<p>自己建一个服务器，最基础会遇到的问题就是被人随机攻击服务器，把默认端口修改掉就会减少很多啦</p>
-<a id="more"></a>
-
-<p>登录服务器以后，输入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
-<p>然后会看到一行被注释的 #port 22</p>
-<p>把”#”删掉然后把22换成其它端口号就好。</p>
-<p>关于vim使用，要修改之前按一下i，修改结束按esc，然后输入”:wq”。</p>
-<p>最后重新刷新一下配置（Debian 9）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service ssh restart</span><br></pre></td></tr></table></figure>
-<p>如不成功，可尝试以下命令：（Centos 7）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service sshd restart</span><br></pre></td></tr></table></figure>
-<p>然后可以先试一下用默认端口登录，发现不可以登录</p>
-<p>之后输入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh root@xxx.xxx.xx.xx -p abcd(端口号)</span><br></pre></td></tr></table></figure>
-<p>会发现让输入密码，那就成功修改端口啦</p>
-<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/101845927">https://blog.csdn.net/yueyue200830/article/details/101845927</a></p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>port</tag>
       </tags>
   </entry>
   <entry>
@@ -1216,6 +1187,58 @@
       </tags>
   </entry>
   <entry>
+    <title>修改服务器端口</title>
+    <url>/2019/10/01/%E4%BF%AE%E6%94%B9%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%8F%A3/</url>
+    <content><![CDATA[<p>自己建一个服务器，最基础会遇到的问题就是被人随机攻击服务器，把默认端口修改掉就会减少很多啦</p>
+<a id="more"></a>
+
+<p>登录服务器以后，输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+<p>然后会看到一行被注释的 #port 22</p>
+<p>把”#”删掉然后把22换成其它端口号就好。</p>
+<p>关于vim使用，要修改之前按一下i，修改结束按esc，然后输入”:wq”。</p>
+<p>最后重新刷新一下配置（Debian 9）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service ssh restart</span><br></pre></td></tr></table></figure>
+<p>如不成功，可尝试以下命令：（Centos 7）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service sshd restart</span><br></pre></td></tr></table></figure>
+<p>然后可以先试一下用默认端口登录，发现不可以登录</p>
+<p>之后输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh root@xxx.xxx.xx.xx -p abcd(端口号)</span><br></pre></td></tr></table></figure>
+<p>会发现让输入密码，那就成功修改端口啦</p>
+<p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/101845927">https://blog.csdn.net/yueyue200830/article/details/101845927</a></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>port</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于VS Code运行C++中文乱码问题</title>
+    <url>/2020/05/26/%E5%85%B3%E4%BA%8EVS-Code%E8%BF%90%E8%A1%8CC-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>在几个编辑器里面，VS Code已经算是比较优秀，有插件可以很方便编译和运行<code>c++</code>的，但是因为特殊需要要输出中文，结果发现乱码。。搜索了一通选择了我个人觉得比较方便的方法</p>
+<p>这里我编译运行是采用<code>code runner</code>的，但应该对task配置的方法也适用，不过这里强烈推荐<code>code runner</code>！</p>
+<a id="more"></a>
+
+<p>首先说说乱码的原因，其实就是<code>cmd</code>和<code>powershell</code>在中文的Windows下默认编码是<code>GBK</code>，而编译输出的文件是<code>UTF-8</code>，于是导致了乱码</p>
+<p>其实在<code>git bash</code>里直接运行把编译好的exe是没有编码问题的，不过在VS Code中也似乎变成了<code>GBK</code>的编码</p>
+<p>既然是编码问题，那么可以直接把terminal的编码改成<code>UTF-8</code>，这样就可以了。<br>但是搜索了以下， 直接修改会导致一些程序的错误。<br>实际上，我们只是需要运行的环境是<code>UTF-8</code>编码而已，因此只需要命令修改编译运行时的terminal的编码即可。</p>
+<p>修改编码的命令是：<code>chcp 65001</code></p>
+<p>我们需要将这个命令集成到编译运行的命令里<br>打开用户的<code>setting.json</code>，也可以通过<code>code runner</code>的<code>extention setting</code>中<code>executorMap</code>进入<br>添加以下内容，这里后面的命令是插件自己的命令，没有修改</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;code-runner.executorMap&quot;: &#123;</span><br><span class="line">    &quot;cpp&quot;: &quot;chcp 65001 &amp;&amp; cd $dir &amp;&amp; g++ $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>保存后就会运行这条命令了，可以解决中文乱码的问题</p>
+]]></content>
+      <categories>
+        <category>Others</category>
+      </categories>
+      <tags>
+        <tag>Windows</tag>
+        <tag>VS Code</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>前端图画绘制——Canvas</title>
     <url>/2021/04/18/%E5%89%8D%E7%AB%AF%E5%9B%BE%E7%94%BB%E7%BB%98%E5%88%B6%E2%80%94%E2%80%94Canvas/</url>
     <content><![CDATA[<p>作为一个假全栈开发者，遇到一个需求要在页面上显示地图，然后根据房间点击跳转，原生HTML有两种解决方法：SVG和Canvas，这两种都是在前端画图，但原理和实现完全不一样。</p>
@@ -1267,55 +1290,6 @@
       </tags>
   </entry>
   <entry>
-    <title>关于VS Code运行C++中文乱码问题</title>
-    <url>/2020/05/26/%E5%85%B3%E4%BA%8EVS-Code%E8%BF%90%E8%A1%8CC-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>在几个编辑器里面，VS Code已经算是比较优秀，有插件可以很方便编译和运行<code>c++</code>的，但是因为特殊需要要输出中文，结果发现乱码。。搜索了一通选择了我个人觉得比较方便的方法</p>
-<p>这里我编译运行是采用<code>code runner</code>的，但应该对task配置的方法也适用，不过这里强烈推荐<code>code runner</code>！</p>
-<a id="more"></a>
-
-<p>首先说说乱码的原因，其实就是<code>cmd</code>和<code>powershell</code>在中文的Windows下默认编码是<code>GBK</code>，而编译输出的文件是<code>UTF-8</code>，于是导致了乱码</p>
-<p>其实在<code>git bash</code>里直接运行把编译好的exe是没有编码问题的，不过在VS Code中也似乎变成了<code>GBK</code>的编码</p>
-<p>既然是编码问题，那么可以直接把terminal的编码改成<code>UTF-8</code>，这样就可以了。<br>但是搜索了以下， 直接修改会导致一些程序的错误。<br>实际上，我们只是需要运行的环境是<code>UTF-8</code>编码而已，因此只需要命令修改编译运行时的terminal的编码即可。</p>
-<p>修改编码的命令是：<code>chcp 65001</code></p>
-<p>我们需要将这个命令集成到编译运行的命令里<br>打开用户的<code>setting.json</code>，也可以通过<code>code runner</code>的<code>extention setting</code>中<code>executorMap</code>进入<br>添加以下内容，这里后面的命令是插件自己的命令，没有修改</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;code-runner.executorMap&quot;: &#123;</span><br><span class="line">    &quot;cpp&quot;: &quot;chcp 65001 &amp;&amp; cd $dir &amp;&amp; g++ $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<p>保存后就会运行这条命令了，可以解决中文乱码的问题</p>
-]]></content>
-      <categories>
-        <category>Others</category>
-      </categories>
-      <tags>
-        <tag>Windows</tag>
-        <tag>VS Code</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>新版OpenGL学习入门（一）——初始化窗口</title>
-    <url>/2018/12/01/%E6%96%B0%E7%89%88OpenGL%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%88%9D%E5%A7%8B%E5%8C%96%E7%AA%97%E5%8F%A3/</url>
-    <content><![CDATA[<p>主要用来记录一下学习代码，每次新建一个项目还要配置太麻烦啦</p>
-<p>配置网址：<a href="https://blog.csdn.net/qq_19003345/article/details/76098781">https://blog.csdn.net/qq_19003345/article/details/76098781</a> </p>
-<p>学习的是可编辑管线，不过顺便也配置了一下旧版本的，这样可以偶尔运行一下别人的代码</p>
-<a id="more"></a>
-
-<p><em>题外话：新版OpenGL比较少，一不小心就找到旧的了。而且和旧版相比，新版需要理解的东西太多了</em></p>
-<p>学习网址（这是中文翻译网站）：<a href="https://learnopengl-cn.github.io/01%20Getting%20started/03%20Hello%20Window/">https://learnopengl-cn.github.io/01%20Getting%20started/03%20Hello%20Window/</a></p>
-<p>这个代码全部都是原来教程上的，不过加了一点<strong>自己的备注</strong>。建议跟着教程阅读，直接看代码很累。</p>
-<blockquote>
-<p>Update：如果只是为了写出东西的话，这一块初始化内容完全可以不要去管它</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;glad/glad.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;glfw3.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">framebuffer_size_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span></span>;      <span class="comment">//窗口回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processInput</span><span class="params">(GLFWwindow *window)</span></span>;  <span class="comment">//输入控制</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// settings 初始化设置</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> SCR_WIDTH = <span class="number">800</span>;     <span class="comment">//初始宽度</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> SCR_HEIGHT = <span class="number">600</span>;    <span class="comment">//初始高度</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// glfw: initialize and configure   不需要做任何改动</span></span><br><span class="line">	glfwInit();                                             <span class="comment">//初始化GLFW</span></span><br><span class="line">	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, <span class="number">3</span>);          <span class="comment">//主版本号为3</span></span><br><span class="line">	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, <span class="number">3</span>);          <span class="comment">//次版本号为3</span></span><br><span class="line">	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);   <span class="comment">//核心模式</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __APPLE__</span></span><br><span class="line">	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);    <span class="comment">// 对于OS X</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// glfw 窗口对象   不需要改动</span></span><br><span class="line">	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, <span class="string">&quot;LearnOpenGL&quot;</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);   <span class="comment">//窗口：宽、高、名称。</span></span><br><span class="line">	<span class="keyword">if</span> (window == <span class="literal">NULL</span>)    <span class="comment">//确保正确创建窗口</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Failed to create GLFW window&quot;</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">		glfwTerminate();</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	glfwMakeContextCurrent(window);                                       <span class="comment">//设置窗口上下文为当前线程</span></span><br><span class="line">	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);    <span class="comment">//告诉glfw窗口大小会根据改变</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// glad: load all OpenGL function pointers  加载系统相关的OpenGL函数指针地址的函数   不需要改动</span></span><br><span class="line">	<span class="keyword">if</span> (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Failed to initialize GLAD&quot;</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// render loop  渲染循环，这样可以保持一直运行</span></span><br><span class="line">	<span class="keyword">while</span> (!glfwWindowShouldClose(window))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 输入</span></span><br><span class="line">		processInput(window);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//渲染指令</span></span><br><span class="line">		glClearColor(<span class="number">0.8f</span>, <span class="number">0.3f</span>, <span class="number">0.3f</span>, <span class="number">1.0f</span>);    <span class="comment">//设置清空屏幕所用的颜色，每次循环重新渲染，因此需要清空，也因此这是屏幕的背景色。RGB色</span></span><br><span class="line">		glClear(GL_COLOR_BUFFER_BIT);            <span class="comment">//清楚颜色缓冲</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">// 检查并调用事件、交换缓冲</span></span><br><span class="line">		glfwSwapBuffers(window);      <span class="comment">//交换颜色缓冲</span></span><br><span class="line">		glfwPollEvents();             <span class="comment">//检查事件触发</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// glfw: terminate, clearing all previously allocated GLFW resources.</span></span><br><span class="line">	glfwTerminate();     <span class="comment">//终止glfw</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输入控制</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processInput</span><span class="params">(GLFWwindow *window)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)    <span class="comment">//判断是否按下Esc</span></span><br><span class="line">		glfwSetWindowShouldClose(window, <span class="literal">true</span>);               <span class="comment">//如果时Esc，那么glfw需要关闭窗口</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// glfw: whenever the window size changed (by OS or user resize) this callback function executes 根据窗口大小改变显示大小</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">framebuffer_size_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// make sure the viewport matches the new window dimensions; note that width and</span></span><br><span class="line">	<span class="comment">// height will be significantly larger than specified on retina displays.</span></span><br><span class="line">	glViewport(<span class="number">0</span>, <span class="number">0</span>, width, height);    <span class="comment">//窗口左下角的坐标x、y</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>从CSDN搬过来的，原文链接：<a href="https://blog.csdn.net/yueyue200830/article/details/84672369">https://blog.csdn.net/yueyue200830/article/details/84672369</a></p>
-]]></content>
-      <categories>
-        <category>OpenGL</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-        <tag>图形学</tag>
-        <tag>OpenGL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>新版OpenGL学习入门（三）——对着色器的一些理解</title>
     <url>/2019/03/02/%E6%96%B0%E7%89%88OpenGL%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E2%80%94%E5%AF%B9%E7%9D%80%E8%89%B2%E5%99%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</url>
     <content><![CDATA[<p>在写完OpenGL项目后，再次回顾并总结一下用到的一些知识。</p>
@@ -1351,6 +1325,32 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#version 330 core</span></span><br><span class="line">out vec4 FragColor;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Material</span> &#123;</span></span><br><span class="line">    sampler2D diffuse;</span><br><span class="line">    sampler2D specular;</span><br><span class="line">    <span class="keyword">float</span> shininess;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">DirLight</span> &#123;</span></span><br><span class="line">    vec3 direction;</span><br><span class="line"></span><br><span class="line">    vec3 ambient;</span><br><span class="line">    vec3 diffuse;</span><br><span class="line">    vec3 specular;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">in vec3 FragPos;</span><br><span class="line">in vec3 Normal;</span><br><span class="line">in vec2 TexCoords;</span><br><span class="line"></span><br><span class="line">uniform vec3 viewPos;</span><br><span class="line">uniform DirLight dirLight;</span><br><span class="line">uniform Material material;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function">vec3 <span class="title">CalcDirLight</span><span class="params">(DirLight light, vec3 normal, vec3 viewDir)</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	vec3 norm = normalize(Normal);</span><br><span class="line">    vec3 viewDir = normalize(viewPos - FragPos);</span><br><span class="line">	vec3 result = CalcDirLight(dirLight, norm, viewDir);</span><br><span class="line"></span><br><span class="line">	FragColor = vec4(result, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">vec3 <span class="title">CalcDirLight</span><span class="params">(DirLight light, vec3 normal, vec3 viewDir)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vec3 lightDir = normalize(-light.direction);</span><br><span class="line">    <span class="comment">// diffuse shading</span></span><br><span class="line">    <span class="keyword">float</span> diff = max(dot(normal, lightDir), <span class="number">0.0</span>);</span><br><span class="line">    <span class="comment">// specular shading</span></span><br><span class="line">    vec3 reflectDir = reflect(-lightDir, normal);</span><br><span class="line">    <span class="keyword">float</span> spec = <span class="built_in">pow</span>(max(dot(viewDir, reflectDir), <span class="number">0.0</span>), material.shininess);</span><br><span class="line">    <span class="comment">// combine results</span></span><br><span class="line">    vec3 ambient = light.ambient * vec3(texture(material.diffuse, TexCoords));</span><br><span class="line">    vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, TexCoords));</span><br><span class="line">    vec3 specular = light.specular * spec * vec3(texture(material.specular, TexCoords));</span><br><span class="line">    <span class="keyword">return</span> (ambient + diffuse + specular);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>总体来说，着色器虽然较难入手，但是着色器可以很有效的帮助我们进行变换等其他操作，尤其是十分优秀的几何着色器。</p>
 <p>搬运自CSDN：<a href="https://blog.csdn.net/yueyue200830/article/details/88071644">https://blog.csdn.net/yueyue200830/article/details/88071644</a></p>
+]]></content>
+      <categories>
+        <category>OpenGL</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>图形学</tag>
+        <tag>OpenGL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>新版OpenGL学习入门（一）——初始化窗口</title>
+    <url>/2018/12/01/%E6%96%B0%E7%89%88OpenGL%E5%AD%A6%E4%B9%A0%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E5%88%9D%E5%A7%8B%E5%8C%96%E7%AA%97%E5%8F%A3/</url>
+    <content><![CDATA[<p>主要用来记录一下学习代码，每次新建一个项目还要配置太麻烦啦</p>
+<p>配置网址：<a href="https://blog.csdn.net/qq_19003345/article/details/76098781">https://blog.csdn.net/qq_19003345/article/details/76098781</a> </p>
+<p>学习的是可编辑管线，不过顺便也配置了一下旧版本的，这样可以偶尔运行一下别人的代码</p>
+<a id="more"></a>
+
+<p><em>题外话：新版OpenGL比较少，一不小心就找到旧的了。而且和旧版相比，新版需要理解的东西太多了</em></p>
+<p>学习网址（这是中文翻译网站）：<a href="https://learnopengl-cn.github.io/01%20Getting%20started/03%20Hello%20Window/">https://learnopengl-cn.github.io/01%20Getting%20started/03%20Hello%20Window/</a></p>
+<p>这个代码全部都是原来教程上的，不过加了一点<strong>自己的备注</strong>。建议跟着教程阅读，直接看代码很累。</p>
+<blockquote>
+<p>Update：如果只是为了写出东西的话，这一块初始化内容完全可以不要去管它</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;glad/glad.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;glfw3.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">framebuffer_size_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span></span>;      <span class="comment">//窗口回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processInput</span><span class="params">(GLFWwindow *window)</span></span>;  <span class="comment">//输入控制</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// settings 初始化设置</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> SCR_WIDTH = <span class="number">800</span>;     <span class="comment">//初始宽度</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> SCR_HEIGHT = <span class="number">600</span>;    <span class="comment">//初始高度</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// glfw: initialize and configure   不需要做任何改动</span></span><br><span class="line">	glfwInit();                                             <span class="comment">//初始化GLFW</span></span><br><span class="line">	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, <span class="number">3</span>);          <span class="comment">//主版本号为3</span></span><br><span class="line">	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, <span class="number">3</span>);          <span class="comment">//次版本号为3</span></span><br><span class="line">	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);   <span class="comment">//核心模式</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __APPLE__</span></span><br><span class="line">	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);    <span class="comment">// 对于OS X</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// glfw 窗口对象   不需要改动</span></span><br><span class="line">	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, <span class="string">&quot;LearnOpenGL&quot;</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);   <span class="comment">//窗口：宽、高、名称。</span></span><br><span class="line">	<span class="keyword">if</span> (window == <span class="literal">NULL</span>)    <span class="comment">//确保正确创建窗口</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Failed to create GLFW window&quot;</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">		glfwTerminate();</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	glfwMakeContextCurrent(window);                                       <span class="comment">//设置窗口上下文为当前线程</span></span><br><span class="line">	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);    <span class="comment">//告诉glfw窗口大小会根据改变</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// glad: load all OpenGL function pointers  加载系统相关的OpenGL函数指针地址的函数   不需要改动</span></span><br><span class="line">	<span class="keyword">if</span> (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Failed to initialize GLAD&quot;</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// render loop  渲染循环，这样可以保持一直运行</span></span><br><span class="line">	<span class="keyword">while</span> (!glfwWindowShouldClose(window))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 输入</span></span><br><span class="line">		processInput(window);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//渲染指令</span></span><br><span class="line">		glClearColor(<span class="number">0.8f</span>, <span class="number">0.3f</span>, <span class="number">0.3f</span>, <span class="number">1.0f</span>);    <span class="comment">//设置清空屏幕所用的颜色，每次循环重新渲染，因此需要清空，也因此这是屏幕的背景色。RGB色</span></span><br><span class="line">		glClear(GL_COLOR_BUFFER_BIT);            <span class="comment">//清楚颜色缓冲</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">// 检查并调用事件、交换缓冲</span></span><br><span class="line">		glfwSwapBuffers(window);      <span class="comment">//交换颜色缓冲</span></span><br><span class="line">		glfwPollEvents();             <span class="comment">//检查事件触发</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">// glfw: terminate, clearing all previously allocated GLFW resources.</span></span><br><span class="line">	glfwTerminate();     <span class="comment">//终止glfw</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输入控制</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processInput</span><span class="params">(GLFWwindow *window)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)    <span class="comment">//判断是否按下Esc</span></span><br><span class="line">		glfwSetWindowShouldClose(window, <span class="literal">true</span>);               <span class="comment">//如果时Esc，那么glfw需要关闭窗口</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// glfw: whenever the window size changed (by OS or user resize) this callback function executes 根据窗口大小改变显示大小</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">framebuffer_size_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// make sure the viewport matches the new window dimensions; note that width and</span></span><br><span class="line">	<span class="comment">// height will be significantly larger than specified on retina displays.</span></span><br><span class="line">	glViewport(<span class="number">0</span>, <span class="number">0</span>, width, height);    <span class="comment">//窗口左下角的坐标x、y</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从CSDN搬过来的，原文链接：<a href="https://blog.csdn.net/yueyue200830/article/details/84672369">https://blog.csdn.net/yueyue200830/article/details/84672369</a></p>
 ]]></content>
       <categories>
         <category>OpenGL</category>
@@ -1540,6 +1540,29 @@
       </tags>
   </entry>
   <entry>
+    <title>解决Google Play Store一直「正在等待下载」的问题</title>
+    <url>/2020/02/29/%E8%A7%A3%E5%86%B3Google-Play-Store%E4%B8%80%E7%9B%B4%E3%80%8C%E6%AD%A3%E5%9C%A8%E7%AD%89%E5%BE%85%E4%B8%8B%E8%BD%BD%E3%80%8D%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>大概月初开始，我的小米的Play Store就开始卡在<code>正在等待下载</code>，play store其它内容加载一切正常，其它网页加载也都正常，但是就是无法更新。。<br>卡了近一个月后终于想到网络搜索解决问题了。</p>
+<a id="more"></a>
+
+<ol>
+<li>确保是软件问题，play store可加载其它内容，且没有程序卡在<code>正在下载</code></li>
+<li>打开play store的应用信息，选择<code>清楚全部数据</code>，可能会出现提示，按确定清除数据<img src="/2020/02/29/%E8%A7%A3%E5%86%B3Google-Play-Store%E4%B8%80%E7%9B%B4%E3%80%8C%E6%AD%A3%E5%9C%A8%E7%AD%89%E5%BE%85%E4%B8%8B%E8%BD%BD%E3%80%8D%E7%9A%84%E9%97%AE%E9%A2%98/play-store.jpg" class="" width="300" title="Play-store"></li>
+<li>【小米手机/部分国内手机】打开<code>下载管理</code>（或类似名称），禁用迅雷加速下载<img src="/2020/02/29/%E8%A7%A3%E5%86%B3Google-Play-Store%E4%B8%80%E7%9B%B4%E3%80%8C%E6%AD%A3%E5%9C%A8%E7%AD%89%E5%BE%85%E4%B8%8B%E8%BD%BD%E3%80%8D%E7%9A%84%E9%97%AE%E9%A2%98/xunlei.jpg" class="" width="300" title="Xunlei"></li>
+<li>打开下载管理的应用信息，选择<code>清楚全部数据</code></li>
+<li>重新打开play store，查看是否恢复正常</li>
+</ol>
+<p>完全不懂什么原理，个人猜测线程卡死死锁了？<br>据说play store的下载机制是通过手机自己的下载来下载的，所以可能出奇奇怪怪的问题。。</p>
+<p>ps. play store绝对是一个神奇的软件，在我的三星出现了一个更迷的bug，无法自动更新play store，永远显示已经最新版，且确定过版本应该不是盗版。。。</p>
+]]></content>
+      <categories>
+        <category>Others</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>设置hexo首页只显示部分摘要（不显示全文）</title>
     <url>/2020/02/23/%E8%AE%BE%E7%BD%AEhexo%E9%A6%96%E9%A1%B5%E5%8F%AA%E6%98%BE%E7%A4%BA%E9%83%A8%E5%88%86%E6%91%98%E8%A6%81%EF%BC%88%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%85%A8%E6%96%87%EF%BC%89/</url>
     <content><![CDATA[<p>本文针对Next主题，不确保对于其它主题有效（但从修改模式来看，是有效的）</p>
@@ -1562,29 +1585,6 @@
       </categories>
       <tags>
         <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>解决Google Play Store一直「正在等待下载」的问题</title>
-    <url>/2020/02/29/%E8%A7%A3%E5%86%B3Google-Play-Store%E4%B8%80%E7%9B%B4%E3%80%8C%E6%AD%A3%E5%9C%A8%E7%AD%89%E5%BE%85%E4%B8%8B%E8%BD%BD%E3%80%8D%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>大概月初开始，我的小米的Play Store就开始卡在<code>正在等待下载</code>，play store其它内容加载一切正常，其它网页加载也都正常，但是就是无法更新。。<br>卡了近一个月后终于想到网络搜索解决问题了。</p>
-<a id="more"></a>
-
-<ol>
-<li>确保是软件问题，play store可加载其它内容，且没有程序卡在<code>正在下载</code></li>
-<li>打开play store的应用信息，选择<code>清楚全部数据</code>，可能会出现提示，按确定清除数据<img src="/2020/02/29/%E8%A7%A3%E5%86%B3Google-Play-Store%E4%B8%80%E7%9B%B4%E3%80%8C%E6%AD%A3%E5%9C%A8%E7%AD%89%E5%BE%85%E4%B8%8B%E8%BD%BD%E3%80%8D%E7%9A%84%E9%97%AE%E9%A2%98/play-store.jpg" class="" width="300" title="Play-store"></li>
-<li>【小米手机/部分国内手机】打开<code>下载管理</code>（或类似名称），禁用迅雷加速下载<img src="/2020/02/29/%E8%A7%A3%E5%86%B3Google-Play-Store%E4%B8%80%E7%9B%B4%E3%80%8C%E6%AD%A3%E5%9C%A8%E7%AD%89%E5%BE%85%E4%B8%8B%E8%BD%BD%E3%80%8D%E7%9A%84%E9%97%AE%E9%A2%98/xunlei.jpg" class="" width="300" title="Xunlei"></li>
-<li>打开下载管理的应用信息，选择<code>清楚全部数据</code></li>
-<li>重新打开play store，查看是否恢复正常</li>
-</ol>
-<p>完全不懂什么原理，个人猜测线程卡死死锁了？<br>据说play store的下载机制是通过手机自己的下载来下载的，所以可能出奇奇怪怪的问题。。</p>
-<p>ps. play store绝对是一个神奇的软件，在我的三星出现了一个更迷的bug，无法自动更新play store，永远显示已经最新版，且确定过版本应该不是盗版。。。</p>
-]]></content>
-      <categories>
-        <category>Others</category>
-      </categories>
-      <tags>
-        <tag>Android</tag>
       </tags>
   </entry>
   <entry>

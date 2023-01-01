@@ -294,25 +294,18 @@
 <p>在网上搜索解决方案不知道为何失败后，决定试一下自己修改，没想到成功了！！</p>
 <p>方法依旧是修改<code>注册表</code>，只是修改不同的部分。</p>
 <span id="more"></span>
-
 <h1 id="打开注册表"><a href="#打开注册表" class="headerlink" title="打开注册表"></a>打开注册表</h1><p>Windows 10下直接搜索<code>注册表</code>可以跳出来<code>注册表编辑器</code>直接打开即可（搜索多优秀呀，何必学习网上教程注册表编辑器的英文打开方式呢）</p>
 <img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/1.png" class="" width="700" title="搜索注册表">
-
 <h1 id="新建文件的存储位置（常规方法）"><a href="#新建文件的存储位置（常规方法）" class="headerlink" title="新建文件的存储位置（常规方法）"></a>新建文件的存储位置（常规方法）</h1><p>右键新建文件的位置是在：<code>计算机\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\ShellNew</code><br>双击打开后有一个<code>Classes</code>，可以看到数据那栏是一堆文件的后缀名</p>
 <img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/2.png" class="" width="700" title="“新建”位置">
-
 <p>双击<code>Classes</code>，可以对数据进行编辑，添加或删除不要的后缀名</p>
 <img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/3.png" class="" width="700" title="修改新建数据">
-
-
 <p><strong>然而</strong>，我并没有成功修改。。。每次删除后又被加回来了。。。<br>一开始以为中病毒了呢。。。<br>而事实上是因为只删除了部分导致注册表错误。。。</p>
 <h1 id="删除文件后缀关联"><a href="#删除文件后缀关联" class="headerlink" title="删除文件后缀关联"></a>删除文件后缀关联</h1><p>打开<code>计算机\HKEY_CURRENT_USER</code>，可以看到里面有各式各样的后缀（以<code>.</code>开头的）</p>
 <img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/4.png" class="" title="后缀">
-
 <p>那既然上个方法删不掉我们想要的，不如看看这个后缀文件的注册表里有些什么东西。</p>
 <p>找到需要删除的文件后缀对应的文件夹，比如我要删除<code>.eap</code></p>
 <img src="/2020/03/15/Windows%E4%BF%AE%E6%94%B9%E5%8F%B3%E9%94%AE%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95/5.png" class="" width="700" title="后缀文件夹">
-
 <p>我们可以看到怎么里面有一个<code>ShellNew</code>？？？这不是和前面那个新建文件的名字一样吗？？？<br>再打开其它的后缀文件夹看一下，果然没有<code>ShellNew</code><br>那大概可以猜到是<code>ShellNew</code>的锅，这边定义了有新增但我们上面那个方法只是删除了一个地方，导致出错了。</p>
 <p>因此<strong>解决方法</strong>就是把<code>ShellNew</code>删除掉，由于我本来把软件也卸载了，就直接整个后缀的文件夹全删光了（个人猜测是那个公司写的垃圾）<br>删除后关闭就可以发现新建菜单里没有啦！</p>
 
@@ -499,7 +492,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:44</span>
+    <span title="Reading time total">1:43</span>
 </div>
 
         

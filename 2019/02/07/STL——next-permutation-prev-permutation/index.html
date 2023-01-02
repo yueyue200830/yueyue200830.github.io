@@ -104,7 +104,7 @@
       <h1 class="site-title">Z Blog</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
-      <p class="site-subtitle" itemprop="description">Simply CS, Simply Coding</p>
+      <p class="site-subtitle" itemprop="description">Coding for Life</p>
   </div>
 
   <div class="site-nav-right">
@@ -286,6 +286,7 @@
       
         <p>next_permutation和prev_permutation是对c++求全排列的函数，分别可以求出下一个全排列和前一个全排列。</p>
 <span id="more"></span>
+
 <p>这里以next_permutation为例，来看一下c++官网的定义：</p>
 <blockquote>
 <p>default: bool next_permutation (BidirectionalIterator first, BidirectionalIterator last);<br>custom: bool next_permutation (BidirectionalIterator first, BidirectionalIterator last, Compare comp);</p>
@@ -295,6 +296,7 @@
 <h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>题目：<a target="_blank" rel="noopener" href="https://leetcode.com/problems/permutations/">leetcode 46. Permutations</a></p>
 <p>这是一道全排列的题目，普通解法有dfs和非递归的查找，看解答时发现了这个函数，减少了不少代码量。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">permute</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; ans;</span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() == <span class="number">0</span>) <span class="keyword">return</span> ans;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>());</span><br><span class="line">        ans.<span class="built_in">push_back</span>(nums);</span><br><span class="line">        <span class="keyword">while</span> (<span class="built_in">next_permutation</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>())) &#123;</span><br><span class="line">            ans.<span class="built_in">push_back</span>(nums);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 <p>搬运自CSDN：<a target="_blank" rel="noopener" href="https://blog.csdn.net/yueyue200830/article/details/86771956">https://blog.csdn.net/yueyue200830/article/details/86771956</a></p>
 
     </div>
@@ -480,7 +482,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:43</span>
+    <span title="Reading time total">1:44</span>
 </div>
 
         

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="9ay-z3ep7Zek63qOsEb7JqINfKIQRxqvQ4efBve7eVc">
+  <meta name="msvalidate.01" content="77BD50564510E4BCABCFADB76378DC4F">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yueyue200830.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="我也算是忠实的Windows用户了，装过Ubuntu和黑苹果最后还是觉得Windows用起来方便些，经过了各种的折腾也是比较习惯，偶尔的一些需求也可以用虚拟机代替，以及近两年还推出了WSL2也更加方便了开发使用；最近重新开始学习Vim也装上了WSL2，但发现Windows Terminal和vim的组合还是有很多问题需要解决的，由其默认的配色在某些状态下根本看不清字体，所以折腾了下自定义配色。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vim Custom Color Scheme 自定义配色">
+<meta property="og:url" content="https://yueyue200830.github.io/2023/01/07/Vim-Custom-Color-Scheme-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E8%89%B2/index.html">
+<meta property="og:site_name" content="Z Blog">
+<meta property="og:description" content="我也算是忠实的Windows用户了，装过Ubuntu和黑苹果最后还是觉得Windows用起来方便些，经过了各种的折腾也是比较习惯，偶尔的一些需求也可以用虚拟机代替，以及近两年还推出了WSL2也更加方便了开发使用；最近重新开始学习Vim也装上了WSL2，但发现Windows Terminal和vim的组合还是有很多问题需要解决的，由其默认的配色在某些状态下根本看不清字体，所以折腾了下自定义配色。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yueyue200830.github.io/2023/01/07/Vim-Custom-Color-Scheme-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E8%89%B2/before.png">
+<meta property="og:image" content="https://yueyue200830.github.io/2023/01/07/Vim-Custom-Color-Scheme-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E8%89%B2/after.png">
+<meta property="og:image" content="https://yueyue200830.github.io/2023/01/07/Vim-Custom-Color-Scheme-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E8%89%B2/color256.png">
+<meta property="og:image" content="https://yueyue200830.github.io/2023/01/07/Vim-Custom-Color-Scheme-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E8%89%B2/colorscheme.png">
+<meta property="og:image" content="https://yueyue200830.github.io/2023/01/07/Vim-Custom-Color-Scheme-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E8%89%B2/highlight.png">
+<meta property="article:published_time" content="2023-01-07T11:01:48.000Z">
+<meta property="article:modified_time" content="2023-01-07T11:01:48.000Z">
+<meta property="article:author" content="yueyue200830">
+<meta property="article:tag" content="Windows">
+<meta property="article:tag" content="Vim">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yueyue200830.github.io/2023/01/07/Vim-Custom-Color-Scheme-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E8%89%B2/before.png">
+
+<link rel="canonical" href="https://yueyue200830.github.io/2023/01/07/Vim-Custom-Color-Scheme-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E8%89%B2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Vim Custom Color Scheme 自定义配色 | Z Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Z Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Z Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Coding for Life</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yueyue200830.github.io/2023/01/07/Vim-Custom-Color-Scheme-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E8%89%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yueyue200830">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Z Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vim Custom Color Scheme 自定义配色
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-01-07 19:01:48" itemprop="dateCreated datePublished" datetime="2023-01-07T19:01:48+08:00">2023-01-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vim/" itemprop="url" rel="index"><span itemprop="name">Vim</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2023/01/07/Vim-Custom-Color-Scheme-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E8%89%B2/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/01/07/Vim-Custom-Color-Scheme-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E8%89%B2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>3.6k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>3 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>我也算是忠实的Windows用户了，装过Ubuntu和黑苹果最后还是觉得Windows用起来方便些，经过了各种的折腾也是比较习惯，偶尔的一些需求也可以用虚拟机代替，以及近两年还推出了WSL2也更加方便了开发使用；最近重新开始学习Vim也装上了WSL2，但发现Windows Terminal和vim的组合还是有很多问题需要解决的，由其默认的配色在某些状态下根本看不清字体，所以折腾了下自定义配色。</p>
+<span id="more"></span>
+
+<p>其实Vim是有很多自定义配色的插件，也尝试安装过，发现和Windows Terminal不兼容，配色非常奇怪，还是自己配色比较稳妥，如果是linux/mac用户完全可以在<a target="_blank" rel="noopener" href="https://vimcolorschemes.com/">vimcolor</a>上选择一个喜欢的配色进行配置</p>
+<p>我Windows Terminal采用的是魔改后的OneHalfDark配色（一开始以为vim的问题可以用配色解决，最后发现不行）</p>
+<p>可以看下对比效果，左侧是git bash终端默认的配色，右侧是我改动后的配色，由其在visual模式下看起来舒服很多了</p>
+<!-- ![before](before.png) ![after](after.png) -->
+
+<div style="display: flex">
+  <img src="before.png" alt="before" width="45%"/>
+  <img src="after.png" alt="after" width="45%"/>
+</div>
+
+<h1 id="256色"><a href="#256色" class="headerlink" title="256色"></a>256色</h1><p>现在的terminal都支持256色了，vim的配置一般会用这个256个颜色，所以知道对应的几个颜色，这256色的配置是来源是terminal的scheme，可以通过<a target="_blank" rel="noopener" href="https://gist.github.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263">脚本</a>来查看terminal配置的256色；这是我的配置颜色</p>
+<img src="color256.png" alt="color_256" width="50%"/>
+
+<h1 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h1><h2 id="自带配置文件"><a href="#自带配置文件" class="headerlink" title="自带配置文件"></a>自带配置文件</h2><p>vim默认的配置路径在ubuntu下是<code>/usr/share/vim/vim82/</code>（这里vim82与vim版本有关），颜色的的配置文件夹在<code>colors</code>下，可以看到一些默认的配色，如果想要在原来的配置上魔改一下，可以从这里复制一份出来，默认的配置是<code>default.vim</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  colors <span class="built_in">ls</span></span><br><span class="line">blue.vim      delek.vim    evening.vim   lists        pablo.vim      shine.vim  torte.vim</span><br><span class="line">darkblue.vim  desert.vim   industry.vim  morning.vim  peachpuff.vim  slate.vim  zellner.vim</span><br><span class="line">default.vim   elflord.vim  koehler.vim   murphy.vim   ron.vim        tools</span><br></pre></td></tr></table></figure>
+
+<p>自定义的颜色配置放置在<code>~/.vim/colors/</code>下，比如我的文件名叫做<code>diy.vim</code></p>
+<h2 id="查看及切换配置"><a href="#查看及切换配置" class="headerlink" title="查看及切换配置"></a>查看及切换配置</h2><h3 id="切换配置文件配置"><a href="#切换配置文件配置" class="headerlink" title="切换配置文件配置"></a>切换配置文件配置</h3><p>在编辑器中，可以通过<code>:colorscheme</code> + <tab> 查看可用的配置</p>
+<img src="colorscheme.png" alt="color_scheme" width="75%">
+
+<p>可以用<code>:hi</code>（highlight的简写）查看配置中的文件，也可以查看当前哪个配置有问题，方便修改</p>
+<img src="highlight.png" alt="highlight" width="75%">
+
+<h3 id="配置文件及参数"><a href="#配置文件及参数" class="headerlink" title="配置文件及参数"></a>配置文件及参数</h3><h4 id="前置配置"><a href="#前置配置" class="headerlink" title="前置配置"></a>前置配置</h4><p>这些配置是从默认配置复制来的，放在配置文件最前面即可。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&quot; Remove all existing highlighting and set the defaults.</span></span><br><span class="line"><span class="comment">&quot; 清除所有的配置</span></span><br><span class="line"><span class="keyword">hi</span> clear</span><br><span class="line"></span><br><span class="line"><span class="comment">&quot; Load the syntax highlighting defaults, if it&#x27;s enabled.</span></span><br><span class="line"><span class="comment">&quot; 加载高光</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">exists</span>(<span class="string">&quot;syntax_on&quot;</span>)</span><br><span class="line">  <span class="keyword">syntax</span> reset</span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&quot; Set color scheme name</span></span><br><span class="line"><span class="comment">&quot; 设置配置文件名称</span></span><br><span class="line"><span class="keyword">let</span> colors_name = <span class="string">&quot;diy&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="高亮配置"><a href="#高亮配置" class="headerlink" title="高亮配置"></a>高亮配置</h4><p>在vim的配置中，针对不同的样式有不同的高亮方案，最终形成了一个有高亮的vim编辑器，常见的配置有以下三种：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&quot; Color configuration to a style</span></span><br><span class="line"><span class="keyword">hi</span> Folded ctermfg=<span class="number">14</span> ctermbg=<span class="number">242</span> guifg=DarkCyan guibg=LightGrey term=standout</span><br><span class="line"></span><br><span class="line"><span class="comment">&quot; Set the style without extra highlight</span></span><br><span class="line">LineNrAbove    xxx cleared</span><br><span class="line"></span><br><span class="line"><span class="comment">&quot; Set a style same as another style</span></span><br><span class="line">CursorLineSign xxx links <span class="keyword">to</span> SignColumn</span><br></pre></td></tr></table></figure>
+
+<p>我们一般只需要修改第一种实际带有颜色的配置即可，它的写法如下：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">hi</span> <span class="symbol">&lt;style_name&gt;</span> ctermfg=<span class="symbol">&lt;font_color&gt;</span> ctermbg=<span class="symbol">&lt;background_color&gt;</span> guifg=<span class="symbol">&lt;font_color&gt;</span> guibg=<span class="symbol">&lt;background_color&gt;</span> term=<span class="symbol">&lt;text_style&gt;</span> <span class="keyword">gui</span>=<span class="symbol">&lt;text_style&gt;</span> cterm=<span class="symbol">&lt;text_style&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>第一个是样式名称，我们可以通过<code>:hi</code>查看想要配置的样式;</p>
+<p>后面的配置从范围上可以分为：</p>
+<ul>
+<li>针对彩色终端（color terminal）的配置：<code>ctermfg</code>，<code>ctermbg</code>和<code>cterm</code></li>
+<li>针对gui的配置：<code>guifg</code>，<code>guibg</code>和<code>gui</code></li>
+<li>针对常规终端：<code>term</code>；因为常规终端是黑白配色的，所以没有颜色配置</li>
+</ul>
+<p>从配置样式上可以分为：</p>
+<ul>
+<li>字体颜色：<code>ctermfg</code>，<code>guifg</code></li>
+<li>背景颜色：<code>ctermbg</code>，<code>guibg</code></li>
+<li>字体样式：<code>cterm</code>，<code>gui</code>，<code>term</code></li>
+</ul>
+<p>我是在终端配置的，也就是只需要配置<code>ctermfg</code>，<code>ctermbg</code>和<code>cterm</code>，但为了防止修改修改导致以后使用gui显示不正常，我会一同配置gui的颜色；如果不需要覆盖某种配置（比如不需要背景色），就不需要配置这个参数<br>Terminal和GUI配置的最大区别是terminal只可以用256色，但是GUI可以用RGB颜色来配置（更多的颜色选择），在配置terminal时我们可以对照前面提到的256色卡来判断颜色的选择。</p>
+<p>在字体颜色的配置上，我们常用0-15（终端内配置的色彩） / 232-255（灰度）进行配置，比如<code>ctermfg=11</code>配置字体颜色为浅黄色</p>
+<p>字体样式有以下选择：</p>
+<ul>
+<li>bold</li>
+<li>underline</li>
+<li>undercurl    <em>not always available, only available in GUI 一般仅在GUI中有效</em></li>
+<li>reverse</li>
+<li>inverse        <em>same as reverse</em></li>
+<li>italic</li>
+<li>standout</li>
+<li>NONE        <em>no attributes used (used to reset it)</em></li>
+</ul>
+<p>以下这个配置，可以看到它设置了terminal和GUI字体颜色是黄色，在GUI和普通黑白终端中字体加粗，在颜色终端中是下划线</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">hi</span> CursorLineNr ctermfg=<span class="number">11</span> guifg=Yellow <span class="keyword">gui</span>=bold term=bold cterm=underline</span><br></pre></td></tr></table></figure>
+
+<p>在我们能看懂配置后，就可以在原有的配置上进行魔改，设置成自己喜欢的颜色</p>
+<h1 id="我的配置"><a href="#我的配置" class="headerlink" title="我的配置"></a>我的配置</h1><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&quot; Diy Vim color file for Windows Terminal with One Dark</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">hi</span> clear Normal</span><br><span class="line"><span class="keyword">set</span> bg&amp;</span><br><span class="line"></span><br><span class="line"><span class="comment">&quot; Remove all existing highlighting and set the defaults.</span></span><br><span class="line"><span class="keyword">hi</span> clear</span><br><span class="line"></span><br><span class="line"><span class="comment">&quot; Load the syntax highlighting defaults, if it&#x27;s enabled.</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">exists</span>(<span class="string">&quot;syntax_on&quot;</span>)</span><br><span class="line">  <span class="keyword">syntax</span> reset</span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> colors_name = <span class="string">&quot;diy&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">hi</span> LineNr       ctermfg=<span class="number">11</span> guifg=Yellow cterm=none</span><br><span class="line"><span class="keyword">hi</span> CursorLineNr ctermfg=<span class="number">11</span> guifg=Yellow <span class="keyword">gui</span>=bold term=bold cterm=underline</span><br><span class="line"><span class="keyword">hi</span> Search       ctermfg=<span class="number">8</span> ctermbg=<span class="number">11</span> guifg=Black guibg=Yellow term=<span class="built_in">reverse</span></span><br><span class="line"><span class="keyword">hi</span> Statement    ctermfg=<span class="number">11</span> guifg=Yellow <span class="keyword">gui</span>=bold term=bold</span><br><span class="line"><span class="keyword">hi</span> SignColumn   ctermfg=<span class="number">14</span> ctermbg=<span class="number">242</span> guifg=Cyan guibg=Grey term=standout</span><br><span class="line"><span class="keyword">hi</span> FoldColumn   ctermfg=<span class="number">14</span> ctermbg=<span class="number">242</span> guifg=Cyan guibg=Grey term=standout</span><br><span class="line"><span class="keyword">hi</span> Folded       ctermfg=<span class="number">14</span> ctermbg=<span class="number">242</span> guifg=DarkCyan guibg=LightGrey term=standout</span><br><span class="line"><span class="keyword">hi</span> Visual       ctermbg=<span class="number">242</span> guibg=LightGrey term=<span class="built_in">reverse</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10271969">Day 12：vim 配色方案</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/20718108">如何编写属于自己的Vim主题</a><br><a target="_blank" rel="noopener" href="https://alvinalexander.com/linux/vi-vim-editor-color-scheme-syntax/">How to control/configure vim colors</a><br><a target="_blank" rel="noopener" href="https://blog.51cto.com/oeasy/3582938">oeasy教您玩转vim - 24 - 自定颜色</a><br><a target="_blank" rel="noopener" href="https://vimdoc.sourceforge.net/htmldoc/syntax.html">Vim Doc - Syntax</a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>yueyue200830
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://yueyue200830.github.io/2023/01/07/Vim-Custom-Color-Scheme-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E8%89%B2/" title="Vim Custom Color Scheme 自定义配色">https://yueyue200830.github.io/2023/01/07/Vim-Custom-Color-Scheme-自定义配色/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Windows/" rel="tag"># Windows</a>
+              <a href="/tags/Vim/" rel="tag"># Vim</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/01/01/Hexo%E5%8D%87%E7%BA%A7%E8%AE%B0%E5%BD%95/" rel="prev" title="Hexo-Next升级记录">
+      <i class="fa fa-chevron-left"></i> Hexo-Next升级记录
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#256%E8%89%B2"><span class="nav-number">1.</span> <span class="nav-text">256色</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">基础配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%B8%A6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">自带配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%8F%8A%E5%88%87%E6%8D%A2%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">查看及切换配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.1.</span> <span class="nav-text">切换配置文件配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%8F%8A%E5%8F%82%E6%95%B0"><span class="nav-number">2.2.2.</span> <span class="nav-text">配置文件及参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">前置配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E4%BA%AE%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">高亮配置</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">我的配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yueyue200830</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yueyue200830" title="GitHub → https://github.com/yueyue200830" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yueyue200830AT163DOTcom" title="E-Mail → mailto:yueyue200830AT163DOTcom" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/yueyue200830" title="CSDN → https://blog.csdn.net/yueyue200830" rel="noopener" target="_blank"><i class="fab fa-codiepie fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yueyue200830</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">118k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">1:47</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'sh5S0z8pii4z5WK0vFJvezHt-MdYXbMMI',
+      appKey     : '1xzkJ66M0YUNtQ9qodkCVSVT',
+      placeholder: "Add your comment",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

@@ -286,23 +286,18 @@
       
         <p>常见的ssh连接服务器有两种，一是通过用户名和密码登录，这也是我们最常用的，而另一种是通过密钥来登录，这种不仅可以省去密码，而且更加安全可靠。</p>
 <span id="more"></span>
-
 <h1 id="服务器端生成密钥"><a href="#服务器端生成密钥" class="headerlink" title="服务器端生成密钥"></a>服务器端生成密钥</h1><p>首先连接服务器，输入<code>ssh-keygen</code>建立密钥， 会跳出以下内容：（中文备注的地方需要输入处理）</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ ssh-keygen</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/root/.ssh/id_rsa): // 直接按Enter，用默认文件位置</span><br><span class="line">Enter passphrase (empty for no passphrase): // 直接Enter，不用密码</span><br><span class="line">Enter same passphrase again: // 重复密码</span><br><span class="line">Your identification has been saved in /root/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in /root/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span><br><span class="line">The key&#x27;s randomart image is:</span><br><span class="line">+---[RSA 2048]----+</span><br><span class="line">|                 |</span><br><span class="line">|                 |</span><br><span class="line">|                 |</span><br><span class="line">|     o +         |</span><br><span class="line">|    o O S .      |</span><br><span class="line">|     X O = o     |</span><br><span class="line">|    @ O.* X      |</span><br><span class="line">|   ..XoX.* +     |</span><br><span class="line">|   xxxxxxxx      |</span><br><span class="line">+----[SHA256]-----+</span><br></pre></td></tr></table></figure>
-
 <p>这样密钥就生成好了，其中<code>id_rsa</code>是密钥，也是我们本地需要的钥匙，<code>id_rsa.pub</code>是公钥，服务器自己持有</p>
 <h1 id="服务器配置密钥"><a href="#服务器配置密钥" class="headerlink" title="服务器配置密钥"></a>服务器配置密钥</h1><p>在<code>~/.ssh</code>文件夹下面可以找到刚才生成的钥匙（我这里是root用户，所以上面显示的是<code>/root</code>）</p>
 <p>首先需要把<code>id_rsa.pub</code>这个公钥内容复制到<code>authorized_keys</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> id_rsa.pub &gt;&gt; authorized_keys</span><br></pre></td></tr></table></figure>
-
 <p>然后需要修改文件的读写权限，保证只有此用户有写权限，一般就设置为以下的权限：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 600 authorized_keys</span><br><span class="line"><span class="built_in">chmod</span> 700 ~/.ssh</span><br></pre></td></tr></table></figure>
-
 <p>到这里如果之前没有对服务器ssh进行修改的话，服务器端配置就完成了</p>
 <h1 id="客户端配置密钥"><a href="#客户端配置密钥" class="headerlink" title="客户端配置密钥"></a>客户端配置密钥</h1><p>其实客户端这里没什么配置的，只要把私钥复制到本地就可以</p>
 <p>通过<code>scp</code>命令复制id_rsa文件到本地用户的<code>.ssh</code>文件夹下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp root@xxxx:~/.ssh/id_rsa ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
-
 <p>之后就可以通过密钥登录了，命令如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@xxx -i ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
 
@@ -421,7 +416,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -484,12 +479,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">118k</span>
+    <span title="Symbols count total">124k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:47</span>
+    <span title="Reading time total">1:53</span>
 </div>
 
         

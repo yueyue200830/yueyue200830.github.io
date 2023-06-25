@@ -286,13 +286,18 @@
         <p>本文针对Next主题，不确保对于其它主题有效（但从修改模式来看，是有效的）</p>
 <p>Next默认是会显示全文的，这样显然很不方便，因此需要一些方法去只显示前面一部分。</p>
 <span id="more"></span>
+
 <h1 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h1><p>首先需要在Next主题的_config.yml中把设置打开：(默认安装时就打开了)</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Automatically excerpt description in homepage as preamble text.</span></span><br><span class="line"><span class="attr">excerpt_description:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
 <p>之后有两种方法</p>
 <h2 id="方法一：写概述"><a href="#方法一：写概述" class="headerlink" title="方法一：写概述"></a>方法一：写概述</h2><p>在文章的<code>front-matter</code>中添加<code>description</code>，其中description中的内容就会被显示在首页上，其余一律不显示。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 让首页显示部分内容</span><br><span class="line">date: 2020-02-23 22:55:10</span><br><span class="line">description: 这是显示在首页的概述，正文内容均会被隐藏。</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
 <p>比较不方便的是还得写一下概述，很多时候会懒得写概述，于是就需要第二种方法了。</p>
-<h2 id="方法二：文章截断"><a href="#方法二：文章截断" class="headerlink" title="方法二：文章截断"></a>方法二：文章截断</h2><p>在需要截断的地方加入：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="方法二：文章截断"><a href="#方法二：文章截断" class="headerlink" title="方法二：文章截断"></a>方法二：文章截断</h2><p>在需要截断的地方加入：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure>
+
 <p>首页就会显示这条以上的所有内容，隐藏接下来的所有内容。<br>例如本文会显示到<code>修改配置</code>上面。</p>
 <p>这个明显就方便很多，但当然有利有弊，比如开头都是废话首页看着就不是很好看，因此我一般会先选择方法二，如果感觉文章前面的写的不太好再用方法一。</p>
 

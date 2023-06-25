@@ -237,7 +237,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
                 </span>
             </span>
 
@@ -287,34 +287,47 @@
       
         <p>每次新的系统安装各个环境都得操作都得搜索一遍，不如自己写一篇找起来方便些。</p>
 <span id="more"></span>
+
 <p>由于apt的版本总是比较旧一些，所以我们需要自己编译源码进行安装，这样也比较方便管控版本。</p>
 <h1 id="1-Prerequisite-安装编译环境"><a href="#1-Prerequisite-安装编译环境" class="headerlink" title="1. Prerequisite 安装编译环境"></a>1. Prerequisite 安装编译环境</h1><p>一定注意要执行一遍命令，之前以为电脑中安装了环境，导致后面编译出错，踩了不少坑</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install make build-essential zlib1g-dev libbz2-dev libssl-dev libncurses5-dev libsqlite3-dev libreadline-dev tk-dev libgdbm-dev libdb-dev libpcap-dev xz-utils libexpat1-dev liblzma-dev libffi-dev libc6-dev</span><br></pre></td></tr></table></figure>
+
 <h1 id="2-Download-source-package-下载源码包"><a href="#2-Download-source-package-下载源码包" class="headerlink" title="2. Download source package 下载源码包"></a>2. Download source package 下载源码包</h1><p>我安装的是3.11.3，从<a target="_blank" rel="noopener" href="https://www.python.org/downloads/">python官网</a>找到的下载链接，使用wget下载</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.11.3/Python-3.11.3.tgz</span><br></pre></td></tr></table></figure>
+
 <h1 id="3-Decompress-解压"><a href="#3-Decompress-解压" class="headerlink" title="3. Decompress 解压"></a>3. Decompress 解压</h1><p>解压到默认文件夹即可，这个文件夹最后会删除</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -xzf Python-3.11.3.tgz</span><br><span class="line"><span class="built_in">cd</span> Python-3.11.3</span><br></pre></td></tr></table></figure>
+
 <h1 id="4-Configuration-配置"><a href="#4-Configuration-配置" class="headerlink" title="4. Configuration 配置"></a>4. Configuration 配置</h1><p>如果不需要做额外配置，直接执行configure文件即可，可以用<code>--prefix</code>指定安装目录，默认路径是<code>/usr/local/lib/</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br></pre></td></tr></table></figure>
+
 <p>想要学习更多参数，可以用<code>./configure --help</code>了解更多，安装说明在<code>README.rst</code>文件中。</p>
 <h1 id="5-Make-amp-Install-Make与安装"><a href="#5-Make-amp-Install-Make与安装" class="headerlink" title="5. Make &amp; Install Make与安装"></a>5. Make &amp; Install Make与安装</h1><p>首先需要make生成预安装的内容</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+
 <p>然后按照官方说明是需要进行安装测试，不过网上大部分都直接install了</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
 <p>测试通过后，就可以进行正式安装了</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+
 <p>如果没有报错，那么输入<code>python3.11</code>就可以运行了。</p>
 <p><strong>如果遇到任何报错</strong>，请首先执行以下命令，安装相关依赖，并从第四步configuration开始重新安装。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make clean</span><br></pre></td></tr></table></figure>
+
 <h1 id="6-Configure-default-version-配置默认版本"><a href="#6-Configure-default-version-配置默认版本" class="headerlink" title="6. Configure default version 配置默认版本"></a>6. Configure default version 配置默认版本</h1><p>如果电脑之前没有安装其他python版本，直接输入<code>python3</code>应该是可以直接运行的，但像我的ubuntu默认有一个python3.10，会发现默认的版本仍然是python3.10，我们首先可以看下python3的配置</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ <span class="built_in">which</span> python3</span><br><span class="line">/usr/bin/python3</span><br></pre></td></tr></table></figure>
+
 <p>应该是这个软连接指向了旧的python3.10，那么我们删除这个软链重新生成一个就可以了</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ sudo <span class="built_in">rm</span> /usr/bin/python3</span><br><span class="line">➜  ~ <span class="built_in">ln</span> -s /usr/local/bin/python3.11 /usr/bin/python3</span><br><span class="line">➜  ~ python3 --version</span><br><span class="line">Python 3.11.3</span><br></pre></td></tr></table></figure>
+
 <p>同时也检查以下pip是否正常</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ pip3 --version</span><br><span class="line">pip 22.3.1 from /usr/local/lib/python3.11/site-packages/pip (python 3.11)</span><br></pre></td></tr></table></figure>
+
 <h1 id="安装后导致的一些问题"><a href="#安装后导致的一些问题" class="headerlink" title="安装后导致的一些问题"></a>安装后导致的一些问题</h1><h2 id="apt-update报错"><a href="#apt-update报错" class="headerlink" title="apt update报错"></a>apt update报错</h2><p>ModuleNotFoundError: No module named ‘apt_pkg’</p>
 <p>更新了python后运行<code>apt update</code>出现了<code>ModuleNotFoundError: No module named &#39;apt_pkg&#39;</code>，根据网上解答，重新安装<code>python3-apt</code>可以解决问题</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install --reinstall python3-apt</span><br></pre></td></tr></table></figure>
+
 <p>如果还是不行，可以尝试卸载再安装，我的是卸载报错了，但是再执行了重新安装命令就成功了。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/149796622">Ubuntu安装Python3</a><br><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/480908/problem-with-update-manager-no-module-named-apt-pkg-in-ubuntu-13-10-having-i">Problem with update-manager</a></p>
 

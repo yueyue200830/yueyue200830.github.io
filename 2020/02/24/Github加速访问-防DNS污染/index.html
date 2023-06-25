@@ -292,6 +292,7 @@
         <p>在访问DNS有的时候会比较慢甚至无法打开，而我最近遇到的一个问题是DNS被污染，并且由于同时加载了境内和境外DNS，根本无法找到究竟是哪里受到了DNS污染。为此我搜了不少资料，最终得到了以下的解决方案，不过其实这个方法个人认为也是治标不治本。</p>
 <p>解决方法就是本地设置<code>hosts</code>/<code>DNS</code>，强制直接让网站访问某个ip从而跳过寻找ip地址。</p>
 <span id="more"></span>
+
 <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>简单讲一下原理（应该其实会一点CS的都懂啦），可以跳过。</p>
 <p>在访问网站时，由于我们输入的是域名（如<code>www.google.com</code>)，需要寻找它真实的ip地址再去访问。<br>那如何获取它的ip地址呢，这就是DNS和hosts的用处了。</p>
 <p>电脑首先在本地的<code>hosts</code>中寻找域名对应的ip，比如<code>localhost</code>是直接对应<code>127.0.0.0</code>。<br>如果能在hosts中寻找到，那么就直接进行下一步去加载网页了<br>但往往hosts中没有太多的对应，于是就下一步采用<code>DNS</code>寻找ip。</p>
@@ -306,7 +307,7 @@
 <li>github.global.ssl.fastly.net</li>
 </ul>
 <h2 id="可选"><a href="#可选" class="headerlink" title="可选"></a>可选</h2><ul>
-<li>www.github.com</li>
+<li><a target="_blank" rel="noopener" href="http://www.github.com">www.github.com</a></li>
 <li>api.github.com</li>
 <li>github.githubassets.com</li>
 <li>github.map.fastly.net</li>
@@ -318,20 +319,26 @@
 </ul>
 <h2 id="如何有针对性的选择添加解析的域名"><a href="#如何有针对性的选择添加解析的域名" class="headerlink" title="如何有针对性的选择添加解析的域名"></a>如何有针对性的选择添加解析的域名</h2><p>在加载github的时候打开开发者模式（F12），选择网络（Network），观察加载比较慢的或者直接加载失败的。</p>
 <img src="/2020/02/24/Github%E5%8A%A0%E9%80%9F%E8%AE%BF%E9%97%AE-%E9%98%B2DNS%E6%B1%A1%E6%9F%93/p1.png" class="" width="300" title="Network-Screenshot">
+
 <p>如图，可以看到头像是加载失败的，找到网址是：avatars0.githubusercontent.com，把它加入需要解析的地址</p>
 <h1 id="二、获取Github的DNS解析地址"><a href="#二、获取Github的DNS解析地址" class="headerlink" title="二、获取Github的DNS解析地址"></a>二、获取Github的DNS解析地址</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>采用<a target="_blank" rel="noopener" href="https://www.ipaddress.com/ip-lookup">IPAddress.com</a>查询ip地址。</p>
 <p>输入需要查找的网址，如：assets-cdn.github.com，就可以看到结果。</p>
 <img src="/2020/02/24/Github%E5%8A%A0%E9%80%9F%E8%AE%BF%E9%97%AE-%E9%98%B2DNS%E6%B1%A1%E6%9F%93/ip1.png" class="" width="400" title="Find-ip">
+
 <p>可以看到assets-cdn.github.com有四个对应ip</p>
 <h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>在用方法一的时候，发现电脑本来自动加载的ip和搜索出来的ip相差很大，因此可以直接采用电脑本来自己加载的时候采用的ip。</p>
 <img src="/2020/02/24/Github%E5%8A%A0%E9%80%9F%E8%AE%BF%E9%97%AE-%E9%98%B2DNS%E6%B1%A1%E6%9F%93/ip2.png" class="" title="Auto-ip">
+
 <p>又或者如果有自己的服务器可以尝试用服务器ping一下查看服务器所找到的ip。</p>
 <p>又又或者直接试试网上别人提供的ip。</p>
 <h1 id="三、修改Hosts文件"><a href="#三、修改Hosts文件" class="headerlink" title="三、修改Hosts文件"></a>三、修改Hosts文件</h1><p>打开系统的hosts文件，Windows是在<code>C:\Windows\System32\drivers\etc</code>，Mac和Linux是在<code>/etc</code><br>均需要采用管理员（root）打开</p>
 <p>在文件最后加上需要的ip和域名对应的地址，如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.30.255.112 gist.github.com</span><br><span class="line">192.30.253.113 github.com</span><br><span class="line">185.199.111.153 assets-cdn.github.com</span><br></pre></td></tr></table></figure>
+
 <h1 id="四、刷新DNS缓存"><a href="#四、刷新DNS缓存" class="headerlink" title="四、刷新DNS缓存"></a>四、刷新DNS缓存</h1><p>对于Windwos用户，需要刷新一下DNS缓存</p>
-<p>打开<code>cmd</code>或<code>powershell</code><br>输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipconfig /flushdns</span><br></pre></td></tr></table></figure></p>
+<p>打开<code>cmd</code>或<code>powershell</code><br>输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipconfig /flushdns</span><br></pre></td></tr></table></figure>
+
 <p>这样就可以使用我们自定义的hosts了</p>
 <h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><p>这其实是一个硬方法，由于ip可能会变且存在很多不同的ip，采用自定义ip其实并没有那么方便，一是不一定能找到最快的ip，二是一旦ip修改还得自行修改hosts文件，并没有那么方便。<br>但网上搜索了那么多，也没有找到一些好的方法，就先选择采用这个方法吧。</p>
 <p>ps.几年前的采用修改hosts的方法是可以当半个梯子用的，不过现在好像并不太好用了。。</p>

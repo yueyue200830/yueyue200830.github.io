@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="9ay-z3ep7Zek63qOsEb7JqINfKIQRxqvQ4efBve7eVc">
+  <meta name="msvalidate.01" content="77BD50564510E4BCABCFADB76378DC4F">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yueyue200830.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="最近入手了第一台NAS，考虑配置拓展入手了威联通，于是开始了捣腾QTS系统。威联通的通知中心会发送事件和警报通知给注册的设备，其中一种发送方式是邮件，需要通过SMTP服务连接一个邮件服务器，使用这个服务器的账户发送通知给指定的邮箱。其实简单点直接配置自己的邮箱服务就行，但我突然想尝试一下在NAS上搭一个邮件系统。威联通系统不像群晖有自带的邮件服务，需要自己去搭建，在搜索几个服务后选择了docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="威联通NAS使用docker-mailserver搭建邮件服务">
+<meta property="og:url" content="https://yueyue200830.github.io/2023/11/27/%E5%A8%81%E8%81%94%E9%80%9ANAS%E6%90%AD%E5%BB%BA%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1/index.html">
+<meta property="og:site_name" content="Z Blog">
+<meta property="og:description" content="最近入手了第一台NAS，考虑配置拓展入手了威联通，于是开始了捣腾QTS系统。威联通的通知中心会发送事件和警报通知给注册的设备，其中一种发送方式是邮件，需要通过SMTP服务连接一个邮件服务器，使用这个服务器的账户发送通知给指定的邮箱。其实简单点直接配置自己的邮箱服务就行，但我突然想尝试一下在NAS上搭一个邮件系统。威联通系统不像群晖有自带的邮件服务，需要自己去搭建，在搜索几个服务后选择了docker">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-11-26T16:04:34.000Z">
+<meta property="article:modified_time" content="2023-11-26T16:04:34.000Z">
+<meta property="article:author" content="yueyue200830">
+<meta property="article:tag" content="NAS">
+<meta property="article:tag" content="威联通">
+<meta property="article:tag" content="SMTP">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://yueyue200830.github.io/2023/11/27/%E5%A8%81%E8%81%94%E9%80%9ANAS%E6%90%AD%E5%BB%BA%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>威联通NAS使用docker-mailserver搭建邮件服务 | Z Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Z Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Z Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Coding for Life</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yueyue200830.github.io/2023/11/27/%E5%A8%81%E8%81%94%E9%80%9ANAS%E6%90%AD%E5%BB%BA%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yueyue200830">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Z Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          威联通NAS使用docker-mailserver搭建邮件服务
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-11-27 00:04:34" itemprop="dateCreated datePublished" datetime="2023-11-27T00:04:34+08:00">2023-11-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NAS/" itemprop="url" rel="index"><span itemprop="name">NAS</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2023/11/27/%E5%A8%81%E8%81%94%E9%80%9ANAS%E6%90%AD%E5%BB%BA%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/11/27/%E5%A8%81%E8%81%94%E9%80%9ANAS%E6%90%AD%E5%BB%BA%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>5.4k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>5 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>最近入手了第一台NAS，考虑配置拓展入手了威联通，于是开始了捣腾QTS系统。威联通的通知中心会发送事件和警报通知给注册的设备，其中一种发送方式是邮件，需要通过SMTP服务连接一个邮件服务器，使用这个服务器的账户发送通知给指定的邮箱。其实简单点直接配置自己的邮箱服务就行，但我突然想尝试一下在NAS上搭一个邮件系统。威联通系统不像群晖有自带的邮件服务，需要自己去搭建，在搜索几个服务后选择了<a target="_blank" rel="noopener" href="https://docker-mailserver.github.io/docker-mailserver/latest/">docker-mailserver</a>来搭建，这个镜像比较轻量级，可以简单的只搭建一个SMTP服务，对系统的要求比较低一些。</p>
+<span id="more"></span>
+
+<p>由于我没有自己的域名，而当前的需求只是发送邮件，所以这里的配置不涉及任何SSL配置，简单来说这个文章就是把最基本的容器跑起来的一个过程。</p>
+<p>参考了多个文章之后（列在最后的参考文档，非常感谢几位作者的分享，第一次搭邮件系统好多都不懂），发现官方tutorial中<a target="_blank" rel="noopener" href="https://docker-mailserver.github.io/docker-mailserver/edge/examples/tutorials/basic-installation/#using-dms-as-a-local-mail-relay-for-containers">Using DMS as a local mail relay for containers</a>是比较符合我的需求的，只搭建SMTP服务，不搭POP3 / IMAP。</p>
+<h2 id="威联通Container-Station认识"><a href="#威联通Container-Station认识" class="headerlink" title="威联通Container Station认识"></a>威联通Container Station认识</h2><p>正好是到手第一次配置docker，也算是对这个定制化docker认识的一个过程，记录一些小发现：</p>
+<ul>
+<li>支持Docker Compose，但竟然是在Application中创建，第一次找了半天没找到</li>
+<li>使用Container时，输入镜像后选择版本依赖hub.docker.com的访问，这个域名DNS污染了，需要手动解决下（顺便解决上这个网站的问题）</li>
+<li>ssh进入后，可以完美使用docker命令，嫌页面麻烦的可以直接ssh操作，不过bash比较难用（还没成功使用zsh）</li>
+<li>bash的vim版本低的可怜，relativenumber和color都不支持，实在是太难用了</li>
+</ul>
+<h2 id="服务搭建过程"><a href="#服务搭建过程" class="headerlink" title="服务搭建过程"></a>服务搭建过程</h2><h3 id="编写compose文件"><a href="#编写compose文件" class="headerlink" title="编写compose文件"></a>编写compose文件</h3><p>文件基本时照搬官方文档的，其实也没几行配置：<br>首先需要配置一个hostname，这里按喜好填写，但建议不要用常见的域名，不知道会不会被其他邮箱拦截；<br>ports只配置SMTP的端口，其实感觉甚至后两个不配都可能没事；<br>volume配置照抄官方配置，其实不是特别好因为是映射到了container的本地文件中，在QNAP中重新编译会删掉原本的本地文件，比较好的做法是用docker的volume，不过我也只是搭个账号就简单处理了。至于为什么要映射本地文件是为了保证容器重启后数据不会丢失；<br>环境变量中需要注意把SSL_TYPE删掉，这样默认SSL就是空，如果根据原本的配置会需要一个SSL证书，否则容器跑不起来。当然如果想要接收邮件证书是必须的；</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;1.0&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">mailserver:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">ghcr.io/docker-mailserver/docker-mailserver:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">mailserver</span></span><br><span class="line">    <span class="attr">hostname:</span> <span class="string">mail.example.com</span> <span class="comment"># 千万记得换个域名，发送邮件给网易被拒绝了就是因为这个域名。。。</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;25:25&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;587:587&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;465:465&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./docker-data/dms/mail-data/:/var/mail/</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./docker-data/dms/mail-state/:/var/mail-state/</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./docker-data/dms/mail-logs/:/var/log/mail/</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./docker-data/dms/config/:/tmp/docker-mailserver/</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/etc/localtime:/etc/localtime:ro</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ENABLE_FAIL2BAN=1</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">PERMIT_DOCKER=network</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">SPOOF_PROTECTION=0</span></span><br><span class="line">    <span class="attr">cap_add:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">NET_ADMIN</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br></pre></td></tr></table></figure>
+
+<p>然后把这个配置丢到Application中创建就行，它会自动创建并启动一个对应的容器。</p>
+<h3 id="配置一个用户"><a href="#配置一个用户" class="headerlink" title="配置一个用户"></a>配置一个用户</h3><p>容器启动后，就会提示没有用户，需要创建一个用户（这里一个坑点是120s没有用户就会重启，不是很懂）<br>这时就需要ssh进入系统，跑下命令创建一个用户，这个操作很多文档都说要下载脚本跑，但实际上直接用docker里的脚本操作就行，以下命令是创建一个邮箱是<a href="mailto:admin@example.com">admin@example.com</a>密码是passwd123的一个账户。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -ti mailserver setup email add admin@example.com passwd123</span><br></pre></td></tr></table></figure>
+
+<p>这个脚本运行后，就会发现docker中显示正常启动了。</p>
+<h3 id="通知中心连接服务"><a href="#通知中心连接服务" class="headerlink" title="通知中心连接服务"></a>通知中心连接服务</h3><p>其实到这一步，邮件服务算是跑起来了，但是还有其他的坑我们晚点处理，现在可以尝试连接邮件服务了。在通知中心中添加SMTP服务，选择custom account，服务ip配置127.0.0.1，安全连接配置为None，输入用户名密码，就可以了。<br>创建后点击发送测试邮件，自己给自己发一封邮件，会发现有些日志，不过好像有点错误（也可能成功，我用example.com的域名能发送成功，用新的域名就是失败找不到域名）不过至少我们服务器能连接上了。<br>当然也可以尝试发送一封邮件给自己真实的邮箱，如果能发送成功，那恭喜你就配置完成了。不过我这边会有个postfix的报错<code>Host or domain name not found. Name service error for name=example.com</code></p>
+<h3 id="处理域名问题"><a href="#处理域名问题" class="headerlink" title="处理域名问题"></a>处理域名问题</h3><p>上面这个postfix的服务解析问题，其实是因为dns配置错误导致的，通过互联网搜索找到了解法，可以修改<code>resolv.conf</code>配置postfix的dns解析。</p>
+<p>首先进入容器，我这里ui界面的terminal不知道为什么没法用（还需要研究下），直接ssh到服务后运行docker命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it mailserver /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>可以找到配置文件路径在<code>/etc/resolv.conf</code>，使用cat看下默认的配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nameserver 127.0.0.11</span><br><span class="line">options ndots:0</span><br></pre></td></tr></table></figure>
+
+<p>域名解析的服务器不知道为什么还在本地，需要修改成真实解析的dns地址。在docker文档上找了一圈没找到配置项，只能手动改这个配置了。结果尝试vim / vi竟然都不支持，可能作者为了精简吧，把编辑功能都删了，尝试apt install直接连不上。。还好这配置只有两行，最终用最傻的方法<code>&gt;</code>直接覆盖写入文件（不过好像在源文件后面append一行配置也可以）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先复制一份，虽然没什么用</span></span><br><span class="line"><span class="built_in">cp</span> resolv.conf resolv.conf.backup</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;nameserver 1.1.1.1&#x27;</span> &gt; resolv.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;options ndots:0&#x27;</span> &gt;&gt; resolv.conf</span><br></pre></td></tr></table></figure>
+
+<p>然后用通知中心给自己的邮箱发送一份邮件，就能很愉快的接收到了，也可以从docker的日志看到一些信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Nov 27 02:07:05 xxx postfix/trivial-rewrite[16634]: warning: do not list domain my-mail.com in BOTH mydestination and virtual_mailbox_domains</span><br><span class="line">Nov 27 02:07:05 xxx postfix/smtpd[16548]: send-id-A: client=unknown[172.29.8.1]</span><br><span class="line">Nov 27 02:07:05 xxx postfix/cleanup[16635]: send-id-A: message-id=&lt;&gt;</span><br><span class="line">Nov 27 02:07:05 xxx opendkim[489]: send-id-A: no signing table match for &#x27;user@my-mail.com&#x27;</span><br><span class="line">Nov 27 02:07:05 xxx opendkim[489]: send-id-A: no signature data</span><br><span class="line">Nov 27 02:07:05 xxx postfix/qmgr[619]: send-id-A: from=&lt;user@my-mail.com&gt;, size=32379, nrcpt=1 (queue active)</span><br><span class="line">Nov 27 02:07:05 xxx postfix/smtpd[16548]: disconnect from unknown[172.29.8.1] ehlo=1 mail=1 rcpt=1 data=1 quit=1 commands=5</span><br><span class="line">Nov 27 02:07:05 xxx postfix/smtpd-amavis/smtpd[16638]: connect from localhost[127.0.0.1]</span><br><span class="line">Nov 27 02:07:05 xxx postfix/trivial-rewrite[16634]: warning: do not list domain my-mail.com in BOTH mydestination and virtual_mailbox_domains</span><br><span class="line">Nov 27 02:07:05 xxx postfix/smtpd-amavis/smtpd[16638]: receive-id-B: client=localhost[127.0.0.1]</span><br><span class="line">Nov 27 02:07:05 xxx postfix/cleanup[16635]: receive-id-B: message-id=&lt;this-is-id@my-mail.com&gt;</span><br><span class="line">Nov 27 02:07:05 xxx postfix/qmgr[619]: receive-id-B: from=&lt;user@my-mail.co&gt;, size=32604, nrcpt=1 (queue active)</span><br><span class="line">Nov 27 02:07:05 xxx amavis[687]: (00687-01) Passed CLEAN &#123;RelayedOpenRelay&#125;, [172.29.8.1]:59858 &lt;user@my-mail.co&gt; -&gt; &lt;my-real-email@email.com&gt;, Queue-ID: send-id-A, mail_id: xxxxx, Hits: -, size: 32345, queued_as: receive-id-B, 43 ms</span><br><span class="line">Nov 27 02:07:05 xxx postfix/smtp-amavis/smtp[16636]: send-id-A: to=&lt;my-real-email@email.com&gt;, relay=127.0.0.1[127.0.0.1]:10024, delay=0.07, delays=0.01/0.01/0/0.04, dsn=2.0.0, status=sent (250 2.0.0 from MTA(smtp:[127.0.0.1]:10025): 250 2.0.0 Ok: queued as receive-id-B)</span><br><span class="line">Nov 27 02:07:05 xxx postfix/qmgr[619]: send-id-A: removed</span><br><span class="line">Nov 27 02:07:06 xxx postfix/smtp[16639]: receive-id-B: to=&lt;my-real-email@email.com&gt;, relay=real-email-domian[xxx.xxx.xx.xx]:25, delay=0.89, delays=0/0.01/0.16/0.72, dsn=2.0.0, status=sent (250 Mail OK queued as some-id another-id)</span><br><span class="line">Nov 27 02:07:06 xxx postfix/qmgr[619]: receive-id-B: removed</span><br></pre></td></tr></table></figure>
+
+<p>这样配置后，理论上我们还需要把这个配置做持久化映射，否则docker重启后又会发送失败。</p>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>整体只是一个简单的配置，但是因为不熟悉邮件系统 + 没有域名导致折腾了很久，很多配置在域名上的我以为是本地配的，找了半天。另外其实这个邮件系统有点鸡肋，算是一个小小的学习demo吧。<br>其实运行过程中还会发现有些问题，比如经常出现connect from unknown然后忽略连接，也不知道是局域网有问题还是什么情况；另外也有思考既然基本只用到postfix是不是找个postfix镜像就行，但好像还需要一个简单的db存储，针对这个docker也需要更深入研究下。</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.treesir.pub/post/docker-deploy-mailserver/#%E7%8E%AF%E5%A2%83%E8%AF%B4%E6%98%8E">使用 Docker Compose 5分钟 部署 一台邮件服务器</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/609639797">docker-mailserver 搭建邮件服务器</a></li>
+<li><a target="_blank" rel="noopener" href="https://wmwm.me/article/456048926181560320">搭建一个属于自己的域名邮箱｜Docker-Mailserver详细教程｜避坑指南</a></li>
+<li><a target="_blank" rel="noopener" href="https://lala.im/4224.html">使用docker-mailserver自建邮件服务器</a></li>
+<li><a target="_blank" rel="noopener" href="https://xinalin.com/91/selfhosted-mail-server-on-docker">Docker自建邮件服务器</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/turingguo/p/15802479.html">使用docker-mailserver搭建轻量邮件服务器</a></li>
+<li><a target="_blank" rel="noopener" href="https://serverfault.com/questions/577134/postfix-host-or-domain-not-found">Postfix - Host or domain not found</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>yueyue200830
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://yueyue200830.github.io/2023/11/27/%E5%A8%81%E8%81%94%E9%80%9ANAS%E6%90%AD%E5%BB%BA%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1/" title="威联通NAS使用docker-mailserver搭建邮件服务">https://yueyue200830.github.io/2023/11/27/威联通NAS搭建邮件服务/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/NAS/" rel="tag"># NAS</a>
+              <a href="/tags/%E5%A8%81%E8%81%94%E9%80%9A/" rel="tag"># 威联通</a>
+              <a href="/tags/SMTP/" rel="tag"># SMTP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/06/24/Install-Neovim-on-WSL/" rel="prev" title="Install and Config Neovim on WSL">
+      <i class="fa fa-chevron-left"></i> Install and Config Neovim on WSL
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A8%81%E8%81%94%E9%80%9AContainer-Station%E8%AE%A4%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">威联通Container Station认识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">服务搭建过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99compose%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">编写compose文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AA%E7%94%A8%E6%88%B7"><span class="nav-number">2.2.</span> <span class="nav-text">配置一个用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E7%9F%A5%E4%B8%AD%E5%BF%83%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.3.</span> <span class="nav-text">通知中心连接服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%9F%9F%E5%90%8D%E9%97%AE%E9%A2%98"><span class="nav-number">2.4.</span> <span class="nav-text">处理域名问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-number">2.5.</span> <span class="nav-text">后记</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">3.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yueyue200830</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yueyue200830" title="GitHub → https://github.com/yueyue200830" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yueyue200830AT163DOTcom" title="E-Mail → mailto:yueyue200830AT163DOTcom" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/yueyue200830" title="CSDN → https://blog.csdn.net/yueyue200830" rel="noopener" target="_blank"><i class="fab fa-codiepie fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yueyue200830</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">130k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">1:58</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'sh5S0z8pii4z5WK0vFJvezHt-MdYXbMMI',
+      appKey     : '1xzkJ66M0YUNtQ9qodkCVSVT',
+      placeholder: "Add your comment",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

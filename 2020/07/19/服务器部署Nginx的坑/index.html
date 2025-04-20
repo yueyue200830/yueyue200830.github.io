@@ -287,13 +287,11 @@
       
         <p>好久不发博文了，debug了一天的Nginx部署，必须得记录一下踩过的坑。</p>
 <span id="more"></span>
-
 <h1 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h1><p>前端有两个页面、后端有一个服务，需要把前端访问转发到后端去读数据库。<br>服务器用的<code>Centos 8</code>。</p>
 <h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><h2 id="问题一：无法转发"><a href="#问题一：无法转发" class="headerlink" title="问题一：无法转发"></a>问题一：无法转发</h2><p>采用<code>proxy_pass</code>转发到local，始终没反应，返回<code>502</code>，log显示<code>(13: Permission denied)</code>，服务器curl localhost有反应。</p>
 <p>结果是linux的http设置问题</p>
 <p><strong>解决方法</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setsebool -P httpd_can_network_connect 1</span><br></pre></td></tr></table></figure>
-
 <h2 id="问题二：部分图片加载一半就结束"><a href="#问题二：部分图片加载一半就结束" class="headerlink" title="问题二：部分图片加载一半就结束"></a>问题二：部分图片加载一半就结束</h2><p>有的图片莫名不能加载出来，浏览器的console报错<code>net::ERR_CONTENT_LENGTH_MISMATCH</code>，log显示<code>(13: Permission denied)</code>。</p>
 <p>这是真的没权限，因为访问速度较慢，nginx创建了temp文件夹做缓存，结果用户权限不够。</p>
 <p><strong>解决方法</strong></p>
@@ -302,13 +300,11 @@
 <p>端口没有注册，需要在系统中加入这个端口。</p>
 <p><strong>解决方法</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo semanage port -a -t http_port_t  -p tcp xxxx <span class="comment"># xxxx is port number</span></span><br></pre></td></tr></table></figure>
-
 <h2 id="问题四：修改文件后无法加载"><a href="#问题四：修改文件后无法加载" class="headerlink" title="问题四：修改文件后无法加载"></a>问题四：修改文件后无法加载</h2><p>把前端的静态文件重新编译部署了以下，就出现了这个问题，返回<code>403</code>，log显示<code>(13: Permission denied)</code>，一直以为是没权限，但用户是root，并且给了777。</p>
 <p>结果是nginx的问题，盲猜缓存的锅？</p>
 <p><strong>解决方法</strong></p>
 <p>手动重新启动，不能用reload</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nginx -s stop</span><br><span class="line">nginx -c nginx.conf</span><br></pre></td></tr></table></figure>
-
 <h1 id="崩溃的总结"><a href="#崩溃的总结" class="headerlink" title="崩溃的总结"></a>崩溃的总结</h1><p>linux系统也各种坑呀，一半都是系统设置的问题，一开始还没找到error的log完全不知道发生了什么。</p>
 <p>今天以后我也是用过nginx的人了</p>
 
@@ -428,7 +424,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -441,7 +437,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-count">67</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -482,7 +478,7 @@
 <div class="copyright">
   
   &copy; 2020 – 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -491,12 +487,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">130k</span>
+    <span title="Symbols count total">134k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:58</span>
+    <span title="Reading time total">2:02</span>
 </div>
 
         

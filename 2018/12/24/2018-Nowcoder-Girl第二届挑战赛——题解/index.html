@@ -288,7 +288,6 @@
 <p>Update: 第一次还是挺顺利的，奖品加分都有啦hhh</p>
 <p>2020update：都一年过去了，2019也比完了，题目还是没有上来？？？</p>
 <span id="more"></span>
-
 <h1 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h1><p>这是一道坑题，题意理解错了，是歌曲已经下载的秒数不是从下载到开始过了多少秒。。。</p>
 <p>其实就算是一道追及问题吧，求一下下一次重头播放的时候是第几秒</p>
 <p>代码等有题目了再更（大概不会有了）</p>
@@ -301,13 +300,11 @@
 <h2 id="判断是有限小数还是无限小数"><a href="#判断是有限小数还是无限小数" class="headerlink" title="判断是有限小数还是无限小数"></a>判断是有限小数还是无限小数</h2><p>其实对于有限小数，就是要整除$10^n$，因此当且仅当分母只是2和5的倍数时才行。</p>
 <p>不过有一个小坑在于记得分子分母需要先约分一下，用gcd求一下就好</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">gcd</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;<span class="keyword">return</span> a%b==<span class="number">0</span>?b:<span class="built_in">gcd</span>(b,a%b);&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//判断是不是有限小数</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">yes</span><span class="params">(<span class="type">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (n%<span class="number">2</span> == <span class="number">0</span>) n /= <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">while</span> (n%<span class="number">5</span> == <span class="number">0</span>) n /= <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">double</span> n, i;</span><br><span class="line">    <span class="type">double</span> e = <span class="built_in">exp</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> s;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">5</span>) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">0</span> &lt;&lt;endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    s = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">5</span>; i &lt;=  n; i++) &#123;</span><br><span class="line">        <span class="type">int</span> k = <span class="built_in">int</span>(i/e+<span class="number">0.5</span>);</span><br><span class="line">        <span class="type">int</span> x = <span class="built_in">gcd</span>(<span class="built_in">int</span>(i),k);</span><br><span class="line">        k /= x;</span><br><span class="line">        <span class="type">bool</span> ok = <span class="built_in">yes</span>(k);</span><br><span class="line">        <span class="keyword">if</span>(ok) s -= <span class="built_in">int</span>(i);</span><br><span class="line">        <span class="keyword">else</span> s += <span class="built_in">int</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, s);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h1 id="第三题"><a href="#第三题" class="headerlink" title="第三题"></a>第三题</h1><p>第三题题意又有点坑。。需要所有连续x个都满足才行。。。</p>
 <p>感觉读懂题其实就没什么难点了</p>
 <p>求出最坏情况就好</p>
 <p>这个代码好像本地保存有一点问题，可能最后是在网上直接修改的，我稍微修改了一下，不能保证一定是对的，等题目出来了再检查一下，但思路是没问题的。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a[<span class="number">1000005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll n, x, c, m, i, j, s, k;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; x &gt;&gt; c &gt;&gt; m;</span><br><span class="line">    <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="built_in">sizeof</span>(a));</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;j);</span><br><span class="line">        a[j<span class="number">-1</span>]++;</span><br><span class="line">    &#125;</span><br><span class="line">    s = <span class="number">0</span>;</span><br><span class="line">    j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; x<span class="number">-1</span>; i++) &#123;</span><br><span class="line">        j += a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = x<span class="number">-1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        j += a[i];</span><br><span class="line">        k = i;</span><br><span class="line">        <span class="keyword">while</span> (j &lt; c) &#123;</span><br><span class="line">            <span class="keyword">while</span> (a[k]==<span class="number">1</span>) &#123;</span><br><span class="line">                k--;</span><br><span class="line">            &#125;</span><br><span class="line">            a[k]++;</span><br><span class="line">            j++;</span><br><span class="line">            s++;</span><br><span class="line">            k--;</span><br><span class="line">        &#125;</span><br><span class="line">        j -= a[i-x+<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>其他未完待续。。</p>
 <p>搬运自CSDN：<a target="_blank" rel="noopener" href="https://blog.csdn.net/yueyue200830/article/details/85236298">https://blog.csdn.net/yueyue200830/article/details/85236298</a></p>
 
@@ -426,7 +423,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -439,7 +436,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-count">67</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -480,7 +477,7 @@
 <div class="copyright">
   
   &copy; 2020 – 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -489,12 +486,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">130k</span>
+    <span title="Symbols count total">134k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:58</span>
+    <span title="Reading time total">2:02</span>
 </div>
 
         

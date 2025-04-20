@@ -290,44 +290,33 @@
       
         <p>作为一个假全栈开发者，遇到一个需求要在页面上显示地图，然后根据房间点击跳转，原生HTML有两种解决方法：SVG和Canvas，这两种都是在前端画图，但原理和实现完全不一样。</p>
 <span id="more"></span>
-
 <h1 id="SVG和Canvas的区别"><a href="#SVG和Canvas的区别" class="headerlink" title="SVG和Canvas的区别"></a>SVG和Canvas的区别</h1><p>SVG和Canvas最大的区别是SVG是矢量图而Canvas是非矢量图，Canvas是HTML5内自带的标签，而SVG则其实并非必须基于HTML，它类似JPG、GIF，是一种定义的格式，甚至可以采用Adobe AI来画SVG。</p>
 <p>在页面绘制方面，Canvas逻辑上是一块画布，我们在画布上通过js画我们想要的图案，因此若要做到动态效果，Canvas必须进行重绘，也就是Canvas是通过代码把每一帧写出来的方式做到的动画效果，而这样的开发也更多的依赖于前端工程师，因此Canvas更多的会用在复杂的场景上，如3D等。</p>
 <p>而SVG则是仅采用HTML标签绘制，它也可以类似JPG一样采用image标签导入显示，SVG的动画效果采用标签animate实现，支持触发各种listener的事件，个人理解为通过HTML标签读取并执行相应js。SVG作为矢量图更多的用于一些动画渲染，比如loading图标，因为矢量且轻量，可以减少传输的数据量，又不会失真，而个人感觉SVG应该更多的是UX画的（？）。实际上我感觉SVG更像一个轻量级的Flash，因为AI里制作动画十分像Flash的模式。</p>
 <h1 id="Canvas基本入门"><a href="#Canvas基本入门" class="headerlink" title="Canvas基本入门"></a>Canvas基本入门</h1><h2 id="Canvas标签"><a href="#Canvas标签" class="headerlink" title="Canvas标签"></a>Canvas标签</h2><p>Canvas在HTML部分只需要写一个标签，绘制部分全部交给js，所以必须要填id，而在标签内部，可以写一些文字，当canvas标签不支持时会显示。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;canvasLearning&quot;</span>&gt;</span></span><br><span class="line">  抱歉，您的浏览器不支持canvas元素</span><br><span class="line">  （这些内容将会在不支持<span class="tag">&lt;<span class="name">canvas</span>&gt;</span>元素的浏览器或是禁用了JavaScript的浏览器内渲染并展现）</span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
 <h2 id="Canvas坐标"><a href="#Canvas坐标" class="headerlink" title="Canvas坐标"></a>Canvas坐标</h2><p>Canvas坐标和大部分CS坐标一样，左上角是0，0。图片来源：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/fly_dragon/p/10416034.html">Canvas入门到高级详解(上)</a></p>
 <img src="/2021/04/18/%E5%89%8D%E7%AB%AF%E5%9B%BE%E7%94%BB%E7%BB%98%E5%88%B6%E2%80%94%E2%80%94Canvas/1.png" class="" title="canvas坐标">
-
 <h2 id="Canvas绘制——Context"><a href="#Canvas绘制——Context" class="headerlink" title="Canvas绘制——Context"></a>Canvas绘制——Context</h2><p>Canvas绘制需要通过js获取canvas的上下文（context），用context来画的，2d是二维画图，也就是我们一般用的，如果用3d则是WebGL。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> canvas = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;canvasLearning&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> ctx = canvas.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
 <p>一个小例子，画一个红色的正方形。<br>canvas画图和古老的MFC很像，首先定义画笔的颜色、粗细、样式等，也就是这里的<code>fillStyle</code>，然后通过函数画图，这里是画一个实心的长方形。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> canvas = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;canvasLearning&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> ctx = canvas.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>)</span><br><span class="line">ctx.<span class="property">fillStyle</span> = <span class="string">&#x27;rgb(200,0,0)&#x27;</span></span><br><span class="line">ctx.<span class="title function_">fillRect</span>(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">50</span>)</span><br></pre></td></tr></table></figure>
-
 <h2 id="绘制基本图形"><a href="#绘制基本图形" class="headerlink" title="绘制基本图形"></a>绘制基本图形</h2><h3 id="矩形"><a href="#矩形" class="headerlink" title="矩形"></a>矩形</h3><p>矩形有三种画法，全填充的<code>fillRect(x, y, width, height)</code>，描边的<code>strokeRect(x, y, width, height)</code>和清空矩形内的画布<code>clearRect(x, y, width, height)</code>。<br>这里的x和y是矩形左上角的点，也是在坐标轴内坐标最小的点。</p>
 <p>一个例子，来自MDN</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> canvas = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;canvasLearning&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> ctx = canvas.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>)</span><br><span class="line"></span><br><span class="line">ctx.<span class="title function_">fillRect</span>(<span class="number">25</span>, <span class="number">25</span>, <span class="number">100</span>, <span class="number">100</span>)</span><br><span class="line">ctx.<span class="title function_">clearRect</span>(<span class="number">45</span>, <span class="number">45</span>, <span class="number">60</span>, <span class="number">60</span>)</span><br><span class="line">ctx.<span class="title function_">strokeRect</span>(<span class="number">50</span>, <span class="number">50</span>, <span class="number">50</span>, <span class="number">50</span>)</span><br></pre></td></tr></table></figure>
-
 <p>结果如下：</p>
 <img src="/2021/04/18/%E5%89%8D%E7%AB%AF%E5%9B%BE%E7%94%BB%E7%BB%98%E5%88%B6%E2%80%94%E2%80%94Canvas/rect.png" class="" title="矩形">
-
 <h3 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h3><p>这里的路径是指由很多个点或线组成的图案，可以绘制空心也可绘制实心。于矩形不同的是这里会需要<code>beginPath()</code>作为开始绘制路径的命令，并且当使用<code>stroke()</code>（空心）或<code>fill()</code>（实心）时才会执行绘制。</p>
 <p>移动画笔位置命令为<code>moveTo(x, y)</code></p>
 <p>下面的绘制是基于路径的绘制方法。</p>
 <h3 id="直线"><a href="#直线" class="headerlink" title="直线"></a>直线</h3><p><code>lineTo(x, y)</code>会从当前位置绘制一条线到坐标（x，y）</p>
 <p>例子，绘制三角形，来自MDN</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> canvas = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;canvas&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> ctx = canvas.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 填充三角形</span></span><br><span class="line">ctx.<span class="title function_">beginPath</span>()</span><br><span class="line">ctx.<span class="title function_">moveTo</span>(<span class="number">25</span>, <span class="number">25</span>)</span><br><span class="line">ctx.<span class="title function_">lineTo</span>(<span class="number">105</span>, <span class="number">25</span>)</span><br><span class="line">ctx.<span class="title function_">lineTo</span>(<span class="number">25</span>, <span class="number">105</span>)</span><br><span class="line">ctx.<span class="title function_">fill</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 描边三角形</span></span><br><span class="line">ctx.<span class="title function_">beginPath</span>()</span><br><span class="line">ctx.<span class="title function_">moveTo</span>(<span class="number">125</span>, <span class="number">125</span>)</span><br><span class="line">ctx.<span class="title function_">lineTo</span>(<span class="number">125</span>, <span class="number">45</span>)</span><br><span class="line">ctx.<span class="title function_">lineTo</span>(<span class="number">45</span>, <span class="number">125</span>)</span><br><span class="line">ctx.<span class="title function_">closePath</span>()</span><br><span class="line">ctx.<span class="title function_">stroke</span>()</span><br></pre></td></tr></table></figure>
-
 <img src="/2021/04/18/%E5%89%8D%E7%AB%AF%E5%9B%BE%E7%94%BB%E7%BB%98%E5%88%B6%E2%80%94%E2%80%94Canvas/lineTo.png" class="" title="直线">
-
 <h3 id="圆弧"><a href="#圆弧" class="headerlink" title="圆弧"></a>圆弧</h3><p><code>arc(x, y, radius, startAngle, endAngle, anticlockwise)</code>绘制一个以<code>(x, y)</code>为圆心，半径为radius的圆弧，圆弧的角度采用弧度制，x轴正方向为0，anticlockwise为<code>true</code>或<code>false</code>表示顺时针或逆时针。</p>
 <p>例子，来自MDN</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ctx.<span class="title function_">beginPath</span>()</span><br><span class="line">ctx.<span class="title function_">arc</span>(<span class="number">75</span>, <span class="number">75</span>, <span class="number">50</span>, <span class="number">0</span>, <span class="title class_">Math</span>.<span class="property">PI</span> * <span class="number">2</span>, <span class="literal">true</span>)</span><br><span class="line">ctx.<span class="title function_">moveTo</span>(<span class="number">110</span>, <span class="number">75</span>)</span><br><span class="line">ctx.<span class="title function_">arc</span>(<span class="number">75</span>, <span class="number">75</span>, <span class="number">35</span>, <span class="number">0</span>, <span class="title class_">Math</span>.<span class="property">PI</span>, <span class="literal">false</span>)</span><br><span class="line">ctx.<span class="title function_">moveTo</span>(<span class="number">65</span>, <span class="number">65</span>)</span><br><span class="line">ctx.<span class="title function_">arc</span>(<span class="number">60</span>, <span class="number">65</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="title class_">Math</span>.<span class="property">PI</span> * <span class="number">2</span>, <span class="literal">true</span>)</span><br><span class="line">ctx.<span class="title function_">moveTo</span>(<span class="number">95</span>, <span class="number">65</span>)</span><br><span class="line">ctx.<span class="title function_">arc</span>(<span class="number">90</span>, <span class="number">65</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="title class_">Math</span>.<span class="property">PI</span> * <span class="number">2</span>, <span class="literal">true</span>)</span><br><span class="line">ctx.<span class="title function_">stroke</span>()</span><br></pre></td></tr></table></figure>
-
 <img src="/2021/04/18/%E5%89%8D%E7%AB%AF%E5%9B%BE%E7%94%BB%E7%BB%98%E5%88%B6%E2%80%94%E2%80%94Canvas/arc.png" class="" title="圆弧">
-
 <h2 id="Style样式"><a href="#Style样式" class="headerlink" title="Style样式"></a>Style样式</h2><p>最基本的就是设置绘制颜色，支持CSS中的颜色表达，命令为<code>ctx.style = &#39;...&#39;</code></p>
 <p>如果绘制线条，那么牵扯到线条的粗细，可以通过<code>ctx.lineWidth</code>设置</p>
 <p>此外还有很多可以设置的参数，而比较特殊的我认为是渐变效果，有线性渐变<code>createLinearGradient(x1, y1, x2, y2)</code>和径向渐变<code>createRadialGradient(x1, y1, r1, x2, y2, r2)</code></p>
@@ -449,7 +438,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -462,7 +451,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-count">67</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -503,7 +492,7 @@
 <div class="copyright">
   
   &copy; 2020 – 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -512,12 +501,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">130k</span>
+    <span title="Symbols count total">134k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:58</span>
+    <span title="Reading time total">2:02</span>
 </div>
 
         

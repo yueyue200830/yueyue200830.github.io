@@ -286,23 +286,17 @@
         <p>Calendar类实个挺神奇的类，具体原因也没有细究，记一下它的用法。</p>
 <p>Calendar类是一个基于Date类的类，它其中用到了Date，并且有相应的方法。而Calendar比Date增加了一些更通用的甚至，比如可以单独甚至年月日。</p>
 <span id="more"></span>
-
 <h1 id="新建一个（假）实例"><a href="#新建一个（假）实例" class="headerlink" title="新建一个（假）实例"></a>新建一个（假）实例</h1><p>和其他很多函数用法不一样，Calendar不用new来新建一个实例，而是用Calendar.getInstance()，因为某些原因所以我叫它（假）实例。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Calendar</span> <span class="variable">c</span> <span class="operator">=</span> Calendar.getInstance();</span><br></pre></td></tr></table></figure>
-
 <p>这样我们就拥有了一个时间为现在时间的Calendar类c了。</p>
 <h1 id="设置时间"><a href="#设置时间" class="headerlink" title="设置时间"></a>设置时间</h1><p>Calendar有两种设置方法。</p>
 <h2 id="调用set"><a href="#调用set" class="headerlink" title="调用set"></a>调用set</h2><p>第一种调用set，用法是set(变量，值)<br>变量可以是Calendar.HOUR, Calendar.YEAR 等。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Calendar</span> <span class="variable">c</span> <span class="operator">=</span> Calendar.getInstance();</span><br><span class="line">c.set(Calendar.YEAR, <span class="number">2019</span>);</span><br></pre></td></tr></table></figure>
-
 <p>这样年份就变成了2019</p>
 <h2 id="调用setTime"><a href="#调用setTime" class="headerlink" title="调用setTime"></a>调用setTime</h2><p>setTime就是一个和Date有关的方法了，它的传参是一个Date类，为什么要用Date呢，因为Date的日期计算方式是距离一个年份的毫秒数，个人猜测比较方便。<br>用法就是setTime(date)</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Calendar</span> <span class="variable">c</span> <span class="operator">=</span> Calendar.getInstance();</span><br><span class="line"><span class="type">Date</span> <span class="variable">d</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">c.setTime(d);</span><br></pre></td></tr></table></figure>
-
 <h2 id="复制另一个Calendar时间"><a href="#复制另一个Calendar时间" class="headerlink" title="复制另一个Calendar时间"></a>复制另一个Calendar时间</h2><p>Calendar有一个方法是getTime()返回的是一个Date类，和setTime很像，因此我的解决方法如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Calendar</span> <span class="variable">c1</span> <span class="operator">=</span> Calendar.getInstance();</span><br><span class="line"><span class="type">Calendar</span> <span class="variable">c2</span> <span class="operator">=</span> Calendar.getInstance();</span><br><span class="line">c1.setTime(c2.getTime());</span><br></pre></td></tr></table></figure>
-
-
 <h1 id="Assert的使用"><a href="#Assert的使用" class="headerlink" title="Assert的使用"></a>Assert的使用</h1><p>这里就是为什么我认为我们构建的是一个（假）实例了。<br>阅读下述代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Calendar</span> <span class="variable">c1</span> <span class="operator">=</span> Calendar.getInstance();</span><br><span class="line"><span class="type">Calendar</span> <span class="variable">c2</span> <span class="operator">=</span> Calendar.getInstance();</span><br><span class="line">assertEquals(c1, c2);</span><br></pre></td></tr></table></figure>
 <p>它是不会报错的，十分神奇。。</p>
@@ -426,7 +420,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -439,7 +433,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-count">67</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -480,7 +474,7 @@
 <div class="copyright">
   
   &copy; 2020 – 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -489,12 +483,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">130k</span>
+    <span title="Symbols count total">134k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:58</span>
+    <span title="Reading time total">2:02</span>
 </div>
 
         

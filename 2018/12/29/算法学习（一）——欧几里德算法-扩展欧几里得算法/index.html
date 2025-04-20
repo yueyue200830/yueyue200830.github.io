@@ -289,10 +289,7 @@
 <p>个人简单脑补就是a和b两个数的模还是a和b的最大公约数</p>
 <p>int类型 </p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">gcd</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;<span class="keyword">return</span> a%b==<span class="number">0</span> ? b : <span class="built_in">gcd</span>(b, a%b);&#125;</span><br></pre></td></tr></table></figure>
-
-<p>long long类型的 </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">gcd</span><span class="params">(<span class="type">long</span> <span class="type">long</span> a, <span class="type">long</span> <span class="type">long</span> b)</span> </span>&#123;<span class="keyword">return</span> a%b==<span class="number">0</span> ? b : <span class="built_in">gcd</span>(b, a%b);&#125;</span><br></pre></td></tr></table></figure>
-
+<p>long long类型的<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">gcd</span><span class="params">(<span class="type">long</span> <span class="type">long</span> a, <span class="type">long</span> <span class="type">long</span> b)</span> </span>&#123;<span class="keyword">return</span> a%b==<span class="number">0</span> ? b : <span class="built_in">gcd</span>(b, a%b);&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="扩展欧几里得算法（exgcd）"><a href="#扩展欧几里得算法（exgcd）" class="headerlink" title="扩展欧几里得算法（exgcd）"></a>扩展欧几里得算法（exgcd）</h1><p>概念： </p>
 <blockquote>
 <p>对于不完全为0的非负整数a,b</p>
@@ -309,7 +306,6 @@
 <p>注意：x可能为负的，需要x=x+p</p>
 <p>代码</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">exgcd</span><span class="params">(ll a, ll b, ll &amp;x, ll &amp;y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b == <span class="number">0</span>)&#123;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    ll t = <span class="built_in">exgcd</span>(b, a%b, x, y);</span><br><span class="line">    ll tmp = y;</span><br><span class="line">    y = x - a / b * y;</span><br><span class="line">    x = tmp;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>搬运自CSDN：<a target="_blank" rel="noopener" href="https://blog.csdn.net/yueyue200830/article/details/85333585">https://blog.csdn.net/yueyue200830/article/details/85333585</a></p>
 
     </div>
@@ -427,7 +423,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -440,7 +436,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-count">67</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -481,7 +477,7 @@
 <div class="copyright">
   
   &copy; 2020 – 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -490,12 +486,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">130k</span>
+    <span title="Symbols count total">134k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:58</span>
+    <span title="Reading time total">2:02</span>
 </div>
 
         
